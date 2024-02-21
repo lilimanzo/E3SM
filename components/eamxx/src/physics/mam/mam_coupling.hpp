@@ -251,7 +251,10 @@ const char* cld_aero_mmr_field_name(const int mode, const int species) {
 // mixing ratio field in EAMxx
 KOKKOS_INLINE_FUNCTION
 const char* gas_mmr_field_name(const int gas) {
-  return const_cast<const char*>(gas_species_name(gas));
+  if (!gas_mmr_names(gas)[0]) {
+    concat_2_strings("", gas_species_name(gas), gas_mmr_names(gas));
+  }
+  return const_cast<const char*>(gas_mmr_names(gas));
 }
 
 // This type stores multi-column views related specifically to the wet
