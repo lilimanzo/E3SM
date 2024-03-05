@@ -522,6 +522,7 @@ haero::Atmosphere atmosphere_for_column(const DryAtmosphere& dry_atm,
     "cldfrac not defined for dry atmosphere state!");
   EKAT_KERNEL_ASSERT_MSG(dry_atm.w_updraft.data() != nullptr,
     "w_updraft not defined for dry atmosphere state!");
+  haero::ConstColumnView interface_pressure;
   return haero::Atmosphere(mam4::nlev,
                            ekat::subview(dry_atm.T_mid, column_index),
                            ekat::subview(dry_atm.p_mid, column_index),
@@ -533,6 +534,7 @@ haero::Atmosphere atmosphere_for_column(const DryAtmosphere& dry_atm,
                            ekat::subview(dry_atm.z_mid, column_index),
                            ekat::subview(dry_atm.p_del, column_index),
                            ekat::subview(dry_atm.p_int, column_index),
+			   interface_pressure,
                            ekat::subview(dry_atm.cldfrac, column_index),
                            ekat::subview(dry_atm.w_updraft, column_index),
                            dry_atm.pblh(column_index));
@@ -803,7 +805,7 @@ void copy_view_lev_slice(haero::ThreadTeamPolicy team_policy, //inputs
   const auto PC = mam4::ModeIndex::PrimaryCarbon; \
   const auto NoMode = mam4::ModeIndex::None; \
   static const mam4::ModeIndex mode_for_cnst[gas_pcnst()] = { \
-    NoMode, NoMode, NoMode, NoMode, NoMode, NoMode, /* gases (not aerosols) */ \
+    NoMode, NoMode, NoMode, NoMode, NoMode, NoMode,                 /* gases (not aerosols) */ \
     Accum, Accum, Accum, Accum, Accum, Accum, Accum, Accum,         /* 7 aero species + NMR */ \
     Aitken, Aitken, Aitken, Aitken, Aitken,                         /* 4 aero species + NMR */ \
     Coarse, Coarse, Coarse, Coarse, Coarse, Coarse, Coarse, Coarse, /* 7 aero species + NMR */ \
