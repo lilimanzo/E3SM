@@ -1,22 +1,6 @@
 %YAML 1.1
 ---
 ANONYMOUS:
-  Problem:
-    Basal Cubature Degree: 4
-    LandIce Field Norm:
-      sliding_velocity_basalside:
-        Regularization Type: Given Value
-        Regularization Value: 1.0e-4
-    LandIce BCs:
-      BC 0:
-        Basal Friction Coefficient:
-          Type: Power Law
-          Power Exponent: 1.0
-          Mu Type: Field 
-          Effective Pressure Type: Hydrostatic Computed At Nodes
-          Zero Effective Pressure On Floating Ice At Nodes: true
-          Zero Beta On Floating Ice: false
-          Use Pressurized Bed Above Sea Level: false
 # Discretization Description
   Discretization:
     #Exodus Output File Name: albany_output.exo
