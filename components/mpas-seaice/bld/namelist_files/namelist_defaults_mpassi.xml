@@ -221,6 +221,7 @@
 <config_use_floe_size_distribution>false</config_use_floe_size_distribution>
 
 <!-- biogeochemistry -->
+<config_couple_biogeochemistry_fields>false</config_couple_biogeochemistry_fields>
 <config_use_brine>false</config_use_brine>
 <config_use_vertical_zsalinity>false</config_use_vertical_zsalinity>
 <config_use_vertical_biochemistry>false</config_use_vertical_biochemistry>
