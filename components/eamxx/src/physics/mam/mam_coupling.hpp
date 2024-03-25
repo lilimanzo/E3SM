@@ -273,6 +273,7 @@ struct DryAtmosphere {
   Real          z_surf;    // height of bottom of atmosphere [m]
   const_view_2d T_mid;     // temperature at grid midpoints [K]
   const_view_2d p_mid;     // total pressure at grid midpoints [Pa]
+  const_view_2d p_int;    // total pressure at layer interfaces [Pa]
   view_2d       qv;        // dry water vapor mixing ratio [kg vapor / kg dry air]
   view_2d       qc;        // dry cloud liquid water mass mixing ratio [kg cloud water/kg dry air]
   view_2d       nc;        // dry cloud liquid water number mixing ratio [# / kg dry air]
@@ -351,8 +352,9 @@ struct Buffer {
   // =======================
 
   // number of local fields stored at column interfaces
-  static constexpr int num_2d_iface = 1;
+  static constexpr int num_2d_iface = 2;
 
+  uview_2d p_int; // pressure at interfaces
   uview_2d z_iface; // height at interfaces
 
   // storage
@@ -468,6 +470,7 @@ inline size_t init_buffer(const ATMBufferManager &buffer_manager,
 
   // set view pointers for interface fields
   uview_2d* view_2d_iface_ptrs[Buffer::num_2d_iface] = {
+    &buffer.p_int,
     &buffer.z_iface
   };
   for (int i = 0; i < Buffer::num_2d_iface; ++i) {
@@ -522,7 +525,8 @@ haero::Atmosphere atmosphere_for_column(const DryAtmosphere& dry_atm,
     "cldfrac not defined for dry atmosphere state!");
   EKAT_KERNEL_ASSERT_MSG(dry_atm.w_updraft.data() != nullptr,
     "w_updraft not defined for dry atmosphere state!");
-  haero::ConstColumnView interface_pressure;
+  EKAT_KERNEL_ASSERT_MSG(dry_atm.p_int.data() != nullptr,
+    "p_int not defined for dry atmosphere state!");
   return haero::Atmosphere(mam4::nlev,
                            ekat::subview(dry_atm.T_mid, column_index),
                            ekat::subview(dry_atm.p_mid, column_index),
@@ -534,7 +538,6 @@ haero::Atmosphere atmosphere_for_column(const DryAtmosphere& dry_atm,
                            ekat::subview(dry_atm.z_mid, column_index),
                            ekat::subview(dry_atm.p_del, column_index),
                            ekat::subview(dry_atm.p_int, column_index),
-			   interface_pressure,
                            ekat::subview(dry_atm.cldfrac, column_index),
                            ekat::subview(dry_atm.w_updraft, column_index),
                            dry_atm.pblh(column_index));
