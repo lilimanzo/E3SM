@@ -563,10 +563,6 @@ module li_subglacial_hydro
 
          block => block % next
       end do
-      call mpas_timer_start("halo updates")
-      call mpas_dmpar_field_halo_exch(domain, 'totalGroundingLineDischargeCell')
-      call mpas_dmpar_field_halo_exch(domain, 'totalGroundingLineDischargeEdge')
-      call mpas_timer_stop("halo updates")
 
       ! =============
       ! Update water layer thickness
@@ -2349,7 +2345,6 @@ module li_subglacial_hydro
       real (kind=RKIND), dimension(:), pointer :: distGroundingLineDischargeCell
       real (kind=RKIND), dimension(:), pointer :: chnlGroundingLineDischargeCell
       real (kind=RKIND), dimension(:), pointer :: totalGroundingLineDischargeCell
-      real (kind=RKIND), dimension(:), pointer :: bedTopography
       real (kind=RKIND), dimension(:), pointer :: channelDischarge
       real (kind=RKIND), dimension(:), pointer :: waterFlux
       real (kind=RKIND), dimension(:), pointer :: dvEdge
@@ -2361,7 +2356,6 @@ module li_subglacial_hydro
       real (kind=RKIND) :: distGroundingLineDischargeEdge
       real (kind=RKIND) :: chnlGroundingLineDischargeEdge
       real (kind=RKIND) :: totalGroundingLineDischargeEdge
-      real (kind=RKIND), pointer :: config_sea_level
 
       call mpas_pool_get_subpool(block % structs, 'hydro', hydroPool)
       call mpas_pool_get_subpool(block % structs, 'geometry', geometryPool)
@@ -2370,7 +2364,6 @@ module li_subglacial_hydro
       call mpas_pool_get_array(hydroPool, 'distGroundingLineDischargeCell', distGroundingLineDischargeCell)
       call mpas_pool_get_array(hydroPool, 'chnlGroundingLineDischargeCell', chnlGroundingLineDischargeCell)
       call mpas_pool_get_array(hydroPool, 'totalGroundingLineDischargeCell', totalGroundingLineDischargeCell)
-      call mpas_pool_get_array(geometryPool, 'bedTopography', bedTopography)
       call mpas_pool_get_array(hydroPool, 'channelDischarge', channelDischarge)
       call mpas_pool_get_array(hydroPool, 'waterFlux', waterFlux)
       call mpas_pool_get_array(meshPool, 'dvEdge', dvEdge)
@@ -2378,18 +2371,18 @@ module li_subglacial_hydro
       call mpas_pool_get_array(meshPool, 'cellsOnEdge', cellsOnEdge)
       call mpas_pool_get_array(hydroPool, 'hydroMarineMarginMask', hydroMarineMarginMask)
       call mpas_pool_get_array(geometryPool, 'cellMask', cellMask)
-      call mpas_pool_get_config(liConfigs, 'config_sea_level', config_sea_level)
 
       distGroundingLineDischargeCell(:) = 0.0_RKIND
       chnlGroundingLineDischargeCell(:) = 0.0_RKIND
       totalGroundingLineDischargeCell(:) = 0.0_RKIND
       
       do iEdge = 1, nEdgesSolve
-         cell1 = cellsOnEdge(1, iEdge)
-         cell2 = cellsOnEdge(2, iEdge)
          
          if (hydroMarineMarginMask(iEdge) == 1) then
                
+            cell1 = cellsOnEdge(1, iEdge)
+            cell2 = cellsOnEdge(2, iEdge)
+            
             !calculate totals at each grounding line edge
             distGroundingLineDischargeEdge = abs(waterFlux(iEdge) * dvEdge(iEdge))
             chnlGroundingLineDischargeEdge = abs(channelDischarge(iEdge))
