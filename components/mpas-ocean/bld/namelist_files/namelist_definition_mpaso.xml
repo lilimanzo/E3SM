@@ -747,19 +747,19 @@ Valid values: Any positive real value.
 Default: Defined in namelist_defaults.xml
 </entry>
 
-<entry id="config_cvmix_background_diffusion_passive_enable" type="logical"
+<entry id="config_cvmix_background_diffusion_passive" type="real"
 	category="cvmix" group="cvmix">
-Enable different background vertical diffusion value for passive tracer quantities
+Background vertical diffusion applied to passive tracer quantities
 
-Valid values: .true. or .false.
+Valid values: Any positive real value.
 Default: Defined in namelist_defaults.xml
 </entry>
 
-<entry id="config_cvmix_background_diffusion_passive" type="real"
+<entry id="config_cvmix_background_diffusion_passive_enable" type="logical"
 	category="cvmix" group="cvmix">
-Background vertical diffusion applied to passive tracer quantities if enabled
+flag to enable using a different background vertical diffusion for passive tracers
 
-Valid values: Any positive real value.
+Valid values: .true. or .false.
 Default: Defined in namelist_defaults.xml
 </entry>
 
