@@ -1188,7 +1188,6 @@ void RRTMGPRadiation::run_impl (const double dt) {
 #ifdef RRTMGP_ENABLE_KOKKOS
         COMPARE_WRAP(tmp2d, tmp2d_k);
         m_gas_concs_k.set_vmr(name, tmp2d_k);
-        //VALIDATE_KOKKOS(m_gas_concs, m_gas_concs_k); broken for some reason
 #endif
       }
 
@@ -1373,7 +1372,6 @@ void RRTMGPRadiation::run_impl (const double dt) {
 
       COMPARE_ALL_WRAP(std::vector<real3d>({sw_bnd_flux_up, sw_bnd_flux_dn, sw_bnd_flux_dir, lw_bnd_flux_up, lw_bnd_flux_dn}),
                        std::vector<real3dk>({sw_bnd_flux_up_k, sw_bnd_flux_dn_k, sw_bnd_flux_dir_k, lw_bnd_flux_up_k, lw_bnd_flux_dn_k}));
-      //VALIDATE_KOKKOS(m_gas_concs, m_gas_concs_k);
 #endif
 
       // Update heating tendency
@@ -1663,7 +1661,6 @@ void RRTMGPRadiation::run_impl (const double dt) {
 #ifdef RRTMGP_ENABLE_KOKKOS
     m_gas_concs_k.concs = gas_concs_k;
     m_gas_concs_k.ncol = orig_ncol_k;
-    //VALIDATE_KOKKOS(m_gas_concs, m_gas_concs_k);
 #endif
   } // update_rad
 
