@@ -263,7 +263,6 @@ _TESTS = {
             "SMS_D_Ld1.T62_oQU240wLI.GMPAS-IAF-PISMF.mpaso-impl_top_drag",
             "SMS_D_Ld1.T62_oQU240.GMPAS-IAF.mpaso-harmonic_mean_drag",
             "SMS_D_Ld1.T62_oQU240.GMPAS-IAF.mpaso-upwind_advection",
-            "SMS_P512_D_Ld5.T62_oEC60to30v3wLI_ais20.MPAS_LISIO_TEST.mpaso-ocn_glcshelf",
             )
         },
 
@@ -301,8 +300,8 @@ _TESTS = {
             "SMS.ne30_f19_g16_rx1.A",
             "ERS_Ld5.T62_oQU120.CMPASO-NYF",
             "ERS.f09_g16_g.MALISIA",
-            "SMS.T62_oQU120_ais20.MPAS_LISIO_TEST",
-            "SMS_P12x2.ne4_oQU240.WCYCL1850NS.allactive-mach_mods",
+            "ERS_Ld5.TL319_oQU240wLI_ais20.MPAS_LISIO_JRA1p5.mpaso-ocn_glcshelf",
+            "SMS_P12x2.ne4pg2_oQU480.WCYCL1850NS.allactive-mach_mods",
             "ERS_Ln9.ne4pg2_ne4pg2.F2010-MMF1.eam-mmf_crmout",
             )
         },
