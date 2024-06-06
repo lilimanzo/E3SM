@@ -921,54 +921,31 @@ void RRTMGPRadiation::run_impl (const double dt) {
 #endif
 #ifdef RRTMGP_ENABLE_KOKKOS
       // If YAKL is on, we don't want aliased memory in both the yakl and kokos
-      // subviews, so make new views and deep_copy. Also, be sure to trim the excess
-      // items from the field manager views due to simd packs. If we don't trim, then
-      // check_range_k will fail due to looking at unused values. Once rrtmgp can handle
-      // packs, this won't be necessary.
-      auto subview_1dk = [&](const ureal1dk& v) -> ureal1dk {
-        ureal1dk subv(v, std::make_pair(beg, beg+ncol));
+      // subviews.
+      auto subview_1dk = [&](const view_1d_real v) -> view_1d_real {
+        view_1d_real subv(v, std::make_pair(0, ncol));
 #ifdef RRTMGP_ENABLE_YAKL
-        real1dk rv(v.label(), ncol);
+        view_1d_real rv(v.label(), ncol);
         Kokkos::deep_copy(rv, subv);
         return rv;
 #else
         return subv;
 #endif
       };
-      auto subview_1dkc = [&](const cureal1dk& v) -> cureal1dk {
-        cureal1dk subv(v, std::make_pair(beg, beg+ncol));
+      auto subview_2dk = [&](const view_2d_real v) -> view_2d_real {
+        view_2d_real subv(v, std::make_pair(0, ncol), Kokkos::ALL);
 #ifdef RRTMGP_ENABLE_YAKL
-        creal1dk rv(v.label(), ncol);
+        view_2d_real rv(v.label(), ncol, v.extent(1));
         Kokkos::deep_copy(rv, subv);
         return rv;
 #else
         return subv;
 #endif
       };
-      auto subview_2dk = [&](const ureal2dk& v, const int inner_dim) -> ureal2dk {
-        ureal2dk subv(v, std::make_pair(beg, beg+ncol), std::make_pair(0, inner_dim));
+      auto subview_3dk = [&](const view_3d_real v) -> view_3d_real {
+        view_3d_real subv(v, std::make_pair(0, ncol), Kokkos::ALL, Kokkos::ALL);
 #ifdef RRTMGP_ENABLE_YAKL
-        real2dk rv(v.label(), ncol, v.extent(1));
-        Kokkos::deep_copy(rv, subv);
-        return rv;
-#else
-        return subv;
-#endif
-      };
-      auto subview_2dkc = [&](const cureal2dk& v, const int inner_dim) -> cureal2dk {
-        cureal2dk subv(v, std::make_pair(beg, beg+ncol), std::make_pair(0, inner_dim));
-#ifdef RRTMGP_ENABLE_YAKL
-        creal2dk rv(v.label(), ncol, v.extent(1));
-        Kokkos::deep_copy(rv, subv);
-        return rv;
-#else
-        return subv;
-#endif
-      };
-      auto subview_3dk = [&](const ureal3dk& v) -> ureal3dk {
-        ureal3dk subv(v, std::make_pair(0, ncol), Kokkos::ALL, Kokkos::ALL); // The range assumes these are buffer views, not fields
-#ifdef RRTMGP_ENABLE_YAKL
-        real3dk rv(v.label(), ncol, v.extent(1), v.extent(2));
+        view_3d_real rv(v.label(), ncol, v.extent(1), v.extent(2));
         Kokkos::deep_copy(rv, subv);
         return rv;
 #else
@@ -1182,7 +1159,7 @@ void RRTMGPRadiation::run_impl (const double dt) {
       Kokkos::fence();
 #ifdef RRTMGP_ENABLE_KOKKOS
       COMPARE_ALL_WRAP(std::vector<real3d>({aero_tau_sw, aero_ssa_sw, aero_g_sw, aero_tau_lw}),
-                       std::vector<real3dk>({aero_tau_sw_k, aero_ssa_sw_k, aero_g_sw_k, aero_tau_lw_k}));
+                       std::vector<view_3d_real>({aero_tau_sw_k, aero_ssa_sw_k, aero_g_sw_k, aero_tau_lw_k}));
 #endif
 
 
@@ -1192,6 +1169,9 @@ void RRTMGPRadiation::run_impl (const double dt) {
       // correct size that uses m_buffer.tmp2d's pointer
 #ifdef RRTMGP_ENABLE_YAKL
       real2d tmp2d = subview_2d(m_buffer.tmp2d);
+#endif
+#ifdef RRTMGP_ENABLE_KOKKOS
+      view_2d_real tmp2d_k = subview_2dk(m_buffer.tmp2d_k);
 #endif
       for (int igas = 0; igas < m_ngas; igas++) {
         auto name = m_gas_names[igas];
@@ -1293,14 +1273,14 @@ void RRTMGPRadiation::run_impl (const double dt) {
 
       // Compute layer cloud mass (per unit area)
 #ifdef RRTMGP_ENABLE_YAKL
-      rrtmgp::mixing_ratio_to_cloud_mass(qc, cldfrac_tot, p_del, lwp);
-      rrtmgp::mixing_ratio_to_cloud_mass(qi, cldfrac_tot, p_del, iwp);
+      interface_t::mixing_ratio_to_cloud_mass(qc, cldfrac_tot, p_del, lwp);
+      interface_t::mixing_ratio_to_cloud_mass(qi, cldfrac_tot, p_del, iwp);
 #endif
 #ifdef RRTMGP_ENABLE_KOKKOS
       interface_t::mixing_ratio_to_cloud_mass(qc_k, cldfrac_tot_k, p_del_k, lwp_k);
       interface_t::mixing_ratio_to_cloud_mass(qi_k, cldfrac_tot_k, p_del_k, iwp_k);
       COMPARE_ALL_WRAP(std::vector<real2d>({lwp, iwp}),
-                       std::vector<real2dk>({lwp_k, iwp_k}));
+                       std::vector<view_2d_real>({lwp_k, iwp_k}));
 #endif
       // Convert to g/m2 (needed by RRTMGP)
       {
@@ -1341,7 +1321,7 @@ void RRTMGPRadiation::run_impl (const double dt) {
         sfc_alb_dif_vis_k, sfc_alb_dif_nir_k,
         sfc_alb_dir_k, sfc_alb_dif_k);
       COMPARE_ALL_WRAP(std::vector<real2d>({sfc_alb_dir, sfc_alb_dif}),
-                       std::vector<real2dk>({sfc_alb_dir_k, sfc_alb_dif_k}));
+                       std::vector<view_2d_real>({sfc_alb_dir_k, sfc_alb_dif_k}));
 #endif
       // Compute cloud optical properties here?
 
@@ -1397,7 +1377,7 @@ void RRTMGPRadiation::run_impl (const double dt) {
         lw_clnclrsky_flux_up, lw_clnclrsky_flux_dn,
         lw_clrsky_flux_up, lw_clrsky_flux_dn,
         lw_clnsky_flux_up, lw_clnsky_flux_dn}),
-                       std::vector<real2dk>({
+                       std::vector<view_2d_real>({
         sw_flux_up_k, sw_flux_dn_k, sw_flux_dn_dir_k, lw_flux_up_k, lw_flux_dn_k,
         sw_clnclrsky_flux_up_k, sw_clnclrsky_flux_dn_k, sw_clnclrsky_flux_dn_dir_k,
         sw_clrsky_flux_up_k, sw_clrsky_flux_dn_k, sw_clrsky_flux_dn_dir_k,
@@ -1406,7 +1386,7 @@ void RRTMGPRadiation::run_impl (const double dt) {
         lw_clrsky_flux_up_k, lw_clrsky_flux_dn_k,
         lw_clnsky_flux_up_k, lw_clnsky_flux_dn_k}));
       COMPARE_ALL_WRAP(std::vector<real3d>({sw_bnd_flux_up, sw_bnd_flux_dn, sw_bnd_flux_dir, lw_bnd_flux_up, lw_bnd_flux_dn}),
-                       std::vector<real3dk>({sw_bnd_flux_up_k, sw_bnd_flux_dn_k, sw_bnd_flux_dir_k, lw_bnd_flux_up_k, lw_bnd_flux_dn_k}));
+                       std::vector<view_3d_real>({sw_bnd_flux_up_k, sw_bnd_flux_dn_k, sw_bnd_flux_dir_k, lw_bnd_flux_up_k, lw_bnd_flux_dn_k}));
 #endif
 
       // Update heating tendency
@@ -1456,7 +1436,7 @@ void RRTMGPRadiation::run_impl (const double dt) {
       }
       Kokkos::fence();
       COMPARE_ALL_WRAP(std::vector<real2d>({sw_heating, lw_heating}),
-                       std::vector<real2dk>({sw_heating_k, lw_heating_k}));
+                       std::vector<view_2d_real>({sw_heating_k, lw_heating_k}));
 #endif
 
       // Index to surface (bottom of model); used to get surface fluxes below
@@ -1500,7 +1480,7 @@ void RRTMGPRadiation::run_impl (const double dt) {
           sfc_flux_dif_vis_k, sfc_flux_dif_nir_k
       );
       COMPARE_ALL_WRAP(std::vector<real1d>({sfc_flux_dir_vis, sfc_flux_dir_nir, sfc_flux_dif_vis, sfc_flux_dif_nir}),
-                       std::vector<real1dk>({sfc_flux_dir_vis_k, sfc_flux_dir_nir_k, sfc_flux_dif_vis_k, sfc_flux_dif_nir_k}));
+                       std::vector<view_1d_real>({sfc_flux_dir_vis_k, sfc_flux_dir_nir_k, sfc_flux_dif_vis_k, sfc_flux_dif_nir_k}));
 #endif
 
       // Compute diagnostic total cloud area (vertically-projected cloud cover)
@@ -1521,10 +1501,10 @@ void RRTMGPRadiation::run_impl (const double dt) {
       rrtmgp::compute_cloud_area(ncol, nlay, nlwgpts,     0, std::numeric_limits<Real>::max(), p_lay, cld_tau_lw_gpt, cldtot);
 #endif
 #ifdef RRTMGP_ENABLE_KOKKOS
-      real1dk cldlow_k (d_cldlow.data() + m_col_chunk_beg[ic], ncol);
-      real1dk cldmed_k (d_cldmed.data() + m_col_chunk_beg[ic], ncol);
-      real1dk cldhgh_k (d_cldhgh.data() + m_col_chunk_beg[ic], ncol);
-      real1dk cldtot_k (d_cldtot.data() + m_col_chunk_beg[ic], ncol);
+      view_1d_real cldlow_k (d_cldlow.data() + m_col_chunk_beg[ic], ncol);
+      view_1d_real cldmed_k (d_cldmed.data() + m_col_chunk_beg[ic], ncol);
+      view_1d_real cldhgh_k (d_cldhgh.data() + m_col_chunk_beg[ic], ncol);
+      view_1d_real cldtot_k (d_cldtot.data() + m_col_chunk_beg[ic], ncol);
       // NOTE: limits for low, mid, and high clouds are mostly taken from EAM F90 source, with the
       // exception that I removed the restriction on low clouds to be above (numerically lower pressures)
       // 1200 hPa, and on high clouds to be below (numerically high pressures) 50 hPa. This probably
@@ -1536,7 +1516,7 @@ void RRTMGPRadiation::run_impl (const double dt) {
       interface_t::compute_cloud_area(ncol, nlay, nlwgpts,     0,                            400e2, p_lay_k, cld_tau_lw_gpt_k, cldhgh_k);
       interface_t::compute_cloud_area(ncol, nlay, nlwgpts,     0, std::numeric_limits<Real>::max(), p_lay_k, cld_tau_lw_gpt_k, cldtot_k);
       COMPARE_ALL_WRAP(std::vector<real1d>({cldlow, cldmed, cldhgh, cldtot}),
-                       std::vector<real1dk>({cldlow_k, cldmed_k, cldhgh_k, cldtot_k}));
+                       std::vector<view_1d_real>({cldlow_k, cldmed_k, cldhgh_k, cldtot_k}));
 #endif
 
       // Compute cloud-top diagnostics following AeroCOM recommendation
@@ -1567,17 +1547,17 @@ void RRTMGPRadiation::run_impl (const double dt) {
       // Get IR 10.5 micron band for COSP
       auto idx_105_k = interface_t::get_wavelength_index_lw_k(10.5e-6);
 
-      real1dk T_mid_at_cldtop_k (d_T_mid_at_cldtop.data() + m_col_chunk_beg[ic], ncol);
-      real1dk p_mid_at_cldtop_k (d_p_mid_at_cldtop.data() + m_col_chunk_beg[ic], ncol);
-      real1dk cldfrac_ice_at_cldtop_k (d_cldfrac_ice_at_cldtop.data() + m_col_chunk_beg[ic], ncol);
-      real1dk cldfrac_liq_at_cldtop_k (d_cldfrac_liq_at_cldtop.data() + m_col_chunk_beg[ic], ncol);
-      real1dk cldfrac_tot_at_cldtop_k (d_cldfrac_tot_at_cldtop.data() + m_col_chunk_beg[ic], ncol);
-      real1dk cdnc_at_cldtop_k (d_cdnc_at_cldtop.data() + m_col_chunk_beg[ic], ncol);
-      real1dk eff_radius_qc_at_cldtop_k (d_eff_radius_qc_at_cldtop.data() + m_col_chunk_beg[ic], ncol);
-      real1dk eff_radius_qi_at_cldtop_k (d_eff_radius_qi_at_cldtop.data() + m_col_chunk_beg[ic], ncol);
+      view_1d_real T_mid_at_cldtop_k (d_T_mid_at_cldtop.data() + m_col_chunk_beg[ic], ncol);
+      view_1d_real p_mid_at_cldtop_k (d_p_mid_at_cldtop.data() + m_col_chunk_beg[ic], ncol);
+      view_1d_real cldfrac_ice_at_cldtop_k (d_cldfrac_ice_at_cldtop.data() + m_col_chunk_beg[ic], ncol);
+      view_1d_real cldfrac_liq_at_cldtop_k (d_cldfrac_liq_at_cldtop.data() + m_col_chunk_beg[ic], ncol);
+      view_1d_real cldfrac_tot_at_cldtop_k (d_cldfrac_tot_at_cldtop.data() + m_col_chunk_beg[ic], ncol);
+      view_1d_real cdnc_at_cldtop_k (d_cdnc_at_cldtop.data() + m_col_chunk_beg[ic], ncol);
+      view_1d_real eff_radius_qc_at_cldtop_k (d_eff_radius_qc_at_cldtop.data() + m_col_chunk_beg[ic], ncol);
+      view_1d_real eff_radius_qi_at_cldtop_k (d_eff_radius_qi_at_cldtop.data() + m_col_chunk_beg[ic], ncol);
 
       interface_t::compute_aerocom_cloudtop(
-          ncol, nlay, t_lay_k, p_lay_k, p_del_k, d_dz, qc_k, qi_k, rel_k, rei_k, cldfrac_tot_k,
+          ncol, nlay, t_lay_k, p_lay_k, p_del_k, z_del_k, qc_k, qi_k, rel_k, rei_k, cldfrac_tot_k,
           nc_k, T_mid_at_cldtop_k, p_mid_at_cldtop_k, cldfrac_ice_at_cldtop_k,
           cldfrac_liq_at_cldtop_k, cldfrac_tot_at_cldtop_k, cdnc_at_cldtop_k,
           eff_radius_qc_at_cldtop_k, eff_radius_qi_at_cldtop_k);
@@ -1585,7 +1565,7 @@ void RRTMGPRadiation::run_impl (const double dt) {
             T_mid_at_cldtop, p_mid_at_cldtop, cldfrac_ice_at_cldtop,
             cldfrac_liq_at_cldtop, cldfrac_tot_at_cldtop, cdnc_at_cldtop,
             eff_radius_qc_at_cldtop, eff_radius_qi_at_cldtop}),
-                       std::vector<real1dk>({
+                       std::vector<view_1d_real>({
             T_mid_at_cldtop_k, p_mid_at_cldtop_k, cldfrac_ice_at_cldtop_k,
             cldfrac_liq_at_cldtop_k, cldfrac_tot_at_cldtop_k, cdnc_at_cldtop_k,
             eff_radius_qc_at_cldtop_k, eff_radius_qi_at_cldtop_k}));
@@ -1656,7 +1636,7 @@ void RRTMGPRadiation::run_impl (const double dt) {
       });
 #ifdef RRTMGP_ENABLE_YAKL
       // Sync back to gas_concs_k
-      real3dk temp(gas_concs_k, std::make_pair(0, ncol), Kokkos::ALL, Kokkos::ALL);
+      view_3d_real temp(gas_concs_k, std::make_pair(0, ncol), Kokkos::ALL, Kokkos::ALL);
       Kokkos::deep_copy(temp, m_gas_concs_k.concs);
 #endif
 #endif
