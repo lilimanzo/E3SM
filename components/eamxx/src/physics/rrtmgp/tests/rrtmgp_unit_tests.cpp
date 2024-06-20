@@ -856,6 +856,7 @@ using real3dk = interface_t::view_t<scream::Real***>;
 using int1dk = interface_t::view_t<int*>;
 using int2dk = interface_t::view_t<int**>;
 using int3dk = interface_t::view_t<int***>;
+using MDRP = interface_t::MDRP;
 
 TEST_CASE("rrtmgp_test_heating_k") {
   // Initialize Kokkos

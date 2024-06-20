@@ -112,7 +112,7 @@ bool check_range(T x, Real xmin, Real xmax, std::string msg, std::ostream& out=s
 }
 #endif
 #ifdef RRTMGP_ENABLE_KOKKOS
-template <class T>
+template <class T, typename std::enable_if<T::rank == 1>::type* = nullptr>
 bool check_range_k(T x, typename T::const_value_type xmin, typename T::const_value_type xmax,
                    std::string msg, std::ostream& out=std::cout) {
   bool pass = true;
@@ -120,10 +120,10 @@ bool check_range_k(T x, typename T::const_value_type xmin, typename T::const_val
   auto _xmax = conv::maxval(x);
   if (_xmin < xmin or _xmax > xmax) {
     // How many outside range?
-    Kokkos::View<bool*> bad_mask("bad_mask", x.size());
-    Kokkos::parallel_for(x.size(), KOKKOS_LAMBDA (int i) {
-      if (x.data()[i] < xmin or x.data()[i] > xmax) {
-        bad_mask.data()[i] = true;
+    Kokkos::View<bool*> bad_mask("bad_mask", x.extent(0));
+    Kokkos::parallel_for(x.extent(0), KOKKOS_LAMBDA (int i) {
+      if (x(i) < xmin or x(i) > xmax) {
+        bad_mask(i) = true;
       }
     });
     auto num_bad = conv::sum(bad_mask);
