@@ -10,9 +10,10 @@
 //>>>>>>>
 
 /*
-Future work:
-Wirte comments
-write in/outs for all variables clearly
+-----------------------------------------------------------------
+NOTES:
+1. We should connect surface fluxes and add code to update the fluxes
+2. Identify diagnostic variables and remove them from FM
 */
 
 namespace scream {
@@ -112,10 +113,11 @@ void MAMWetscav::set_grids(
   //----------- Variables from microphysics scheme -------------
 
   // Evaporation from stratiform rain [kg/kg/s] (FIXME: Get it from P3)
-  add_field<Required>("evapr", scalar3d_mid, kg / kg / s, grid_name);
+  add_field<Required>("nevapr", scalar3d_mid, kg / kg / s, grid_name);
 
   // Stratiform rain production rate [kg/kg/s] (FIXME: Get it from P3)
-  add_field<Updated>("prain", scalar3d_mid, kg / kg / s, grid_name);
+  add_field<Required>("precip_total_tend", scalar3d_mid, kg / kg / s,
+                      grid_name);
 
   // For variables that are non dimensional (e.g., fractions etc.)
   static constexpr auto nondim = Units::nondimensional();
@@ -425,10 +427,15 @@ void MAMWetscav::run_impl(const double dt) {
   const auto &work                           = work_;
   const auto &dry_aero_tends                 = dry_aero_tends_;
 
-  // -------------------------------------------------------------------------------------------------------------------------
+  // ---------------------------------------------------------------
   // These variables are "required" or pure inputs for the process
-  // -------------------------------------------------------------------------------------------------------------------------
-  // Shallow convective cloud fraction [fraction]
+  // ---------------------------------------------------------------
+
+  //----------- Variables from convective scheme -------------
+
+  // Following variables are from convective parameterization (not implemented
+  // yet in EAMxx), so should be zero for now
+
   auto sh_frac = get_field_in("sh_frac").get_view<const Real **>();
 
   // Deep convective cloud fraction [fraction]
@@ -455,10 +462,20 @@ void MAMWetscav::run_impl(const double dt) {
   // In cloud water mixing ratio, shallow convection
   auto icwmrsh = get_field_in("icwmrsh").get_view<const Real **>();
 
-  // evaporation from stratiform rain [kg/kg/s]
-  // FIXME: Get it from P3
-  auto evapr = get_field_in("evapr").get_view<const Real **>();
+  // Detraining cld H20 from deep convection [kg/kg/s]
+  auto dlf = get_field_in("dlf").get_view<const Real **>();
 
+  //----------- Variables from macrophysics scheme -------------
+  // Total cloud fraction
+  auto cldt = get_field_in("cldfrac_liq").get_view<const Real **>();
+
+  //----------- Variables from microphysics scheme -------------
+
+  // Evaporation from stratiform rain [kg/kg/s]
+  auto nevapr = get_field_in("nevapr").get_view<const Real **>();
+
+  // Stratiform rain production rate [kg/kg/s] (FIXME: Get it from P3)
+  auto prain = get_field_in("precip_total_tend").get_view<const Real **>();
   // -------------------------------------------------------------------------------------------------------------------------
   // These variables are "Updated" or pure inputs/outputs for the process
   // -------------------------------------------------------------------------------------------------------------------------
@@ -515,7 +532,7 @@ void MAMWetscav::run_impl(const double dt) {
 
         auto icwmrdp_col  = ekat::subview(icwmrdp, icol);
         auto icwmrsh_icol = ekat::subview(icwmrsh, icol);
-        auto evapr_icol   = ekat::subview(evapr, icol);
+        auto nevapr_icol  = ekat::subview(nevapr, icol);
         auto cldt_icol    = ekat::subview(cldt, icol);
 
         auto dlf_icol         = ekat::subview(dlf, icol);
@@ -534,7 +551,7 @@ void MAMWetscav::run_impl(const double dt) {
             team, atm, progs, tends, dt,
             // inputs
             cldt_icol, rprdsh_icol, rprddp_icol, evapcdp_icol, evapcsh_icol,
-            dp_frac_icol, sh_frac_icol, icwmrdp_col, icwmrsh_icol, evapr_icol,
+            dp_frac_icol, sh_frac_icol, icwmrdp_col, icwmrsh_icol, nevapr_icol,
             dlf_icol, prain_icol,
             // in/out
             wet_diameter_icol, dry_diameter_icol, qaerwat_icol, wetdens_icol,

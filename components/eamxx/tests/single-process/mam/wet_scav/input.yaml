@@ -25,6 +25,12 @@ initial_conditions:
   # The name of the file containing the initial conditions for this test.
   Filename: ${SCREAM_DATA_DIR}/init/${EAMxx_tests_IC_FILE_MAM4xx_72lev}
   topography_filename: ${TOPO_DATA_DIR}/${EAMxx_tests_TOPO_FILE}
+  pbl_height: 25.0
+  phis : 0.1
+  #variables from P3
+  precip_total_tend: 1e-5
+  nevapr: 1e-5
+  #variables from convection scheme (they should all be zero)
   rprdsh: 0.
   rprddp: 0.
   evapcsh: 0.
