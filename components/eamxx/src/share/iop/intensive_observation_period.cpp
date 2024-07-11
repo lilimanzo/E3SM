@@ -550,6 +550,7 @@ read_iop_file_data (const util::TimeStamp& current_ts)
     // Convert to pressure to millibar (file gives pressure in Pa)
     for (int ilev=0; ilev<file_levs; ++ilev) data[ilev] /= 100;
     iop_file_pressure.sync_to_dev();
+    m_helper_fields.insert({"iop_file_pressure", iop_file_pressure});
 
     // Pre-process file pressures, store number of file levels
     // where the last level is the first level equal to surface pressure.
