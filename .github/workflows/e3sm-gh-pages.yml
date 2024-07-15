@@ -30,8 +30,8 @@ jobs:
           submodules: true
       - name: Show action trigger
         run: echo "= The job was automatically triggered by a ${{github.event_name}} event on repo ${{github.event.repository.name}}."
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5.1.1
         with:
           python-version: "3.11"
       - name: Install python deps
