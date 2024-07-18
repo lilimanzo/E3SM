@@ -30,7 +30,7 @@ set (TEST_INPUT_FILES
   scream/mam4xx/physprops/ocpho_rrtmg_c20240206.nc
   scream/mam4xx/physprops/bcpho_rrtmg_c20240206.nc
   scream/mam4xx/physprops/poly_rrtmg_c20240206.nc
-  scream/init/scream_unit_tests_aerosol_optics_ne2np4L72_20220822.nc
+  # scream/init/scream_unit_tests_aerosol_optics_ne2np4L72_20220822.nc
 )
 foreach (file IN ITEMS ${TEST_INPUT_FILES})
   GetInputFile(${file})
@@ -52,13 +52,3 @@ CompareNCFilesFamilyMpi (
   LABELS rrtmgp mam4_optics
   META_FIXTURES_REQUIRED ${FIXTURES_BASE_NAME}_npMPIRANKS_omp1
 )
-<<<<<<< HEAD:components/eamxx/tests/coupled/physics_only/mam_optics_rrtmgp/CMakeLists.txt
-=======
-
-if (SCREAM_ENABLE_BASELINE_TESTS)
-  # Compare one of the output files with the baselines.
-  # Note: one is enough, since we already check that np1 is BFB with npX
-  set (OUT_FILE ${TEST_BASE_NAME}_output.INSTANT.nsteps_x2.np${TEST_RANK_END}.${RUN_T0}.nc)
-  CreateBaselineTest(${TEST_BASE_NAME} ${TEST_RANK_END} ${OUT_FILE} ${FIXTURES_BASE_NAME})
-endif()
->>>>>>> dfdb126f08 (Fixes file names for baselines for the standalone tests):components/eamxx/tests/single-process/mam/optics/CMakeLists.txt
