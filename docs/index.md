@@ -22,6 +22,7 @@ research problems and Department of Energy mission needs while efficiently using
 - [ELM](./ELM/index.md)
 - [MOSART](./MOSART/index.md)
 - [MPAS-seaice](./MPAS-seaice/index.md)
+- [Omega](https://docs.e3sm.org/Omega/omega/) — not yet supported.
 
 ## Tools
 
