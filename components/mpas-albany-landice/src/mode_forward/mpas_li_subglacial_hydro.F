@@ -2259,7 +2259,7 @@ module li_subglacial_hydro
       type (mpas_pool_type), pointer :: hydroPool
       type (mpas_pool_type), pointer :: geometryPool
       real (kind=RKIND), dimension(:), pointer :: bedTopography
-      real (kind=RKIND), dimension(:), pointer :: effectivePressureSGH
+      real (kind=RKIND), dimension(:), pointer :: effectivePressure
       real (kind=RKIND), dimension(:), pointer :: thickness
       real (kind=RKIND), pointer :: rhoi, rhoo
 
@@ -2273,11 +2273,11 @@ module li_subglacial_hydro
          call mpas_pool_get_subpool(block % structs, 'geometry', geometryPool)
          call mpas_pool_get_subpool(block % structs, 'hydro', hydroPool)
          call mpas_pool_get_array(geometryPool, 'bedTopography', bedTopography)
-         call mpas_pool_get_array(hydroPool, 'effectivePressureSGH', effectivePressureSGH)
+         call mpas_pool_get_array(hydroPool, 'effectivePressure', effectivePressure)
          call mpas_pool_get_array(hydroPool, 'thickness', thickness)
          
-         effectivePressureSGH = rhoi * gravity * thickness - rhoi * gravity * max(0.0_RKIND,  -1.0_RKIND * rhoo/rhoi * bedTopography)
-         effectivePressureSGH = max(effectivePressureSGH, 0.0_RKIND) ! This is just to zero out N in the open ocean to avoid confusion
+         effectivePressure = rhoi * gravity * thickness - rhoi * gravity * max(0.0_RKIND,  -1.0_RKIND * rhoo/rhoi * bedTopography)
+         effectivePressure = max(effectivePressure, 0.0_RKIND) ! This is just to zero out N in the open ocean to avoid confusion
 
          block => block % next
       end do
