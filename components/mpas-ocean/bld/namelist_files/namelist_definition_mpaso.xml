@@ -1271,19 +1271,11 @@ Valid values: .true. or .false.
 Default: Defined in namelist_defaults.xml
 </entry>
 
-<entry id="config_scale_dismf_by_removed_ice_runoff" type="logical"
-	category="coupling" group="coupling">
-Whether to scale data ice-shelf melt fluxes by the running mean of removed ice runoff.
+<entry id="config_2d_thermal_forcing_depth" type="real"
+        category="coupling" group="coupling">
+Depth at which to pass 2d thermal forcing to the coupler for use in the GLC component.  Note that mapping files for this field must be created with a mask to exclude ocean grid cells shallower than this value and thus must be regenerated if this value is changed.
 
-Valid values: .true. or .false.
-Default: Defined in namelist_defaults.xml
-</entry>
-
-<entry id="config_ais_ice_runoff_history_days" type="integer"
-	category="coupling" group="coupling">
-The number of days over for which the history of removed AIS runoff is stored. The default is 731 days (2 years + 1 day).
-
-Valid values: Any positive integer
+Valid values: any non-negative value
 Default: Defined in namelist_defaults.xml
 </entry>
 
