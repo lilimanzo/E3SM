@@ -5867,15 +5867,20 @@ contains
           avgflag='A', long_name='column-integrated snow freezing rate', &
            ptr_col=this%qflx_snofrz, set_lake=spval, c2l_scale_type='urbanf')
 
-    if (use_IM2_hillslope_hydrology) then
-      call hist_addfld1d (fname='QFROM_UPHILL',  units='mm/s',  &
-            avgflag='A', long_name='input to top layer soil from uphill topounit(s)', &
-            ptr_col=this%qflx_from_uphill, c2l_scale_type='urbanf')
+    this%qflx_glcice(begc:endc) = spval
+     call hist_addfld1d (fname='QICE',  units='mm/s',  &
+          avgflag='A', long_name='ice growth/melt', &
+           ptr_col=this%qflx_glcice, l2g_scale_type='ice')
 
-      call hist_addfld1d (fname='QTO_DOWNHILL',  units='mm/s',  &
-            avgflag='A', long_name='output from column to downhill topounit', &
-            ptr_col=this%qflx_to_downhill, c2l_scale_type='urbanf')
-    endif
+    this%qflx_glcice_frz(begc:endc) = spval
+     call hist_addfld1d (fname='QICE_FRZ',  units='mm/s',  &
+          avgflag='A', long_name='ice growth', &
+           ptr_col=this%qflx_glcice_frz, l2g_scale_type='ice')
+
+    this%qflx_glcice_melt(begc:endc) = spval
+     call hist_addfld1d (fname='QICE_MELT',  units='mm/s',  &
+          avgflag='A', long_name='ice melt', &
+           ptr_col=this%qflx_glcice_melt, l2g_scale_type='ice')
 
     if (create_glacier_mec_landunit) then
             this%qflx_glcice(begc:endc) = spval
