@@ -123,8 +123,8 @@ contains
          qflx_snwcp_ice         => col_wf%qflx_snwcp_ice          , & ! Output: [real(r8) (:)   ]  excess snowfall due to snow capping (mm H2O /s) [+]`
          qflx_glcice            => col_wf%qflx_glcice             , & ! Output: [real(r8) (:)   ]  flux of new glacier ice (mm H2O /s)
          qflx_glcice_frz        => col_wf%qflx_glcice_frz         , & ! Output: [real(r8) (:)   ]  ice growth (positive definite) (mm H2O/s)
-         qflx_to_downhill       => col_wf%qflx_to_downhill          & ! Output: [real(r8) (:)   ]  flux transferred to downhill topounit (mm H2O/s)
-         )
+         qflx_glcice_diag       => col_wf%qflx_glcice_diag        , & ! Output: [real(r8) (:)   ]  flux of new glacier ice (mm H2O/s) - diagnostic, no MECs or GLC
+         qflx_glcice_frz_diag   => col_wf%qflx_glcice_frz_diag      & ! Output: [real(r8) (:)   ]  ice growth (positive definite) (mm H2O/s)) - diagnostic, no MECs or GLC
 
       ! Determine time step and step size
 
@@ -231,18 +231,16 @@ contains
          g = col_pp%gridcell(c)
          ! In the following, we convert glc_snow_persistence_max_days to r8 to avoid overflow
          if ( (snow_persistence(c) >= (real(glc_snow_persistence_max_days, r8) * secspday)) &
-              .or. lun_pp%itype(l) == istice_mec .or. lun_pp%itype(l) == istice) then
-
-              if ( (snow_persistence(c) >= (real(glc_snow_persistence_max_days, r8) * secspday)) &
-                 .or. lun_pp%itype(l) == istice_mec) then 
-                      qflx_glcice_frz(c) = qflx_snwcp_ice(c)
-                      qflx_glcice(c) = qflx_glcice(c) + qflx_glcice_frz(c)
-                      if (glc_dyn_runoff_routing(g)) qflx_snwcp_ice(c) = 0._r8
-              else
-                      qflx_glcice_frz(c) = qflx_snwcp_ice(c)
-                      qflx_glcice(c) = qflx_glcice(c) + qflx_glcice_frz(c)
-              end if ! lun_pp%itype(l) == istice
+              .or. lun_pp%itype(l) == istice_mec ) then
+                   qflx_glcice_frz(c) = qflx_snwcp_ice(c)
+                   qflx_glcice(c) = qflx_glcice(c) + qflx_glcice_frz(c)
+                   if (glc_dyn_runoff_routing(g)) qflx_snwcp_ice(c) = 0._r8
          end if
+
+         if (lun_pp%itype(l)==istice) then
+               qflx_glcice_frz_diags(c) = qflx_snwcp_ice(c)
+               qflx_glcice_diags(c) = qflx_glcice_diags(c) + qflx_glcice_frz_diags(c)
+         endif
 
       end do
 
