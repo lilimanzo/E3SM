@@ -895,7 +895,7 @@ static void rrtmgp_lw(
   view_t<RealT**>  gauss_wts    (dcurr, max_gauss_pts,max_gauss_pts); dcurr += size3;
   view_t<RealT**>  t_lay_limited(dcurr, ncol, nlay); dcurr += size4;
   view_t<RealT**>  t_lev_limited(dcurr, ncol, nlay+1); dcurr += size5;
-  view_t<RealT***> col_gas      (dcurr, std::make_pair(0, ncol-1), std::make_pair(0, nlay-1), std::make_pair(-1, k_dist.get_ngas()-1)); dcurr += size6;
+  view_t<RealT***> col_gas      (dcurr, ncol, nlay, k_dist.get_ngas()+1); dcurr += size6;
 
   // Associate local pointers for fluxes
   auto &flux_up           = fluxes.flux_up;
@@ -982,7 +982,6 @@ static void rrtmgp_lw(
   limit_to_bounds_k(t_lev, k_dist_lw_k.get_temp_min(), k_dist_lw_k.get_temp_max(), t_lev_limited);
 
   // Do gas optics
-  view_t<RealT***> col_gas("col_gas", ncol, nlay, k_dist.get_ngas()+1);
   k_dist.gas_optics(ncol, nlay, top_at_1, p_lay, p_lev, t_lay_limited, t_sfc, gas_concs, col_gas, optics, lw_sources, view_t<RealT**>(), t_lev_limited);
   if (extra_clnsky_diag) {
     k_dist.gas_optics(ncol, nlay, top_at_1, p_lay, p_lev, t_lay_limited, t_sfc, gas_concs, col_gas, optics_no_aerosols, lw_sources, view_t<RealT**>(), t_lev_limited);
