@@ -168,9 +168,6 @@ template <typename T>
 using view_t = Kokkos::View<T, LayoutT, DeviceT>;
 
 template <typename T>
-using oview_t = Kokkos::Experimental::OffsetView<T, LayoutT, DeviceT>;
-
-template <typename T>
 using hview_t = Kokkos::View<T, LayoutT, HostDevice>;
 
 using pool_t = conv::MemPoolSingleton<RealT, DeviceT>;
@@ -744,6 +741,8 @@ static void rrtmgp_sw(
     val |= p_lay(0, 0) < p_lay(0, nlay-1);
   }, Kokkos::LOr<bool>(top_at_1));
 
+  view_t<RealT***> col_gas("col_gas", ncol, nlay, k_dist.get_ngas()+1);
+
   k_dist.gas_optics(nday, nlay, top_at_1, p_lay_day, p_lev_day, t_lay_limited, gas_concs_day, col_gas, optics, toa_flux);
   if (extra_clnsky_diag) {
     k_dist.gas_optics(nday, nlay, top_at_1, p_lay_day, p_lev_day, t_lay_limited, gas_concs_day, col_gas, optics_no_aerosols, toa_flux);
@@ -944,6 +943,7 @@ static void rrtmgp_lw(
   limit_to_bounds_k(t_lev, k_dist_lw_k.get_temp_min(), k_dist_lw_k.get_temp_max(), t_lev_limited);
 
   // Do gas optics
+  view_t<RealT***> col_gas("col_gas", ncol, nlay, k_dist.get_ngas()+1);
   k_dist.gas_optics(ncol, nlay, top_at_1, p_lay, p_lev, t_lay_limited, t_sfc, gas_concs, col_gas, optics, lw_sources, view_t<RealT**>(), t_lev_limited);
   if (extra_clnsky_diag) {
     k_dist.gas_optics(ncol, nlay, top_at_1, p_lay, p_lev, t_lay_limited, t_sfc, gas_concs, col_gas, optics_no_aerosols, lw_sources, view_t<RealT**>(), t_lev_limited);
