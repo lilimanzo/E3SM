@@ -558,9 +558,9 @@ static void rrtmgp_sw(
   const bool extra_clnclrsky_diag, const bool extra_clnsky_diag)
 {
   // Get problem sizes
-  int nbnd = k_dist.get_nband();
-  int ngpt = k_dist.get_ngpt();
-  int ngas = gas_concs.get_num_gases();
+  const int nbnd = k_dist.get_nband();
+  const int ngpt = k_dist.get_ngpt();
+  const int ngas = gas_concs.get_num_gases();
 
   // Allocate temporaries from pool
   const int size1 = nday;
@@ -639,7 +639,7 @@ static void rrtmgp_sw(
   });
 
   // Get daytime indices
-  auto dayIndices = view_t<int*>("dayIndices", ncol);
+  auto dayIndices = pool_t::template alloc<int>(ncol);
   Kokkos::deep_copy(dayIndices, -1);
 
   int nday = 0;
@@ -654,8 +654,48 @@ static void rrtmgp_sw(
 
   if (nday == 0) {
     // No daytime columns in this chunk, skip the rest of this routine
+    pool_t::dealloc(dayIndices);
     return;
   }
+
+  // Allocate temporaries from pool
+  const int size1 = nday;
+  const int size2 = nday*nlay; // 4
+  const int size3 = nday*(nlay+1); // 5
+  const int size4 = ncol*nlay;
+  const int size5 = nbnd*nday; //2
+  const int size6 = nday*ngpt;
+  const int size7 = nday*(nlay+1)*nbnd; // 3
+  const int size8 = ncol*nlay*(k_dist.get_ngas()+1);
+
+  const int total_size = size1 + size2*4 + size3*5 + size4 + size5*2 + size6 + size7*3 + size8;
+  auto data = pool_t::template alloc<RealT>(total_size); RealT* dcurr = data.data();
+
+  auto mu0_day             = view_t<RealT*>  (dcurr, nday); dcurr += size1;
+
+  auto p_lay_day           = view_t<RealT**> (dcurr, nday, nlay); dcurr += size2;
+  auto t_lay_day           = view_t<RealT**> (dcurr, nday, nlay); dcurr += size2;
+  auto vmr_day             = view_t<RealT**> (dcurr, nday, nlay); dcurr += size2;
+  auto t_lay_limited       = view_t<RealT**> (dcurr, nday, nlay); dcurr += size2;
+
+  auto p_lev_day           = view_t<RealT**> (dcurr, nday, nlay+1); dcurr += size3;
+  auto t_lev_day           = view_t<RealT**> (dcurr, nday, nlay+1); dcurr += size3;
+  auto flux_up_day         = view_t<RealT**> (dcurr, nday, nlay+1); dcurr += size3;
+  auto flux_dn_day         = view_t<RealT**> (dcurr, nday, nlay+1); dcurr += size3;
+  auto flux_dn_dir_day     = view_t<RealT**> (dcurr, nday, nlay+1); dcurr += size3;
+
+  auto vmr                 = view_t<RealT**> (dcurr, ncol, nlay); dcurr += size4;
+
+  auto sfc_alb_dir_T       = view_t<RealT**> (dcurr, nbnd, nday); dcurr += size5;
+  auto sfc_alb_dif_T       = view_t<RealT**> (dcurr, nbnd, nday); dcurr += size5;
+
+  auto toa_flux            = view_t<RealT**> (dcurr, nday, ngpt); dcurr += size6;
+
+  auto bnd_flux_up_day     = view_t<RealT***>(dcurr, nday, nlay+1, nbnd); dcurr += size7;
+  auto bnd_flux_dn_day     = view_t<RealT***>(dcurr, nday, nlay+1, nbnd); dcurr += size7;
+  auto bnd_flux_dn_dir_day = view_t<RealT***>(dcurr, nday, nlay+1, nbnd); dcurr += size7;
+
+  auto col_gas             = view_t<RealT***>(dcurr, ncol, nlay, k_dist.get_ngas()+1); dcurr += size8;
 
   // Subset mu0
   Kokkos::parallel_for(nday, KOKKOS_LAMBDA(int iday) {
@@ -741,8 +781,6 @@ static void rrtmgp_sw(
     val |= p_lay(0, 0) < p_lay(0, nlay-1);
   }, Kokkos::LOr<bool>(top_at_1));
 
-  view_t<RealT***> col_gas("col_gas", ncol, nlay, k_dist.get_ngas()+1);
-
   k_dist.gas_optics(nday, nlay, top_at_1, p_lay_day, p_lev_day, t_lay_limited, gas_concs_day, col_gas, optics, toa_flux);
   if (extra_clnsky_diag) {
     k_dist.gas_optics(nday, nlay, top_at_1, p_lay_day, p_lev_day, t_lay_limited, gas_concs_day, col_gas, optics_no_aerosols, toa_flux);
@@ -822,7 +860,8 @@ static void rrtmgp_sw(
     });
   }
 
-  pool_t::dealloc(data, dcurr - data);
+  pool_t::dealloc(data);
+  pool_t::dealloc(dayIndices);
 }
 
 /*
