@@ -146,6 +146,7 @@ module seq_flux_mct
   integer :: index_o2x_So_u
   integer :: index_o2x_So_v
   integer :: index_o2x_So_fswpen
+  integer :: index_o2x_So_LM
   integer :: index_o2x_So_s
   integer :: index_o2x_So_roce_16O
   integer :: index_o2x_So_roce_HDO
