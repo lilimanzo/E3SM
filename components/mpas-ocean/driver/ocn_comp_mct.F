@@ -2881,7 +2881,7 @@ contains
    integer :: i, n
    integer, pointer :: nCellsSolve, index_temperatureSurfaceValue, index_salinitySurfaceValue, &
                        index_avgZonalSurfaceVelocity, index_avgMeridionalSurfaceVelocity, &
-                       index_avgZonalSSHGradient, index_avgMeridionalSSHGradient
+                       index_avgZonalSSHGradient, index_avgMeridionalSSHGradient, index_LMVar
 
    type (block_type), pointer :: block_ptr
 
@@ -2969,6 +2969,7 @@ contains
      call mpas_pool_get_dimension(meshPool, 'nCellsSolve', nCellsSolve)
 
      call mpas_pool_get_dimension(forcingPool, 'index_avgTemperatureSurfaceValue', index_temperatureSurfaceValue)
+     call mpas_pool_get_dimension(forcingPool, 'index_avgSalinitySurfaceValue', index_LMVar)
      call mpas_pool_get_dimension(forcingPool, 'index_avgSalinitySurfaceValue', index_salinitySurfaceValue)
      call mpas_pool_get_dimension(forcingPool, 'index_avgSurfaceVelocityZonal', index_avgZonalSurfaceVelocity)
      call mpas_pool_get_dimension(forcingPool, 'index_avgSurfaceVelocityMeridional', index_avgMeridionalSurfaceVelocity)
@@ -3047,6 +3048,7 @@ contains
        n = n + 1
 
        o2x_o % rAttr(index_o2x_So_t, n) = avgTracersSurfaceValue(index_temperatureSurfaceValue, i)
+       !o2x_o % rAttr(index_o2x_So_s, n) = avgTracersSurfaceValue(index_LMVar, i)
        o2x_o % rAttr(index_o2x_So_s, n) = avgTracersSurfaceValue(index_salinitySurfaceValue, i)
        o2x_o % rAttr(index_o2x_So_u, n) = avgSurfaceVelocity(index_avgZonalSurfaceVelocity, i)
        o2x_o % rAttr(index_o2x_So_v, n) = avgSurfaceVelocity(index_avgMeridionalSurfaceVelocity, i)
