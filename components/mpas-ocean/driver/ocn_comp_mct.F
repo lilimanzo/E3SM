@@ -3048,7 +3048,7 @@ contains
        n = n + 1
 
        o2x_o % rAttr(index_o2x_So_t, n) = avgTracersSurfaceValue(index_temperatureSurfaceValue, i)
-       !o2x_o % rAttr(index_o2x_So_s, n) = avgTracersSurfaceValue(index_LMVar, i)
+       o2x_o % rAttr(index_o2x_So_s, n) = avgTracersSurfaceValue(index_LMVar, i)
        o2x_o % rAttr(index_o2x_So_s, n) = avgTracersSurfaceValue(index_salinitySurfaceValue, i)
        o2x_o % rAttr(index_o2x_So_u, n) = avgSurfaceVelocity(index_avgZonalSurfaceVelocity, i)
        o2x_o % rAttr(index_o2x_So_v, n) = avgSurfaceVelocity(index_avgMeridionalSurfaceVelocity, i)
