@@ -187,7 +187,7 @@ contains
     index_o2x_So_u          = mct_avect_indexra(o2x,'So_u')
     index_o2x_So_v          = mct_avect_indexra(o2x,'So_v')
     index_o2x_So_s          = mct_avect_indexra(o2x,'So_s')
-    !index_o2x_So_LM         = mct_avect_indexra(o2x,'So_LM')
+    index_o2x_So_LM         = mct_avect_indexra(o2x,'So_LM')
     index_o2x_So_dhdx       = mct_avect_indexra(o2x,'So_dhdx')
     index_o2x_So_dhdy       = mct_avect_indexra(o2x,'So_dhdy')
     index_o2x_Fioo_q        = mct_avect_indexra(o2x,'Fioo_q',perrWith='quiet')
