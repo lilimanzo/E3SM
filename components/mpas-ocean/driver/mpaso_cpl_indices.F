@@ -14,6 +14,7 @@ module mpaso_cpl_indices
   integer :: index_o2x_So_u
   integer :: index_o2x_So_v
   integer :: index_o2x_So_s
+  integer :: index_o2x_So_LM
   integer :: index_o2x_So_dhdx
   integer :: index_o2x_So_dhdy
   integer :: index_o2x_Fioo_q
@@ -186,6 +187,7 @@ contains
     index_o2x_So_u          = mct_avect_indexra(o2x,'So_u')
     index_o2x_So_v          = mct_avect_indexra(o2x,'So_v')
     index_o2x_So_s          = mct_avect_indexra(o2x,'So_s')
+    index_o2x_So_LM         = mct_avect_indexra(o2x,'So_LM')
     index_o2x_So_dhdx       = mct_avect_indexra(o2x,'So_dhdx')
     index_o2x_So_dhdy       = mct_avect_indexra(o2x,'So_dhdy')
     index_o2x_Fioo_q        = mct_avect_indexra(o2x,'Fioo_q',perrWith='quiet')
