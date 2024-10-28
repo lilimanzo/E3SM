@@ -1707,7 +1707,7 @@ contains
 
     ! LM duplicate variable of surface  salinity
     call seq_flds_add(o2x_states,"So_LM")
-    call seq_flds_add(x2i_states,"So_LM")
+    call seq_flds_add(x2a_states,"So_LM")
     longname = 'LM Sea surface salinity'
     stdname  = 'LM sea_surface_salinity'
     units    = 'g kg-1'
