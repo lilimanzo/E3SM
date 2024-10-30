@@ -1714,6 +1714,15 @@ contains
     attname  = 'So_s'
     call metadata_set(attname, longname, stdname, units)
 
+    ! LM variable for sea ice emissivity
+    call seq_flds_add(i2x_states,"Si_LM")
+    call seq_flds_add(x2a_states,"Si_LM")
+    longname = 'LM Sea ice emissivity'
+    stdname  = 'LM_sea_ice_emissivity'
+    units    = 'g kg-1'
+    attname  = 'Si_LM'
+    call metadata_set(attname, longname, stdname, units)
+
     ! Zonal sea water velocity
     call seq_flds_add(o2x_states,"So_u")
     call seq_flds_add(x2i_states,"So_u")
