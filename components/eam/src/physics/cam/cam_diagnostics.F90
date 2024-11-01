@@ -662,6 +662,7 @@ subroutine diag_init()
 
    call addfld ('TS',horiz_only,    'A','K','Surface temperature (radiative)', &
        standard_name = 'surface_temperature')
+   call addfld ('MSV_LM',horiz_only, 'A','K','LM emissivity')
    call addfld ('TSMN',horiz_only,    'M','K','Minimum surface temperature over output period')
    call addfld ('TSMX',horiz_only,    'X','K','Maximum surface temperature over output period')
    call addfld ('SNOWHLND',horiz_only,    'A','m','Water equivalent snow depth')
