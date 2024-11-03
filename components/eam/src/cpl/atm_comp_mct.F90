@@ -1908,7 +1908,7 @@ subroutine atm_import_moab(Eclock, cam_in, restart_init )
        end if
        first_time = .false.
     end if
-  write(iulog,*) "LM test write"
+  !write(iulog,*) "LM test write"
   end subroutine atm_import_moab
 
 ! endif for HAVE_MOAB
