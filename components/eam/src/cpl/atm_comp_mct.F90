@@ -248,7 +248,7 @@ CONTAINS
              call shr_file_setIO('atm_modelio.nml'//trim(inst_suffix), iulog)
           endif
           write(iulog,*) "CAM atmosphere model initialization"
-          write(iulog,*) "LM test write"
+          !write(iulog,*) "LM test write"
        endif
        
        call shr_file_getLogUnit (shrlogunit)
@@ -1908,8 +1908,7 @@ subroutine atm_import_moab(Eclock, cam_in, restart_init )
        end if
        first_time = .false.
     end if
-
-
+  write(iulog,*) "LM test write"
   end subroutine atm_import_moab
 
 ! endif for HAVE_MOAB
