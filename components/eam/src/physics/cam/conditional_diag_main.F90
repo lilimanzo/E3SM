@@ -468,6 +468,9 @@ subroutine get_values( arrayout, varname, state, pbuf, cam_in, cam_out )
         case('PS')
            arrayout(1:ncol,1) = state%ps(1:ncol)
 
+        case('MSV')
+           arrayout(1:ncol,1) = state%msv(1:ncol) ! LM
+
         !---------
         ! cam_in 
         !---------
@@ -502,8 +505,8 @@ subroutine get_values( arrayout, varname, state, pbuf, cam_in, cam_out )
         case('SST')
            arrayout(1:ncol,1) = cam_in%sst(1:ncol)
 
-        case('MSV')
-           arrayout(1:ncol,1) = cam_in%msv(1:ncol)  ! LM msv
+        !case('MSV')
+        !   arrayout(1:ncol,1) = cam_in%msv(1:ncol)  ! LM msv
         !----------
         ! cam_out
         !----------
