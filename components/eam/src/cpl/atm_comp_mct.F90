@@ -1770,9 +1770,6 @@ subroutine atm_import_moab(Eclock, cam_in, restart_init )
           cam_in(c)%ts(i)        =  x2a_am(ig,index_x2a_Sx_t)  
           cam_in(c)%sst(i)       =  x2a_am(ig,index_x2a_So_t)
           cam_in(c)%msv(i)       =  x2a_am(ig,index_x2a_So_LM)
-
-          write(iulog,*)' msv_LM =',x2a_am(ig,index_x2a_So_LM)
-
           cam_in(c)%snowhland(i) =  x2a_am(ig,index_x2a_Sl_snowh)  
           cam_in(c)%snowhice(i)  =  x2a_am(ig,index_x2a_Si_snowh)  
           cam_in(c)%tref(i)      =  x2a_am(ig,index_x2a_Sx_tref)  
@@ -1902,8 +1899,9 @@ subroutine atm_import_moab(Eclock, cam_in, restart_init )
        if (is_first_step()) then
           do c=begchunk, endchunk
              ncols = get_ncols_p(c)
+             write(iulog,*)' msv_LM =',x2a_am(ig,index_x2a_So_LM)
              do i=1,ncols
-                cam_in(c)%lwup(i) = shr_const_stebol*(cam_in(c)%ts(i)**4)
+                cam_in(c)%lwup(i) = shr_const_stebol*(cam_in(c)%ts(i)**4) ! LM note
              end do
           end do
        end if
