@@ -248,6 +248,7 @@ CONTAINS
              call shr_file_setIO('atm_modelio.nml'//trim(inst_suffix), iulog)
           endif
           write(iulog,*) "CAM atmosphere model initialization"
+          write(iulog,*) "LM test write"
        endif
        
        call shr_file_getLogUnit (shrlogunit)
@@ -1899,7 +1900,7 @@ subroutine atm_import_moab(Eclock, cam_in, restart_init )
        if (is_first_step()) then
           do c=begchunk, endchunk
              ncols = get_ncols_p(c)
-             write(iulog,*)' msv_LM =',x2a_am(ig,index_x2a_So_LM)
+             !write(iulog,*)' msv_LM =',x2a_am(ig,index_x2a_So_LM)
              do i=1,ncols
                 cam_in(c)%lwup(i) = shr_const_stebol*(cam_in(c)%ts(i)**4) ! LM note
              end do
