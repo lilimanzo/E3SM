@@ -1715,12 +1715,12 @@ contains
     call metadata_set(attname, longname, stdname, units)
 
     ! LM variable for sea ice emissivity
-    call seq_flds_add(i2x_states,"Si_LM")
-    call seq_flds_add(x2a_states,"Si_LM")
+    call seq_flds_add(i2x_states,"Si_imsv")
+    call seq_flds_add(x2a_states,"Si_imsv")
     longname = 'LM Sea ice emissivity'
     stdname  = 'LM_sea_ice_emissivity'
     units    = 'g kg-1'
-    attname  = 'Si_LM'
+    attname  = 'Si_imsv'
     call metadata_set(attname, longname, stdname, units)
 
     ! Zonal sea water velocity
