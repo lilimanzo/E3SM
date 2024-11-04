@@ -13,7 +13,8 @@ module mpassi_cpl_indices
   integer :: index_i2x_Si_ifrac        ! fractional ice coverage wrt ocean
   integer :: index_i2x_Si_ithick       ! ice thickness (m)
   integer :: index_i2x_Si_snowh        ! snow height (m)
-  integer :: index_i2x_Si_t            ! temperature                     
+  integer :: index_i2x_Si_t            ! temperature                   
+  integer :: index_i2x_Si_imsv         ! LM sea ice emissivity  
   integer :: index_i2x_Si_bpress       ! basal pressure                  
   integer :: index_i2x_Si_tref         ! 2m reference temperature        
   integer :: index_i2x_Si_qref         ! 2m reference specific humidity  
@@ -143,6 +144,7 @@ contains
     call mct_aVect_init(i2x, rList=seq_flds_i2x_fields, lsize=1)
 
     index_i2x_Si_t          = mct_avect_indexra(i2x,'Si_t')
+    index_i2x_Si_imsv       = mct_avect_indexra(i2x,'Si_imsv') ! LM sea ice emissivity
     index_i2x_Si_bpress     = mct_avect_indexra(i2x,'Si_bpress')
     index_i2x_Si_tref       = mct_avect_indexra(i2x,'Si_tref')
     index_i2x_Si_qref       = mct_avect_indexra(i2x,'Si_qref')
