@@ -2947,6 +2947,7 @@ contains
 
             !-------states--------------------
             i2x_i % rAttr(index_i2x_Si_t     ,n)  = Tsrf
+            i2x_i % rAttr(index_i2x_Si_imsv  ,n)  = 0.0_RKIND ! LM
             i2x_i % rAttr(index_i2x_Si_bpress,n)  = basalPressure
             i2x_i % rAttr(index_i2x_Si_u10   ,n)  = atmosReferenceSpeed10m(i)
             i2x_i % rAttr(index_i2x_Si_u10withgusts,n) = atmosReferenceSpeed10m(i)
