@@ -2191,6 +2191,7 @@ subroutine diag_surf (cam_in, cam_out, ps, trefmxav, trefmnav )
 
     call outfld('TBOT',     cam_out%tbot,     pcols, lchnk)
     call outfld('TS',       cam_in%ts,        pcols, lchnk)
+    call outfld('MSV_LM',   cam_in%msv,       pcols, lchnk) 
     call outfld('TSMN',     cam_in%ts,        pcols, lchnk)
     call outfld('TSMX',     cam_in%ts,        pcols, lchnk)
     call outfld('SNOWHLND', cam_in%snowhland, pcols, lchnk)
