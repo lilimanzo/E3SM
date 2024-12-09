@@ -94,7 +94,7 @@ contains
           cam_in(c)%ts(i)        =  x2a(index_x2a_Sx_t,     ig)  
           cam_in(c)%sst(i)       =  x2a(index_x2a_So_t,     ig)
           cam_in(c)%msv(i)       =  x2a(index_x2a_So_LM,    ig) 
-          cam_in(c)%imsv(i)       =  x2a(index_x2a_Si_imsv  ig)  ! LM     
+          cam_in(c)%imsv(i)      =  x2a(index_x2a_Si_imsv,  ig)  ! LM     
           cam_in(c)%snowhland(i) =  x2a(index_x2a_Sl_snowh, ig)  
           cam_in(c)%snowhice(i)  =  x2a(index_x2a_Si_snowh, ig)  
           cam_in(c)%tref(i)      =  x2a(index_x2a_Sx_tref,  ig)  
