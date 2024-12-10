@@ -114,7 +114,7 @@ contains
          albi_grc  (bounds%begg:bounds%endg,:) , &
          p2c_scale_type=unity, c2l_scale_type= urbanf, l2g_scale_type=unity)
 
-    call p2g(bounds, numrad, &
+    call p2g(bounds, &
          emg(bounds%begp:bounds%endp,:) , &
          p2c_scale_type=unity, c2l_scale_type= urbanf, l2g_scale_type=unity) ! LM
 
