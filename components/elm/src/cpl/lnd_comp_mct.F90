@@ -1073,7 +1073,7 @@ contains
        l2x_lm(i,index_l2x_Sl_anidr)    =  lnd2atm_vars%albd_grc(g,2)
        l2x_lm(i,index_l2x_Sl_avsdf)    =  lnd2atm_vars%albi_grc(g,1)
        l2x_lm(i,index_l2x_Sl_anidf)    =  lnd2atm_vars%albi_grc(g,2)
-       l2x_lm(i,index_l2x_Sl_emg)      =  lnd2atm_vars%emg_grc(g) ! LM
+       l2x_lm(i,index_l2x_Sl_lmsv)     =  lnd2atm_vars%emg_grc(g) ! LM
        l2x_lm(i,index_l2x_Sl_tref)     =  lnd2atm_vars%t_ref2m_grc(g)
        l2x_lm(i,index_l2x_Sl_qref)     =  lnd2atm_vars%q_ref2m_grc(g)
        l2x_lm(i,index_l2x_Sl_u10)      =  lnd2atm_vars%u_ref10m_grc(g)
