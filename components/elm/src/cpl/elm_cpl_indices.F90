@@ -41,6 +41,7 @@ module elm_cpl_indices
   integer, public ::index_l2x_Sl_anidr        ! albedo: direct , near-ir
   integer, public ::index_l2x_Sl_avsdf        ! albedo: diffuse, visible
   integer, public ::index_l2x_Sl_anidf        ! albedo: diffuse, near-ir
+  integer, public ::index_l2x_Sl_lmsv         ! land emissivity LM
   integer, public ::index_l2x_Sl_snowh        ! snow height
   integer, public ::index_l2x_Sl_u10          ! 10m wind
   integer, public ::index_l2x_Sl_u10withgusts ! 10m wind with gustiness included
@@ -201,6 +202,7 @@ contains
     index_l2x_Sl_anidr      = mct_avect_indexra(l2x,'Sl_anidr')
     index_l2x_Sl_avsdf      = mct_avect_indexra(l2x,'Sl_avsdf')
     index_l2x_Sl_anidf      = mct_avect_indexra(l2x,'Sl_anidf')
+    index_l2x_Sl_lmsv       = mct_avect_indexra(l2x,'Sl_lmsv') ! LM
     index_l2x_Sl_tref       = mct_avect_indexra(l2x,'Sl_tref')
     index_l2x_Sl_qref       = mct_avect_indexra(l2x,'Sl_qref')
     index_l2x_Sl_u10        = mct_avect_indexra(l2x,'Sl_u10')
