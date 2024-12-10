@@ -85,6 +85,7 @@ contains
       albd_grc   => lnd2atm_vars%albd_grc   , &
       albi_patch => surfalb_vars%albi_patch , &
       albi_grc   => lnd2atm_vars%albi_grc   , &
+      emg        => col_es%emg              , & ! LM added emg
       eflx_lwrad_out => veg_ef%eflx_lwrad_out , &
       eflx_lwrad_out_grc => lnd2atm_vars%eflx_lwrad_out_grc   &
       )
