@@ -1404,7 +1404,7 @@ contains
        l2x(index_l2x_Sl_anidr,i)    =  lnd2atm_vars%albd_grc(g,2)
        l2x(index_l2x_Sl_avsdf,i)    =  lnd2atm_vars%albi_grc(g,1)
        l2x(index_l2x_Sl_anidf,i)    =  lnd2atm_vars%albi_grc(g,2)
-       !l2x(index_l2x_Sl_lmsv,i)      =  lnd2atm_vars%emg_grc(g) ! LM
+       l2x(index_l2x_Sl_lmsv,i)      =  lnd2atm_vars%emg_grc(g) ! LM
        l2x(index_l2x_Sl_tref,i)     =  lnd2atm_vars%t_ref2m_grc(g)
        l2x(index_l2x_Sl_qref,i)     =  lnd2atm_vars%q_ref2m_grc(g)
        l2x(index_l2x_Sl_u10,i)      =  lnd2atm_vars%u_ref10m_grc(g)
