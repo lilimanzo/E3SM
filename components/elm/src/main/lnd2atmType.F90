@@ -128,7 +128,7 @@ contains
     allocate(this%h2osoi_vol_grc       (begg:endg,1:nlevgrnd)) ; this%h2osoi_vol_grc     (:,:) =ival
     allocate(this%albd_grc             (begg:endg,1:numrad))   ; this%albd_grc           (:,:) =ival
     allocate(this%albi_grc             (begg:endg,1:numrad))   ; this%albi_grc           (:,:) =ival
-    allocate(this%emg_grc              (begg:endg,1:numrad))   ; this%emg_grc            (:,:) =ival ! LM
+    allocate(this%emg_grc              (begg:endg))            ; this%emg_grc              (:) =ival ! LM
     allocate(this%taux_grc             (begg:endg))            ; this%taux_grc             (:) =ival
     allocate(this%tauy_grc             (begg:endg))            ; this%tauy_grc             (:) =ival
     allocate(this%eflx_lwrad_out_grc   (begg:endg))            ; this%eflx_lwrad_out_grc   (:) =ival
