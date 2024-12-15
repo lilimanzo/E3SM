@@ -454,7 +454,7 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,   &
         !--- heat flux ---
         sen (n) =          cp * tau * tstar / ustar
         lat (n) =  loc_latvap * tau * qstar / ustar
-        lwup(n) = -loc_stebol * ts(n)**4
+        lwup(n) = -0.97_R8 * loc_stebol * ts(n)**4 ! LM
 
         !--- water flux ---
         evap(n) = lat(n)/loc_latvap
