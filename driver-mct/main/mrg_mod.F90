@@ -67,6 +67,7 @@ contains
     integer  :: index_x2a_Sf_ofrac
     integer  :: index_x2a_Faxx_lwup ! LM added
     integer  :: index_x2a_Sx_t      ! LM added
+    integer, save :: index_x2a_Sx_mmsv  ! LM added
     character(CL) :: field_atm   ! string converted to char
     character(CL) :: field_lnd   ! string converted to char
     character(CL) :: field_ice   ! string converted to char
