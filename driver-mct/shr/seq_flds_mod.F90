@@ -1710,7 +1710,7 @@ contains
     call seq_flds_add(x2a_states,"So_LM")
     longname = 'LM Sea surface salinity'
     stdname  = 'LM sea_surface_salinity'
-    units    = 'g kg-1'
+    units    = '1'
     attname  = 'So_s'
     call metadata_set(attname, longname, stdname, units)
 
@@ -1720,10 +1720,18 @@ contains
     call seq_flds_add(x2a_states,"Si_imsv")
     longname = 'LM Sea ice emissivity'
     stdname  = 'LM_sea_ice_emissivity'
-    units    = 'g kg-1'
+    units    = '1'
     attname  = 'Si_imsv'
     call metadata_set(attname, longname, stdname, units)
     attname  = 'Sl_lmsv'
+    call metadata_set(attname, longname, stdname, units)
+
+    ! LM variable for mean emissivity computed in coupler
+    call seq_flds_add(x2a_states,"Sx_mmsv")
+    longname = 'Mean emissivity'
+    stdname  = 'LM_mean_emissivity'
+    units    = '1'
+    attname  = 'Sx_mmsv'
     call metadata_set(attname, longname, stdname, units)
 
     ! Zonal sea water velocity
