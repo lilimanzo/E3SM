@@ -95,6 +95,8 @@ contains
        noflds = mct_aVect_nRattr(o2x_a)
        nxflds = mct_aVect_nRattr(xao_a)
 
+       index_x2a_Sx_mmsv    = mct_aVect_indexRA(x2a_a,'Sx_mmsv') ! LM added
+
        allocate(lindx(naflds), lmerge(naflds))
        allocate(iindx(naflds), imerge(naflds))
        allocate(xindx(naflds), xmerge(naflds))
