@@ -221,7 +221,7 @@ contains
           fracl = fractions_a%Rattr(klf,n)
           fraci = fractions_a%Rattr(kif,n)
           fraco = fractions_a%Rattr(kof,n)
-          mmsv  = x2a_a%rAttr(index_x2a_Faxx_lwup,n) / x2a_a%rAttr(index_x2a_Sx_t,n) ! LM added
+          mmsv  = x2a_a%rAttr(index_x2a_Faxx_lwup,n) / (5.67e-8_r8 * x2a_a%rAttr(index_x2a_Sx_t,n) ** 4) ! LM added
           if (lindx(ka) > 0 .and. fracl > 0._r8) then
              if (lmerge(ka)) then
                 x2a_a%rAttr(ka,n) = x2a_a%rAttr(ka,n) + l2x_a%rAttr(lindx(ka),n) * fracl
