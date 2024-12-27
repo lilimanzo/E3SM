@@ -95,7 +95,7 @@ contains
        noflds = mct_aVect_nRattr(o2x_a)
        nxflds = mct_aVect_nRattr(xao_a)
 
-       index_x2a_Sx_mmsv    = mct_aVect_indexRA(x2a_a,'Sx_mmsv') ! LM added
+       
 
        allocate(lindx(naflds), lmerge(naflds))
        allocate(iindx(naflds), imerge(naflds))
@@ -199,10 +199,13 @@ contains
     index_x2a_Sf_lfrac = mct_aVect_indexRA(x2a_a,'Sf_lfrac')
     index_x2a_Sf_ifrac = mct_aVect_indexRA(x2a_a,'Sf_ifrac')
     index_x2a_Sf_ofrac = mct_aVect_indexRA(x2a_a,'Sf_ofrac')
+    index_x2a_Sx_mmsv  = mct_aVect_indexRA(x2a_a,'Sx_mmsv') ! LM added
+
     do n = 1,lsize
        x2a_a%rAttr(index_x2a_Sf_lfrac,n) = fractions_a%Rattr(klf,n)
        x2a_a%rAttr(index_x2a_Sf_ifrac,n) = fractions_a%Rattr(kif,n)
        x2a_a%rAttr(index_x2a_Sf_ofrac,n) = fractions_a%Rattr(kof,n)
+       x2a_a%rAttr(index_x2a_Sx_mmsv,n) = 1.0_r8 ! LM added
     end do
 
     ! Copy attributes that do not need to be merged
@@ -225,8 +228,8 @@ contains
           fraci = fractions_a%Rattr(kif,n)
           fraco = fractions_a%Rattr(kof,n)
 
-          mmsv  = 1 !x2a_a%rAttr(index_x2a_Faxx_lwup,n) / (5.67e-8_r8 * x2a_a%rAttr(index_x2a_Sx_t,n) ** 4) ! LM added
-          x2a_a%rAttr(index_x2a_Sx_mmsv,n) = mmsv ! LM added
+          !mmsv  = 1 !x2a_a%rAttr(index_x2a_Faxx_lwup,n) / (5.67e-8_r8 * x2a_a%rAttr(index_x2a_Sx_t,n) ** 4) ! LM added
+          !x2a_a%rAttr(index_x2a_Sx_mmsv,n) = mmsv ! LM added
 
           if (lindx(ka) > 0 .and. fracl > 0._r8) then ! LM test
              if (lmerge(ka)) then
