@@ -515,6 +515,7 @@ contains
     real(r8) :: frac_sum
     real(r8) :: avsdr, anidr, avsdf, anidf   ! albedos
     real(r8) :: fswabsv, fswabsi             ! sw
+    real(r8) :: mmsv                         ! LM mean emissivity
     integer  :: noflds,naflds,niflds,nxflds
     integer  :: kof,kaf,kif,kxf
     character(CL) :: field_ocn   ! string converted to char
