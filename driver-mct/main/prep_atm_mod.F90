@@ -281,11 +281,13 @@ contains
     !
     ! Local workspace
     real(r8) :: fracl, fraci, fraco, fracl_st
+    real(r8) :: mmsv                            ! LM added
     integer  :: n,ka,ki,kl,ko,kx,kof,kif,klf,klf_st,i,i1,o1
     integer  :: lsize
     integer  :: index_x2a_Sf_lfrac
     integer  :: index_x2a_Sf_ifrac
     integer  :: index_x2a_Sf_ofrac
+    integer  :: index_x2a_Sx_mmsv               ! LM added
     character(CL),allocatable :: field_atm(:)   ! string converted to char
     character(CL),allocatable :: field_lnd(:)   ! string converted to char
     character(CL),allocatable :: field_ice(:)   ! string converted to char
