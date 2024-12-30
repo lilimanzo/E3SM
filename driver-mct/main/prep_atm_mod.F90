@@ -512,7 +512,7 @@ contains
        x2a_a%rAttr(index_x2a_Sf_lfrac,n) = fractions_a%Rattr(klf,n)
        x2a_a%rAttr(index_x2a_Sf_ifrac,n) = fractions_a%Rattr(kif,n)
        x2a_a%rAttr(index_x2a_Sf_ofrac,n) = fractions_a%Rattr(kof,n)
-       x2a_a%rAttr(index_x2a_Sx_mmsv,n) = 1.0_r8 ! LM added
+       x2a_a%rAttr(index_x2a_Sx_mmsv,n)  = x2a_a%rAttr(index_x2a_Faxx_lwup,n) !1.0_r8 ! LM added
     end do
 
     !--- document fraction operations ---
