@@ -799,6 +799,7 @@ contains
           index_x2a_Faxx_lat    = mct_aVect_indexRA(x2a_a,'Faxx_lat')
           index_x2a_Faxx_sen    = mct_aVect_indexRA(x2a_a,'Faxx_sen')
           index_x2a_Faxx_evap   = mct_aVect_indexRA(x2a_a,'Faxx_evap')
+          index_x2a_Sx_t        = mct_aVect_indexRA(x2a_a,'Sx_t') ! LM added
 
           if ( flds_wiso_atm )then
              index_x2a_Faxx_evap_16O = mct_aVect_indexRA(x2a_a,'Faxx_evap_16O')
