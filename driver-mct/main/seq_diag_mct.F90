@@ -840,7 +840,7 @@ contains
              nf = f_hh2ot; budg_dataL(nf,ic,ip) = budg_dataL(nf,ic,ip) + ca_a*x2a_a%rAttr(index_x2a_Faoo_h2otemp,n)
              nf = f_wevap; budg_dataL(nf,ic,ip) = budg_dataL(nf,ic,ip) + ca_a*x2a_a%rAttr(index_x2a_Faxx_evap,n)
 
-             emsv = 1.0_remsv = 1.0_r88
+             emsv = 1.0_r8 ! LM added 
 
              if ( flds_wiso_atm )then
                 nf = f_wevap_16O;
