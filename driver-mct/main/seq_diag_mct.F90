@@ -257,6 +257,8 @@ module seq_diag_mct
   integer :: index_x2a_Faxx_evap
   integer :: index_x2a_Faoo_h2otemp
 
+  integer :: index_x2a_Sx_t    ! LM added
+
   integer :: index_l2x_Fall_swnet
   integer :: index_l2x_Fall_lwup
   integer :: index_l2x_Fall_lat

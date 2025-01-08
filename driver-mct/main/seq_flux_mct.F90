@@ -776,7 +776,7 @@ contains
 
   !===============================================================================
 
-  subroutine seq_flux_ocnalb_mct( infodata, ocn, a2x_o, fractions_o, xao_o , x2a_a) ! LM added x2a_a
+  subroutine seq_flux_ocnalb_mct( infodata, ocn, a2x_o, fractions_o, xao_o) ! LM added x2a_a previously
 
     !-----------------------------------------------------------------------
     !
