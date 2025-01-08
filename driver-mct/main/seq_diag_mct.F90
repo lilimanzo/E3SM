@@ -654,6 +654,7 @@ contains
     character(CL)            :: atm_gnam          ! atm grid
     character(CL)            :: lnd_gnam          ! lnd grid
     integer(in)              :: k,n,ic,nf,ip      ! generic index
+    integer(in)              :: emsv              ! LM added effective emissivity
     integer(in)              :: kArea             ! index of area field in aVect
     integer(in)              :: kLat              ! index of lat field in aVect
     integer(in)              :: kl,ka,ko,ki       ! fraction indices
@@ -838,6 +839,8 @@ contains
              nf = f_hsen ; budg_dataL(nf,ic,ip) = budg_dataL(nf,ic,ip) + ca_a*x2a_a%rAttr(index_x2a_Faxx_sen,n)
              nf = f_hh2ot; budg_dataL(nf,ic,ip) = budg_dataL(nf,ic,ip) + ca_a*x2a_a%rAttr(index_x2a_Faoo_h2otemp,n)
              nf = f_wevap; budg_dataL(nf,ic,ip) = budg_dataL(nf,ic,ip) + ca_a*x2a_a%rAttr(index_x2a_Faxx_evap,n)
+
+             emsv = 1.0_remsv = 1.0_r88
 
              if ( flds_wiso_atm )then
                 nf = f_wevap_16O;
