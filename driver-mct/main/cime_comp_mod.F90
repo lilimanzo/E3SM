@@ -2285,7 +2285,7 @@ contains
              eai = mod((exi-1),num_inst_atm) + 1
              xao_ox => prep_aoflux_get_xao_ox()        ! array over all instances
              a2x_ox => prep_ocn_get_a2x_ox()
-             call seq_flux_ocnalb_mct(infodata, ocn(1), a2x_ox(eai), fractions_ox(efi), xao_ox(exi))
+             call seq_flux_ocnalb_mct(infodata, ocn(1), a2x_ox(eai), fractions_ox(efi), xao_ox(exi), x2a_ax(exi)) ! LM added x2a_ax
           enddo
 
           if (drv_threading) call seq_comm_setnthreads(nthreads_GLOID)
