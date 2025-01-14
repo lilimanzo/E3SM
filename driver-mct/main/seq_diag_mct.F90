@@ -229,7 +229,7 @@ module seq_diag_mct
   real(r8),public :: budg_dataL(f_size,c_size,p_size) ! local sum, valid on all pes
   real(r8),public :: budg_dataG(f_size,c_size,p_size) ! global sum, valid only on root pe
   real(r8),public :: budg_ns   (f_size,c_size,p_size) ! counter, valid only on root pe
-  real(r8),public :: emsv      (f_size,c_size,p_size) ! LM added
+  !real(r8),public :: emsv      (f_size,c_size,p_size) ! LM added
 
   character(len=*),parameter :: afldname  = 'aream'
   character(len=*),parameter :: latname   = 'lat'
@@ -258,7 +258,7 @@ module seq_diag_mct
   integer :: index_x2a_Faxx_evap
   integer :: index_x2a_Faoo_h2otemp
 
-  integer :: index_x2a_Sx_t    ! LM added
+  !integer :: index_x2a_Sx_t    ! LM added
 
   integer :: index_l2x_Fall_swnet
   integer :: index_l2x_Fall_lwup
@@ -801,7 +801,7 @@ contains
           index_x2a_Faxx_lat    = mct_aVect_indexRA(x2a_a,'Faxx_lat')
           index_x2a_Faxx_sen    = mct_aVect_indexRA(x2a_a,'Faxx_sen')
           index_x2a_Faxx_evap   = mct_aVect_indexRA(x2a_a,'Faxx_evap')
-          index_x2a_Sx_t        = mct_aVect_indexRA(x2a_a,'Sx_t') ! LM added
+          !index_x2a_Sx_t        = mct_aVect_indexRA(x2a_a,'Sx_t') ! LM added
 
           if ( flds_wiso_atm )then
              index_x2a_Faxx_evap_16O = mct_aVect_indexRA(x2a_a,'Faxx_evap_16O')
@@ -841,7 +841,7 @@ contains
              nf = f_hh2ot; budg_dataL(nf,ic,ip) = budg_dataL(nf,ic,ip) + ca_a*x2a_a%rAttr(index_x2a_Faoo_h2otemp,n)
              nf = f_wevap; budg_dataL(nf,ic,ip) = budg_dataL(nf,ic,ip) + ca_a*x2a_a%rAttr(index_x2a_Faxx_evap,n)
 
-             emsv(nf,ic,ip) = x2a_a%rAttr(index_x2a_Sx_t,n) ! LM added 
+             !emsv(nf,ic,ip) = x2a_a%rAttr(index_x2a_Sx_t,n) ! LM added 
 
              if ( flds_wiso_atm )then
                 nf = f_wevap_16O;
