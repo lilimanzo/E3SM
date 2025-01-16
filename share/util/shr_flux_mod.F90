@@ -67,6 +67,7 @@ module shr_flux_mod
    real(R8) :: loc_latice = shr_const_latice
    real(R8) :: loc_stebol = shr_const_stebol
    real(R8) :: loc_tkfrz  = shr_const_tkfrz
+   real(R8) :: loc_ocn_msv= shr_const_ocn_msv  ! LM added
 
    ! These control convergence of the iterative flux calculation
    ! (For Large and Pond scheme only; not UA or COARE).
