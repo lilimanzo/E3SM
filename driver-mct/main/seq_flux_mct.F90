@@ -62,6 +62,7 @@ module seq_flux_mct
   real(r8), allocatable ::  sen  (:)  ! heat flux: sensible
   real(r8), allocatable ::  lat  (:)  ! heat flux: latent
   real(r8), allocatable ::  lwup (:)  ! lwup over ocean
+  real(r8), allocatable ::  radtemp (:)  ! LM added ocean radiative temperature
   real(r8), allocatable ::  evap (:)  ! water flux: evaporation
   real(r8), allocatable ::  evap_16O (:) !H2O flux: evaporation
   real(r8), allocatable ::  evap_HDO (:) !HDO flux: evaporation
@@ -331,6 +332,9 @@ contains
     allocate(lwup(nloc),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate lwup',ier)
     lwup = 0.0_r8
+    !allocate(radtemp(nloc),stat=ier) ! LM added
+    !if(ier/=0) call mct_die(subName,'allocate radtemp',ier) ! LM added
+    !radtemp = 0.0_r8 ! LM added
     allocate(taux(nloc),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate taux',ier)
     taux = 0.0_r8
