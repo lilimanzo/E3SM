@@ -1165,7 +1165,7 @@ contains
             shum , shum_16O , shum_HDO, shum_18O, dens , tbot, uocn, vocn , &
             tocn , emask, seq_flux_atmocn_minwind, &
             sen , lat , lwdn , lwup , & ! LM added lwdn
-            roce_16O, roce_HDO, roce_18O,    &
+            radtemp, roce_16O, roce_HDO, roce_18O,    & ! LM added radtemp
             evap , evap_16O, evap_HDO, evap_18O, taux, tauy, tref, qref , &
             ocn_surface_flux_scheme, &
             duu10n, u10res, ustar, re  , ssq , missval = 0.0_r8, &
@@ -1632,7 +1632,7 @@ contains
             shum , shum_16O , shum_HDO, shum_18O, dens , tbot, uocn, vocn , &
             tocn , emask, seq_flux_atmocn_minwind, &
             sen , lat , lwdn , lwup , & ! LM added lwdn
-            roce_16O, roce_HDO, roce_18O,    &
+            radtemp, roce_16O, roce_HDO, roce_18O,    & ! LM added radtemp
             evap , evap_16O, evap_HDO, evap_18O, taux , tauy, tref, qref , &
             ocn_surface_flux_scheme, &
             duu10n, u10res, ustar, re  , ssq, &

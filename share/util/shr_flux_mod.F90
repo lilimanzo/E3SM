@@ -146,7 +146,7 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,   &
            &               tbot  ,us    ,vs    ,   &
            &               ts    ,mask  , seq_flux_atmocn_minwind, &
            &               sen   ,lat   ,lwdn  ,lwup  ,   & ! LM add lwdn
-           &               r16O, rhdo, r18O, &
+           &               r16O, rhdo, r18O, radtemp , &    ! LM added radtemp
            &               evap  ,evap_16O, evap_HDO, evap_18O, &
            &               taux  ,tauy  ,tref  ,qref  ,   &
            &               ocn_surface_flux_scheme, &
@@ -188,6 +188,7 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,   &
    real(R8),intent(out)  ::  sen  (nMax) ! heat flux: sensible    (W/m^2)
    real(R8),intent(out)  ::  lat  (nMax) ! heat flux: latent      (W/m^2)
    real(R8),intent(out)  ::  lwup (nMax) ! heat flux: lw upward   (W/m^2)
+   real(R8),intent(out)  ::  radtemp(nMax) ! LM added radiative temperature (K)
    real(R8),intent(out)  ::  evap (nMax) ! water flux: evap  ((kg/s)/m^2)
    real(R8),intent(out)  ::  evap_16O (nMax) ! water flux: evap ((kg/s/m^2)
    real(R8),intent(out)  ::  evap_HDO (nMax) ! water flux: evap ((kg/s)/m^2)
