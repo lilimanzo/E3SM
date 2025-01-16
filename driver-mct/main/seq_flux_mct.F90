@@ -332,9 +332,9 @@ contains
     allocate(lwup(nloc),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate lwup',ier)
     lwup = 0.0_r8
-    !allocate(radtemp(nloc),stat=ier) ! LM added
-    !if(ier/=0) call mct_die(subName,'allocate radtemp',ier) ! LM added
-    !radtemp = 0.0_r8 ! LM added
+    allocate(radtemp(nloc),stat=ier) ! LM added
+    if(ier/=0) call mct_die(subName,'allocate radtemp',ier) ! LM added
+    radtemp = 0.0_r8 ! LM added
     allocate(taux(nloc),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate taux',ier)
     taux = 0.0_r8
@@ -1012,6 +1012,7 @@ contains
     integer(in) :: index_evap_HDO
     integer(in) :: index_evap_18O
     integer(in) :: index_lwup
+    integer(in) :: index_radtemp ! LM added
     integer(in) :: index_sumwt
     integer(in) :: atm_nx,atm_ny,ocn_nx,ocn_ny
     real(r8)    :: wt
