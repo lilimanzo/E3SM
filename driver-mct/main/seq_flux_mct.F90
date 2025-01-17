@@ -167,6 +167,7 @@ module seq_flux_mct
   integer :: index_xao_Faox_evap_HDO
   integer :: index_xao_Faox_evap_18O
   integer :: index_xao_Faox_lwup
+  integer :: index_xao_So_radtemp ! LM added radiative temp
   integer :: index_xao_Faox_swdn
   integer :: index_xao_Faox_swup
   integer :: index_xao_So_ustar
@@ -744,6 +745,8 @@ contains
     if(ier/=0) call mct_die(subName,'allocate evap_18O',ier)
     allocate(lwup(nloc_a2o),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate lwup',ier)
+    allocate(radtemp(nloc_a2o),stat=ier)                    ! LM added
+    if(ier/=0) call mct_die(subName,'allocate radtemp',ier) ! LM added
     allocate(taux(nloc_a2o),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate taux',ier)
     allocate(tauy(nloc_a2o),stat=ier)
