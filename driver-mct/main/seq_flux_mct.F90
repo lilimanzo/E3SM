@@ -1402,6 +1402,7 @@ contains
        index_xao_Faox_lwup = mct_aVect_indexRA(xao,'Faox_lwup')
        index_xao_Faox_swdn = mct_aVect_indexRA(xao,'Faox_swdn')
        index_xao_Faox_swup = mct_aVect_indexRA(xao,'Faox_swup')
+       index_xao_So_radtemp= mct_aVect_indexRA(xao,'So_radtemp')  ! LM added
        index_xao_So_fswpen            = mct_aVect_indexRA(xao,'So_fswpen')
        index_xao_So_warm_diurn        = mct_aVect_indexRA(xao,'So_warm_diurn')
        index_xao_So_salt_diurn        = mct_aVect_indexRA(xao,'So_salt_diurn')
