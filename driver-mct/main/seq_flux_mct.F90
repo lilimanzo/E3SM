@@ -1668,6 +1668,7 @@ contains
           xao%rAttr(index_xao_So_re    ,n) = re(n)     ! reynolds number
           xao%rAttr(index_xao_So_ssq   ,n) = ssq(n)    ! s.hum. saturation at Ts
           xao%rAttr(index_xao_Faox_lwup,n) = lwup(n)
+          xao%rAttr(index_xao_So_radtemp,n)= radtemp(n) ! LM added
           xao%rAttr(index_xao_So_duu10n,n) = duu10n(n)
           xao%rAttr(index_xao_So_u10   ,n) = u10res(n)
           xao%rAttr(index_xao_So_u10withgusts,n) = sqrt(duu10n(n))
