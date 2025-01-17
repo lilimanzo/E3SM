@@ -1209,6 +1209,7 @@ contains
     index_evap_HDO = mct_aVect_indexRA(xaop_ae,"Faox_evap_HDO", perrWith='quiet')
     index_evap_18O = mct_aVect_indexRA(xaop_ae,"Faox_evap_18O", perrWith='quiet')
     index_lwup   = mct_aVect_indexRA(xaop_ae,"Faox_lwup")
+    index_radtemp  = mct_aVect_indexRA(xaop_ae,"So_radtemp") ! LM added
     index_sumwt  = mct_aVect_indexRA(xaop_ae,"sumwt")
 
     !--- aggregate ocean values locally based on exchange grid decomp
