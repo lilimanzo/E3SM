@@ -1236,6 +1236,7 @@ contains
        xaop_oe%rAttr(index_re    ,io) = xaop_oe%rAttr(index_re    ,io) + re(n)  * wt   ! reynolds number
        xaop_oe%rAttr(index_ssq   ,io) = xaop_oe%rAttr(index_ssq   ,io) + ssq(n) * wt   ! s.hum. saturation at Ts
        xaop_oe%rAttr(index_lwup  ,io) = xaop_oe%rAttr(index_lwup  ,io) + lwup(n)* wt
+       xaop_oe%rAttr(index_radtemp,io)= xaop_oe%rAttr(index_radtemp,io)+ radtemp(n)* wt   ! LM added
        xaop_oe%rAttr(index_duu10n,io) = xaop_oe%rAttr(index_duu10n,io) + duu10n(n)*wt
        xaop_oe%rAttr(index_u10   ,io) = xaop_oe%rAttr(index_u10   ,io) + u10res(n)*wt
        xaop_oe%rAttr(index_u10withgusts,io) = xaop_oe%rAttr(index_u10withgusts,io) + sqrt(duu10n(n))*wt
@@ -1271,6 +1272,7 @@ contains
        xaop_ae%rAttr(index_re    ,ia) = xaop_ae%rAttr(index_re    ,ia) + re(n)  * wt   ! reynolds number
        xaop_ae%rAttr(index_ssq   ,ia) = xaop_ae%rAttr(index_ssq   ,ia) + ssq(n) * wt   ! s.hum. saturation at Ts
        xaop_ae%rAttr(index_lwup  ,ia) = xaop_ae%rAttr(index_lwup  ,ia) + lwup(n)* wt
+       xaop_ae%rAttr(index_radtemp,ia) = xaop_ae%rAttr(index_radtemp,ia)+ radtemp(n)* wt! LM added
        xaop_ae%rAttr(index_duu10n,ia) = xaop_ae%rAttr(index_duu10n,ia) + duu10n(n)*wt
        xaop_ae%rAttr(index_u10   ,ia) = xaop_ae%rAttr(index_u10   ,ia) + u10res(n)*wt
        xaop_ae%rAttr(index_u10withgusts,ia) = xaop_ae%rAttr(index_u10withgusts,ia) + sqrt(duu10n(n))*wt
