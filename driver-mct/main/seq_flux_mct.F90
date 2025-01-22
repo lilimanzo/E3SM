@@ -167,7 +167,7 @@ module seq_flux_mct
   integer :: index_xao_Faox_evap_HDO
   integer :: index_xao_Faox_evap_18O
   integer :: index_xao_Faox_lwup
-  integer :: index_xao_So_radtemp ! LM added radiative temp
+  integer :: index_xao_Sx_radtemp ! LM added radiative temp
   integer :: index_xao_Faox_swdn
   integer :: index_xao_Faox_swup
   integer :: index_xao_So_ustar
@@ -1209,7 +1209,7 @@ contains
     index_evap_HDO = mct_aVect_indexRA(xaop_ae,"Faox_evap_HDO", perrWith='quiet')
     index_evap_18O = mct_aVect_indexRA(xaop_ae,"Faox_evap_18O", perrWith='quiet')
     index_lwup   = mct_aVect_indexRA(xaop_ae,"Faox_lwup")
-    index_radtemp  = mct_aVect_indexRA(xaop_ae,"So_radtemp") ! LM added
+    index_radtemp  = mct_aVect_indexRA(xaop_ae,"Sx_radtemp") ! LM added
     index_sumwt  = mct_aVect_indexRA(xaop_ae,"sumwt")
 
     !--- aggregate ocean values locally based on exchange grid decomp
@@ -1404,7 +1404,7 @@ contains
        index_xao_Faox_lwup = mct_aVect_indexRA(xao,'Faox_lwup')
        index_xao_Faox_swdn = mct_aVect_indexRA(xao,'Faox_swdn')
        index_xao_Faox_swup = mct_aVect_indexRA(xao,'Faox_swup')
-       index_xao_So_radtemp= mct_aVect_indexRA(xao,'So_radtemp')  ! LM added
+       index_xao_Sx_radtemp= mct_aVect_indexRA(xao,'Sx_radtemp')  ! LM added
        index_xao_So_fswpen            = mct_aVect_indexRA(xao,'So_fswpen')
        index_xao_So_warm_diurn        = mct_aVect_indexRA(xao,'So_warm_diurn')
        index_xao_So_salt_diurn        = mct_aVect_indexRA(xao,'So_salt_diurn')
@@ -1670,7 +1670,7 @@ contains
           xao%rAttr(index_xao_So_re    ,n) = re(n)     ! reynolds number
           xao%rAttr(index_xao_So_ssq   ,n) = ssq(n)    ! s.hum. saturation at Ts
           xao%rAttr(index_xao_Faox_lwup,n) = lwup(n)
-          xao%rAttr(index_xao_So_radtemp,n)= radtemp(n) ! LM added
+          xao%rAttr(index_xao_Sx_radtemp,n)= radtemp(n) ! LM added
           xao%rAttr(index_xao_So_duu10n,n) = duu10n(n)
           xao%rAttr(index_xao_So_u10   ,n) = u10res(n)
           xao%rAttr(index_xao_So_u10withgusts,n) = sqrt(duu10n(n))
