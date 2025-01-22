@@ -558,6 +558,7 @@ contains
     real(r8) :: frac_sum
     real(r8) :: avsdr, anidr, avsdf, anidf   ! albedos
     real(r8) :: fswabsv, fswabsi             ! sw
+    real(r8) :: radtemp                      ! LM added ocean radiative temp
     character(CL),allocatable :: field_ocn(:)   ! string converted to char
     character(CL),allocatable :: field_atm(:)   ! string converted to char
     character(CL),allocatable :: field_ice(:)   ! string converted to char
