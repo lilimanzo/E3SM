@@ -462,8 +462,8 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,   &
         lwup(n) = -loc_ocn_msv * loc_stebol * ts(n)**4 - (1.0_R8 - loc_ocn_msv) * lwdn(n) ! LM
         !lwup(n) = -loc_stebol * ts(n)**4 ! orig
 
-        radtemp(n) = ts ! LM added
-        !radtemp(n) = 1.0_R8 ! LM added
+        !radtemp(n) = ts(n) ! LM added
+        radtemp(n) = 1.0_R8 ! LM added
 
         !--- water flux ---
         evap(n) = lat(n)/loc_latvap
@@ -507,7 +507,7 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,   &
         sen   (n) = spval  ! sensible         heat flux  (W/m^2)
         lat   (n) = spval  ! latent           heat flux  (W/m^2)
         lwup  (n) = spval  ! long-wave upward heat flux  (W/m^2)
-        radtemp(n)= spval  ! LM added radiative temp (K)
+        !radtemp(n)= spval  ! LM added radiative temp (K)
         evap  (n) = spval  ! evaporative water flux ((kg/s)/m^2)
         evap_16O (n) = spval !water tracer flux (kg/s)/m^2)
         evap_HDO (n) = spval !HDO tracer flux  (kg/s)/m^2)
@@ -614,7 +614,7 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,   &
         sen      (n) = spval  ! sensible         heat flux  (W/m^2)
         lat      (n) = spval  ! latent           heat flux  (W/m^2)
         lwup     (n) = spval  ! long-wave upward heat flux  (W/m^2)
-        radtemp  (n) = spval  ! LM added radiative temperature (K)
+        !radtemp  (n) = spval  ! LM added radiative temperature (K)
         evap     (n) = spval  ! evaporative water flux ((kg/s)/m^2)
         evap_16O (n) = spval  ! water tracer flux (kg/s)/m^2)
         evap_HDO (n) = spval  ! HDO tracer flux  (kg/s)/m^2)
