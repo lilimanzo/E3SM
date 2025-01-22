@@ -462,8 +462,8 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,   &
         lwup(n) = -loc_ocn_msv * loc_stebol * ts(n)**4 - (1.0_R8 - loc_ocn_msv) * lwdn(n) ! LM
         !lwup(n) = -loc_stebol * ts(n)**4 ! orig
 
-        !radtemp(n) = ts(n) ! LM added
-        radtemp(n) = 1.0_R8 ! LM added
+        radtemp(n) = ts ! LM added
+        !radtemp(n) = 1.0_R8 ! LM added
 
         !--- water flux ---
         evap(n) = lat(n)/loc_latvap

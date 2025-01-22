@@ -549,7 +549,7 @@ contains
     integer, save :: index_xao_So_anidr
     integer, save :: index_xao_So_avsdf
     integer, save :: index_xao_So_anidf
-    integer, save :: index_xao_Sx_radtemp ! LM added
+    integer, save :: index_xao_So_radtemp ! LM added
     integer, save :: index_a2x_Faxa_snowc
     integer, save :: index_a2x_Faxa_snowl
     integer, save :: index_a2x_Faxa_rainc

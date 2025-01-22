@@ -1735,11 +1735,11 @@ contains
     call metadata_set(attname, longname, stdname, units)
 
     ! LM variable for ocean radiative temperature in coupler
-    call seq_flds_add(xao_states,"Sx_radtemp")
+    call seq_flds_add(xao_states,"So_radtemp")
     longname = 'Radiative temperature'
     stdname  = 'LM_radtemp'
     units    = 'K'
-    attname  = 'Sx_radtemp'
+    attname  = 'So_radtemp'
     call metadata_set(attname, longname, stdname, units)
     
     ! Zonal sea water velocity

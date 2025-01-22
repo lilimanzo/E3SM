@@ -582,7 +582,7 @@ contains
     integer, save :: index_xao_So_anidr
     integer, save :: index_xao_So_avsdf
     integer, save :: index_xao_So_anidf
-    integer, save :: index_xao_Sx_radtemp ! LM added
+    integer, save :: index_xao_So_radtemp ! LM added
     integer, save :: index_a2x_Faxa_snowc
     integer, save :: index_a2x_Faxa_snowl
     integer, save :: index_a2x_Faxa_rainc
@@ -692,7 +692,7 @@ contains
        index_xao_So_anidf       = mct_aVect_indexRA(xao_o,'So_anidf')
        index_x2o_Foxx_swnet     = mct_aVect_indexRA(x2o_o,'Foxx_swnet')
 
-       index_xao_Sx_radtemp     = mct_aVect_indexRA(xao_o,'Sx_radtemp')  ! LM added
+       index_xao_So_radtemp     = mct_aVect_indexRA(xao_o,'So_radtemp')  ! LM added
 
        index_a2x_Faxa_snowc     = mct_aVect_indexRA(a2x_o,'Faxa_snowc')
        index_a2x_Faxa_snowl     = mct_aVect_indexRA(a2x_o,'Faxa_snowl')
