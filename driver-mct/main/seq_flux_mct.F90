@@ -335,7 +335,7 @@ contains
     lwup = 0.0_r8
     allocate(radtemp(nloc),stat=ier)                            ! LM added
     if(ier/=0) call mct_die(subName,'allocate radtemp',ier)     ! LM added
-    !radtemp = 0.0_r8                                           ! LM added
+    radtemp = 0.0_r8                                            ! LM added
     allocate(taux(nloc),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate taux',ier)
     taux = 0.0_r8

@@ -1455,6 +1455,11 @@ contains
     call t_drvstopf  (trim(timer))
   end subroutine prep_ocn_calc_w2x_ox
 
+  subroutine prep_ocn_msv
+
+
+  end subroutine prep_ocn_msv 
+
   !================================================================================================
 
   function prep_ocn_get_a2x_ox()
