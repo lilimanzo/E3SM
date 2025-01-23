@@ -802,6 +802,9 @@ contains
         ! Local variables
         integer :: index_x2a_Faxx_lwup
 
+        index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
+
+
   end subroutine prep_atm_msv
 
 
