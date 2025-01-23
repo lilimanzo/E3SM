@@ -795,9 +795,9 @@ contains
 
   end subroutine prep_atm_calc_z2x_ax
 
-  subroutine prep_atm_msv
+  subroutine prep_atm_msv(x2a_a)
 
-        type(mct_aVect), pointer :: x2a_ax
+        type(mct_aVect), intent(in) :: x2a_a
 
         ! Local variables
         integer :: index_x2a_Faxx_lwup
