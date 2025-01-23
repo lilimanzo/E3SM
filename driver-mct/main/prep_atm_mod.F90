@@ -799,7 +799,7 @@ contains
 
   subroutine prep_atm_msv(x2a_a) ! LM created subroutine
 
-        type(mct_aVect), intent(in) :: x2a_a
+        type(mct_aVect), intent(inout) :: x2a_a
 
         ! Local variables
         integer :: index_x2a_Faxx_lwup
