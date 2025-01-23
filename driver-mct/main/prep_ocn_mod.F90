@@ -1456,7 +1456,11 @@ contains
   end subroutine prep_ocn_calc_w2x_ox
 
   subroutine prep_ocn_msv
+        
+        type(mct_aVect), pointer :: x2a_ax
 
+        ! Local variables
+        integer :: index_x2a_Faxx_lwup
 
   end subroutine prep_ocn_msv 
 
