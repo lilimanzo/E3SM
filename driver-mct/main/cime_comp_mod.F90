@@ -3961,6 +3961,8 @@ contains
           call prep_rof_accum_atm(timer='CPL:atmpost_acca2r')
        endif
 
+       call prep_atm_msv ! LM added
+
        call component_diag(infodata, atm, flow='c2x', comment= 'recv atm', &
             info_debug=info_debug, timer_diag='CPL:atmpost_diagav')
 

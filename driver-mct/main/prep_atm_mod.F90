@@ -795,7 +795,7 @@ contains
 
   end subroutine prep_atm_calc_z2x_ax
 
-  subroutine prep_atm_msv(x2a_a)
+  subroutine prep_atm_msv(x2a_a) ! LM created subroutine
 
         type(mct_aVect), intent(in) :: x2a_a
 
@@ -803,7 +803,6 @@ contains
         integer :: index_x2a_Faxx_lwup
 
         index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
-
 
   end subroutine prep_atm_msv
 
