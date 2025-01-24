@@ -147,6 +147,7 @@ module cime_comp_mod
   use seq_diag_mct, only : seq_diag_rof_mct  , seq_diag_ocn_mct  , seq_diag_atm_mct
   use seq_diag_mct, only : seq_diag_ice_mct  , seq_diag_glc_mct 
   use seq_diag_mct, only : seq_diag_accum_mct, seq_diag_print_mct
+  use seq_diag_mct, only : seq_diag_msv ! LM added
   use seq_diagBGC_mct, only : seq_diagBGC_zero_mct , seq_diagBGC_avect_mct, seq_diagBGC_lnd_mct
   use seq_diagBGC_mct, only : seq_diagBGC_rof_mct  , seq_diagBGC_ocn_mct  , seq_diagBGC_atm_mct
   use seq_diagBGC_mct, only : seq_diagBGC_ice_mct  , seq_diagBGC_accum_mct
