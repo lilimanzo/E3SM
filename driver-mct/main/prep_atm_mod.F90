@@ -45,7 +45,7 @@ module prep_atm_mod
   public :: prep_atm_get_mapper_Si2a
   public :: prep_atm_get_mapper_Fi2a
 
-  public :: prep_atm_msv ! LM added
+  !public :: prep_atm_msv ! LM added
 
   !--------------------------------------------------------------------------
   ! Private interfaces
@@ -797,18 +797,18 @@ contains
 
   end subroutine prep_atm_calc_z2x_ax
 
-  subroutine prep_atm_msv(x2a_a) ! LM created subroutine
+!  subroutine prep_atm_msv(x2a_a) ! LM created subroutine
 
-        type(mct_aVect), intent(inout) :: x2a_a
+!        type(mct_aVect), intent(inout) :: x2a_a
 
         ! Local variables
-        integer :: index_x2a_Faxx_lwup
-        integer :: index_x2a_Sx_mmsv
+!        integer :: index_x2a_Faxx_lwup
+!        integer :: index_x2a_Sx_mmsv
 
-        index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
-        index_x2a_Sx_mmsv   = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
+!        index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
+!        index_x2a_Sx_mmsv   = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
 
-  end subroutine prep_atm_msv
+!  end subroutine prep_atm_msv
 
 
   !================================================================================================
