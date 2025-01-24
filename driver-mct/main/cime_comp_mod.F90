@@ -4818,7 +4818,7 @@ contains
        if (atm_present) then
           call seq_diag_atm_mct(atm(ens1), fractions_ax(ens1), infodata, do_a2x=.true., do_x2a=.true.)
           a2x_ax => component_get_c2x_cx(atm(eai)) ! LM added
-          call seq_diag_msv(a2x_ax)  ! LM added
+          call seq_diag_msv(atm(ens1), fractions_ax(ens1), infodata, do_a2x=.true., do_x2a=.true.)  ! LM added
        endif
        if (ice_present) then
           call seq_diag_ice_mct(ice(ens1), fractions_ix(ens1), infodata, do_i2x=.true.)
