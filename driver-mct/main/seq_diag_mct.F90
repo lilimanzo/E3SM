@@ -2671,11 +2671,40 @@ contains
   end subroutine seq_diag_avdiff_mct
 
   subroutine seq_diag_msv(x2a_a) ! LM created subroutine
+        
+    ! !INPUT/OUTPUT PARAMETERS:
 
-        type(mct_aVect), intent(inout) :: x2a_a
+    type(component_type)    , intent(in)           :: atm    ! component type for instance1
+    type(mct_aVect)         , intent(in)           :: frac_a ! frac bundle
+    type(seq_infodata_type) , intent(in)           :: infodata
+    logical                 , intent(in), optional :: do_a2x
+    logical                 , intent(in), optional :: do_x2a
+
+    !EOP
+
+    !----- local -----
+    type(mct_aVect), pointer :: a2x_a             ! model to drv bundle
+    type(mct_aVect), pointer :: x2a_a             ! drv to model bundle
+    type(mct_ggrid), pointer :: dom_a
+    character(CL)            :: atm_gnam          ! atm grid
+    character(CL)            :: lnd_gnam          ! lnd grid
+    integer(in)              :: k,n,ic,nf,ip      ! generic index
+    !integer(in)              :: emsv              ! LM added effective emissivity
+    integer(in)              :: kArea             ! index of area field in aVect
+    integer(in)              :: kLat              ! index of lat field in aVect
+    integer(in)              :: kl,ka,ko,ki       ! fraction indices
+    integer(in)              :: lSize             ! size of aVect
+    real(r8)                 :: ca_a              ! area of a grid cell
+    logical,save             :: first_time    = .true.
+    logical,save             :: flds_wiso_atm = .false.
+    logical,save             :: samegrid_al       ! samegrid atm and lnd
+
+    !----- formats -----
+    character(*),parameter :: subName = '(seq_diag_atm_mct) '
+        !type(mct_aVect), intent(inout) :: x2a_a
 
         ! Local variables
-        integer :: index_x2a_Faxx_lwup
+        !integer :: index_x2a_Faxx_lwup
         integer :: index_x2a_Sx_mmsv
 
         index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
