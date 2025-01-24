@@ -3961,8 +3961,8 @@ contains
           call prep_rof_accum_atm(timer='CPL:atmpost_acca2r')
        endif
 
-       a2x_ax => component_get_c2x_cx(atm(eai)) ! LM added
-       call prep_atm_msv(a2x_ax) ! LM added
+       !a2x_ax => component_get_c2x_cx(atm(eai)) ! LM added
+       !call prep_atm_msv(a2x_ax) ! LM added
 
        call component_diag(infodata, atm, flow='c2x', comment= 'recv atm', &
             info_debug=info_debug, timer_diag='CPL:atmpost_diagav')
@@ -4203,6 +4203,9 @@ contains
        ! (MUST BE AFTER prep_ocn_mrg for swnet to ocn to be computed properly
        !----------------------------------------------------------
        call cime_run_ocn_albedos(hashint)
+
+       a2x_ax => component_get_c2x_cx(atm(eai)) ! LM added
+       call prep_atm_msv(a2x_ax) ! LM added
 
        !----------------------------------------------------------
        ! ocn budget
