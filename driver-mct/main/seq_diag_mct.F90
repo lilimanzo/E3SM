@@ -2681,6 +2681,6 @@ contains
         index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
         index_x2a_Sx_mmsv   = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
 
-  end subroutine prep_atm_msv
+  end subroutine seq_diag_msv
 
 end module seq_diag_mct
