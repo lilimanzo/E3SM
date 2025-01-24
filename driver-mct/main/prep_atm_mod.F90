@@ -45,7 +45,7 @@ module prep_atm_mod
   public :: prep_atm_get_mapper_Si2a
   public :: prep_atm_get_mapper_Fi2a
 
-  !public :: prep_atm_msv ! LM added
+  public :: prep_atm_msv ! LM added
 
   !--------------------------------------------------------------------------
   ! Private interfaces
