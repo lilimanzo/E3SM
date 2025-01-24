@@ -4816,6 +4816,7 @@ contains
        call t_drvstartf ('CPL:BUDGET2',cplrun=lcplrun,budget=.true.,barrier=mpicom_CPLID)
        if (atm_present) then
           call seq_diag_atm_mct(atm(ens1), fractions_ax(ens1), infodata, do_a2x=.true., do_x2a=.true.)
+          a2x_ax => component_get_c2x_cx(atm(eai)) ! LM added
           call prep_atm_msv(a2x_ax)  ! LM added
        endif
        if (ice_present) then
