@@ -1452,6 +1452,7 @@ end function radiation_nextsw_cday
                   call outfld('QRLC'//diag(icall),qrlc(:ncol,:)/cpair,ncol,lchnk)
                   call outfld('FLNT'//diag(icall),flnt  ,pcols,lchnk)
                   call outfld('FLUT'//diag(icall),flut  ,pcols,lchnk)
+                  call outfld('FLUS'//diag(icall),flus  ,pcols,lchnk) ! LM added
                   call outfld('FLUTC'//diag(icall),flutc ,pcols,lchnk)
                   call outfld('FLNTC'//diag(icall),flntc ,pcols,lchnk)
                   call outfld('FLNS'//diag(icall),flns  ,pcols,lchnk)
