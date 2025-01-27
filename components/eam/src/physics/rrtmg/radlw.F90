@@ -242,6 +242,7 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    fldsc(:ncol) = dflxc(:ncol,1)
    flns(:ncol)  = uflx (:ncol,1) - dflx (:ncol,1)
    flnsc(:ncol) = uflxc(:ncol,1) - dflxc(:ncol,1)
+   flus(:ncol)  = uflx (:ncol,1)                        ! LM added
    flnt(:ncol)  = uflx (:ncol,rrtmg_levs) - dflx (:ncol,rrtmg_levs)
    flntc(:ncol) = uflxc(:ncol,rrtmg_levs) - dflxc(:ncol,rrtmg_levs)
    flut(:ncol)  = uflx (:ncol,rrtmg_levs)
