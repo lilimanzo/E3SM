@@ -38,8 +38,8 @@ CONTAINS
 subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
                         pmid    ,aer_lw_abs,cld       ,tauc_lw,       &
                         qrl     ,qrlc      ,                          &
-                        flns    ,flnt      ,flnsc     ,flntc  ,flwds, flus, & ! LM added flus
-                        flut    ,flutc     ,fnl       ,fcnl   ,fldsc,clm_rand_seed, &
+                        flns    ,flnt      ,flnsc     ,flntc  ,flwds, flus, & ! LM added flus and flusc
+                        flusc   ,flut    ,flutc     ,fnl       ,fcnl   ,fldsc,clm_rand_seed, &
                         lu      ,ld        )
 
 !-----------------------------------------------------------------------
@@ -77,7 +77,8 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    real(r8), intent(out) :: flns(pcols)          ! Surface cooling flux
    real(r8), intent(out) :: flnt(pcols)          ! Net outgoing flux
    real(r8), intent(out) :: flut(pcols)          ! Upward flux at top of model
-   real(r8), intent(out) :: flus(pcols)          ! LM added Upward flux at bottom of atmosphere
+   real(r8), intent(out) :: flus(pcols)          ! LM added Upward flux at surface
+   real(r8), intent(out) :: flusc(pcols)         ! LM added Clear sky Upward flux at surface
    real(r8), intent(out) :: flnsc(pcols)         ! Clear sky surface cooing
    real(r8), intent(out) :: flntc(pcols)         ! Net clear sky outgoing flux
    real(r8), intent(out) :: flutc(pcols)         ! Upward clear-sky flux at top of model
@@ -243,6 +244,7 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    flns(:ncol)  = uflx (:ncol,1) - dflx (:ncol,1)
    flnsc(:ncol) = uflxc(:ncol,1) - dflxc(:ncol,1)
    flus(:ncol)  = uflx (:ncol,1)                        ! LM added
+   flusc(:ncol) = uflxc(:ncol,1)                        ! LM added
    flnt(:ncol)  = uflx (:ncol,rrtmg_levs) - dflx (:ncol,rrtmg_levs)
    flntc(:ncol) = uflxc(:ncol,rrtmg_levs) - dflxc(:ncol,rrtmg_levs)
    flut(:ncol)  = uflx (:ncol,rrtmg_levs)
