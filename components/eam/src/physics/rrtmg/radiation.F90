@@ -732,7 +732,8 @@ end function radiation_nextsw_cday
              call add_default('FLNS'//diag(icall),  1, ' ')
              call add_default('FLDS'//diag(icall),  1, ' ')
              call add_default('FLNT'//diag(icall),  1, ' ')
-             call add_default('FLUT'//diag(icall),  1, ' ')
+             call add_default('FLUS'//diag(icall),  1, ' ') ! LM added
+             call add_default('FLUT'//diag(icall),  1, ' ') 
              call add_default('FLUTC'//diag(icall), 1, ' ')
              call add_default('FLNTC'//diag(icall), 1, ' ')
              call add_default('FLNSC'//diag(icall), 1, ' ')
