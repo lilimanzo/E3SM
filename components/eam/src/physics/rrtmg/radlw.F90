@@ -77,6 +77,7 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    real(r8), intent(out) :: flns(pcols)          ! Surface cooling flux
    real(r8), intent(out) :: flnt(pcols)          ! Net outgoing flux
    real(r8), intent(out) :: flut(pcols)          ! Upward flux at top of model
+   real(r8), intent(out) :: flus(pcols)          ! Upward flux at bottom of atmosphere
    real(r8), intent(out) :: flnsc(pcols)         ! Clear sky surface cooing
    real(r8), intent(out) :: flntc(pcols)         ! Net clear sky outgoing flux
    real(r8), intent(out) :: flutc(pcols)         ! Upward clear-sky flux at top of model
