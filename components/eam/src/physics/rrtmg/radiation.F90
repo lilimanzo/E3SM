@@ -996,6 +996,7 @@ end function radiation_nextsw_cday
     real(r8) fsnsc(pcols)         ! Clear sky surface abs solar flux
     real(r8) fsdsc(pcols)         ! Clear sky surface downwelling solar flux
     real(r8) flut(pcols)          ! Upward flux at top of model
+    real(r8) flus(pcols)          ! Upward flux at bottom of atmosphere
     real(r8) lwcf(pcols)          ! longwave cloud forcing
     real(r8) swcf(pcols)          ! shortwave cloud forcing
     real(r8) flutc(pcols)         ! Upward Clear Sky flux at top of model
