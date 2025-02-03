@@ -2072,7 +2072,7 @@
       real (kind=dbl_kind) :: &
          raice       , & ! 1/aice
          pond        , & ! water retained in ponds (m)
-         taf             ! LM added- temporal adjustment factor
+         !taf             ! LM added- temporal adjustment factor
       !---------------------------------------------------------------
       ! Initialize rate of snow loss to leads
       !---------------------------------------------------------------
