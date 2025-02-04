@@ -3570,6 +3570,7 @@ contains
                !-------states--------------------
                i2x_im(n, index_i2x_Si_t)  = Tsrf
                i2x_im(n, index_i2x_Si_bpress)  = basalPressure
+               i2x_im(n, index_i2x_Si_taf)  = taf ! LM added
                i2x_im(n, index_i2x_Si_u10)  = atmosReferenceSpeed10m(i)
                i2x_im(n, index_i2x_Si_tref)  = atmosReferenceTemperature2m(i)
                i2x_im(n, index_i2x_Si_qref)  = atmosReferenceHumidity2m(i)
