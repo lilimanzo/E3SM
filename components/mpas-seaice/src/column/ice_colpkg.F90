@@ -2410,7 +2410,7 @@
 
       enddo                  ! ncat
 
-      taf=flwout-flw+Tsfc(n) ! LM added
+      taf=(flwout-flw)/(5.67e-8*Tsfc(n)**4-flw) ! LM added
 
       !-----------------------------------------------------------------
       ! Calculate ponds from the topographic scheme
