@@ -2906,6 +2906,17 @@ contains
                  pondLidThicknessCell(i), &
                  pondAreaCell(i),         &
                  config_use_topo_meltponds)
+            call time_adjustment_factor (& ! LM added call
+                 basalPressure2,          &
+                 iceVolumeCell(i),        &
+                 snowVolumeCell(i),       &
+                 pondDepthCell(i),        &
+                 pondLidThicknessCell(i), &
+                 pondAreaCell(i),         &
+                 longwaveDown(i),         &
+                 longwaveUp(i),           &
+                 Tsrf(i),                 &
+                 config_use_topo_meltponds)
          endif
 
          ! wind stress  (on T-grid:  convert to lat-lon)
@@ -3176,7 +3187,7 @@ contains
       logical,           intent(in)  :: config_use_topo_meltponds
 
 ! !OUTPUT PARAMETERS:
-      real (kind=RKIND), intent(out) :: basalPressure
+      real (kind=RKIND), intent(out) :: basalPressure2
 
 !EOP
 !BOC
@@ -3185,26 +3196,26 @@ contains
 !  local variables
 !
 !-----------------------------------------------------------------------
-   real(kind=RKIND) :: &
-      seaIceSpecificMass
+!   real(kind=RKIND) :: &
+!      seaIceSpecificMass
 
-   ! sea ice and snow specific mass
-   seaIceSpecificMass = &
-      iceVolumeCell  * seaiceDensityIce + &
-      snowVolumeCell * seaiceDensitySnow
+ !  ! sea ice and snow specific mass
+ !   seaIceSpecificMass = &
+ !     iceVolumeCell  * seaiceDensityIce + &
+ !     snowVolumeCell * seaiceDensitySnow
 
    ! only topo ponds have real pond volume
-   if (config_use_topo_meltponds) then
+  ! if (config_use_topo_meltponds) then
 
       ! add pond specific weight
-      seaIceSpecificMass = seaIceSpecificMass + &
-         pondDepthCell        * pondAreaCell * seaiceDensitySeaWater + &
-         pondLidThicknessCell * pondAreaCell * seaiceDensityIce
+   !   seaIceSpecificMass = seaIceSpecificMass + &
+   !      pondDepthCell        * pondAreaCell * seaiceDensitySeaWater + &
+   !      pondLidThicknessCell * pondAreaCell * seaiceDensityIce
 
-   endif ! config_use_topo_meltponds
+   !endif ! config_use_topo_meltponds
 
    ! convert specific mass to pressure at sea ice base
-   basalPressure = seaIceSpecificMass * seaiceGravity
+   basalPressure2 = 2.0_RKIND
 
 !-----------------------------------------------------------------------
 !EOC
