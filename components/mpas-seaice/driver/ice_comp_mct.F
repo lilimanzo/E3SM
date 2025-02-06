@@ -3600,6 +3600,18 @@ contains
                      pondLidThicknessCell(i), &
                      pondAreaCell(i),         &
                      config_use_topo_meltponds)
+               call time_adjustment_factor (& ! LM added call
+                     basalPressure2,          &
+                     iceVolumeCell(i),        &
+                     snowVolumeCell(i),       &
+                     pondDepthCell(i),        &
+                     pondLidThicknessCell(i), &
+                     pondAreaCell(i),         &
+                     !longwaveDown(i),         &
+                     !longwaveUp(i),           &
+                     !Tsrf(i),                 &
+                     surfaceTemperatureCell(i),&
+                     config_use_topo_meltponds)
             endif
 
             ! wind stress  (on T-grid:  convert to lat-lon)
