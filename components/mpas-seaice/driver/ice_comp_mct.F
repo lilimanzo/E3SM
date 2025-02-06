@@ -2915,7 +2915,7 @@ contains
                  pondLidThicknessCell(i), &
                  pondAreaCell(i),         &
                  !longwaveDown(i),         &
-                 !longwaveUp(i),           &
+                 longwaveUp(i),           &
                  Tsrf,                    &
                  !surfaceTemperatureCell(i),&
                  config_use_topo_meltponds)
@@ -3170,7 +3170,8 @@ contains
 ! LM subroutine time_adjustment_factor
 ! !INTERFACE:
    subroutine time_adjustment_factor(taf,  iceVolumeCell,  snowVolumeCell,  pondDepthCell, &
-                             pondLidThicknessCell,  pondAreaCell,  Tsrf,  config_use_topo_meltponds) !,  longwaveDown,  Tsrf)!{{{
+                             pondLidThicknessCell,  pondAreaCell,  longwaveUp,  &
+                             Tsrf,  config_use_topo_meltponds) !,  longwaveDown,  Tsrf)!{{{
 !
 ! !DESCRIPTION:
 ! Calculate time adjustment factor for a cell
@@ -3183,7 +3184,7 @@ contains
       real (kind=RKIND), intent(in)  :: pondLidThicknessCell
       real (kind=RKIND), intent(in)  :: pondAreaCell
       !real (kind=RKIND), intent(in)  :: surfaceTemperatureCell
-      !real (kind=RKIND), intent(in)  :: longwaveUp ! check
+      real (kind=RKIND), intent(in)  :: longwaveUp ! check
       real (kind=RKIND), intent(in)  :: Tsrf       ! check
       !real (kind=RKIND), intent(in)  :: longwaveDown ! check
       logical,           intent(in)  :: config_use_topo_meltponds
