@@ -3154,6 +3154,59 @@ contains
 
    end subroutine basal_pressure!}}}
 
+! LM subroutine time_adjustment_factor
+! !INTERFACE:
+   subroutine time_adjustment_factor(basalPressure,  iceVolumeCell,  snowVolumeCell,  pondDepthCell, &
+                             pondLidThicknessCell,  pondAreaCell, config_use_topo_meltponds)!{{{
+!
+! !DESCRIPTION:
+! Calculate basal pressure for a cell
+!
+
+! !INPUT PARAMETERS:
+      real (kind=RKIND), intent(in)  :: iceVolumeCell
+      real (kind=RKIND), intent(in)  :: snowVolumeCell
+      real (kind=RKIND), intent(in)  :: pondDepthCell
+      real (kind=RKIND), intent(in)  :: pondLidThicknessCell
+      real (kind=RKIND), intent(in)  :: pondAreaCell
+      logical,           intent(in)  :: config_use_topo_meltponds
+
+! !OUTPUT PARAMETERS:
+      real (kind=RKIND), intent(out) :: basalPressure
+
+!EOP
+!BOC
+!-----------------------------------------------------------------------
+!
+!  local variables
+!
+!-----------------------------------------------------------------------
+   real(kind=RKIND) :: &
+      seaIceSpecificMass
+
+   ! sea ice and snow specific mass
+   seaIceSpecificMass = &
+      iceVolumeCell  * seaiceDensityIce + &
+      snowVolumeCell * seaiceDensitySnow
+
+   ! only topo ponds have real pond volume
+   if (config_use_topo_meltponds) then
+
+      ! add pond specific weight
+      seaIceSpecificMass = seaIceSpecificMass + &
+         pondDepthCell        * pondAreaCell * seaiceDensitySeaWater + &
+         pondLidThicknessCell * pondAreaCell * seaiceDensityIce
+
+   endif ! config_use_topo_meltponds
+
+   ! convert specific mass to pressure at sea ice base
+   basalPressure = seaIceSpecificMass * seaiceGravity
+
+!-----------------------------------------------------------------------
+!EOC
+
+   end subroutine time_adjustment_factor!}}}
+
 !***********************************************************************
 !BOP
 !
