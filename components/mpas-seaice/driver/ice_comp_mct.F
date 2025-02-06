@@ -2849,6 +2849,7 @@ contains
 
       call MPAS_pool_get_array(atmosFluxes, 'latentHeatFlux', latentHeatFlux)
       call MPAS_pool_get_array(atmosFluxes, 'sensibleHeatFlux', sensibleHeatFlux)
+      call MPAS_pool_get_array(atmosFluxes, 'longwaveDown', longwaveDown) ! LM added
       call MPAS_pool_get_array(atmosFluxes, 'longwaveUp', longwaveUp)
       call MPAS_pool_get_array(atmosFluxes, 'evaporativeWaterFlux', evaporativeWaterFlux)
 
