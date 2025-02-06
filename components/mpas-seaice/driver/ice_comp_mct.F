@@ -3221,7 +3221,7 @@ contains
 
    ! convert specific mass to pressure at sea ice base
    ! taf = Tsrf + longwaveUp + longwaveDown
-   taf = (longwaveUp - longwaveDown) / (5.67e-8 * Tsrf**4 - longwaveDown) 
+   taf = (longwaveUp + longwaveDown) / (5.67e-8 * Tsrf**4 + longwaveDown) 
 
    ! call mpas_pool_get_array(atmosCoupling, 'longwaveDown', longwaveDown)
 !-----------------------------------------------------------------------
