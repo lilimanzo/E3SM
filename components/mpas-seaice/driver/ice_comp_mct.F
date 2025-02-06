@@ -2916,8 +2916,8 @@ contains
                  pondAreaCell(i),         &
                  !longwaveDown(i),         &
                  !longwaveUp(i),           &
-                 !Tsrf(i),                 &
-                 surfaceTemperatureCell(i),&
+                 Tsrf,                    &
+                 !surfaceTemperatureCell(i),&
                  config_use_topo_meltponds)
          endif
 
@@ -3170,8 +3170,7 @@ contains
 ! LM subroutine time_adjustment_factor
 ! !INTERFACE:
    subroutine time_adjustment_factor(basalPressure2,  iceVolumeCell,  snowVolumeCell,  pondDepthCell, &
-                             pondLidThicknessCell,  pondAreaCell,  config_use_topo_meltponds, & 
-                             surfaceTemperatureCell) !,  longwaveDown,  Tsrf)!{{{
+                             pondLidThicknessCell,  pondAreaCell,  Tsrf,  config_use_topo_meltponds) !,  longwaveDown,  Tsrf)!{{{
 !
 ! !DESCRIPTION:
 ! Calculate time adjustment factor for a cell
@@ -3183,9 +3182,9 @@ contains
       real (kind=RKIND), intent(in)  :: pondDepthCell
       real (kind=RKIND), intent(in)  :: pondLidThicknessCell
       real (kind=RKIND), intent(in)  :: pondAreaCell
-      real (kind=RKIND), intent(in)  :: surfaceTemperatureCell
+      !real (kind=RKIND), intent(in)  :: surfaceTemperatureCell
       !real (kind=RKIND), intent(in)  :: longwaveUp ! check
-      !real (kind=RKIND), intent(in)  :: Tsrf       ! check
+      real (kind=RKIND), intent(in)  :: Tsrf       ! check
       !real (kind=RKIND), intent(in)  :: longwaveDown ! check
       logical,           intent(in)  :: config_use_topo_meltponds
 
@@ -3599,18 +3598,6 @@ contains
                      pondDepthCell(i),        &
                      pondLidThicknessCell(i), &
                      pondAreaCell(i),         &
-                     config_use_topo_meltponds)
-               call time_adjustment_factor (& ! LM added call
-                     basalPressure2,          &
-                     iceVolumeCell(i),        &
-                     snowVolumeCell(i),       &
-                     pondDepthCell(i),        &
-                     pondLidThicknessCell(i), &
-                     pondAreaCell(i),         &
-                     !longwaveDown(i),         &
-                     !longwaveUp(i),           &
-                     !Tsrf(i),                 &
-                     surfaceTemperatureCell(i),&
                      config_use_topo_meltponds)
             endif
 
