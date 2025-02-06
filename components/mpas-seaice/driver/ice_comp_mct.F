@@ -3218,7 +3218,7 @@ contains
    !endif ! config_use_topo_meltponds
 
    ! convert specific mass to pressure at sea ice base
-   taf = Tsrf
+   taf = Tsrf + longwaveUp
 
    ! call mpas_pool_get_array(atmosCoupling, 'longwaveDown', longwaveDown)
 !-----------------------------------------------------------------------
