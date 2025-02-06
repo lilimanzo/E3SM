@@ -3157,10 +3157,11 @@ contains
 ! LM subroutine time_adjustment_factor
 ! !INTERFACE:
    subroutine time_adjustment_factor(basalPressure,  iceVolumeCell,  snowVolumeCell,  pondDepthCell, &
-                             pondLidThicknessCell,  pondAreaCell, config_use_topo_meltponds)!{{{
+                             pondLidThicknessCell,  pondAreaCell, config_use_topo_meltponds, & 
+                             longwaveDown,  longwaveUp,  Tsrf)!{{{
 !
 ! !DESCRIPTION:
-! Calculate basal pressure for a cell
+! Calculate time adjustment factor for a cell
 !
 
 ! !INPUT PARAMETERS:
@@ -3169,6 +3170,9 @@ contains
       real (kind=RKIND), intent(in)  :: pondDepthCell
       real (kind=RKIND), intent(in)  :: pondLidThicknessCell
       real (kind=RKIND), intent(in)  :: pondAreaCell
+      real (kind=RKIND), intent(in)  :: longwaveUp ! check
+      real (kind=RKIND), intent(in)  :: Tsrf       ! check
+      real (kind=RKIND), intent(in)  :: longwaveDown ! check
       logical,           intent(in)  :: config_use_topo_meltponds
 
 ! !OUTPUT PARAMETERS:
