@@ -2908,7 +2908,7 @@ contains
                  pondAreaCell(i),         &
                  config_use_topo_meltponds)
             call time_adjustment_factor (& ! LM added call
-                 basalPressure2,          &
+                 taf,                     &
                  iceVolumeCell(i),        &
                  snowVolumeCell(i),       &
                  pondDepthCell(i),        &
@@ -3169,7 +3169,7 @@ contains
 
 ! LM subroutine time_adjustment_factor
 ! !INTERFACE:
-   subroutine time_adjustment_factor(basalPressure2,  iceVolumeCell,  snowVolumeCell,  pondDepthCell, &
+   subroutine time_adjustment_factor(taf,  iceVolumeCell,  snowVolumeCell,  pondDepthCell, &
                              pondLidThicknessCell,  pondAreaCell,  Tsrf,  config_use_topo_meltponds) !,  longwaveDown,  Tsrf)!{{{
 !
 ! !DESCRIPTION:
@@ -3189,7 +3189,7 @@ contains
       logical,           intent(in)  :: config_use_topo_meltponds
 
 ! !OUTPUT PARAMETERS:
-      real (kind=RKIND), intent(out) :: basalPressure2
+      real (kind=RKIND), intent(out) :: taf
 
 !EOP
 !BOC
@@ -3217,7 +3217,7 @@ contains
    !endif ! config_use_topo_meltponds
 
    ! convert specific mass to pressure at sea ice base
-   basalPressure2 = 2.0_RKIND
+   taf = Tsrf
 
    ! call mpas_pool_get_array(atmosCoupling, 'longwaveDown', longwaveDown)
 !-----------------------------------------------------------------------
