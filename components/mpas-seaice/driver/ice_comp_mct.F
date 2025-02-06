@@ -2698,7 +2698,8 @@ contains
       tauxo,           &
       tauyo,           &
       basalPressure,   &
-      taf              ! LM added
+      taf,             &   ! LM added
+      basalPressure2       ! LM added
 
    type (block_type), pointer :: &
       block_ptr
