@@ -2698,8 +2698,8 @@ contains
       tauxo,           &
       tauyo,           &
       basalPressure,   &
-      taf                   ! LM added
-      !basalPressure2       ! LM added
+      taf,             &    ! LM added
+      f_check               ! LM added
 
    type (block_type), pointer :: &
       block_ptr
@@ -2911,6 +2911,7 @@ contains
                  config_use_topo_meltponds)
             call time_adjustment_factor (& ! LM added call
                  taf,                     &
+                 f_check,                 &
                  iceVolumeCell(i),        &
                  snowVolumeCell(i),       &
                  pondDepthCell(i),        &
@@ -3171,7 +3172,7 @@ contains
 
 ! LM subroutine time_adjustment_factor
 ! !INTERFACE:
-   subroutine time_adjustment_factor(taf,  iceVolumeCell,  snowVolumeCell,  pondDepthCell, &
+   subroutine time_adjustment_factor(taf, f_check,  iceVolumeCell,  snowVolumeCell,  pondDepthCell, &
                              pondLidThicknessCell,  pondAreaCell, longwaveDown, longwaveUp,  &
                              Tsrf,  config_use_topo_meltponds) !,  longwaveDown,  Tsrf)!{{{
 !
@@ -3193,6 +3194,7 @@ contains
 
 ! !OUTPUT PARAMETERS:
       real (kind=RKIND), intent(out) :: taf
+      real (kind=RKIND), intent(out) :: f_check
 
 !EOP
 !BOC
@@ -3209,21 +3211,11 @@ contains
  !     iceVolumeCell  * seaiceDensityIce + &
  !     snowVolumeCell * seaiceDensitySnow
 
-   ! only topo ponds have real pond volume
-  ! if (config_use_topo_meltponds) then
+   ! compute temporal adjustment factor (TAF)
+   !taf = longwaveDown
+   taf = (longwaveUp + longwaveDown) / (5.67e-8 * Tsrf**4 + longwaveDown) 
 
-      ! add pond specific weight
-   !   seaIceSpecificMass = seaIceSpecificMass + &
-   !      pondDepthCell        * pondAreaCell * seaiceDensitySeaWater + &
-   !      pondLidThicknessCell * pondAreaCell * seaiceDensityIce
-
-   !endif ! config_use_topo_meltponds
-
-   ! convert specific mass to pressure at sea ice base
-   taf = longwaveDown
-   !taf = (longwaveUp + longwaveDown) / (5.67e-8 * Tsrf**4 + longwaveDown) 
-
-   ! call mpas_pool_get_array(atmosCoupling, 'longwaveDown', longwaveDown)
+   f_check = taf * 5.67e-8 * Tsrf**4 + (1-taf) * longwaveDown
 !-----------------------------------------------------------------------
 !EOC
 
