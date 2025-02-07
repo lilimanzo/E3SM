@@ -2699,7 +2699,7 @@ contains
       tauyo,           &
       basalPressure,   &
       taf,             &    ! LM added
-      f_check               ! LM added
+      fcheck                ! LM added
 
    type (block_type), pointer :: &
       block_ptr
@@ -2911,7 +2911,7 @@ contains
                  config_use_topo_meltponds)
             call time_adjustment_factor (& ! LM added call
                  taf,                     &
-                 f_check,                 &
+                 fcheck,                  &
                  iceVolumeCell(i),        &
                  snowVolumeCell(i),       &
                  pondDepthCell(i),        &
@@ -2966,6 +2966,7 @@ contains
             i2x_i % rAttr(index_i2x_Si_t     ,n)  = Tsrf
             i2x_i % rAttr(index_i2x_Si_imsv  ,n)  = 1.0_RKIND ! LM
             i2x_i % rAttr(index_i2x_Si_taf   ,n)  = taf ! LM
+            i2x_i % rAttr(index_i2x_Si_fcheck,n)  = fcheck ! LM
             i2x_i % rAttr(index_i2x_Si_bpress,n)  = basalPressure
             i2x_i % rAttr(index_i2x_Si_u10   ,n)  = atmosReferenceSpeed10m(i)
             i2x_i % rAttr(index_i2x_Si_u10withgusts,n) = atmosReferenceSpeed10m(i)
@@ -3172,7 +3173,7 @@ contains
 
 ! LM subroutine time_adjustment_factor
 ! !INTERFACE:
-   subroutine time_adjustment_factor(taf, f_check,  iceVolumeCell,  snowVolumeCell,  pondDepthCell, &
+   subroutine time_adjustment_factor(taf, fcheck,  iceVolumeCell,  snowVolumeCell,  pondDepthCell, &
                              pondLidThicknessCell,  pondAreaCell, longwaveDown, longwaveUp,  &
                              Tsrf,  config_use_topo_meltponds) !,  longwaveDown,  Tsrf)!{{{
 !
@@ -3194,7 +3195,7 @@ contains
 
 ! !OUTPUT PARAMETERS:
       real (kind=RKIND), intent(out) :: taf
-      real (kind=RKIND), intent(out) :: f_check
+      real (kind=RKIND), intent(out) :: fcheck
 
 !EOP
 !BOC
@@ -3215,7 +3216,7 @@ contains
    !taf = longwaveDown
    taf = (longwaveUp + longwaveDown) / (5.67e-8 * Tsrf**4 + longwaveDown) 
 
-   f_check = taf * 5.67e-8 * Tsrf**4 + (1-taf) * longwaveDown
+   fcheck = taf * 5.67e-8 * Tsrf**4 + (1-taf) * longwaveDown
 !-----------------------------------------------------------------------
 !EOC
 
@@ -3639,6 +3640,7 @@ contains
                i2x_im(n, index_i2x_Si_t)  = Tsrf
                i2x_im(n, index_i2x_Si_bpress)  = basalPressure
                i2x_im(n, index_i2x_Si_taf)  = taf ! LM added
+               i2x_im(n, index_i2x_Si_fcheck) = fcheck ! LM added
                i2x_im(n, index_i2x_Si_u10)  = atmosReferenceSpeed10m(i)
                i2x_im(n, index_i2x_Si_tref)  = atmosReferenceTemperature2m(i)
                i2x_im(n, index_i2x_Si_qref)  = atmosReferenceHumidity2m(i)
