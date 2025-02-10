@@ -1706,24 +1706,28 @@ contains
     call metadata_set(attname, longname, stdname, units)
 
     ! LM duplicate variable of surface  salinity
-    call seq_flds_add(o2x_states,"So_LM")
-    call seq_flds_add(x2a_states,"So_LM")
-    longname = 'LM Sea surface salinity'
-    stdname  = 'LM sea_surface_salinity'
-    units    = '1'
-    attname  = 'So_s'
-    call metadata_set(attname, longname, stdname, units)
+    !call seq_flds_add(o2x_states,"So_LM")
+    !call seq_flds_add(x2a_states,"So_LM")
+    !longname = 'LM Sea surface salinity'
+    !stdname  = 'LM sea_surface_salinity'
+    !units    = '1'
+    !attname  = 'So_s'
+    !call metadata_set(attname, longname, stdname, units)
 
     ! LM variable for land and sea ice emissivity
     call seq_flds_add(i2x_states,"Si_imsv")
     call seq_flds_add(l2x_states,"Sl_lmsv")
+    call seq_flds_add(o2x_states,"So_omsv")
     call seq_flds_add(x2a_states,"Si_imsv")
+    call seq_flds_add(x2a_states,"So_omsv")
     longname = 'LM Sea ice emissivity'
     stdname  = 'LM_sea_ice_emissivity'
     units    = '1'
     attname  = 'Si_imsv'
     call metadata_set(attname, longname, stdname, units)
     attname  = 'Sl_lmsv'
+    call metadata_set(attname, longname, stdname, units)
+    attname  = 'So_omsv'
     call metadata_set(attname, longname, stdname, units)
 
     ! LM variable for temporal adjustment factor

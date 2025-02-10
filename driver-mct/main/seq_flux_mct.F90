@@ -147,7 +147,7 @@ module seq_flux_mct
   integer :: index_o2x_So_u
   integer :: index_o2x_So_v
   integer :: index_o2x_So_fswpen
-  integer :: index_o2x_So_LM
+  integer :: index_o2x_So_omsv ! LM added
   integer :: index_o2x_So_s
   integer :: index_o2x_So_roce_16O
   integer :: index_o2x_So_roce_HDO
@@ -1455,7 +1455,7 @@ contains
        index_o2x_So_v      = mct_aVect_indexRA(o2x,'So_v')
        index_o2x_So_fswpen = mct_aVect_indexRA(o2x,'So_fswpen')
        index_o2x_So_s      = mct_aVect_indexRA(o2x,'So_s')
-       index_o2x_So_LM      = mct_aVect_indexRA(o2x,'So_LM')
+       index_o2x_So_omsv   = mct_aVect_indexRA(o2x,'So_omsv')  ! LM added
        index_o2x_So_roce_16O = mct_aVect_indexRA(o2x,'So_roce_16O', perrWith='quiet')
        index_o2x_So_roce_HDO = mct_aVect_indexRA(o2x,'So_roce_HDO', perrWith='quiet')
        index_o2x_So_roce_18O = mct_aVect_indexRA(o2x,'So_roce_18O', perrWith='quiet')

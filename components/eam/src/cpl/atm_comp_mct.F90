@@ -1770,7 +1770,7 @@ subroutine atm_import_moab(Eclock, cam_in, restart_init )
           cam_in(c)%aldif(i)     =  x2a_am(ig,index_x2a_Sx_anidf)
           cam_in(c)%ts(i)        =  x2a_am(ig,index_x2a_Sx_t)  
           cam_in(c)%sst(i)       =  x2a_am(ig,index_x2a_So_t)
-          cam_in(c)%msv(i)       =  x2a_am(ig,index_x2a_So_LM)
+          cam_in(c)%msv(i)       =  x2a_am(ig,index_x2a_So_omsv) ! LM
           cam_in(c)%imsv(i)      =  x2a_am(ig,index_x2a_Si_imsv) ! LM
           cam_in(c)%snowhland(i) =  x2a_am(ig,index_x2a_Sl_snowh)  
           cam_in(c)%snowhice(i)  =  x2a_am(ig,index_x2a_Si_snowh)  
