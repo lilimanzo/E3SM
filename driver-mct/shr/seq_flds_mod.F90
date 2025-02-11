@@ -1415,7 +1415,7 @@ contains
     longname = 'Sea ice upward longwave heat flux'
     stdname  = 'SI_net_upward_longwave_flux'
     units    = 'W m-2'
-    attname  = 'Faii_lwupi'
+    attname  = 'Faii_lwup'
     call metadata_set(attname, longname, stdname, units)
     
     ! Evaporation water flux
