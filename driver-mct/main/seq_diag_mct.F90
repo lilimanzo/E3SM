@@ -339,6 +339,7 @@ module seq_diag_mct
   integer :: index_i2x_Faii_swnet
   integer :: index_i2x_Fioi_swpen
   integer :: index_i2x_Faii_lwup
+  integer :: index_i2x_Faii_lwupi ! LM added- for ice lwup on atm grid
   integer :: index_i2x_Faii_lat
   integer :: index_i2x_Faii_sen
   integer :: index_i2x_Faii_evap
@@ -1758,6 +1759,7 @@ contains
        index_i2x_Fioi_swpen  = mct_aVect_indexRA(i2x_i,'Fioi_swpen')
        index_i2x_Faii_swnet  = mct_aVect_indexRA(i2x_i,'Faii_swnet')
        index_i2x_Faii_lwup   = mct_aVect_indexRA(i2x_i,'Faii_lwup')
+       index_i2x_Faii_lwupi  = mct_aVect_indexRA(i2x_i,'Faii_lwup') ! LM added
        index_i2x_Faii_lat    = mct_aVect_indexRA(i2x_i,'Faii_lat')
        index_i2x_Faii_sen    = mct_aVect_indexRA(i2x_i,'Faii_sen')
        index_i2x_Faii_evap   = mct_aVect_indexRA(i2x_i,'Faii_evap')

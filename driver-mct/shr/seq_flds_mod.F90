@@ -1393,7 +1393,7 @@ contains
     call seq_flds_add(l2x_fluxes,"Fall_lwup")
     call seq_flds_add(xao_fluxes,"Faox_lwup")
     call seq_flds_add(i2x_fluxes,"Faii_lwup")
-    call seq_flds_add(xao_fluxes,"Faii_lwup") ! LM added
+    !call seq_flds_add(x2a_fluxes,"Faii_lwupi") ! LM added
     call seq_flds_add(x2a_fluxes,"Faxx_lwup")
     call seq_flds_add(x2o_fluxes,"Foxx_lwup")
     longname = 'Surface upward longwave heat flux'
