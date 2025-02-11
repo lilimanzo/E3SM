@@ -1732,6 +1732,7 @@ contains
 
     ! LM variable for temporal adjustment factor
     call seq_flds_add(i2x_states,"Si_taf")
+    call seq_flds_add(x2a_states,"Si_taf")
     longname = 'LM temporal adjustment factor'
     stdname  = 'LM_taf'
     units    = '1'
