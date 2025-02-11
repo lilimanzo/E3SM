@@ -75,7 +75,7 @@ module seq_diag_mct
   public seq_diag_avloc_mct
   public seq_diag_avdiff_mct
 
-  !public seq_diag_msv  ! LM added
+  public seq_diag_msv  ! LM added
 
   !EOP
 
@@ -2670,17 +2670,17 @@ contains
 
   end subroutine seq_diag_avdiff_mct
 
-  !subroutine seq_diag_msv(a2x_a) ! LM created subroutine
+  subroutine seq_diag_msv(a2x_a) ! LM created subroutine
         
-  !      a2x_a => component_get_c2x_cx(atm) 
+        a2x_a => component_get_c2x_cx(atm) 
         
         ! Local variables
-  !      integer :: index_x2a_Faxx_lwup
-  !      integer :: index_x2a_Sx_mmsv
+        integer :: index_x2a_Faxx_lwup
+        integer :: index_x2a_Sx_mmsv
 
         !index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
         !index_x2a_Sx_mmsv   = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
 
-  !end subroutine seq_diag_msv
+  end subroutine seq_diag_msv
 
 end module seq_diag_mct
