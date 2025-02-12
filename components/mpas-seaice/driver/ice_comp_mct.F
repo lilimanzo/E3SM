@@ -2981,6 +2981,7 @@ contains
             i2x_i % rAttr(index_i2x_Faii_lat  ,n) = latentHeatFlux(i)
             i2x_i % rAttr(index_i2x_Faii_sen  ,n) = sensibleHeatFlux(i)
             i2x_i % rAttr(index_i2x_Faii_lwup ,n) = longwaveUp(i)
+            i2x_i % rAttr(index_i2x_Faii_lwupi,n) = longwaveUp(i) ! LM added
             i2x_i % rAttr(index_i2x_Faii_evap ,n) = evaporativeWaterFlux(i)
             i2x_i % rAttr(index_i2x_Faii_swnet,n) = absorbedShortwaveFlux(i)
             i2x_i % rAttr(index_i2x_Faii_evap ,n) = evaporativeWaterFlux(i)
@@ -3652,6 +3653,7 @@ contains
                i2x_im(n, index_i2x_Faii_lat ) = latentHeatFlux(i)
                i2x_im(n, index_i2x_Faii_sen ) = sensibleHeatFlux(i)
                i2x_im(n, index_i2x_Faii_lwup) = longwaveUp(i)
+               i2x_im(n, index_i2x_Faii_lwupi)= longwaveUp(i) ! LM added
                i2x_im(n, index_i2x_Faii_evap) = evaporativeWaterFlux(i)
                i2x_im(n, index_i2x_Faii_swnet) = absorbedShortwaveFlux(i)
                i2x_im(n, index_i2x_Faii_evap) = evaporativeWaterFlux(i)
