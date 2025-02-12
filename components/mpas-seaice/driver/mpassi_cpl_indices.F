@@ -26,7 +26,8 @@ module mpassi_cpl_indices
   integer :: index_i2x_Si_anidf        ! albedo: near ir, diffuse        
   integer :: index_i2x_Si_u10          ! 10m wind
   integer :: index_i2x_Si_u10withgusts ! 10m wind root-mean-square magnitude with gustiness
-  integer :: index_i2x_Faii_lwup       ! upward longwave heat flux  
+  integer :: index_i2x_Faii_lwup       ! upward longwave heat flux
+  integer :: index_i2x_Faii_lwupi      ! LM duplicate lwup  
   integer :: index_i2x_Faii_lat        ! latent          heat flux  
   integer :: index_i2x_Faii_sen        ! sensible        heat flux      
   integer :: index_i2x_Faii_evap       ! evaporation    water flux      
@@ -166,6 +167,7 @@ contains
     index_i2x_Faii_lat      = mct_avect_indexra(i2x,'Faii_lat')
     index_i2x_Faii_sen      = mct_avect_indexra(i2x,'Faii_sen')
     index_i2x_Faii_lwup     = mct_avect_indexra(i2x,'Faii_lwup')
+    index_i2x_Faii_lwupi    = mct_avect_indexra(i2x,'Faii_lwupi') ! LM added
     index_i2x_Faii_evap     = mct_avect_indexra(i2x,'Faii_evap')
     index_i2x_Faii_swnet    = mct_avect_indexra(i2x,'Faii_swnet')
     index_i2x_Fioi_swpen    = mct_avect_indexra(i2x,'Fioi_swpen')
