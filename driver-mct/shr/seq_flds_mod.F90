@@ -1410,7 +1410,8 @@ contains
     attname  = 'Foxx_lwup'
     call metadata_set(attname, longname, stdname, units)
 
-    ! Duplicate Faii_lwup and rename for atm regridding
+    ! LM duplicate Faii_lwup and rename for atm regridding
+    call seq_flds_add(i2x_fluxes,"Faii_lwupi") ! LM added
     call seq_flds_add(x2a_fluxes,"Faii_lwupi") ! LM added
     longname = 'Sea ice upward longwave heat flux'
     stdname  = 'SI_net_upward_longwave_flux'
