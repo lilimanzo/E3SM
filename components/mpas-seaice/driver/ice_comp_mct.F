@@ -68,6 +68,7 @@ module ice_comp_mct
                                seaiceReferenceSalinity, &
                                seaiceFrazilSalinityReduction, &
                                seaiceFrazilIcePorosity, &
+                               seaiceStefanBoltzmann, & ! LM added
                                pii
 
    use seaice_core
@@ -3215,7 +3216,7 @@ contains
 
    ! compute temporal adjustment factor (TAF)
    !taf = longwaveDown
-   taf = (-longwaveUp + longwaveDown) / (5.67e-8 * Tsrf**4 + longwaveDown) 
+   taf = (-longwaveUp + longwaveDown) / (seaiceStefanBoltzmann * Tsrf**4 + longwaveDown) 
 
    fcheck = taf * 5.67e-8 * Tsrf**4 + (1-taf) * longwaveDown
 !-----------------------------------------------------------------------
