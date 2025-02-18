@@ -2674,7 +2674,7 @@ contains
 
   subroutine seq_diag_saf(atm, a2x_a) ! LM created subroutine
        
-        type(component_type , intent(in)  :: atm    
+        type(component_type) , intent(in)  :: atm    
         type(mct_aVect), pointer          :: a2x_a 
         
         ! Local variables
