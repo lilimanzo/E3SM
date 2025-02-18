@@ -2676,13 +2676,15 @@ contains
        
         type(component_type) , intent(in)  :: atm    
         type(mct_aVect), pointer           :: a2x_a 
-        
+        type(mct_aVect), pointer           :: x2a_a 
+
         ! Local variables
         integer :: index_x2a_Faxx_lwup
   !      integer :: index_x2a_Sx_mmsv
 
         a2x_a => component_get_c2x_cx(atm)
-
+        x2a_a => component_get_x2c_cx(atm)
+        
         index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
         !index_x2a_Sx_mmsv   = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
 
