@@ -804,7 +804,7 @@ contains
 
         ! Local variables
         integer  :: index_x2a_Faxx_lwup
-        integer  :: lsize
+        integer  :: n, lsize
         !integer :: index_x2a_Sx_saf
 
         index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
