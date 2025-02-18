@@ -3881,6 +3881,7 @@ contains
 
   subroutine cime_run_atm_setup_send()
 
+    real(kind=RKIND) :: saf ! LM added
     !----------------------------------------------------------
     !| atm prep-merge
     !----------------------------------------------------------
