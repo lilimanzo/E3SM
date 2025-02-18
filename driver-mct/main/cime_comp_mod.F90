@@ -147,7 +147,7 @@ module cime_comp_mod
   use seq_diag_mct, only : seq_diag_rof_mct  , seq_diag_ocn_mct  , seq_diag_atm_mct
   use seq_diag_mct, only : seq_diag_ice_mct  , seq_diag_glc_mct 
   use seq_diag_mct, only : seq_diag_accum_mct, seq_diag_print_mct
-  !use seq_diag_mct, only : seq_diag_msv ! LM added
+  use seq_diag_mct, only : seq_diag_saf ! LM added
   use seq_diagBGC_mct, only : seq_diagBGC_zero_mct , seq_diagBGC_avect_mct, seq_diagBGC_lnd_mct
   use seq_diagBGC_mct, only : seq_diagBGC_rof_mct  , seq_diagBGC_ocn_mct  , seq_diagBGC_atm_mct
   use seq_diagBGC_mct, only : seq_diagBGC_ice_mct  , seq_diagBGC_accum_mct
@@ -3881,7 +3881,7 @@ contains
 
   subroutine cime_run_atm_setup_send()
 
-    real :: saf ! LM added
+    !real :: saf ! LM added 430s runs
     !----------------------------------------------------------
     !| atm prep-merge
     !----------------------------------------------------------
@@ -3929,8 +3929,8 @@ contains
     !----------------------------------------------------------
 
     if (iamin_CPLALLATMID .and. atm_prognostic) then
-       a2x_ax => component_get_c2x_cx(atm(eai)) ! LM added
-       call prep_atm_msv(a2x_ax, saf) ! LM added
+       !a2x_ax => component_get_c2x_cx(atm(eai)) ! LM added 430s
+       !call prep_atm_msv(a2x_ax, saf) ! LM added 430s
        
        call component_exch(atm, flow='x2c', infodata=infodata, infodata_string='cpl2atm_run', &
             mpicom_barrier=mpicom_CPLALLATMID, run_barriers=run_barriers, &
@@ -4818,8 +4818,8 @@ contains
        call t_drvstartf ('CPL:BUDGET2',cplrun=lcplrun,budget=.true.,barrier=mpicom_CPLID)
        if (atm_present) then
           call seq_diag_atm_mct(atm(ens1), fractions_ax(ens1), infodata, do_a2x=.true., do_x2a=.true.)
-          !a2x_ax => component_get_c2x_cx(atm(eai)) ! LM added
-          !call seq_diag_msv(a2x_ax)  ! LM added
+          a2x_ax => component_get_c2x_cx(atm(eai)) ! LM added
+          call seq_diag_saf(a2x_ax)  ! LM added
        endif
        if (ice_present) then
           call seq_diag_ice_mct(ice(ens1), fractions_ix(ens1), infodata, do_i2x=.true.)

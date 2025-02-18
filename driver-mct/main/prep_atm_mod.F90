@@ -807,7 +807,7 @@ contains
         integer  :: n, lsize
         !integer :: index_x2a_Sx_saf
 
-        index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
+        !index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup') ! crashes here
         !index_x2a_Sx_saf    = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
 
         lsize = mct_avect_lsize(x2a_a)
