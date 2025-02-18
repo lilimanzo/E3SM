@@ -3201,18 +3201,6 @@ contains
 
 !EOP
 !BOC
-!-----------------------------------------------------------------------
-!
-!  local variables
-!
-!-----------------------------------------------------------------------
-!   real(kind=RKIND) :: &
-!      seaIceSpecificMass
-
- !  ! sea ice and snow specific mass
- !   seaIceSpecificMass = &
- !     iceVolumeCell  * seaiceDensityIce + &
- !     snowVolumeCell * seaiceDensitySnow
 
    ! compute temporal adjustment factor (TAF)
    !taf = longwaveDown

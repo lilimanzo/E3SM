@@ -3929,7 +3929,7 @@ contains
 
     if (iamin_CPLALLATMID .and. atm_prognostic) then
        a2x_ax => component_get_c2x_cx(atm(eai)) ! LM added
-       call prep_atm_msv(a2x_ax) ! LM added
+       call prep_atm_msv(a2x_ax, saf) ! LM added
        
        call component_exch(atm, flow='x2c', infodata=infodata, infodata_string='cpl2atm_run', &
             mpicom_barrier=mpicom_CPLALLATMID, run_barriers=run_barriers, &

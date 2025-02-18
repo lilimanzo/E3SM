@@ -797,16 +797,19 @@ contains
 
   end subroutine prep_atm_calc_z2x_ax
 
-  subroutine prep_atm_msv(x2a_a) ! LM created subroutine
+  subroutine prep_atm_msv(x2a_a, saf) ! LM created subroutine
 
         type(mct_aVect), intent(inout) :: x2a_a
+        real(kind=RKIND), intent(out)  :: saf
 
         ! Local variables
         integer :: index_x2a_Faxx_lwup
-        integer :: index_x2a_Sx_mmsv
+        !integer :: index_x2a_Sx_saf
 
         index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
-        !index_x2a_Sx_mmsv   = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
+        !index_x2a_Sx_saf    = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
+
+        saf = 1.0_RKIND
 
   end subroutine prep_atm_msv
 
