@@ -809,7 +809,7 @@ contains
         index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
         !index_x2a_Sx_saf    = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
 
-        saf = 1.0_RKIND
+        saf = 1.0
 
   end subroutine prep_atm_msv
 
