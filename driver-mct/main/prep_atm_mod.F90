@@ -803,13 +803,20 @@ contains
         real, intent(out)  :: saf
 
         ! Local variables
-        integer :: index_x2a_Faxx_lwup
+        integer  :: index_x2a_Faxx_lwup
+        integer  :: lsize
         !integer :: index_x2a_Sx_saf
 
         index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
         !index_x2a_Sx_saf    = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
 
-        saf = 1.0
+        lsize = mct_avect_lsize(x2a_a)
+
+        do n = 1,lsize
+                saf = 1.0
+                !x2a_a%rAttr(index_x2a_Sf_ofrac,n) = fractions_a%Rattr(kof,n)
+        end do
+
 
   end subroutine prep_atm_msv
 
