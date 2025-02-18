@@ -2674,7 +2674,7 @@ contains
 
   subroutine seq_diag_saf(a2x_a) ! LM created subroutine
         
-        a2x_a => component_get_c2x_cx(atm) 
+        !a2x_a => component_get_c2x_cx(atm) 
         
         ! Local variables
         integer :: index_x2a_Faxx_lwup
