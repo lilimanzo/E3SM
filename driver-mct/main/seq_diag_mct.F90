@@ -2672,9 +2672,10 @@ contains
 
   end subroutine seq_diag_avdiff_mct
 
-  subroutine seq_diag_saf(a2x_a) ! LM created subroutine
-        
-        type(mct_aVect), pointer :: a2x_a 
+  subroutine seq_diag_saf(atm, a2x_a) ! LM created subroutine
+       
+        type(component_type , intent(in)  :: atm    
+        type(mct_aVect), pointer          :: a2x_a 
         
         ! Local variables
         integer :: index_x2a_Faxx_lwup
