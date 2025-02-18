@@ -800,7 +800,7 @@ contains
   subroutine prep_atm_msv(x2a_a, saf) ! LM created subroutine
 
         type(mct_aVect), intent(inout) :: x2a_a
-        real(kind=RKIND), intent(out)  :: saf
+        real, intent(out)  :: saf
 
         ! Local variables
         integer :: index_x2a_Faxx_lwup
