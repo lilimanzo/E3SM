@@ -2675,7 +2675,7 @@ contains
   subroutine seq_diag_saf(atm, a2x_a) ! LM created subroutine
        
         type(component_type) , intent(in)  :: atm    
-        type(mct_aVect), pointer          :: a2x_a 
+        type(mct_aVect), pointer           :: a2x_a 
         
         ! Local variables
         integer :: index_x2a_Faxx_lwup
@@ -2683,7 +2683,7 @@ contains
 
         a2x_a => component_get_c2x_cx(atm)
 
-        !index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
+        index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
         !index_x2a_Sx_mmsv   = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
 
   end subroutine seq_diag_saf
