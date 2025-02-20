@@ -2913,16 +2913,9 @@ contains
             call time_adjustment_factor (& ! LM added call
                  taf,                     &
                  fcheck,                  &
-                 iceVolumeCell(i),        &
-                 snowVolumeCell(i),       &
-                 pondDepthCell(i),        &
-                 pondLidThicknessCell(i), &
-                 pondAreaCell(i),         &
                  longwaveDown(i),         &
                  longwaveUp(i),           &
-                 Tsrf,                    &
-                 !surfaceTemperatureCell(i),&
-                 config_use_topo_meltponds)
+                 Tsrf                     )
          endif
 
          ! wind stress  (on T-grid:  convert to lat-lon)
@@ -3175,25 +3168,17 @@ contains
 
 ! LM subroutine time_adjustment_factor
 ! !INTERFACE:
-   subroutine time_adjustment_factor(taf, fcheck,  iceVolumeCell,  snowVolumeCell,  pondDepthCell, &
-                             pondLidThicknessCell,  pondAreaCell, longwaveDown, longwaveUp,  &
-                             Tsrf,  config_use_topo_meltponds) !,  longwaveDown,  Tsrf)!{{{
+   subroutine time_adjustment_factor(taf, fcheck, longwaveDown, longwaveUp,  &
+                             Tsrf) !,  longwaveDown,  Tsrf)!{{{
 !
 ! !DESCRIPTION:
 ! Calculate time adjustment factor for a cell
 !
 
 ! !INPUT PARAMETERS:
-      real (kind=RKIND), intent(in)  :: iceVolumeCell
-      real (kind=RKIND), intent(in)  :: snowVolumeCell
-      real (kind=RKIND), intent(in)  :: pondDepthCell
-      real (kind=RKIND), intent(in)  :: pondLidThicknessCell
-      real (kind=RKIND), intent(in)  :: pondAreaCell
-      !real (kind=RKIND), intent(in)  :: surfaceTemperatureCell
       real (kind=RKIND), intent(in)  :: longwaveDown ! check
       real (kind=RKIND), intent(in)  :: longwaveUp ! check
       real (kind=RKIND), intent(in)  :: Tsrf       ! check
-      logical,           intent(in)  :: config_use_topo_meltponds
 
 ! !OUTPUT PARAMETERS:
       real (kind=RKIND), intent(out) :: taf
@@ -3203,7 +3188,6 @@ contains
 !BOC
 
    ! compute temporal adjustment factor (TAF)
-   !taf = longwaveDown
    taf = (-longwaveUp + longwaveDown) / (seaiceStefanBoltzmann * Tsrf**4 + longwaveDown) 
 
    fcheck = taf * 5.67e-8 * Tsrf**4 + (1-taf) * longwaveDown
