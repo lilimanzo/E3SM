@@ -4805,6 +4805,7 @@ contains
                                               ! CPL:RUN timer
 
     logical :: lcplrun
+    real (kind=RKIND) :: saf ! LM added
     !-------------------------------------------------------------------------------
 
     lcplrun  = .true.
