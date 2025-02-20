@@ -2679,7 +2679,7 @@ contains
         type(mct_aVect), pointer          :: x2a_a 
 
         ! Output parameters
-        real (kind=RKIND), intent(out)    :: saf
+        real, intent(out)    :: saf
 
         ! Local variables
         integer :: index_x2a_Faxx_lwup
