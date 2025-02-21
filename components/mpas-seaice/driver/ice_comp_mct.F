@@ -3190,7 +3190,7 @@ contains
    ! compute temporal adjustment factor (TAF)
    taf = (-longwaveUp + longwaveDown) / (seaiceStefanBoltzmann * Tsrf**4 + longwaveDown) 
 
-   fcheck = taf * 5.67e-8 * Tsrf**4 + (1-taf) * longwaveDown
+   fcheck = taf * seaiceStefanBoltzmann * Tsrf**4 + (1-taf) * longwaveDown
 !-----------------------------------------------------------------------
 !EOC
 
