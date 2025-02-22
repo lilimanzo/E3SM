@@ -28,11 +28,6 @@ void MAMWetscav::set_grids(
     const std::shared_ptr<const GridsManager> grids_manager) {
   using namespace ekat::units;
 
-  // The units of mixing ratio Q are technically non-dimensional.
-  // Nevertheless, for output reasons, we like to see 'kg/kg'.
-  auto q_unit = kg / kg;
-  auto n_unit = 1 / kg;  // units of number mixing ratios of tracers
-
   grid_                = grids_manager->get_grid("Physics");
   const auto &grid_name = grid_->name();
 
@@ -63,37 +58,7 @@ void MAMWetscav::set_grids(
 
   // ----------- Atmospheric quantities -------------
   // Specific humidity [kg/kg]
-  add_tracer<Required>("qv", grid_, q_unit);
-
-  // cloud liquid mass mixing ratio [kg/kg]
-  add_tracer<Required>("qc", grid_, q_unit);
-
-  // cloud ice mass mixing ratio [kg/kg]
-  add_tracer<Required>("qi", grid_, q_unit);
-
-  // cloud liquid number mixing ratio [1/kg]
-  add_tracer<Required>("nc", grid_, n_unit);
-
-  // cloud ice number mixing ratio [1/kg]
-  add_tracer<Required>("ni", grid_, n_unit);
-
-  // Temperature[K] at midpoints
-  add_field<Required>("T_mid", scalar3d_mid, K, grid_name);
-
-  // Vertical pressure velocity [Pa/s] at midpoints
-  add_field<Required>("omega", scalar3d_mid, Pa / s, grid_name);
-
-  // Total pressure [Pa] at midpoints
-  add_field<Required>("p_mid", scalar3d_mid, Pa, grid_name);
-
-  // Total pressure [Pa] at interfaces
-  add_field<Required>("p_int", scalar3d_int, Pa, grid_name);
-
-  // Layer thickness(pdel) [Pa] at midpoints
-  add_field<Required>("pseudo_density", scalar3d_mid, Pa, grid_name);
-
-  // planetary boundary layer height [m]
-  add_field<Required>("pbl_height", scalar2d, m, grid_name);
+  add_tracer_for_wet_and_dry_atm();
 
   static constexpr auto m2 = m * m;
   static constexpr auto s2 = s * s;
@@ -214,35 +179,10 @@ void MAMWetscav::initialize_impl(const RunType run_type) {
   // print_fields_names();
   add_interval_checks();
 
-  // populate the wet atmosphere state with views from fields and
-  // the buffer (NOTE: wet atmosphere only has qv, qc, qi, nc, ni and omega)
-  wet_atm_.qc = get_field_in("qc").get_view<const Real **>();
-  wet_atm_.qi = get_field_in("qi").get_view<const Real **>();
+  populate_wet_and_dry_atm();
+  dry_atm_.phis  = get_field_in("phis").get_view<const Real *>();
 
-  // -- Following wet atm variables are NOT used by the process but we still
-  // need them to
-  // -- create atmosphere object
-  wet_atm_.qv    = get_field_in("qv").get_view<const Real **>();
-  wet_atm_.nc    = get_field_in("nc").get_view<const Real **>();
-  wet_atm_.ni    = get_field_in("ni").get_view<const Real **>();
-  wet_atm_.omega = get_field_in("omega").get_view<const Real **>();
-
-  // populate the dry atmosphere state with views from fields
-  // (NOTE: dry atmosphere has everything that wet
-  // atmosphere has along with z_surf, T_mid, p_mid, z_mid, z_iface,
-  // dz, p_del, cldfrac, w_updraft, pblh, phis)
-  dry_atm_.T_mid = get_field_in("T_mid").get_view<const Real **>();
-  dry_atm_.p_mid = get_field_in("p_mid").get_view<const Real **>();
-  dry_atm_.p_del = get_field_in("pseudo_density").get_view<const Real **>();
-  dry_atm_.p_int = get_field_in("p_int").get_view<const Real **>();
-  // How "buffer_" works: We use buffer to allocate memory for the members of
-  // dry_atm_ object. Here we are providing those memory locations to the
-  // dry_atm_ members. These members are computed from the above wet_atm_ or
-  // dry_atm_ members that are explicitly getting their values either from the
-  // input file or from other processes. These members are null at this point,
-  // they are assigned in "Kokkos::parallel_for("preprocess", scan_policy,
-  // preprocess_);" call in the run_impl
-
+  // store fields converted to dry mmr from wet mmr in dry_atm_
   dry_atm_.qv        = buffer_.qv_dry;
   dry_atm_.qc        = buffer_.qc_dry;
   dry_atm_.nc        = buffer_.nc_dry;
