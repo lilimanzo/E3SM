@@ -13,10 +13,12 @@ namespace scream {
 // =========================================================================================
 MAMWetscav::MAMWetscav(const ekat::Comm &comm,
                        const ekat::ParameterList &params)
-    : AtmosphereProcess(comm, params) {
+    : MAMGenericInterface(comm, params) {
   /* Anything that can be initialized without grid information can be
    * initialized here. Like universal constants, mam wetscav options.
    */
+    check_fields_intervals_   = m_params.get<bool>("mam4_check_fields_intervals", false);
+
 }
 
 // ================================================================
@@ -247,8 +249,11 @@ void MAMWetscav::init_buffers(const ATMBufferManager &buffer_manager) {
 //  INITIALIZE_IMPL
 // ================================================================
 void MAMWetscav::initialize_impl(const RunType run_type) {
-  // Gather runtime options
-  //(e.g.) runtime_options.lambda_low    = m_params.get<double>("lambda_low");
+  // ---------------------------------------------------------------
+  // Input fields read in from IC file, namelist or other processes
+  // ---------------------------------------------------------------
+  // print_fields_names();
+  add_interval_checks();
 
   // populate the wet atmosphere state with views from fields and
   // the buffer (NOTE: wet atmosphere only has qv, qc, qi, nc, ni and omega)
