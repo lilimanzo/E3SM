@@ -256,22 +256,7 @@ void MAMWetscav::initialize_impl(const RunType run_type) {
   // Detraining cld H20 from deep convection [kg/kg/s]
   dlf_ = view_2d("dlf", ncol_, nlev_);
   Kokkos::deep_copy(dlf_, 0);
-
-  //---------------------------------------------------------------------------------
-  // Setup preprocessing and post processing
-  //---------------------------------------------------------------------------------
-  // set up our preprocess  and postprocess functors
-  preprocess_.initialize(ncol_, nlev_, wet_atm_, wet_aero_, dry_atm_,
-                         dry_aero_);
-
-  postprocess_.initialize(ncol_, nlev_, wet_atm_, wet_aero_, dry_atm_,
-                          dry_aero_);
-
-  // wetdep
-
-  const int work_len = mam4::wetdep::get_aero_model_wetdep_work_len();
-  work_              = view_2d("work", ncol_, work_len);
-}
+  }
 
 // ================================================================
 //  RUN_IMPL
@@ -281,7 +266,7 @@ void MAMWetscav::run_impl(const double dt) {
       KT::ExeSpace>::get_thread_range_parallel_scan_team_policy(ncol_, nlev_);
   // preprocess input -- needs a scan for the calculation of all variables
   // needed by this process or setting up MAM4xx classes and their objects
-  Kokkos::parallel_for("preprocess", scan_policy, preprocess_);
+  pre_process();
   Kokkos::fence();
   const mam_coupling::DryAtmosphere &dry_atm = dry_atm_;
   const auto &dry_aero                       = dry_aero_;
@@ -449,7 +434,7 @@ void MAMWetscav::run_impl(const double dt) {
 
   // call post processing to convert dry mixing ratios to wet mixing ratios
   // and update the state
-  Kokkos::parallel_for("postprocess", scan_policy, postprocess_);
+  post_process();
   Kokkos::fence();  // wait before returning to calling function
 }
 
