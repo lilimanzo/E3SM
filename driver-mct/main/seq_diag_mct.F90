@@ -2698,9 +2698,10 @@ contains
         integer     :: index_x2a_Faxx_lwup      ! LW UP
         integer     :: index_x2a_Sx_saf         ! saf
         integer     :: index_x2a_Si_taf         ! sea ice TAF
+        integer     :: index_x2a_Sl_taf         ! land TAF
         integer     :: index_x2a_Faxx_ilwup     ! ice frac LW up 
-        integer     :: index_x2a_Faxx_olwup     ! ice frac LW up
-        integer     :: index_x2a_Faxx_llwup     ! ice frac LW up
+        integer     :: index_x2a_Faxx_olwup     ! ocean frac LW up
+        integer     :: index_x2a_Faxx_llwup     ! land frac LW up
         integer(in) :: lSize                    ! aVect size
         integer(in) :: n                        ! generic index
         integer(in) :: kl,ka,ko,ki,kor,kir      ! fraction indices
@@ -2711,7 +2712,10 @@ contains
         index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
         index_x2a_Sx_saf    = mct_aVect_indexRA(x2a_a,'Sx_saf')
         index_x2a_Si_taf    = mct_aVect_indexRA(x2a_a,'Si_taf')
+        
         index_x2a_Faxx_ilwup= 0.0   ! initialize..?
+        index_x2a_Faxx_olwup= 0.0   ! actually might not need this?
+        index_x2a_Faxx_llwup= 0.0
 
         ! area fractions
         ka    = mct_aVect_indexRA(frac_a,afracname)
