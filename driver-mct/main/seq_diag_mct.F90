@@ -2717,6 +2717,8 @@ contains
         index_x2a_Faxx_olwup= 0.0   ! actually might not need this?
         index_x2a_Faxx_llwup= 0.0
 
+        index_x2a_Sl_taf    = 1.0   ! approximation for now
+
         ! area fractions
         ka    = mct_aVect_indexRA(frac_a,afracname)
         kl    = mct_aVect_indexRA(frac_a,lfracname)
