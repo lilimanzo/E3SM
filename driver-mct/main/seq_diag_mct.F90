@@ -2683,7 +2683,7 @@ contains
 
         ! Local variables
         integer :: index_x2a_Faxx_lwup
-        !integer :: index_x2a_Sx_saf
+        integer :: index_x2a_Sx_mmsv
 
         a2x_a => component_get_c2x_cx(atm)
         x2a_a => component_get_x2c_cx(atm)
@@ -2692,6 +2692,8 @@ contains
         !index_x2a_Sx_mmsv   = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
 
         saf=1.0
+
+        x2a_a % rAttr(index_x2a_Sx_mmsv)=saf
 
   end subroutine seq_diag_saf
 
