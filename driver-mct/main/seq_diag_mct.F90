@@ -2677,13 +2677,13 @@ contains
         use shr_const_mod, only : shr_const_ocn_msv, shr_const_stebol
 
         ! Input parameters
-        type(component_type), intent(in)  :: atm    
+        type(component_type), intent(in)  :: atm    ! component type for instance1
         type(mct_aVect), intent(in)       :: frac_a ! frac bundle
         type(mct_aVect), pointer          :: a2x_a 
         type(mct_aVect), pointer          :: x2a_a 
 
         ! Output parameters
-        real, intent(out)    :: saf
+        real, intent(out)    :: saf                 ! spatial adjustment factor
         
         ! Public data members
         character(len=*),parameter :: afracname = 'afrac'
@@ -2699,6 +2699,8 @@ contains
         integer     :: index_x2a_Sx_saf         ! saf
         integer     :: index_x2a_Si_taf         ! sea ice TAF
         integer     :: index_x2a_Faxx_ilwup     ! ice frac LW up 
+        integer     :: index_x2a_Faxx_olwup     ! ice frac LW up
+        integer     :: index_x2a_Faxx_llwup     ! ice frac LW up
         integer(in) :: lSize                    ! aVect size
         integer(in) :: n                        ! generic index
         integer(in) :: kl,ka,ko,ki,kor,kir      ! fraction indices
@@ -2711,24 +2713,29 @@ contains
         index_x2a_Si_taf    = mct_aVect_indexRA(x2a_a,'Si_taf')
         index_x2a_Faxx_ilwup= 0.0   ! initialize..?
 
+        ! area fractions
         ka    = mct_aVect_indexRA(frac_a,afracname)
         kl    = mct_aVect_indexRA(frac_a,lfracname)
         ko    = mct_aVect_indexRA(frac_a,ofracname)
         ki    = mct_aVect_indexRA(frac_a,ifracname)
         
+        ! fraction at last radiation timestep (also used for swnet calc)
         kor   = mct_aVect_indexRA(frac_a,ofradname)
         kir   = mct_aVect_indexRA(frac_a,ifradname)
-
-        !saf=1.0
 
         lSize = mct_avect_lSize(x2a_a)
         
         do n=1,lSize
+                ! LW up by component fraction
                 x2a_a % rAttr(index_x2a_Faxx_ilwup, n) = x2a_a % rAttr(index_x2a_Faxx_lwup, n) &
                         * frac_a%rAttr(kir,n)
+                x2a_a % rAttr(index_x2a_Faxx_olwup, n) = x2a_a % rAttr(index_x2a_Faxx_lwup, n) &
+                        * frac_a%rAttr(kor,n)
+                x2a_a % rAttr(index_x2a_Faxx_llwup, n) = x2a_a % rAttr(index_x2a_Faxx_lwup, n) &
+                        * frac_a%rAttr(kl,n)
+
+                ! spatial adjustment factor
                 x2a_a % rAttr(index_x2a_Sx_saf, n) = x2a_a % rAttr(index_x2a_Faxx_ilwup, n) 
-                                                    !x2a_a % rAttr(index_x2a_Faxx_lwup, n) & 
-                        !* frac_a%rAttr(ki,n)
         enddo
 
   end subroutine seq_diag_saf
