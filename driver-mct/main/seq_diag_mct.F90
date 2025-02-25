@@ -2682,9 +2682,10 @@ contains
         real, intent(out)    :: saf
 
         ! Local variables
-        integer :: index_x2a_Faxx_lwup
-        integer :: index_x2a_Sx_mmsv
-        integer(in) :: lSize 
+        integer     :: index_x2a_Faxx_lwup      ! LW UP
+        integer     :: index_x2a_Sx_mmsv        ! saf
+        integer(in) :: lSize                    ! aVect size
+        integer(in) :: n                        ! generic index
 
         a2x_a => component_get_c2x_cx(atm)
         x2a_a => component_get_x2c_cx(atm)
@@ -2695,8 +2696,10 @@ contains
         saf=1.0
 
         lSize = mct_avect_lSize(x2a_a)
-
-        !x2a_a % rAttr(index_x2a_Sx_mmsv)=saf
+        
+        do n=1,lSize
+                x2a_a % rAttr(index_x2a_Sx_mmsv, n)=saf
+        enddo
 
   end subroutine seq_diag_saf
 
