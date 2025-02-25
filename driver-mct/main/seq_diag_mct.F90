@@ -2696,6 +2696,7 @@ contains
 
         ! Local variables
         integer     :: index_x2a_Faxx_lwup      ! LW UP
+        integer     :: index_a2x_Faxa_lwdn      ! LW DN
         integer     :: index_x2a_Sx_saf         ! saf
         integer     :: index_x2a_Si_taf         ! sea ice TAF
         integer     :: index_x2a_Sl_taf         ! land TAF
@@ -2710,7 +2711,8 @@ contains
         x2a_a => component_get_x2c_cx(atm)
         
         index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
-        index_x2a_Sx_saf    = mct_aVect_indexRA(x2a_a,'Sx_saf')
+        index_a2x_Faxa_lwdn = mct_aVect_indexRA(a2x_a,'Faxa_lwdn')
+        index_x2a_Sx_saf    = mct_aVect_indexRA(x2a_a,'iSx_saf')
         index_x2a_Si_taf    = mct_aVect_indexRA(x2a_a,'Si_taf')
         
         index_x2a_Faxx_ilwup= 0.0   ! initialize..?
@@ -2718,6 +2720,10 @@ contains
         index_x2a_Faxx_llwup= 0.0
 
         index_x2a_Sl_taf    = 1.0   ! approximation for now
+
+        ! if ice/land present, use computed taf;
+        ! if not, set taf=1; that term will disappear in saf
+        ! eqn when frac=0
 
         ! area fractions
         ka    = mct_aVect_indexRA(frac_a,afracname)
