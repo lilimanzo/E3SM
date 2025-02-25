@@ -2690,7 +2690,7 @@ contains
         !character(len=*),parameter :: lfracname = 'lfrac'
         !character(len=*),parameter :: lfrinname = 'lfrin'
         !character(len=*),parameter :: ofracname = 'ofrac'
-        !character(len=*),parameter :: ifracname = 'ifrac'
+        character(len=*),parameter :: ifracname = 'ifrac'
 
         ! Local variables
         integer     :: index_x2a_Faxx_lwup      ! LW UP
@@ -2710,7 +2710,7 @@ contains
         !ka    = mct_aVect_indexRA(frac_a,afracname)
         !kl    = mct_aVect_indexRA(frac_a,lfrinname)
         !ko    = mct_aVect_indexRA(frac_a,ofracname)
-        !ki    = mct_aVect_indexRA(frac_a,ifracname)
+        ki    = mct_aVect_indexRA(frac_a,ifracname)
         
         !saf=1.0
 
