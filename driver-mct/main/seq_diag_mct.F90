@@ -2683,7 +2683,7 @@ contains
 
         ! Local variables
         integer     :: index_x2a_Faxx_lwup      ! LW UP
-        integer     :: index_x2a_Sx_mmsv        ! saf
+        integer     :: index_x2a_Sx_saf         ! saf
         integer(in) :: lSize                    ! aVect size
         integer(in) :: n                        ! generic index
 
@@ -2691,14 +2691,14 @@ contains
         x2a_a => component_get_x2c_cx(atm)
         
         index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
-        !index_x2a_Sx_mmsv   = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
+        !index_x2a_Sx_saf   = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
 
         saf=1.0
 
         lSize = mct_avect_lSize(x2a_a)
         
         do n=1,lSize
-                x2a_a % rAttr(index_x2a_Sx_mmsv, n)=saf
+                x2a_a % rAttr(index_x2a_Sx_saf, n)=saf
         enddo
 
   end subroutine seq_diag_saf

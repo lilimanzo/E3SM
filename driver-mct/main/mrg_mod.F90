@@ -59,7 +59,7 @@ contains
     ! Local workspace
     !
     real(r8) :: fracl, fraci, fraco
-    real(r8) :: mmsv             ! LM mean emissivity
+    real(r8) :: saf             ! LM mean emissivity
     integer  :: n,ka,ki,kl,ko,kx,kof,kif,klf
     integer  :: lsize
     integer  :: index_x2a_Sf_lfrac
@@ -67,7 +67,7 @@ contains
     integer  :: index_x2a_Sf_ofrac
     integer  :: index_x2a_Faxx_lwup ! LM added
     integer  :: index_x2a_Sx_t      ! LM added
-    integer, save :: index_x2a_Sx_mmsv  ! LM added
+    integer, save :: index_x2a_Sx_saf  ! LM added
     character(CL) :: field_atm   ! string converted to char
     character(CL) :: field_lnd   ! string converted to char
     character(CL) :: field_ice   ! string converted to char
@@ -199,7 +199,7 @@ contains
     index_x2a_Sf_lfrac = mct_aVect_indexRA(x2a_a,'Sf_lfrac')
     index_x2a_Sf_ifrac = mct_aVect_indexRA(x2a_a,'Sf_ifrac')
     index_x2a_Sf_ofrac = mct_aVect_indexRA(x2a_a,'Sf_ofrac')
-    index_x2a_Sx_mmsv  = mct_aVect_indexRA(x2a_a,'Sx_mmsv') ! LM added
+    index_x2a_Sx_saf  = mct_aVect_indexRA(x2a_a,'Sx_saf') ! LM added
 
     do n = 1,lsize
        x2a_a%rAttr(index_x2a_Sf_lfrac,n) = fractions_a%Rattr(klf,n)
@@ -229,7 +229,7 @@ contains
           fraco = fractions_a%Rattr(kof,n)
 
           !mmsv  = 1 !x2a_a%rAttr(index_x2a_Faxx_lwup,n) / (5.67e-8_r8 * x2a_a%rAttr(index_x2a_Sx_t,n) ** 4) ! LM added
-          x2a_a%rAttr(index_x2a_Sx_mmsv,n) = 1.0_r8 ! LM added
+          x2a_a%rAttr(index_x2a_Sx_saf,n) = 1.0_r8 ! LM added
 
           if (lindx(ka) > 0 .and. fracl > 0._r8) then ! LM test
              if (lmerge(ka)) then

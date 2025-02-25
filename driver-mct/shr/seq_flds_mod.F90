@@ -1758,11 +1758,11 @@ contains
     call metadata_set(attname, longname, stdname, units)
 
     ! LM variable for mean emissivity computed in coupler
-    call seq_flds_add(x2a_states,"Sx_mmsv")
+    call seq_flds_add(x2a_states,"Sx_saf")
     longname = 'Mean emissivity'
     stdname  = 'LM_mean_emissivity'
     units    = '1'
-    attname  = 'Sx_mmsv'
+    attname  = 'Sx_saf'
     call metadata_set(attname, longname, stdname, units)
 
     ! LM variable for ocean radiative temperature in coupler
