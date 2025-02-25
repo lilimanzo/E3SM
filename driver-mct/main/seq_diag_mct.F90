@@ -2686,17 +2686,16 @@ contains
         real, intent(out)    :: saf
         
         ! Public data members
-        !character(len=*),parameter :: afracname = 'afrac'
-        !character(len=*),parameter :: lfracname = 'lfrac'
-        !character(len=*),parameter :: lfrinname = 'lfrin'
-        !character(len=*),parameter :: ofracname = 'ofrac'
+        character(len=*),parameter :: afracname = 'afrac'
+        character(len=*),parameter :: lfracname = 'lfrac' ! lfrac vs lfrin? unsure
+        character(len=*),parameter :: ofracname = 'ofrac'
         character(len=*),parameter :: ifracname = 'ifrac'
 
         ! Local variables
         integer     :: index_x2a_Faxx_lwup      ! LW UP
         integer     :: index_x2a_Sx_saf         ! saf
         integer     :: index_x2a_Si_taf         ! sea ice TAF
-        !integer     :: index_fraca_ifrac        ! ice fraction 
+        integer     :: index_x2a_Faxx_ilwup     ! ice frac LW up 
         integer(in) :: lSize                    ! aVect size
         integer(in) :: n                        ! generic index
         integer(in) :: kl,ka,ko,ki              ! fraction indices
@@ -2707,11 +2706,11 @@ contains
         index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
         index_x2a_Sx_saf    = mct_aVect_indexRA(x2a_a,'Sx_saf')
         index_x2a_Si_taf    = mct_aVect_indexRA(x2a_a,'Si_taf')
-        !index_fraca_ifrac   = mct_aVect_indexRa(x2a_a,'fraca_ifrac')
+        index_x2a_Faxx_ilwup= 0.0_rkind ! initialize..?
 
-        !ka    = mct_aVect_indexRA(frac_a,afracname)
-        !kl    = mct_aVect_indexRA(frac_a,lfrinname)
-        !ko    = mct_aVect_indexRA(frac_a,ofracname)
+        ka    = mct_aVect_indexRA(frac_a,afracname)
+        kl    = mct_aVect_indexRA(frac_a,lfracname)
+        ko    = mct_aVect_indexRA(frac_a,ofracname)
         ki    = mct_aVect_indexRA(frac_a,ifracname)
         
         !saf=1.0
