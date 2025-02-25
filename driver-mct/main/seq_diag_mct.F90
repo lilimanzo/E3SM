@@ -2672,38 +2672,52 @@ contains
 
   end subroutine seq_diag_avdiff_mct
 
-  subroutine seq_diag_saf(atm, a2x_a, saf) ! LM created subroutine
+  subroutine seq_diag_saf(atm, frac_a, a2x_a, saf) ! LM created subroutine
         
         use shr_const_mod, only : shr_const_ocn_msv, shr_const_stebol
 
         ! Input parameters
         type(component_type), intent(in)  :: atm    
+        type(mct_aVect), intent(in)       :: frac_a ! frac bundle
         type(mct_aVect), pointer          :: a2x_a 
         type(mct_aVect), pointer          :: x2a_a 
 
         ! Output parameters
         real, intent(out)    :: saf
+        
+        ! Public data members
+        !character(len=*),parameter :: afracname = 'afrac'
+        !character(len=*),parameter :: lfracname = 'lfrac'
+        !character(len=*),parameter :: lfrinname = 'lfrin'
+        !character(len=*),parameter :: ofracname = 'ofrac'
+        !character(len=*),parameter :: ifracname = 'ifrac'
 
         ! Local variables
         integer     :: index_x2a_Faxx_lwup      ! LW UP
         integer     :: index_x2a_Sx_saf         ! saf
-        integer     :: index_fraca_ifrac        ! ice fraction 
+        !integer     :: index_fraca_ifrac        ! ice fraction 
         integer(in) :: lSize                    ! aVect size
         integer(in) :: n                        ! generic index
+        integer(in) :: kl,ka,ko,ki              ! fraction indices
 
         a2x_a => component_get_c2x_cx(atm)
         x2a_a => component_get_x2c_cx(atm)
         
         index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
         index_x2a_Sx_saf    = mct_aVect_indexRA(x2a_a,'Sx_saf')
-        index_fraca_ifrac   = mct_aVect_indexRa(x2a_a,'fraca_ifrac')
+        !index_fraca_ifrac   = mct_aVect_indexRa(x2a_a,'fraca_ifrac')
 
+        !ka    = mct_aVect_indexRA(frac_a,afracname)
+        !kl    = mct_aVect_indexRA(frac_a,lfrinname)
+        !ko    = mct_aVect_indexRA(frac_a,ofracname)
+        !ki    = mct_aVect_indexRA(frac_a,ifracname)
+        
         !saf=1.0
 
         lSize = mct_avect_lSize(x2a_a)
         
         do n=1,lSize
-                x2a_a % rAttr(index_x2a_Sx_saf, n) = x2a_a % rAttr(index_x2a_Faxx_lwup, n) *  x2a_a % rAttr(index_fraca_ifrac, n)
+                x2a_a % rAttr(index_x2a_Sx_saf, n) = x2a_a % rAttr(index_x2a_Faxx_lwup, n)
         enddo
 
   end subroutine seq_diag_saf
