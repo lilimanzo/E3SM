@@ -2698,7 +2698,7 @@ contains
         lSize = mct_avect_lSize(x2a_a)
         
         do n=1,lSize
-                x2a_a % rAttr(index_x2a_Sx_saf, n) = rAttr(index_x2a_Faxx_lwup, n)
+                x2a_a % rAttr(index_x2a_Sx_saf, n) = x2a_a % rAttr(index_x2a_Faxx_lwup, n)
         enddo
 
   end subroutine seq_diag_saf
