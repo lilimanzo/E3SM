@@ -2706,7 +2706,7 @@ contains
         index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
         index_x2a_Sx_saf    = mct_aVect_indexRA(x2a_a,'Sx_saf')
         index_x2a_Si_taf    = mct_aVect_indexRA(x2a_a,'Si_taf')
-        index_x2a_Faxx_ilwup= 0.0_rkind ! initialize..?
+        index_x2a_Faxx_ilwup= 0.0   ! initialize..?
 
         ka    = mct_aVect_indexRA(frac_a,afracname)
         kl    = mct_aVect_indexRA(frac_a,lfracname)
