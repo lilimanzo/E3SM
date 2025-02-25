@@ -283,7 +283,7 @@ contains
     integer :: lsize          ! local size of ice av
     integer :: debug_old      ! old debug value
 
-    character(*),parameter :: fraclist_a = 'afrac:ifrac:ofrac:lfrac:lfrin'
+    character(*),parameter :: fraclist_a = 'afrac:ifrac:ofrac:lfrac:lfrin:ifrad:ofrad' ! LM added ifrad, ofrad
     character(*),parameter :: fraclist_o = 'afrac:ifrac:ofrac:ifrad:ofrad'
     character(*),parameter :: fraclist_i = 'afrac:ifrac:ofrac'
     character(*),parameter :: fraclist_l = 'afrac:lfrac:lfrin'
