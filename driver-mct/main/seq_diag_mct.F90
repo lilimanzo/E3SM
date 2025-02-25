@@ -2673,6 +2673,9 @@ contains
   end subroutine seq_diag_avdiff_mct
 
   subroutine seq_diag_saf(atm, a2x_a, saf) ! LM created subroutine
+        
+        use shr_const_mod, only : shr_const_ocn_msv, shr_const_stebol
+
         ! Input parameters
         type(component_type), intent(in)  :: atm    
         type(mct_aVect), pointer          :: a2x_a 
@@ -2691,9 +2694,9 @@ contains
         x2a_a => component_get_x2c_cx(atm)
         
         index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
-        index_x2a_Sx_saf   = mct_aVect_indexRA(x2a_a,'Sx_saf')
+        index_x2a_Sx_saf    = mct_aVect_indexRA(x2a_a,'Sx_saf')
 
-        saf=1.0
+        !saf=1.0
 
         lSize = mct_avect_lSize(x2a_a)
         
