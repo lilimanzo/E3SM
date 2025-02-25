@@ -2687,9 +2687,12 @@ contains
         
         ! Public data members
         character(len=*),parameter :: afracname = 'afrac'
-        character(len=*),parameter :: lfracname = 'lfrac' ! lfrac vs lfrin? unsure
+        character(len=*),parameter :: lfracname = 'lfrac' 
         character(len=*),parameter :: ofracname = 'ofrac'
         character(len=*),parameter :: ifracname = 'ifrac'
+        
+        character(len=*),parameter :: ofradname = 'ofrad'
+        character(len=*),parameter :: ifradname = 'ifrad'
 
         ! Local variables
         integer     :: index_x2a_Faxx_lwup      ! LW UP
@@ -2713,6 +2716,9 @@ contains
         ko    = mct_aVect_indexRA(frac_a,ofracname)
         ki    = mct_aVect_indexRA(frac_a,ifracname)
         
+        kor   = mct_aVect_indexRA(frac_a,ofradname)
+        kir   = mct_aVect_indexRA(frac_a,ifradname)
+
         !saf=1.0
 
         lSize = mct_avect_lSize(x2a_a)
