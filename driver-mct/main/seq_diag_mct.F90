@@ -2684,6 +2684,7 @@ contains
         ! Local variables
         integer :: index_x2a_Faxx_lwup
         integer :: index_x2a_Sx_mmsv
+        integer(in) :: lSize 
 
         a2x_a => component_get_c2x_cx(atm)
         x2a_a => component_get_x2c_cx(atm)
@@ -2693,7 +2694,9 @@ contains
 
         saf=1.0
 
-        x2a_a % rAttr(index_x2a_Sx_mmsv)=saf
+        lSize = mct_avect_lSize(x2a_a)
+
+        !x2a_a % rAttr(index_x2a_Sx_mmsv)=saf
 
   end subroutine seq_diag_saf
 
