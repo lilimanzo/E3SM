@@ -2695,6 +2695,7 @@ contains
         ! Local variables
         integer     :: index_x2a_Faxx_lwup      ! LW UP
         integer     :: index_x2a_Sx_saf         ! saf
+        integer     :: index_x2a_Si_taf         ! sea ice TAF
         !integer     :: index_fraca_ifrac        ! ice fraction 
         integer(in) :: lSize                    ! aVect size
         integer(in) :: n                        ! generic index
@@ -2705,6 +2706,7 @@ contains
         
         index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
         index_x2a_Sx_saf    = mct_aVect_indexRA(x2a_a,'Sx_saf')
+        index_x2a_Si_taf    = mct_aVect_indexRA(x2a_a,'Si_taf')
         !index_fraca_ifrac   = mct_aVect_indexRa(x2a_a,'fraca_ifrac')
 
         !ka    = mct_aVect_indexRA(frac_a,afracname)
