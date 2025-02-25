@@ -2691,7 +2691,7 @@ contains
         x2a_a => component_get_x2c_cx(atm)
         
         index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
-        !index_x2a_Sx_saf   = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
+        index_x2a_Sx_saf   = mct_aVect_indexRA(x2a_a,'Sx_saf')
 
         saf=1.0
 
