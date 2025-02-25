@@ -2701,7 +2701,7 @@ contains
         integer     :: index_x2a_Faxx_ilwup     ! ice frac LW up 
         integer(in) :: lSize                    ! aVect size
         integer(in) :: n                        ! generic index
-        integer(in) :: kl,ka,ko,ki              ! fraction indices
+        integer(in) :: kl,ka,ko,ki,kor,kir      ! fraction indices
 
         a2x_a => component_get_c2x_cx(atm)
         x2a_a => component_get_x2c_cx(atm)
