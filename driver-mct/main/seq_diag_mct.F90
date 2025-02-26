@@ -2738,7 +2738,7 @@ contains
         lSize = mct_avect_lSize(x2a_a)
         
         do n=1,lSize
-                ! LW up by component fraction
+                ! LW up by component fraction (doesn't work)
                 x2a_a % rAttr(index_x2a_Faxx_ilwup, n) = x2a_a % rAttr(index_x2a_Faxx_lwup, n) &
                         * frac_a%rAttr(ki,n)
                 x2a_a % rAttr(index_x2a_Faxx_olwup, n) = x2a_a % rAttr(index_x2a_Faxx_lwup, n) &
@@ -2747,9 +2747,9 @@ contains
                         * frac_a%rAttr(kl,n)
 
                 ! spatial adjustment factor
-                x2a_a % rAttr(index_x2a_Sx_saf, n) = x2a_a % rAttr(index_x2a_Faxx_lwup, n) &
-                        * frac_a % rAttr(kir, n)
-                !x2a_a % rAttr(index_x2a_Sx_saf, n) = ki
+                !x2a_a % rAttr(index_x2a_Sx_saf, n) = x2a_a % rAttr(index_x2a_Faxx_lwup, n) &
+                !        * frac_a % rAttr(ki, n)
+                x2a_a % rAttr(index_x2a_Sx_saf, n) = frac_a % rAttr(kir, n)
         enddo
 
   end subroutine seq_diag_saf
