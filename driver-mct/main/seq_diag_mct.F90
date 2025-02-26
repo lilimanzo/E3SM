@@ -2707,6 +2707,8 @@ contains
         integer(in) :: n                        ! generic index
         integer(in) :: kl,ka,ko,ki,kor,kir      ! fraction indices
 
+        character(*),parameter :: subName = '(prep_ocn_merge) '
+
         a2x_a => component_get_c2x_cx(atm)
         x2a_a => component_get_x2c_cx(atm)
         
@@ -2732,8 +2734,8 @@ contains
         ki    = mct_aVect_indexRA(frac_a,ifracname)
         
         ! fraction at last radiation timestep (also used for swnet calc)
-        kor   = mct_aVect_indexRA(frac_a,ofradname)
-        kir   = mct_aVect_indexRA(frac_a,ifradname)
+        kor   = mct_aVect_indexRA(frac_a,ofradname,perrWith=subName)
+        kir   = mct_aVect_indexRA(frac_a,ifradname,perrWith=subName)
 
         lSize = mct_avect_lSize(x2a_a)
         
