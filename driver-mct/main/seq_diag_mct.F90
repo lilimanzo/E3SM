@@ -2740,15 +2740,15 @@ contains
         do n=1,lSize
                 ! LW up by component fraction
                 x2a_a % rAttr(index_x2a_Faxx_ilwup, n) = x2a_a % rAttr(index_x2a_Faxx_lwup, n) &
-                        * frac_a%rAttr(kir,n)
+                        * frac_a%rAttr(ki,n)
                 x2a_a % rAttr(index_x2a_Faxx_olwup, n) = x2a_a % rAttr(index_x2a_Faxx_lwup, n) &
                         * frac_a%rAttr(kor,n)
                 x2a_a % rAttr(index_x2a_Faxx_llwup, n) = x2a_a % rAttr(index_x2a_Faxx_lwup, n) &
                         * frac_a%rAttr(kl,n)
 
                 ! spatial adjustment factor
-                !x2a_a % rAttr(index_x2a_Sx_saf, n) = x2a_a % rAttr(index_x2a_Faxx_ilwup, n)  * shr_const_ocn_msv
-                x2a_a % rAttr(index_x2a_Sx_saf, n) = ki
+                x2a_a % rAttr(index_x2a_Sx_saf, n) = x2a_a % rAttr(index_x2a_Faxx_ilwup, n)  * shr_const_ocn_msv
+                !x2a_a % rAttr(index_x2a_Sx_saf, n) = ki
         enddo
 
   end subroutine seq_diag_saf
