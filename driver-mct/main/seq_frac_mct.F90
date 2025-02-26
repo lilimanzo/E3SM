@@ -280,6 +280,7 @@ contains
     integer :: n            ! indices
     integer :: ka, ki, kl, ko ! indices
     integer :: kf, kk, kr, kg ! indices
+    integer :: kir            ! LM added indices
     integer :: lsize          ! local size of ice av
     integer :: debug_old      ! old debug value
 
@@ -457,6 +458,7 @@ contains
     if (atm_present) then
        ka = mct_aVect_indexRa(fractions_a,"afrac",perrWith=subName)
        ki = mct_aVect_indexRa(fractions_a,"ifrac",perrWith=subName)
+       kir= mct_aVect_indexRa(fractions_a,"ifrad",perrWith=subName) ! LM added
        kl = mct_aVect_indexRa(fractions_a,"lfrac",perrWith=subName)
        ko = mct_aVect_indexRa(fractions_a,"ofrac",perrWith=subName)
        kk = mct_aVect_indexRa(fractions_a,"lfrin",perrWith=subName)
