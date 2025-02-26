@@ -2712,7 +2712,7 @@ contains
         
         index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
         index_a2x_Faxa_lwdn = mct_aVect_indexRA(a2x_a,'Faxa_lwdn')
-        index_x2a_Sx_saf    = mct_aVect_indexRA(x2a_a,'iSx_saf')
+        index_x2a_Sx_saf    = mct_aVect_indexRA(x2a_a,'Sx_saf')
         index_x2a_Si_taf    = mct_aVect_indexRA(x2a_a,'Si_taf')
         
         index_x2a_Faxx_ilwup= 0.0   ! initialize..?
