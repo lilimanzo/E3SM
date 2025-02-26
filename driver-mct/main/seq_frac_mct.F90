@@ -467,6 +467,7 @@ contains
        if (ice_present .or. ocn_present) then
           do n = 1,lsize
              fractions_a%rAttr(kl,n) = 1.0_r8 - fractions_a%rAttr(ko,n)
+             fractions_a%rAttr(kir,n)=fractions_a%rAttr(kir,n) ! LM added
              if (abs(fractions_a%rAttr(kl,n)) < eps_fraclim) then
                 fractions_a%rAttr(kl,n) = 0.0_r8
                 if (atm_frac_correct) fractions_a%rAttr(ko,n) = 1.0_r8
