@@ -2748,7 +2748,7 @@ contains
 
                 ! spatial adjustment factor
                 !x2a_a % rAttr(index_x2a_Sx_saf, n) = x2a_a % rAttr(index_x2a_Faxx_ilwup, n)  * shr_const_ocn_msv
-                x2a_a % rAttr(index_x2a_Sx_saf, n) = kir
+                x2a_a % rAttr(index_x2a_Sx_saf, n) = ki
         enddo
 
   end subroutine seq_diag_saf
