@@ -2752,19 +2752,19 @@ contains
                 x2a_a%rAttr(index_x2a_Sl_taf,n) = 1.0
 
                 ! spatial adjustment factor
-                !x2a_a % rAttr(index_x2a_Sx_saf, n) = x2a_a % rAttr(index_x2a_Faxx_lwup, n) &
-                !        * frac_a % rAttr(ki, n)
-                x2a_a % rAttr(index_x2a_Sx_saf, n) = ( x2a_a%rAttr(index_x2a_Faxx_lwup,n) - a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) &
-                        / (shr_const_stebol * ( frac_a%rAttr(ki,n) * ((frac_a%rAttr(ki,n) * x2a_a%rAttr(index_x2a_Faxx_lwup,n) &
-                        - (1-x2a_a%rAttr(index_x2a_Si_taf,n)) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) / (shr_const_stebol & 
-                        * x2a_a%rAttr(index_x2a_Si_taf,n))  )**0.25 + &
-                       frac_a%rAttr(ko,n) * ((frac_a%rAttr(ko,n) * x2a_a%rAttr(index_x2a_Faxx_lwup,n) &
-                        - (1-shr_const_ocn_msv) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) / (shr_const_stebol &
-                        * shr_const_ocn_msv)  )**0.25 &
-                        frac_a%rAttr(kl,n) * ((frac_a%rAttr(kl,n) * x2a_a%rAttr(index_x2a_Faxx_lwup,n) &
-                        - (1-x2a_a%rAttr(index_x2a_Sl_taf,n)) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) / (shr_const_stebol &
-                        * x2a_a%rAttr(index_x2a_Sl_taf,n))  )**0.25 &
-                        )**4 - a2x_a%rAttr(index_a2x_Faxa_lwdn,n))
+                x2a_a % rAttr(index_x2a_Sx_saf, n) = x2a_a % rAttr(index_x2a_Sx_taf, n) &
+                
+                !x2a_a % rAttr(index_x2a_Sx_saf, n) = ( x2a_a%rAttr(index_x2a_Faxx_lwup,n) - a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) &
+                        !/ (shr_const_stebol * ( frac_a%rAttr(ki,n) * ((frac_a%rAttr(ki,n) * x2a_a%rAttr(index_x2a_Faxx_lwup,n) &
+                        !- (1-x2a_a%rAttr(index_x2a_Si_taf,n)) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) / (shr_const_stebol & 
+                        !* x2a_a%rAttr(index_x2a_Si_taf,n))  )**0.25 + &
+                        !frac_a%rAttr(ko,n) * ((frac_a%rAttr(ko,n) * x2a_a%rAttr(index_x2a_Faxx_lwup,n) &
+                        !- (1-shr_const_ocn_msv) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) / (shr_const_stebol &
+                        !* shr_const_ocn_msv)  )**0.25 &
+                        !frac_a%rAttr(kl,n) * ((frac_a%rAttr(kl,n) * x2a_a%rAttr(index_x2a_Faxx_lwup,n) &
+                        !- (1-x2a_a%rAttr(index_x2a_Sl_taf,n)) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) / (shr_const_stebol &
+                        !* x2a_a%rAttr(index_x2a_Sl_taf,n))  )**0.25 &
+                        !)**4 - a2x_a%rAttr(index_a2x_Faxa_lwdn,n))
         enddo
 
   end subroutine seq_diag_saf
