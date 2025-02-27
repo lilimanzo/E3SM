@@ -2751,7 +2751,8 @@ contains
                 ! spatial adjustment factor
                 !x2a_a % rAttr(index_x2a_Sx_saf, n) = x2a_a % rAttr(index_x2a_Faxx_lwup, n) &
                 !        * frac_a % rAttr(ki, n)
-                x2a_a % rAttr(index_x2a_Sx_saf, n) = a2x_a % rAttr(index_a2x_Faxa_lwdn, n) !frac_a % rAttr(kir, n)
+                x2a_a % rAttr(index_x2a_Sx_saf, n) = ( x2a_a%rAttr(index_x2a_Faxx_lwup,n) - a2x_a%(index_a2x_Faxa_lwdn,n) )
+                !a2x_a % rAttr(index_a2x_Faxa_lwdn, n) !frac_a % rAttr(kir, n)
         enddo
 
   end subroutine seq_diag_saf
