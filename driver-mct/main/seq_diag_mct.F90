@@ -2721,7 +2721,7 @@ contains
         index_x2a_Faxx_olwup= 0.0   ! actually might not need this?
         index_x2a_Faxx_llwup= 0.0
 
-        index_x2a_Sl_taf    = 1.0   ! approximation for now
+        !index_x2a_Sl_taf    = 1.0   ! approximation for now
 
         ! if ice/land present, use computed taf;
         ! if not, set taf=1; that term will disappear in saf
@@ -2748,6 +2748,9 @@ contains
                 x2a_a % rAttr(index_x2a_Faxx_llwup, n) = x2a_a % rAttr(index_x2a_Faxx_lwup, n) &
                         * frac_a%rAttr(kl,n)
 
+                ! define land taf (for now)
+                x2a_a%rAttr(index_x2a_Sl_taf,n) = 1.0
+
                 ! spatial adjustment factor
                 !x2a_a % rAttr(index_x2a_Sx_saf, n) = x2a_a % rAttr(index_x2a_Faxx_lwup, n) &
                 !        * frac_a % rAttr(ki, n)
@@ -2758,6 +2761,9 @@ contains
                        frac_a%rAttr(ko,n) * ((frac_a%rAttr(ko,n) * x2a_a%rAttr(index_x2a_Faxx_lwup,n) &
                         - (1-shr_const_ocn_msv) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) / (shr_const_stebol &
                         * shr_const_ocn_msv)  )**0.25 &
+                        frac_a%rAttr(kl,n) * ((frac_a%rAttr(kl,n) * x2a_a%rAttr(index_x2a_Faxx_lwup,n) &
+                        - (1-x2a_a%rAttr(index_x2a_Sl_taf,n)) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) / (shr_const_stebol &
+                        * x2a_a%rAttr(index_x2a_Sl_taf,n))  )**0.25 &
                         )**4 - a2x_a%rAttr(index_a2x_Faxa_lwdn,n))
         enddo
 
