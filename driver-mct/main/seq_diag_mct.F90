@@ -2756,7 +2756,7 @@ contains
                 
                 x2a_a % rAttr(index_x2a_Sx_saf, n) = & ! (Fup - Fdn) / (stebol * (1.0* (iFup - (1-e1)Fdn)/(stebol*e1)) - fdn)
                         (-x2a_a%rAttr(index_x2a_Faxx_lwup,n) - a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) & 
-                        / (shr_const_stebol * (1.0 * (-frac_a%rAttr(ki,n) * x2a_a%rAttr(index_x2a_Faxx_lwup,n) - &
+                        / (shr_const_stebol * (frac_a%rAttr(ki,n) * (-frac_a%rAttr(ki,n) * x2a_a%rAttr(index_x2a_Faxx_lwup,n) - &
                         (1 - x2a_a%rAttr(index_x2a_Si_taf,n)) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n) ) & 
                         / ( shr_const_stebol * x2a_a%rAttr(index_x2a_Si_taf,n) ) ) - a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) 
                         !/ (shr_const_stebol * ( frac_a%rAttr(ki,n) * ( (frac_a%rAttr(ki,n) * x2a_a%rAttr(index_x2a_Faxx_lwup,n) &
