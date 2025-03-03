@@ -2756,13 +2756,11 @@ contains
                 
                 ! (Fup - Fdn) / (stebol * (ifrac* ((iFup - (1-e1)Fdn)/(stebol*e1))**.25 + ofrac )**4 - fdn)
                 x2a_a % rAttr(index_x2a_Sx_saf, n) = &
-                        frac_a%rAttr(ki,n) * frac_a%rAttr(ki,n)
-                        ! 559
-                        !(-x2a_a%rAttr(index_x2a_Faxx_lwup,n) - a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) & 
-                        !/ (shr_const_stebol * (frac_a%rAttr(ki,n) * ((-frac_a%rAttr(ki,n) * x2a_a%rAttr(index_x2a_Faxx_lwup,n) - &
-                        !(1 - x2a_a%rAttr(index_x2a_Si_taf,n)) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n) ) & 
-                        !/ ( shr_const_stebol * x2a_a%rAttr(index_x2a_Si_taf,n) ))**.25 + frac_a%rAttr(ko,n) &
-                        !)**4 - a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) + 1
+                        (-x2a_a%rAttr(index_x2a_Faxx_lwup,n) - a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) & 
+                        / (shr_const_stebol * (frac_a%rAttr(ki,n) * ((-frac_a%rAttr(ki,n) * x2a_a%rAttr(index_x2a_Faxx_lwup,n) - &
+                        (1 - x2a_a%rAttr(index_x2a_Si_taf,n)) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n) ) & 
+                        / ( shr_const_stebol * x2a_a%rAttr(index_x2a_Si_taf,n) ))**.25 + frac_a%rAttr(ko,n) &
+                        )**4 - a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) 
                        
                         !/ (shr_const_stebol * ( frac_a%rAttr(ki,n) * ( (frac_a%rAttr(ki,n) * x2a_a%rAttr(index_x2a_Faxx_lwup,n) &
                         !-(1-x2a_a%rAttr(index_x2a_Si_taf,n))*a2x_a%rAttr(index_a2x_Faxa_lwdn,n)  ) &

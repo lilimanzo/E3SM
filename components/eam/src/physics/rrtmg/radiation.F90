@@ -1265,7 +1265,13 @@ end function radiation_nextsw_cday
        ! stebol constant in mks units
        do i = 1,ncol
           tint(i,1) = state%t(i,1)
-          tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))
+          
+          if (landfrac(i).le.0.001) then ! LM added
+                  tint(i,pverp) = 275.0  ! LM added
+          else                           ! LM added
+                  tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))
+          endif                          ! LM added
+
           do k = 2,pver
              dy = (state%lnpint(i,k) - state%lnpmid(i,k)) / (state%lnpmid(i,k-1) - state%lnpmid(i,k))
              tint(i,k) = state%t(i,k) - dy * (state%t(i,k) - state%t(i,k-1))
