@@ -114,7 +114,13 @@ contains
     ! stebol constant in mks units
     do i = 1,ncol
        tint(i,1) = pstate%t(i,1)
-       tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol)) + 10
+       ! LM added if statement
+       if (landfrac(i).le.0.001) then
+               tint(i,pverp) = 275.0
+       else
+               tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))  ! orig line
+       endif
+
        do k = 2,pver
           dy = (pstate%lnpint(i,k) - pstate%lnpmid(i,k)) / (pstate%lnpmid(i,k-1) - pstate%lnpmid(i,k))
           tint(i,k) = pstate%t(i,k) - dy * (pstate%t(i,k) - pstate%t(i,k-1))
