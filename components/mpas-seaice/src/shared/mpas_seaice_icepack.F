@@ -1320,6 +1320,7 @@ contains
          airSpecificHumidity, &
          airDensity, &
          airTemperature, &
+         radiativeTemperature, & !  LM added
          atmosReferenceTemperature2m, &
          atmosReferenceHumidity2m, &
          atmosReferenceSpeed10m, &
@@ -1563,6 +1564,7 @@ contains
        call MPAS_pool_get_array(atmos_coupling, "atmosReferenceTemperature2m", atmosReferenceTemperature2m)
        call MPAS_pool_get_array(atmos_coupling, "atmosReferenceHumidity2m", atmosReferenceHumidity2m)
        call MPAS_pool_get_array(atmos_coupling, "atmosReferenceSpeed10m", atmosReferenceSpeed10m)
+       call MPAS_pool_get_array(atmos_coupling, "radiativeTemperature", radiativeTemperature)   ! LM added
 
        call MPAS_pool_get_array(atmos_forcing, "windSpeed", windSpeed)
 
@@ -1862,7 +1864,8 @@ contains
                mlt_onset=meltOnset(iCell), &
                frz_onset=freezeOnset(iCell), &
                yday=dayOfYear, &
-               prescribed_ice=config_use_prescribed_ice)
+               prescribed_ice=config_use_prescribed_ice, &
+               TsfKr=radiativeTemperature(iCell)) ! LM added line
 
           abortFlag = icepack_warnings_aborted()
           call seaice_icepack_write_warnings(abortFlag)
@@ -1933,6 +1936,7 @@ contains
              call mpas_log_write("airSpecificHumidity: $r", messageType=MPAS_LOG_ERR, realArgs=(/airSpecificHumidity(iCell)/))
              call mpas_log_write("airDensity: $r", messageType=MPAS_LOG_ERR, realArgs=(/airDensity(iCell)/))
              call mpas_log_write("airTemperature: $r", messageType=MPAS_LOG_ERR, realArgs=(/airTemperature(iCell)/))
+             call mpas_log_write("radiativeTemperature: $r", messageType=MPAS_LOG_ERR,realArgs=(/radiativeTemperature(iCell)/)) ! LM added
              call mpas_log_write("atmosReferenceTemperature2m: $r", messageType=MPAS_LOG_ERR, realArgs=(/atmosReferenceTemperature2m(iCell)/))
              call mpas_log_write("atmosReferenceHumidity2m: $r", messageType=MPAS_LOG_ERR, realArgs=(/atmosReferenceHumidity2m(iCell)/))
              call mpas_log_write("atmosReferenceSpeed10m: $r", messageType=MPAS_LOG_ERR, realArgs=(/atmosReferenceSpeed10m(iCell)/))
