@@ -2757,6 +2757,7 @@ contains
       atmosReferenceSpeed10m,      &
       atmosReferenceTemperature2m, &
       atmosReferenceHumidity2m,    &
+      radiativeTemperature,        & ! LM added
       latentHeatFlux,              &
       sensibleHeatFlux,            &
       longwaveDown,                & ! LM added
@@ -2845,6 +2846,7 @@ contains
       call MPAS_pool_get_array(atmosCoupling, 'atmosReferenceSpeed10m', atmosReferenceSpeed10m)
       call MPAS_pool_get_array(atmosCoupling, 'atmosReferenceTemperature2m', atmosReferenceTemperature2m)
       call MPAS_pool_get_array(atmosCoupling, 'atmosReferenceHumidity2m', atmosReferenceHumidity2m)
+      call MPAS_pool_get_array(atmosCoupling, 'radiativeTemperature', radiativeTemperature) ! LM added
 
       call MPAS_pool_get_array(oceanCoupling, 'frazilMassAdjust', frazilMassAdjust)
 
