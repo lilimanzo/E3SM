@@ -2917,6 +2917,7 @@ contains
                  fcheck,                  &
                  longwaveDown(i),         &
                  longwaveUp(i),           &
+                 radiativeTemperature(i), &
                  Tsrf                     )
          endif
 
@@ -3171,16 +3172,17 @@ contains
 ! LM subroutine time_adjustment_factor
 ! !INTERFACE:
    subroutine time_adjustment_factor(taf, fcheck, longwaveDown, longwaveUp,  &
-                             Tsrf) !,  longwaveDown,  Tsrf)!{{{
+                             radiativeTemperature, Tsrf) !,  longwaveDown,  Tsrf)!{{{
 !
 ! !DESCRIPTION:
 ! Calculate time adjustment factor for a cell
 !
 
 ! !INPUT PARAMETERS:
-      real (kind=RKIND), intent(in)  :: longwaveDown ! check
-      real (kind=RKIND), intent(in)  :: longwaveUp ! check
-      real (kind=RKIND), intent(in)  :: Tsrf       ! check
+      real (kind=RKIND), intent(in)  :: longwaveDown 
+      real (kind=RKIND), intent(in)  :: longwaveUp 
+      real (kind=RKIND), intent(in)  :: radiativeTemperature
+      real (kind=RKIND), intent(in)  :: Tsrf       
 
 ! !OUTPUT PARAMETERS:
       real (kind=RKIND), intent(out) :: taf
