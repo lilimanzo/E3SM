@@ -117,7 +117,7 @@ contains
     do i = 1,ncol
        tint(i,1) = pstate%t(i,1)
        ! LM added if statement
-       if (landfrac(i).le.0.001) then
+       if (landfrac(i).le.0.001 .and. icefrac(i).le.0.001) then
                tint(i,pverp) = 275.0
        else
                tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))  ! orig line
