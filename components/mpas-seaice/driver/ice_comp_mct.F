@@ -2700,8 +2700,8 @@ contains
       tauyo,           &
       basalPressure,   &
       taf,             &    ! LM added
-      fcheck,          &    ! LM added
-      radiativeTemperature
+      fcheck!,          &    ! LM added
+      !radiativeTemperature  ! LM added
 
    type (block_type), pointer :: &
       block_ptr
@@ -2758,7 +2758,7 @@ contains
       atmosReferenceSpeed10m,      &
       atmosReferenceTemperature2m, &
       atmosReferenceHumidity2m,    &
-      !radiativeTemperature,        & ! LM added
+      radiativeTemperature,        & ! LM added
       latentHeatFlux,              &
       sensibleHeatFlux,            &
       longwaveDown,                & ! LM added
@@ -2965,7 +2965,7 @@ contains
             i2x_i % rAttr(index_i2x_Si_imsv  ,n)  = 1.0_RKIND ! LM
             i2x_i % rAttr(index_i2x_Si_taf   ,n)  = taf ! LM
             i2x_i % rAttr(index_i2x_Si_fcheck,n)  = fcheck ! LM
-            i2x_i % rAttr(index_i2x_Si_radtemp,n) = radiativeTemperature ! LM
+            i2x_i % rAttr(index_i2x_Si_radtemp,n) = radiativeTemperature(i) ! LM
             i2x_i % rAttr(index_i2x_Si_bpress,n)  = basalPressure
             i2x_i % rAttr(index_i2x_Si_u10   ,n)  = atmosReferenceSpeed10m(i)
             i2x_i % rAttr(index_i2x_Si_u10withgusts,n) = atmosReferenceSpeed10m(i)
