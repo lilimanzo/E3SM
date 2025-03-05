@@ -2700,7 +2700,8 @@ contains
       tauyo,           &
       basalPressure,   &
       taf,             &    ! LM added
-      fcheck                ! LM added
+      fcheck,          &    ! LM added
+      radiativeTemperature
 
    type (block_type), pointer :: &
       block_ptr
@@ -2757,7 +2758,7 @@ contains
       atmosReferenceSpeed10m,      &
       atmosReferenceTemperature2m, &
       atmosReferenceHumidity2m,    &
-      radiativeTemperature,        & ! LM added
+      !radiativeTemperature,        & ! LM added
       latentHeatFlux,              &
       sensibleHeatFlux,            &
       longwaveDown,                & ! LM added
