@@ -1320,7 +1320,7 @@ contains
          airSpecificHumidity, &
          airDensity, &
          airTemperature, &
-         !radiativeTemperature, & !  LM added
+         radiativeTemperature, & !  LM added
          atmosReferenceTemperature2m, &
          atmosReferenceHumidity2m, &
          atmosReferenceSpeed10m, &
