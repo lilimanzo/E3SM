@@ -1564,7 +1564,7 @@ contains
        call MPAS_pool_get_array(atmos_coupling, "atmosReferenceTemperature2m", atmosReferenceTemperature2m)
        call MPAS_pool_get_array(atmos_coupling, "atmosReferenceHumidity2m", atmosReferenceHumidity2m)
        call MPAS_pool_get_array(atmos_coupling, "atmosReferenceSpeed10m", atmosReferenceSpeed10m)
-       call MPAS_pool_get_array(atmos_coupling, "radiativeTemperature", radiativeTemperature)   ! LM added
+       !call MPAS_pool_get_array(atmos_coupling, "radiativeTemperature", radiativeTemperature)   ! LM added
 
        call MPAS_pool_get_array(atmos_forcing, "windSpeed", windSpeed)
 
