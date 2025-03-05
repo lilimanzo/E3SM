@@ -1772,6 +1772,14 @@ contains
     units    = 'K'
     attname  = 'So_radtemp'
     call metadata_set(attname, longname, stdname, units)
+
+    ! LM variable for sea ice radiative temperature
+    call seq_flds_add(i2x_states,"Si_radtemp")
+    longname = 'Radiative temperature'
+    stdname  = 'LM_radtemp'
+    units    = 'K'
+    attname  = 'Si_radtemp'
+    call metadata_set(attname, longname, stdname, units)
     
     ! Zonal sea water velocity
     call seq_flds_add(o2x_states,"So_u")
