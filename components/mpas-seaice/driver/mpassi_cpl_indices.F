@@ -17,6 +17,7 @@ module mpassi_cpl_indices
   integer :: index_i2x_Si_imsv         ! LM sea ice emissivity  
   integer :: index_i2x_Si_taf          ! LM temporal adjustment factor
   integer :: index_i2x_Si_fcheck       ! LM flux check
+  integer :: index_i2x_Si_radtemp      ! LM radiative temperature
   integer :: index_i2x_Si_bpress       ! basal pressure                  
   integer :: index_i2x_Si_tref         ! 2m reference temperature        
   integer :: index_i2x_Si_qref         ! 2m reference specific humidity  
@@ -149,7 +150,8 @@ contains
     index_i2x_Si_t          = mct_avect_indexra(i2x,'Si_t')
     index_i2x_Si_imsv       = mct_avect_indexra(i2x,'Si_imsv') ! LM sea ice emissivity
     index_i2x_Si_taf        = mct_avect_indexra(i2x,'Si_taf')  ! LM temporal adjustment factor
-    index_i2x_Si_fcheck     = mct_avect_indexra(i2x,'Si_fcheck')  ! LM fluc check
+    index_i2x_Si_fcheck     = mct_avect_indexra(i2x,'Si_fcheck')  ! LM flux check
+    index_i2x_Si_fcheck     = mct_avect_indexra(i2x,'Si_radtemp')  ! LM radiative temperature
     index_i2x_Si_bpress     = mct_avect_indexra(i2x,'Si_bpress')
     index_i2x_Si_tref       = mct_avect_indexra(i2x,'Si_tref')
     index_i2x_Si_qref       = mct_avect_indexra(i2x,'Si_qref')
