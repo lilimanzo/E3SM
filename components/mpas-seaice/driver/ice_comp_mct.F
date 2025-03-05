@@ -2757,7 +2757,7 @@ contains
       atmosReferenceSpeed10m,      &
       atmosReferenceTemperature2m, &
       atmosReferenceHumidity2m,    &
-      radiativeTemperature,        & ! LM added
+      !radiativeTemperature,        & ! LM added
       latentHeatFlux,              &
       sensibleHeatFlux,            &
       longwaveDown,                & ! LM added
@@ -2846,7 +2846,7 @@ contains
       call MPAS_pool_get_array(atmosCoupling, 'atmosReferenceSpeed10m', atmosReferenceSpeed10m)
       call MPAS_pool_get_array(atmosCoupling, 'atmosReferenceTemperature2m', atmosReferenceTemperature2m)
       call MPAS_pool_get_array(atmosCoupling, 'atmosReferenceHumidity2m', atmosReferenceHumidity2m)
-      call MPAS_pool_get_array(atmosCoupling, 'radiativeTemperature', radiativeTemperature) ! LM added
+      !call MPAS_pool_get_array(atmosCoupling, 'radiativeTemperature', radiativeTemperature) ! LM added
 
       call MPAS_pool_get_array(oceanCoupling, 'frazilMassAdjust', frazilMassAdjust)
 
@@ -2917,7 +2917,7 @@ contains
                  fcheck,                  &
                  longwaveDown(i),         &
                  longwaveUp(i),           &
-                 radiativeTemperature(i), &
+                 !radiativeTemperature(i), &
                  Tsrf                     )
          endif
 
@@ -3172,7 +3172,7 @@ contains
 ! LM subroutine time_adjustment_factor
 ! !INTERFACE:
    subroutine time_adjustment_factor(taf, fcheck, longwaveDown, longwaveUp,  &
-                             radiativeTemperature, Tsrf) !,  longwaveDown,  Tsrf)!{{{
+                             Tsrf) !,  longwaveDown,  Tsrf)!{{{
 !
 ! !DESCRIPTION:
 ! Calculate time adjustment factor for a cell
@@ -3181,7 +3181,7 @@ contains
 ! !INPUT PARAMETERS:
       real (kind=RKIND), intent(in)  :: longwaveDown 
       real (kind=RKIND), intent(in)  :: longwaveUp 
-      real (kind=RKIND), intent(in)  :: radiativeTemperature
+      !real (kind=RKIND), intent(in)  :: radiativeTemperature
       real (kind=RKIND), intent(in)  :: Tsrf       
 
 ! !OUTPUT PARAMETERS:
