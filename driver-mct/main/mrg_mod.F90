@@ -61,6 +61,7 @@ contains
     real(r8) :: fracl, fraci, fraco
     real(r8) :: saf             ! LM mean emissivity
     integer  :: n,ka,ki,kl,ko,kx,kof,kif,klf
+    integer  :: kifr,kofr ! LM added
     integer  :: lsize
     integer  :: index_x2a_Sf_lfrac
     integer  :: index_x2a_Sf_ifrac
@@ -194,6 +195,8 @@ contains
     kif=mct_aVect_indexRA(fractions_a,"ifrac")
     klf=mct_aVect_indexRA(fractions_a,"lfrac")
     kof=mct_aVect_indexRA(fractions_a,"ofrac")
+    kifr=mct_aVect_indexRA(fractions_a,"ifrad") ! LM added
+    kofr=mct_aVect_indexRA(fractions_a,"ofrad") ! LM added
     lsize = mct_avect_lsize(x2a_a)
 
     index_x2a_Sf_lfrac = mct_aVect_indexRA(x2a_a,'Sf_lfrac')
