@@ -1320,7 +1320,7 @@ contains
          airSpecificHumidity, &
          airDensity, &
          airTemperature, &
-         radiativeTemperature, & !  LM added
+         !radiativeTemperature, & !  LM added
          atmosReferenceTemperature2m, &
          atmosReferenceHumidity2m, &
          atmosReferenceSpeed10m, &
@@ -1864,8 +1864,8 @@ contains
                mlt_onset=meltOnset(iCell), &
                frz_onset=freezeOnset(iCell), &
                yday=dayOfYear, &
-               prescribed_ice=config_use_prescribed_ice, &
-               TsfKr=radiativeTemperature(iCell)) ! LM added line
+               prescribed_ice=config_use_prescribed_ice)!, &
+               !TsfKr=radiativeTemperature(iCell)) ! LM added line
 
           abortFlag = icepack_warnings_aborted()
           call seaice_icepack_write_warnings(abortFlag)
