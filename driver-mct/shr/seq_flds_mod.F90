@@ -1773,6 +1773,20 @@ contains
     attname  = 'So_radtemp'
     call metadata_set(attname, longname, stdname, units)
 
+    ! LM variable for radiative area fractions
+    call seq_flds_add(x2a_states,"Sf_ifrad")
+    call seq_flds_add(x2a_states,"Sf_ofrad")
+    longname = 'Ice radiative fraction'
+    stdname  = 'LM_ifrad'
+    units    = '1'
+    attname  = 'Sf_ifrad'
+    call metadata_set(attname, longname, stdname, units)
+    longname = 'Ocean radiative fraction'
+    stdname  = 'LM_ofrad'
+    units    = '1'
+    attname  = 'Sf_ofrad'
+    call metadata_set(attname, longname, stdname, units)
+
     ! LM variable for sea ice radiative temperature
     call seq_flds_add(i2x_states,"Si_radtemp")
     longname = 'Radiative temperature'
