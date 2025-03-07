@@ -783,7 +783,7 @@ contains
 
   !===============================================================================
 
-  subroutine seq_flux_ocnalb_mct( infodata, ocn, a2x_o, fractions_o, xao_o) ! LM added x2a_a previously
+  subroutine seq_flux_ocnalb_mct( infodata, ocn, a2x_o, fractions_o, fractions_a, xao_o) ! LM added fractions_a
 
     !-----------------------------------------------------------------------
     !
@@ -793,6 +793,7 @@ contains
     type(component_type)    , intent(in)    :: ocn
     type(mct_aVect)         , intent(in)    :: a2x_o
     type(mct_aVect)         , intent(inout) :: fractions_o
+    type(mct_aVect)         , intent(inout) :: fractions_a ! LM added
     type(mct_aVect)         , intent(inout) :: xao_o
     !
     ! Local variables
