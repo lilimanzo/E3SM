@@ -965,6 +965,9 @@ contains
        kax = mct_aVect_indexRA(fractions_a,"ifrac") ! LM added
        kar = mct_aVect_indexRA(fractions_a,"ifrad") ! LM added
        fractions_a%rAttr(kar,:) = fractions_o%rAttr(kax,:) ! LM added
+       kax = mct_aVect_indexRA(fractions_a,"ofrac") ! LM added
+       kar = mct_aVect_indexRA(fractions_a,"ofrad") ! LM added
+       fractions_a%rAttr(kar,:) = fractions_o%rAttr(kax,:) ! LM added
     endif
 
   end subroutine seq_flux_ocnalb_mct
