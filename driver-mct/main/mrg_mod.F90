@@ -62,6 +62,7 @@ contains
     real(r8) :: saf             ! LM mean emissivity
     integer  :: n,ka,ki,kl,ko,kx,kof,kif,klf
     integer  :: kifr,kofr ! LM added
+    real(r8) :: ofracfr,ifracfr ! LM added
     integer  :: lsize
     integer  :: index_x2a_Sf_lfrac
     integer  :: index_x2a_Sf_ifrac
@@ -209,6 +210,9 @@ contains
        x2a_a%rAttr(index_x2a_Sf_ifrac,n) = fractions_a%Rattr(kif,n)
        x2a_a%rAttr(index_x2a_Sf_ofrac,n) = fractions_a%Rattr(kof,n)
        !x2a_a%rAttr(index_x2a_Sx_mmsv,n) = 1.0_r8 ! LM added- no effect
+
+       ifracfr = fractions_a%rAttr(kifr,n) ! LM added
+
     end do
 
     ! Copy attributes that do not need to be merged
