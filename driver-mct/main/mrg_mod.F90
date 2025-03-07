@@ -63,6 +63,7 @@ contains
     integer  :: n,ka,ki,kl,ko,kx,kof,kif,klf
     integer  :: kifr,kofr ! LM added
     real(r8) :: ofracfr,ifracfr ! LM added
+    real(r8) :: fracfr_sum        ! LM added
     integer  :: lsize
     integer  :: index_x2a_Sf_lfrac
     integer  :: index_x2a_Sf_ifrac
@@ -213,6 +214,11 @@ contains
 
        ifracfr = fractions_a%rAttr(kifr,n) ! LM added
        ofracfr = fractions_a%rAttr(kofr,n) ! LM added
+       fracfr_sum = ifracfr + ofracfr      ! LM added
+       if ((fracfr_sum) /= 0._r8) then     ! LM added
+          ifracfr = ifracfr / (fracfr_sum) ! LM added
+          ofracfr = ofracfr / (fracfr_sum) ! LM added
+       endif                               ! LM added
     end do
 
     ! Copy attributes that do not need to be merged
