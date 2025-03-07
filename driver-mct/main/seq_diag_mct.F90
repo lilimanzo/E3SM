@@ -2786,6 +2786,8 @@ contains
                         !- (1-x2a_a%rAttr(index_x2a_Sl_taf,n)) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) / (shr_const_stebol &
                         !* x2a_a%rAttr(index_x2a_Sl_taf,n))  )**0.25 &
                         !)**4 - a2x_a%rAttr(index_a2x_Faxa_lwdn,n))
+                
+                x2a_a % rAttr(index_x2a_Sx_ts, n) = 1.0
         enddo
 
   end subroutine seq_diag_saf
