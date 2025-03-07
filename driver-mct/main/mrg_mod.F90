@@ -221,6 +221,8 @@ contains
           ifracfr = ifracfr / (fracfr_sum) ! LM added
           ofracfr = ofracfr / (fracfr_sum) ! LM added
        endif                               ! LM added
+
+       x2a_a%rAttr(index_x2a_Sf_ifrad,n) = ifracfr ! LM added
     end do
 
     ! Copy attributes that do not need to be merged
