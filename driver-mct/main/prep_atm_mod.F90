@@ -515,6 +515,9 @@ contains
     index_x2a_Sf_ofrac = mct_aVect_indexRA(x2a_a,'Sf_ofrac')
     !index_x2a_Sx_mmsv  = mct_aVect_indexRA(x2a_a,'Sx_mmsv')  ! LM added
 
+    index_x2a_Sf_ifrad = mct_aVect_indexRA(x2a_a,'Sf_ifrad')  ! LM added
+    index_x2a_Sf_ofrad = mct_aVect_indexRA(x2a_a,'Sf_ofrad')  ! LM added
+
     do n = 1,lsize
        x2a_a%rAttr(index_x2a_Sf_lfrac,n) = fractions_a%Rattr(klf,n)
        x2a_a%rAttr(index_x2a_Sf_ifrac,n) = fractions_a%Rattr(kif,n)
