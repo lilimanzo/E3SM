@@ -820,6 +820,7 @@ contains
     real(r8)            :: swupc                ! temporary swup
     integer(in)         :: ier                  ! error code
     integer(in)         :: kx,kr                ! fractions indices
+    integer(in)         :: kax,kar              ! LM added atmosphere fractions indices
     integer(in)         :: klat,klon       ! field indices
     logical             :: update_alb           ! was albedo updated
     logical,save        :: first_call = .true.
@@ -960,6 +961,10 @@ contains
        kx = mct_aVect_indexRA(fractions_o,"ofrac")
        kr = mct_aVect_indexRA(fractions_o,"ofrad")
        fractions_o%rAttr(kr,:) = fractions_o%rAttr(kx,:)
+
+       kax = mct_aVect_indexRA(fractions_a,"ifrac") ! LM added
+       kar = mct_aVect_indexRA(fractions_a,"ifrad") ! LM added
+       fractions_a%rAttr(kar,:) = fractions_o%rAttr(kax,:) ! LM added
     endif
 
   end subroutine seq_flux_ocnalb_mct
