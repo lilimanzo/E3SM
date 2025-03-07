@@ -212,7 +212,7 @@ contains
        !x2a_a%rAttr(index_x2a_Sx_mmsv,n) = 1.0_r8 ! LM added- no effect
 
        ifracfr = fractions_a%rAttr(kifr,n) ! LM added
-
+       ofracfr = fractions_a%rAttr(kofr,n) ! LM added
     end do
 
     ! Copy attributes that do not need to be merged
