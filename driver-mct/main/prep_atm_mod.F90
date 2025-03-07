@@ -533,6 +533,8 @@ contains
        mrgstr(index_x2a_sf_lfrac) = trim(mrgstr(index_x2a_sf_lfrac))//' = fractions_a%'//trim(fracstr)
        mrgstr(index_x2a_sf_ifrac) = trim(mrgstr(index_x2a_sf_ifrac))//' = fractions_a%ifrac'
        mrgstr(index_x2a_sf_ofrac) = trim(mrgstr(index_x2a_sf_ofrac))//' = fractions_a%ofrac'
+       mrgstr(index_x2a_sf_ifrad) = trim(mrgstr(index_x2a_sf_ifrad))//' = fractions_a%ifrad' ! LM added
+       mrgstr(index_x2a_sf_ofrad) = trim(mrgstr(index_x2a_sf_ofrad))//' = fractions_a%ofrad' ! LM added
     endif
 
     ! Copy attributes that do not need to be merged
