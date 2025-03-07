@@ -68,6 +68,8 @@ contains
     integer  :: index_x2a_Sf_lfrac
     integer  :: index_x2a_Sf_ifrac
     integer  :: index_x2a_Sf_ofrac
+    integer  :: index_x2a_Sf_ifrad  ! LM added
+    integer  :: index_x2a_Sf_ofrad  ! LM added
     integer  :: index_x2a_Faxx_lwup ! LM added
     integer  :: index_x2a_Sx_t      ! LM added
     integer, save :: index_x2a_Sx_saf  ! LM added
