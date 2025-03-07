@@ -2700,6 +2700,7 @@ contains
         integer     :: index_x2a_Sx_saf         ! saf
         integer     :: index_x2a_Si_taf         ! sea ice TAF
         integer     :: index_x2a_Sl_taf         ! land TAF
+        integer     :: index_x2a_Sx_ts          ! surface temperature computed in CPL
         integer     :: index_x2a_Faxx_ilwup     ! ice frac LW up 
         integer     :: index_x2a_Faxx_olwup     ! ocean frac LW up
         integer     :: index_x2a_Faxx_llwup     ! land frac LW up
@@ -2716,6 +2717,7 @@ contains
         index_a2x_Faxa_lwdn = mct_aVect_indexRA(a2x_a,'Faxa_lwdn')
         index_x2a_Sx_saf    = mct_aVect_indexRA(x2a_a,'Sx_saf')
         index_x2a_Si_taf    = mct_aVect_indexRA(x2a_a,'Si_taf')
+        index_x2a_Sx_ts     = mct_aVect_indexRA(x2a_a,'Sx_ts')
         
         index_x2a_Faxx_ilwup= 0.0   ! initialize..?
         index_x2a_Faxx_olwup= 0.0   ! actually might not need this?
