@@ -285,10 +285,13 @@ contains
     real(r8) :: fracl, fraci, fraco, fracl_st
     !real(r8) :: mmsv                            ! LM added
     integer  :: n,ka,ki,kl,ko,kx,kof,kif,klf,klf_st,i,i1,o1
+    integer  :: kifr,kofr                        ! LM added
     integer  :: lsize
     integer  :: index_x2a_Sf_lfrac
     integer  :: index_x2a_Sf_ifrac
     integer  :: index_x2a_Sf_ofrac
+    integer  :: index_x2a_Sf_ifrad               ! LM added
+    integer  :: index_x2a_Sf_ofrad               ! LM added
     !integer  :: index_x2a_Sx_mmsv               ! LM added
     !integer  :: index_x2a_Sx_t                  ! LM added
     !integer  :: index_x2a_Faxx_lwup             ! LM added
@@ -493,6 +496,8 @@ contains
 
     kif=mct_aVect_indexRA(fractions_a,"ifrac")
     kof=mct_aVect_indexRA(fractions_a,"ofrac")
+    kifr=mct_aVect_indexRA(fractions_a,"ifrad")   ! LM added
+    kofr=mct_aVect_indexRA(fractions_a,"ofrad")   ! LM added
     klf_st = mct_aVect_indexRA(fractions_a,"lfrac")
     fracstr_st = 'lfrac'
     if (samegrid_al) then
