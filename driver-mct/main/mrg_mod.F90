@@ -223,6 +223,7 @@ contains
        endif                               ! LM added
 
        x2a_a%rAttr(index_x2a_Sf_ifrad,n) = ifracfr ! LM added
+       x2a_a%rAttr(index_x2a_Sf_ofrad,n) = ofracfr ! LM added
     end do
 
     ! Copy attributes that do not need to be merged
