@@ -2700,7 +2700,7 @@ contains
         integer     :: index_x2a_Sx_saf         ! saf
         integer     :: index_x2a_Si_taf         ! sea ice TAF
         integer     :: index_x2a_Sl_taf         ! land TAF
-        integer     :: index_x2a_Sx_ts          ! surface temperature computed in CPL
+        integer     :: index_x2a_Sx_tr          ! surface temperature computed in CPL
         integer     :: index_x2a_Faxx_ilwup     ! ice frac LW up 
         integer     :: index_x2a_Faxx_olwup     ! ocean frac LW up
         integer     :: index_x2a_Faxx_llwup     ! land frac LW up
@@ -2787,7 +2787,7 @@ contains
                         !* x2a_a%rAttr(index_x2a_Sl_taf,n))  )**0.25 &
                         !)**4 - a2x_a%rAttr(index_a2x_Faxa_lwdn,n))
                 
-                x2a_a % rAttr(index_x2a_Sx_ts, n) = (x2a_a%rAttr(index_x2a_Faxx_lwup,n)- &
+                x2a_a % rAttr(index_x2a_Sx_tr, n) = (x2a_a%rAttr(index_x2a_Faxx_lwup,n)- &
                         (1-shr_const_ocn_msv) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) / sqrt(shr_const_ocn_msv * shr_const_stebol)
         enddo
 

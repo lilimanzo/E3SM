@@ -1796,11 +1796,11 @@ contains
     call metadata_set(attname, longname, stdname, units)
 
     ! LM variable for sea ice radiative temperature
-    call seq_flds_add(x2a_states,"Sx_ts")
+    call seq_flds_add(x2a_states,"Sx_tr")
     longname = 'Surface temperature'
-    stdname  = 'LM_surf_temp'
+    stdname  = 'LM_rad_temp'
     units    = 'K'
-    attname  = 'Sx_ts'
+    attname  = 'Sx_tr'
     call metadata_set(attname, longname, stdname, units)
     
     ! Zonal sea water velocity
