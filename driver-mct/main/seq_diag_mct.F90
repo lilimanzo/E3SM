@@ -2788,7 +2788,7 @@ contains
                         !)**4 - a2x_a%rAttr(index_a2x_Faxa_lwdn,n))
                 
                 x2a_a % rAttr(index_x2a_Sx_ts, n) = (x2a_a%rAttr(index_x2a_Faxx_lwup,n)- &
-                        (1-shr_const_ocn_msv) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) / shr_const_stebol
+                        (1-shr_const_ocn_msv) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) / sqrt(shr_const_stebol)
         enddo
 
   end subroutine seq_diag_saf
