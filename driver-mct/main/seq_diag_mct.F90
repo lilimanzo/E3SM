@@ -2672,7 +2672,7 @@ contains
 
   end subroutine seq_diag_avdiff_mct
 
-  subroutine seq_diag_saf(atm, frac_a, a2x_a, saf) ! LM created subroutine
+  subroutine seq_diag_saf(atm, frac_a, a2x_a) ! LM created subroutine
         
         use shr_const_mod, only : shr_const_ocn_msv, shr_const_stebol
 
@@ -2683,7 +2683,7 @@ contains
         type(mct_aVect), pointer          :: x2a_a 
 
         ! Output parameters
-        real, intent(out)    :: saf                 ! spatial adjustment factor
+        !real, intent(out)    :: saf                 ! spatial adjustment factor
         
         ! Public data members
         character(len=*),parameter :: afracname = 'afrac'
