@@ -2708,7 +2708,7 @@ contains
         integer(in) :: lSize                    ! aVect size
         integer(in) :: n                        ! generic index
         integer(in) :: kl,ka,ko,ki,kor,kir      ! fraction indices
-        integer(in) :: tr                       ! radiative temperature
+        integer     :: tr                       ! radiative temperature
 
         character(*),parameter :: subName = '(prep_ocn_merge) '
 
