@@ -2708,6 +2708,7 @@ contains
         integer(in) :: lSize                    ! aVect size
         integer(in) :: n                        ! generic index
         integer(in) :: kl,ka,ko,ki,kor,kir      ! fraction indices
+        integer(in) :: tr                       ! radiative temperature
 
         character(*),parameter :: subName = '(prep_ocn_merge) '
 
@@ -2788,8 +2789,10 @@ contains
                         !* x2a_a%rAttr(index_x2a_Sl_taf,n))  )**0.25 &
                         !)**4 - a2x_a%rAttr(index_a2x_Faxa_lwdn,n))
                 
-                x2a_a % rAttr(index_x2a_Sx_tr, n) = sqrt(sqrt((-x2a_a%rAttr(index_x2a_Faxx_lwup,n)- &
-                        (1-shr_const_ocn_msv) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) / (shr_const_ocn_msv * shr_const_stebol)))
+                !x2a_a % rAttr(index_x2a_Sx_tr, n) = sqrt(sqrt((-x2a_a%rAttr(index_x2a_Faxx_lwup,n)- &
+                !        (1-shr_const_ocn_msv) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) / (shr_const_ocn_msv * shr_const_stebol)))
+
+                call seq_diag_tr(atm, frac_a, a2x_a, tr)
         enddo
 
   end subroutine seq_diag_saf
@@ -2832,12 +2835,12 @@ contains
         index_x2a_Sx_tr     = mct_aVect_indexRA(x2a_a,'Sx_tr')
         
         lSize = mct_avect_lSize(x2a_a)
-        
-        do n=1,lSize
+  
+        tr = 1.0
 
-                x2a_a % rAttr(index_x2a_Sx_tr, n) = sqrt(sqrt((-x2a_a%rAttr(index_x2a_Faxx_lwup,n)- &
-                        (1-shr_const_ocn_msv) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) / (shr_const_ocn_msv * shr_const_stebol)))
-        enddo
+        x2a_a % rAttr(index_x2a_Sx_tr, n) = sqrt(sqrt((-x2a_a%rAttr(index_x2a_Faxx_lwup,n) - &
+                   (1-shr_const_ocn_msv) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) / (shr_const_ocn_msv * shr_const_stebol)))
+
   end subroutine seq_diag_tr
 
 end module seq_diag_mct
