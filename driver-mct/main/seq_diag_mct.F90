@@ -2809,7 +2809,7 @@ contains
         type(mct_aVect), pointer          :: x2a_a 
 
         ! Output parameters
-        real, intent(out)                 :: tr                 ! radiative temperature
+        integer, intent(out)                 :: tr                 ! radiative temperature
         
         ! Public data members
         
