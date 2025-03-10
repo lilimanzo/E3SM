@@ -1797,7 +1797,7 @@ contains
 
     ! LM variable for sea ice radiative temperature
     call seq_flds_add(x2a_states,"Sx_tr")
-    longname = 'Surface temperature'
+    longname = 'Surface radiative temperature'
     stdname  = 'LM_rad_temp'
     units    = 'K'
     attname  = 'Sx_tr'

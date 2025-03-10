@@ -118,7 +118,8 @@ contains
        tint(i,1) = pstate%t(i,1)
        ! LM added if statement
        if (landfrac(i).le.0.001 .and. icefrac(i).le.0.001) then
-               tint(i,pverp) =  sqrt(sqrt((cam_in%lwup(i)-(1-shr_const_ocn_msv))/(shr_const_ocn_msv*stebol)))    
+               !tint(i,pverp) =  sqrt(sqrt((cam_in%lwup(i)-(1-shr_const_ocn_msv))/(shr_const_ocn_msv*stebol)))    
+               tint(i,pverp) = cam_in%tr(i) 
        else
                tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))  ! orig line
        endif
