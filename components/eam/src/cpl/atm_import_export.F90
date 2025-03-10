@@ -94,10 +94,11 @@ contains
           cam_in(c)%ts(i)        =  x2a(index_x2a_Sx_t,     ig)  
           cam_in(c)%sst(i)       =  x2a(index_x2a_So_t,     ig)
           cam_in(c)%msv(i)       =  x2a(index_x2a_So_omsv,  ig)  ! LM
-          cam_in(c)%imsv(i)      =  x2a(index_x2a_Si_imsv,  ig)  ! LM     
+          cam_in(c)%imsv(i)      =  x2a(index_x2a_Si_imsv,  ig)  ! LM
           cam_in(c)%snowhland(i) =  x2a(index_x2a_Sl_snowh, ig)  
           cam_in(c)%snowhice(i)  =  x2a(index_x2a_Si_snowh, ig)  
           cam_in(c)%tref(i)      =  x2a(index_x2a_Sx_tref,  ig)  
+          cam_in(c)%tr(i)        =  x2a(index_x2a_Sx_tr,    ig)  ! LM
           cam_in(c)%qref(i)      =  x2a(index_x2a_Sx_qref,  ig)
           cam_in(c)%u10(i)       =  x2a(index_x2a_Sx_u10,   ig)
           cam_in(c)%u10withgusts(i) = x2a(index_x2a_Sx_u10withgusts, ig)

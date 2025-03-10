@@ -50,14 +50,15 @@ module cam_cpl_indices
   integer :: index_a2x_Sa_co2prog      ! bottom atm level prognostic co2
   integer :: index_a2x_Sa_co2diag      ! bottom atm level diagnostic co2
 
-  integer :: index_x2a_Sx_t            ! surface temperature             
+  integer :: index_x2a_Sx_t            ! surface temperature  
   integer :: index_x2a_So_t            ! sea surface temperature         
   integer :: index_x2a_So_omsv         ! LM ocean emissivity
   integer :: index_x2a_Si_imsv         ! LM sea ice emissivity
   integer :: index_x2a_Sf_lfrac        ! surface land fraction           
   integer :: index_x2a_Sf_ifrac        ! surface ice fraction            
   integer :: index_x2a_Sf_ofrac        ! surface ocn fraction            
-  integer :: index_x2a_Sx_tref         ! 2m reference temperature        
+  integer :: index_x2a_Sx_tref         ! 2m reference temperature 
+  integer :: index_x2a_Sx_tr           ! LM radiative temperature  
   integer :: index_x2a_Sx_qref         ! 2m reference specific humidity  
   integer :: index_x2a_Sx_avsdr        ! albedo, visible, direct         
   integer :: index_x2a_Sx_anidr        ! albedo, near-ir, direct         
@@ -109,6 +110,7 @@ contains
     index_x2a_Sx_avsdf      = mct_avect_indexra(x2a,'Sx_avsdf')
     index_x2a_Sx_anidf      = mct_avect_indexra(x2a,'Sx_anidf')
     index_x2a_Sx_t          = mct_avect_indexra(x2a,'Sx_t')
+    index_x2a_Sx_tr         = mct_avect_indexra(x2a,'Sx_tr')   ! LM
     index_x2a_So_t          = mct_avect_indexra(x2a,'So_t')
     index_x2a_So_omsv       = mct_avect_indexra(x2a,'So_omsv') ! LM 
     index_x2a_Si_imsv       = mct_avect_indexra(x2a,'Si_imsv') ! LM
