@@ -2823,8 +2823,6 @@ contains
         integer(in) :: lSize                    ! aVect size
         integer(in) :: n                        ! generic index
 
-        character(*),parameter :: subName = '(prep_ocn_merge) '
-
         a2x_a => component_get_c2x_cx(atm)
         x2a_a => component_get_x2c_cx(atm)
         
@@ -2836,10 +2834,12 @@ contains
         
         lSize = mct_avect_lSize(x2a_a)
   
-        tr = 1.0
+        !tr = 1.0
 
-        x2a_a % rAttr(index_x2a_Sx_tr, n) = sqrt(sqrt((-x2a_a%rAttr(index_x2a_Faxx_lwup,n) - &
+        tr = sqrt(sqrt((-x2a_a%rAttr(index_x2a_Faxx_lwup,n) - &
                    (1-shr_const_ocn_msv) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) / (shr_const_ocn_msv * shr_const_stebol)))
+
+        x2a_a % rAttr(index_x2a_Sx_tr, n) = tr
 
   end subroutine seq_diag_tr
 
