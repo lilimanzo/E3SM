@@ -493,6 +493,9 @@ subroutine get_values( arrayout, varname, state, pbuf, cam_in, cam_out )
         case('TREF')
            arrayout(1:ncol,1) = cam_in%tref(1:ncol)
 
+        case('TR')                                      ! LM added
+           arrayout(1:ncol,1) = cam_in%tr(1:ncol)       ! LM added
+
         case('QREF')
            arrayout(1:ncol,1) = cam_in%qref(1:ncol)
 
