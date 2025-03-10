@@ -76,6 +76,7 @@ module seq_diag_mct
   public seq_diag_avdiff_mct
 
   public seq_diag_saf  ! LM added
+  public seq_diag_tr  ! LM added
 
   !EOP
 
@@ -2792,5 +2793,51 @@ contains
         enddo
 
   end subroutine seq_diag_saf
+
+
+  subroutine seq_diag_tr(atm, frac_a, a2x_a, tr) ! LM created subroutine
+        
+        use shr_const_mod, only : shr_const_ocn_msv, shr_const_stebol
+
+        ! Input parameters
+        type(component_type), intent(in)  :: atm    ! component type for instance1
+        type(mct_aVect), intent(in)       :: frac_a ! frac bundle
+        type(mct_aVect), pointer          :: a2x_a 
+        type(mct_aVect), pointer          :: x2a_a 
+
+        ! Output parameters
+        real, intent(out)                 :: tr                 ! radiative temperature
+        
+        ! Public data members
+        
+        ! Local variables
+        integer     :: index_x2a_Faxx_lwup      ! LW UP
+        integer     :: index_a2x_Faxa_lwdn      ! LW DN
+        integer     :: index_x2a_Sx_saf         ! saf
+        integer     :: index_x2a_Si_taf         ! sea ice TAF
+        integer     :: index_x2a_Sl_taf         ! land TAF
+        integer     :: index_x2a_Sx_tr          ! surface temperature computed in CPL
+        integer(in) :: lSize                    ! aVect size
+        integer(in) :: n                        ! generic index
+
+        character(*),parameter :: subName = '(prep_ocn_merge) '
+
+        a2x_a => component_get_c2x_cx(atm)
+        x2a_a => component_get_x2c_cx(atm)
+        
+        index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
+        index_a2x_Faxa_lwdn = mct_aVect_indexRA(a2x_a,'Faxa_lwdn')
+        index_x2a_Sx_saf    = mct_aVect_indexRA(x2a_a,'Sx_saf')
+        index_x2a_Si_taf    = mct_aVect_indexRA(x2a_a,'Si_taf')
+        index_x2a_Sx_tr     = mct_aVect_indexRA(x2a_a,'Sx_tr')
+        
+        lSize = mct_avect_lSize(x2a_a)
+        
+        do n=1,lSize
+
+                x2a_a % rAttr(index_x2a_Sx_tr, n) = sqrt(sqrt((-x2a_a%rAttr(index_x2a_Faxx_lwup,n)- &
+                        (1-shr_const_ocn_msv) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) / (shr_const_ocn_msv * shr_const_stebol)))
+        enddo
+  end subroutine seq_diag_tr
 
 end module seq_diag_mct
