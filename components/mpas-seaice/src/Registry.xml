@@ -4012,7 +4012,12 @@
 		     units="W m-2"
 		     default_value="180.0"
                      description="Downwelling longwave radiation"
-		/>
+			/>
+		<var name="radiativeTemperature" ! LM added
+                     type="real"
+                     dimensions="nCells Time"
+                     units="K"
+                />
 		<var name="rainfallRate"
 		     type="real"
 		     dimensions="nCells Time"

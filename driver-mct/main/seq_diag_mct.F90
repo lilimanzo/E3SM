@@ -2756,8 +2756,6 @@ contains
                 x2a_a%rAttr(index_x2a_Sl_taf,n) = 1.0
 
                 ! spatial adjustment factor
-                !x2a_a % rAttr(index_x2a_Sx_saf, n) = frac_a%rAttr(ko,n) 
-                
                 ! (Fup - Fdn) / (stebol * (ifrac* ((iFup - (1-e1)Fdn)/(stebol*e1))**.25 + ofrac )**4 - fdn)
                 x2a_a % rAttr(index_x2a_Sx_saf, n) = &
                         (-x2a_a%rAttr(index_x2a_Faxx_lwup,n) - a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) & 
