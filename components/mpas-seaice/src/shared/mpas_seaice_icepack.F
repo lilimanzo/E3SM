@@ -1936,7 +1936,7 @@ contains
              call mpas_log_write("airSpecificHumidity: $r", messageType=MPAS_LOG_ERR, realArgs=(/airSpecificHumidity(iCell)/))
              call mpas_log_write("airDensity: $r", messageType=MPAS_LOG_ERR, realArgs=(/airDensity(iCell)/))
              call mpas_log_write("airTemperature: $r", messageType=MPAS_LOG_ERR, realArgs=(/airTemperature(iCell)/))
-             !call mpas_log_write("radiativeTemperature: $r", messageType=MPAS_LOG_ERR,realArgs=(/radiativeTemperature(iCell)/)) ! LM added
+             call mpas_log_write("radiativeTemperature: $r", messageType=MPAS_LOG_ERR,realArgs=(/radiativeTemperature(iCell)/)) ! LM added
              call mpas_log_write("atmosReferenceTemperature2m: $r", messageType=MPAS_LOG_ERR, realArgs=(/atmosReferenceTemperature2m(iCell)/))
              call mpas_log_write("atmosReferenceHumidity2m: $r", messageType=MPAS_LOG_ERR, realArgs=(/atmosReferenceHumidity2m(iCell)/))
              call mpas_log_write("atmosReferenceSpeed10m: $r", messageType=MPAS_LOG_ERR, realArgs=(/atmosReferenceSpeed10m(iCell)/))
