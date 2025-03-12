@@ -2793,6 +2793,9 @@ contains
                         (1-shr_const_ocn_msv) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) / (shr_const_ocn_msv * shr_const_stebol)))
 
                 !call seq_diag_tr(atm, frac_a, a2x_a, tr)
+
+                ! update lwdn_prev
+                x2a_a % rAttr(index_a2x_Faxa_lwdn_prev, n) = x2a_a % rAttr(index_a2x_Faxa_lwdn, n)
         enddo
 
   end subroutine seq_diag_saf
