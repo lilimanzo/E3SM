@@ -78,6 +78,7 @@ module seq_flux_mct
   real(r8), allocatable :: ocnsal (:) ! ocean salinity
   real(r8), allocatable :: uGust  (:) ! wind gust
   real(r8), allocatable :: lwdn   (:) ! long  wave, downward
+  real(r8), allocatable :: lwdn_prev(:) ! LM lwdn from previous timestep 
   real(r8), allocatable :: swdn   (:) ! short wave, downward
   real(r8), allocatable :: swup   (:) ! short wave, upward
   real(r8), allocatable :: prec   (:) ! precip
@@ -139,6 +140,7 @@ module seq_flux_mct
   integer :: index_a2x_Faxa_swvdr
   integer :: index_a2x_Faxa_swvdf
   integer :: index_a2x_Faxa_lwdn
+  integer :: index_a2x_Faxa_lwdn_prev ! LM added
   integer :: index_a2x_Faxa_rainc
   integer :: index_a2x_Faxa_rainl
   integer :: index_a2x_Faxa_snowc
@@ -362,6 +364,9 @@ contains
     allocate(lwdn(nloc),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate lwdn',ier)
     lwdn = 0.0_r8
+    allocate(lwdn_prev(nloc),stat=ier)                           ! LM added
+    if(ier/=0) call mct_die(subName,'allocate lwdn_prev',ier)    ! LM added
+    lwdn_prev = 0.0_r8                                           ! LM added
     allocate(swdn(nloc),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate swdn',ier)
     swdn = 0.0_r8
