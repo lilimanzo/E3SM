@@ -2789,8 +2789,9 @@ contains
                         !* x2a_a%rAttr(index_x2a_Sl_taf,n))  )**0.25 &
                         !)**4 - a2x_a%rAttr(index_a2x_Faxa_lwdn,n))
                 
-                x2a_a % rAttr(index_x2a_Sx_tr, n) = sqrt(sqrt((-x2a_a%rAttr(index_x2a_Faxx_lwup,n)- &
-                        (1-shr_const_ocn_msv) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) / (shr_const_ocn_msv * shr_const_stebol)))
+                x2a_a % rAttr(index_x2a_Sx_tr, n) = a2x_a % rAttr(index_a2x_Faxa_lwdn_prev, n)
+                ! sqrt(sqrt((-x2a_a%rAttr(index_x2a_Faxx_lwup,n)- &
+                        !(1-shr_const_ocn_msv) * a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) / (shr_const_ocn_msv * shr_const_stebol)))
 
                 !call seq_diag_tr(atm, frac_a, a2x_a, tr)
 
