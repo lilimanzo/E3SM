@@ -852,6 +852,14 @@ contains
     attname  = 'Faxa_lwdn'
     call metadata_set(attname, longname, stdname, units)
 
+    ! LM downward LW flux from previous timestep
+    call seq_flds_add(a2x_fluxes,"Faxa_lwdn_prev")
+    longname = 'Downward longwave heat flux from previous timestep'
+    stdname  = 'downwelling_longwave_flux_prev'
+    units    = 'W m-2'
+    attname  = 'Faxa_lwdn_prev'
+    call metadata_set(attname, longname, stdname, units)
+
     ! direct near-infrared incident solar radiation
     call seq_flds_add(a2x_fluxes,"Faxa_swndr")
     call seq_flds_add(x2i_fluxes,"Faxa_swndr")
