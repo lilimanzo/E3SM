@@ -1320,7 +1320,7 @@ contains
          airSpecificHumidity, &
          airDensity, &
          airTemperature, &
-         radiativeTemperature, & !  LM added
+         !radiativeTemperature, & !  LM added
          atmosReferenceTemperature2m, &
          atmosReferenceHumidity2m, &
          atmosReferenceSpeed10m, &
@@ -1425,6 +1425,7 @@ contains
          iceVolumeCategory, &
          snowVolumeCategory, &
          surfaceTemperature, &
+         radiativeTemperature, & ! LM added
          levelIceArea, &
          levelIceVolume, &
          pondArea, &
@@ -1865,7 +1866,7 @@ contains
                frz_onset=freezeOnset(iCell), &
                yday=dayOfYear, &
                prescribed_ice=config_use_prescribed_ice, &
-               TsfKr=radiativeTemperature(iCell)) ! LM added line
+               TsfKr=radiativeTemperature(1,:,iCell)) ! LM added line
 
           abortFlag = icepack_warnings_aborted()
           call seaice_icepack_write_warnings(abortFlag)
