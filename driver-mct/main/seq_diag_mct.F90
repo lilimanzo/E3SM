@@ -2795,7 +2795,7 @@ contains
                 !call seq_diag_tr(atm, frac_a, a2x_a, tr)
 
                 ! update lwdn_prev
-                x2a_a % rAttr(index_a2x_Faxa_lwdn_prev, n) = x2a_a % rAttr(index_a2x_Faxa_lwdn, n)
+                x2a_a % rAttr(index_a2x_Faxa_lwdn_prev, n) = a2x_a % rAttr(index_a2x_Faxa_lwdn, n)
         enddo
 
   end subroutine seq_diag_saf
