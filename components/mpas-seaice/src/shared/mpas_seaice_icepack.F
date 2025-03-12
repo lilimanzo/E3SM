@@ -1893,6 +1893,7 @@ contains
              call mpas_log_write("snowVolumeCategory: "//repeat("$r ", nCategories), messageType=MPAS_LOG_ERR, realArgs=(/snowVolumeCategory(1,:,iCell)/))
              call mpas_log_write("uVelocityCell: $r", messageType=MPAS_LOG_ERR, realArgs=(/uVelocityCell(iCell)/))
              call mpas_log_write("vVelocityCell: $r", messageType=MPAS_LOG_ERR, realArgs=(/vVelocityCell(iCell)/))
+             call mpas_log_write("radiativeTemperature: "//repeat("$r ", nCategories), messageType=MPAS_LOG_ERR, realArgs=(/radiativeTemperature(1,:,iCell)/)) ! LM added
              call mpas_log_write("surfaceTemperature: "//repeat("$r ", nCategories), messageType=MPAS_LOG_ERR, realArgs=(/surfaceTemperature(1,:,iCell)/))
              do iCategory = 1, nCategories
                 call mpas_log_write("snowEnthalpy: $i "//repeat("$r ", nSnowLayers), messageType=MPAS_LOG_ERR, intArgs=(/iCategory/), realArgs=(/snowEnthalpy(:,iCategory,iCell)/))
@@ -1937,7 +1938,7 @@ contains
              call mpas_log_write("airSpecificHumidity: $r", messageType=MPAS_LOG_ERR, realArgs=(/airSpecificHumidity(iCell)/))
              call mpas_log_write("airDensity: $r", messageType=MPAS_LOG_ERR, realArgs=(/airDensity(iCell)/))
              call mpas_log_write("airTemperature: $r", messageType=MPAS_LOG_ERR, realArgs=(/airTemperature(iCell)/))
-             call mpas_log_write("radiativeTemperature: $r", messageType=MPAS_LOG_ERR,realArgs=(/radiativeTemperature(iCell)/)) ! LM added
+             !call mpas_log_write("radiativeTemperature: $r", messageType=MPAS_LOG_ERR,realArgs=(/radiativeTemperature(iCell)/)) ! LM added
              call mpas_log_write("atmosReferenceTemperature2m: $r", messageType=MPAS_LOG_ERR, realArgs=(/atmosReferenceTemperature2m(iCell)/))
              call mpas_log_write("atmosReferenceHumidity2m: $r", messageType=MPAS_LOG_ERR, realArgs=(/atmosReferenceHumidity2m(iCell)/))
              call mpas_log_write("atmosReferenceSpeed10m: $r", messageType=MPAS_LOG_ERR, realArgs=(/atmosReferenceSpeed10m(iCell)/))
