@@ -2698,6 +2698,7 @@ contains
         ! Local variables
         integer     :: index_x2a_Faxx_lwup      ! LW UP
         integer     :: index_a2x_Faxa_lwdn      ! LW DN
+        integer     :: index_a2x_Faxa_lwdn_prev ! LW DN from previous timestep
         integer     :: index_x2a_Sx_saf         ! saf
         integer     :: index_x2a_Si_taf         ! sea ice TAF
         integer     :: index_x2a_Sl_taf         ! land TAF
@@ -2717,6 +2718,7 @@ contains
         
         index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
         index_a2x_Faxa_lwdn = mct_aVect_indexRA(a2x_a,'Faxa_lwdn')
+        index_a2x_Faxa_lwdn_prev = mct_aVect_indexRA(a2x_a,'Faxa_lwdn_prev')
         index_x2a_Sx_saf    = mct_aVect_indexRA(x2a_a,'Sx_saf')
         index_x2a_Si_taf    = mct_aVect_indexRA(x2a_a,'Si_taf')
         index_x2a_Sx_tr     = mct_aVect_indexRA(x2a_a,'Sx_tr')
