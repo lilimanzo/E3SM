@@ -366,7 +366,7 @@ contains
     lwdn = 0.0_r8
     allocate(lwdn_prev(nloc),stat=ier)                           ! LM added
     if(ier/=0) call mct_die(subName,'allocate lwdn_prev',ier)    ! LM added
-    lwdn_prev = 0.0_r8                                           ! LM added
+    !lwdn_prev = 0.0_r8                                           ! LM added
     allocate(swdn(nloc),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate swdn',ier)
     swdn = 0.0_r8
