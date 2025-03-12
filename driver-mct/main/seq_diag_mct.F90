@@ -2758,13 +2758,13 @@ contains
                 x2a_a%rAttr(index_x2a_Sl_taf,n) = 1.0
 
                 ! spatial adjustment factor
-                ! (Fup - Fdn) / (sb * (1*((iFup - (1-e1)Fdn)/(sb*e1))**.25 + (oFup-(1-e2)) )**4 - fdn)
+                ! (Fup - Fdn) / (sb * (1*((iFup - (1-e1)Fdn)/(sb*e1))**.25 + (oFup-(1-e2))**.25 )**4 - fdn)
                 x2a_a % rAttr(index_x2a_Sx_saf, n) = &
                         (-x2a_a%rAttr(index_x2a_Faxx_lwup,n) - a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) & 
                         / (shr_const_stebol * ((1) * ((-frac_a%rAttr(kir,n) &
                         * x2a_a%rAttr(index_x2a_Faxx_lwup,n) - (1 - x2a_a%rAttr(index_x2a_Si_taf,n)) &
                         * a2x_a%rAttr(index_a2x_Faxa_lwdn,n) ) / ( shr_const_stebol * x2a_a%rAttr(index_x2a_Si_taf,n) ))**.25 &
-                        + (frac_a%rAttr(kor,n) * x2a_a%rAttr(index_x2a_Faxx_lwup,n) - (1-shr_const_ocn_msv)) &
+                        + (-frac_a%rAttr(kor,n) * x2a_a%rAttr(index_x2a_Faxx_lwup,n) - (1-shr_const_ocn_msv))**.25 &
                         )**4 - a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) 
                        
                         !/ (shr_const_stebol * ( frac_a%rAttr(ki,n) * ( (frac_a%rAttr(ki,n) * x2a_a%rAttr(index_x2a_Faxx_lwup,n) &
