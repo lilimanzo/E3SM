@@ -1767,8 +1767,8 @@ contains
 
     ! LM variable for mean emissivity computed in coupler
     call seq_flds_add(x2a_states,"Sx_saf")
-    longname = 'Mean emissivity'
-    stdname  = 'LM_mean_emissivity'
+    longname = 'Spatial adjustment factor'
+    stdname  = 'LM_saf'
     units    = '1'
     attname  = 'Sx_saf'
     call metadata_set(attname, longname, stdname, units)
