@@ -2410,7 +2410,7 @@ contains
     call t_startf('CPL:init_readrestart')
     call t_adj_detailf(+2)
 
-    call seq_diag_zero_mct(mode='inf') ! LM changed from all to inf
+    call seq_diag_zero_mct(mode='all') ! LM changed from all to inf for 680
     call seq_diagBGC_zero_mct(mode='all')
     if (read_restart .and. iamin_CPLID) then
 
