@@ -2761,7 +2761,7 @@ contains
                 ! (Fup-Fdn)/(sb*(((ifrac*(Fup-(1-ei)*Fdn))/(ei*sb))**.25+((oFup-(0))/(eo*sb))**.25+((lFup-(0))/sb)**.25)**4-Fdn)
                 x2a_a % rAttr(index_x2a_Sx_saf, n) = &
                         (-x2a_a%rAttr(index_x2a_Faxx_lwup,n) - a2x_a%rAttr(index_a2x_Faxa_lwdn,n)) &
-                        / (shr_const_stebol * ((((frac_a%rAttr(kor,n)*(-*x2a_a%rAttr(index_x2a_Faxx_lwup,n)) &
+                        / (shr_const_stebol * ((((frac_a%rAttr(kor,n)*(-x2a_a%rAttr(index_x2a_Faxx_lwup,n)) &
                         -(1-x2a_a%rAttr(index_x2a_Sl_taf,n))*a2x_a%rAttr(index_a2x_Faxa_lwdn,n))) &
                         /(x2a_a%rAttr(index_x2a_Sl_taf,n)*shr_const_stebol))**.25 & 
                         + ((-frac_a%rAttr(kor,n)*x2a_a%rAttr(index_x2a_Faxx_lwup,n)  &
