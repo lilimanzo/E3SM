@@ -699,7 +699,8 @@ contains
 
     real(kind=RKIND), dimension(:), pointer :: &
          iceAreaCell, &
-         surfaceTemperatureCell
+         surfaceTemperatureCell, &
+         radiativeTemperature ! LM added
 
     real(kind=RKIND), pointer :: &
          config_initial_ice_area, &
@@ -751,6 +752,7 @@ contains
 
     call MPAS_pool_get_array(tracers_aggregate, "iceAreaCell", iceAreaCell)
     call MPAS_pool_get_array(tracers_aggregate, "surfaceTemperatureCell", surfaceTemperatureCell)
+    call MPAS_pool_get_array(tracers_aggregate, "radiativeTemperature", radiativeTemperature) ! LM added
     call MPAS_pool_get_array(tracers, "snowEnthalpy", snowEnthalpy, 1)
     call MPAS_pool_get_array(tracers, "iceEnthalpy", iceEnthalpy, 1)
     call MPAS_pool_get_array(tracers, "iceSalinity", iceSalinity, 1)
@@ -823,6 +825,7 @@ contains
 
        iceAreaCell(iCell) = sum(iceAreaCategory(1,:,iCell))
        surfaceTemperatureCell(iCell) = -20.15_RKIND
+       radiativeTemperature(iCell) = -20.15_RKIND ! LM added
 
        do iCategory = 1, nCategories
           do iIceLayer = 1, nIceLayers
