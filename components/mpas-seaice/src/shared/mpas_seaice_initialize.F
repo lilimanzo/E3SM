@@ -556,7 +556,8 @@ contains
 
     real(kind=RKIND), dimension(:), pointer :: &
          iceAreaCell, &
-         surfaceTemperatureCell
+         surfaceTemperatureCell, &
+         radiativeTemperature ! LM added
 
     real(kind=RKIND), pointer :: &
          config_initial_ice_area, &
@@ -589,6 +590,7 @@ contains
 
     call MPAS_pool_get_array(tracers_aggregate, "iceAreaCell", iceAreaCell)
     call MPAS_pool_get_array(tracers_aggregate, "surfaceTemperatureCell", surfaceTemperatureCell)
+    call MPAS_pool_get_array(tracers_aggregate, "radiativeTemperature", radiativeTemperature) ! LM added
 
     do iCell = 1, nCellsSolve
 
@@ -618,6 +620,7 @@ contains
 
        iceAreaCell(iCell) = sum(iceAreaCategory(1,:,iCell))
        surfaceTemperatureCell(iCell) = -20.15_RKIND
+       radiativeTemperature(iCell) = -20.15_RKIND ! LM added
 
     enddo ! iCell
 
