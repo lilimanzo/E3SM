@@ -1751,7 +1751,7 @@ contains
                uvel=uVelocityCell(iCell), &
                vvel=vVelocityCell(iCell), &
                Tsfc=surfaceTemperature(1,:,iCell), &
-               Tr=radiativeTemperature(1,:,iCell), & ! LM added
+               Tr=surfaceTemperature(1,:,iCell), & ! LM added
                zqsn=snowEnthalpy(:,:,iCell), &
                zqin=iceEnthalpy(:,:,iCell), &
                zSin=iceSalinity(:,:,iCell), &
