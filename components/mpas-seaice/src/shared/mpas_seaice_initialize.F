@@ -556,8 +556,8 @@ contains
 
     real(kind=RKIND), dimension(:), pointer :: &
          iceAreaCell, &
-         surfaceTemperatureCell, &
-         radiativeTemperature ! LM added
+         surfaceTemperatureCell
+         !radiativeTemperature ! 697
 
     real(kind=RKIND), pointer :: &
          config_initial_ice_area, &
@@ -590,7 +590,7 @@ contains
 
     call MPAS_pool_get_array(tracers_aggregate, "iceAreaCell", iceAreaCell)
     call MPAS_pool_get_array(tracers_aggregate, "surfaceTemperatureCell", surfaceTemperatureCell)
-    call MPAS_pool_get_array(tracers_aggregate, "radiativeTemperature", radiativeTemperature) ! LM added
+    !call MPAS_pool_get_array(tracers_aggregate, "radiativeTemperature", radiativeTemperature) ! 697
 
     do iCell = 1, nCellsSolve
 
@@ -620,7 +620,7 @@ contains
 
        iceAreaCell(iCell) = sum(iceAreaCategory(1,:,iCell))
        surfaceTemperatureCell(iCell) = -20.15_RKIND
-       radiativeTemperature(iCell) = -20.15_RKIND ! LM added
+       !radiativeTemperature(iCell) = -20.15_RKIND ! 697
 
     enddo ! iCell
 
@@ -699,8 +699,8 @@ contains
 
     real(kind=RKIND), dimension(:), pointer :: &
          iceAreaCell, &
-         surfaceTemperatureCell, &
-         radiativeTemperature ! LM added
+         surfaceTemperatureCell
+         !radiativeTemperature ! 697
 
     real(kind=RKIND), pointer :: &
          config_initial_ice_area, &
@@ -752,7 +752,7 @@ contains
 
     call MPAS_pool_get_array(tracers_aggregate, "iceAreaCell", iceAreaCell)
     call MPAS_pool_get_array(tracers_aggregate, "surfaceTemperatureCell", surfaceTemperatureCell)
-    call MPAS_pool_get_array(tracers_aggregate, "radiativeTemperature", radiativeTemperature) ! LM added
+    !call MPAS_pool_get_array(tracers_aggregate, "radiativeTemperature", radiativeTemperature) ! 697
     call MPAS_pool_get_array(tracers, "snowEnthalpy", snowEnthalpy, 1)
     call MPAS_pool_get_array(tracers, "iceEnthalpy", iceEnthalpy, 1)
     call MPAS_pool_get_array(tracers, "iceSalinity", iceSalinity, 1)
@@ -825,7 +825,7 @@ contains
 
        iceAreaCell(iCell) = sum(iceAreaCategory(1,:,iCell))
        surfaceTemperatureCell(iCell) = -20.15_RKIND
-       radiativeTemperature(iCell) = -20.15_RKIND ! LM added
+       !radiativeTemperature(iCell) = -20.15_RKIND ! 697
 
        do iCategory = 1, nCategories
           do iIceLayer = 1, nIceLayers

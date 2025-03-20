@@ -4013,13 +4013,13 @@
 		     default_value="180.0"
                      description="Downwelling longwave radiation"
 		/>
-		<var name="radiativeTemperature" ! LM added
-                     type="real"
-                     dimensions="nCells Time"
-		     units="K"
-		     default_value="273.0"
-		     description="Radiative temperature"
-                />
+		!<var name="radiativeTemperature" ! 697
+                !     type="real"
+                !     dimensions="nCells Time"
+		!     units="K"
+		!     default_value="273.0"
+		!     description="Radiative temperature"
+                !/>
 		<var name="rainfallRate"
 		     type="real"
 		     dimensions="nCells Time"

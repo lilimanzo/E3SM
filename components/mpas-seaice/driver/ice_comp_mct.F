@@ -2758,7 +2758,7 @@ contains
       atmosReferenceSpeed10m,      &
       atmosReferenceTemperature2m, &
       atmosReferenceHumidity2m,    &
-      radiativeTemperature,        & ! LM added
+      !radiativeTemperature,        & ! 697
       latentHeatFlux,              &
       sensibleHeatFlux,            &
       longwaveDown,                & ! LM added
@@ -2847,7 +2847,7 @@ contains
       call MPAS_pool_get_array(atmosCoupling, 'atmosReferenceSpeed10m', atmosReferenceSpeed10m)
       call MPAS_pool_get_array(atmosCoupling, 'atmosReferenceTemperature2m', atmosReferenceTemperature2m)
       call MPAS_pool_get_array(atmosCoupling, 'atmosReferenceHumidity2m', atmosReferenceHumidity2m)
-      call MPAS_pool_get_array(atmosCoupling, 'radiativeTemperature', radiativeTemperature) ! LM added
+      !call MPAS_pool_get_array(atmosCoupling, 'radiativeTemperature', radiativeTemperature) ! 697
 
       call MPAS_pool_get_array(oceanCoupling, 'frazilMassAdjust', frazilMassAdjust)
 
@@ -2918,7 +2918,7 @@ contains
                  fcheck,                  &
                  longwaveDown(i),         &
                  longwaveUp(i),           &
-                 radiativeTemperature(i), &
+                 !radiativeTemperature(i), & ! 697
                  Tsrf                     )
          endif
 
@@ -2965,7 +2965,8 @@ contains
             i2x_i % rAttr(index_i2x_Si_imsv  ,n)  = 1.0_RKIND ! LM
             i2x_i % rAttr(index_i2x_Si_taf   ,n)  = taf ! LM
             i2x_i % rAttr(index_i2x_Si_fcheck,n)  = fcheck ! LM
-            i2x_i % rAttr(index_i2x_Si_radtemp,n) = radiativeTemperature(i) ! LM
+            !i2x_i % rAttr(index_i2x_Si_radtemp,n) = radiativeTemperature(i) ! LM
+            i2x_i % rAttr(index_i2x_Si_radtemp,n) = taf ! LM 
             i2x_i % rAttr(index_i2x_Si_bpress,n)  = basalPressure
             i2x_i % rAttr(index_i2x_Si_u10   ,n)  = atmosReferenceSpeed10m(i)
             i2x_i % rAttr(index_i2x_Si_u10withgusts,n) = atmosReferenceSpeed10m(i)
@@ -3174,7 +3175,7 @@ contains
 ! LM subroutine time_adjustment_factor
 ! !INTERFACE:
    subroutine time_adjustment_factor(taf, fcheck, longwaveDown, longwaveUp,  &
-                             radiativeTemperature, Tsrf) !,  longwaveDown,  Tsrf)!{{{
+                              Tsrf) !, radiativeTemperature697)!{{{
 !
 ! !DESCRIPTION:
 ! Calculate time adjustment factor for a cell
@@ -3183,7 +3184,7 @@ contains
 ! !INPUT PARAMETERS:
       real (kind=RKIND), intent(in)  :: longwaveDown 
       real (kind=RKIND), intent(in)  :: longwaveUp 
-      real (kind=RKIND), intent(in)  :: radiativeTemperature
+      !real (kind=RKIND), intent(in)  :: radiativeTemperature ! 697
       real (kind=RKIND), intent(in)  :: Tsrf       
 
 ! !OUTPUT PARAMETERS:
@@ -3194,8 +3195,8 @@ contains
 !BOC
 
    ! compute temporal adjustment factor (TAF)
-   !taf = (-longwaveUp + longwaveDown) / (seaiceStefanBoltzmann * Tsrf**4 + longwaveDown) 
-   taf = radiativeTemperature
+   taf = (-longwaveUp + longwaveDown) / (seaiceStefanBoltzmann * Tsrf**4 + longwaveDown) 
+   !taf = radiativeTemperature ! 697
 
    fcheck = taf * seaiceStefanBoltzmann * Tsrf**4 + (1-taf) * longwaveDown
 !-----------------------------------------------------------------------
