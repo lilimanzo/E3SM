@@ -2764,7 +2764,7 @@ contains
                         / (shr_const_stebol * ((((frac_a%rAttr(kor,n)*(-x2a_a%rAttr(index_x2a_Faxx_lwup,n)) &
                         -(1-x2a_a%rAttr(index_x2a_Sl_taf,n))*a2x_a%rAttr(index_a2x_Faxa_lwdn,n))) &
                         /(x2a_a%rAttr(index_x2a_Sl_taf,n)*shr_const_stebol))**.25 & 
-                        + (((frac_a%rAttr(kor,n)*(-x2a_a%rAttr(index_x2a_Faxx_lwup,n)  &
+                        + ((frac_a%rAttr(kor,n)*(-x2a_a%rAttr(index_x2a_Faxx_lwup,n)  &
                         - (0) ) / (shr_const_ocn_msv*shr_const_stebol)))**.25 & 
                         + ((-frac_a%rAttr(kl,n)*x2a_a%rAttr(index_x2a_Faxx_lwup,n)-(0))/shr_const_stebol)**.25) &
                         **4 - a2x_a%rAttr(index_a2x_Faxa_lwdn,n))
