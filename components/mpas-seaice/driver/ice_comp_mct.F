@@ -2968,7 +2968,7 @@ contains
             i2x_i % rAttr(index_i2x_Si_taf   ,n)  = taf ! LM
             i2x_i % rAttr(index_i2x_Si_fcheck,n)  = fcheck ! LM
             !i2x_i % rAttr(index_i2x_Si_radtemp,n) = radiativeTemperature(i) ! LM
-            i2x_i % rAttr(index_i2x_Si_radtemp,n) = taf ! LM 
+            i2x_i % rAttr(index_i2x_Si_radtemp,n) = radiativeTemperatureCell(i) ! LM 
             i2x_i % rAttr(index_i2x_Si_bpress,n)  = basalPressure
             i2x_i % rAttr(index_i2x_Si_u10   ,n)  = atmosReferenceSpeed10m(i)
             i2x_i % rAttr(index_i2x_Si_u10withgusts,n) = atmosReferenceSpeed10m(i)
