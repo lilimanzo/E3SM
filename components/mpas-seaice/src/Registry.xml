@@ -3290,6 +3290,13 @@
 		     standard_name="sea_ice_surface_temperature"
 		     description="Average surface temperature over ice/snow"
 		/>
+		<var name="radiativeTemperatureCell"
+                     type="real"
+                     dimensions="nCells Time"
+                     units="C"
+                     standard_name="sea_ice_radiative_temperature"
+                     description="Average radiative temperature over ice/snow"
+                />
 		<var name="iceEnthalpyCell"
 		     type="real"
 		     dimensions="nIceLayers nCells Time"

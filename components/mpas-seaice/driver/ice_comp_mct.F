@@ -2747,6 +2747,7 @@ contains
       pondLidThicknessCell,        &
       pondAreaCell,                &
       surfaceTemperatureCell,      &
+      radiativeTemperatureCell,    & ! LM added
       airStressCellU,              &
       airStressCellV,              &
       oceanStressCellU,            &
@@ -2832,6 +2833,7 @@ contains
       call MPAS_pool_get_array(tracersAggregate, 'pondLidThicknessCell', pondLidThicknessCell)
       call MPAS_pool_get_array(tracersAggregate, 'pondAreaCell', pondAreaCell)
       call MPAS_pool_get_array(tracersAggregate, 'surfaceTemperatureCell', surfaceTemperatureCell)
+      call MPAS_pool_get_array(tracersAggregate, 'radiativeTemperatureCell', radiativeTemperatureCell) ! LM added
 
       call MPAS_pool_get_array(velocitySolver, 'airStressCellU', airStressCellU)
       call MPAS_pool_get_array(velocitySolver, 'airStressCellV', airStressCellV)
