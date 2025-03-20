@@ -1425,7 +1425,7 @@ contains
          iceVolumeCategory, &
          snowVolumeCategory, &
          surfaceTemperature, &
-         !radiativeTemperature, & ! LM added
+         radiativeTemperature, & ! LM added
          levelIceArea, &
          levelIceVolume, &
          pondArea, &
@@ -1525,6 +1525,7 @@ contains
        call MPAS_pool_get_array(tracers, "iceVolumeCategory", iceVolumeCategory, 1)
        call MPAS_pool_get_array(tracers, "snowVolumeCategory", snowVolumeCategory, 1)
        call MPAS_pool_get_array(tracers, "surfaceTemperature", surfaceTemperature, 1)
+       call MPAS_pool_get_array(tracers, "radiativeTemperature", radiativeTemperature, 1) ! LM added
        call MPAS_pool_get_array(tracers, "snowEnthalpy", snowEnthalpy, 1)
        call MPAS_pool_get_array(tracers, "iceEnthalpy", iceEnthalpy, 1)
        call MPAS_pool_get_array(tracers, "iceSalinity", iceSalinity, 1)
@@ -1750,6 +1751,7 @@ contains
                uvel=uVelocityCell(iCell), &
                vvel=vVelocityCell(iCell), &
                Tsfc=surfaceTemperature(1,:,iCell), &
+               Tr=radiativeTemperature(1,:,iCell), & ! LM added
                zqsn=snowEnthalpy(:,:,iCell), &
                zqin=iceEnthalpy(:,:,iCell), &
                zSin=iceSalinity(:,:,iCell), &
@@ -1893,7 +1895,7 @@ contains
              call mpas_log_write("snowVolumeCategory: "//repeat("$r ", nCategories), messageType=MPAS_LOG_ERR, realArgs=(/snowVolumeCategory(1,:,iCell)/))
              call mpas_log_write("uVelocityCell: $r", messageType=MPAS_LOG_ERR, realArgs=(/uVelocityCell(iCell)/))
              call mpas_log_write("vVelocityCell: $r", messageType=MPAS_LOG_ERR, realArgs=(/vVelocityCell(iCell)/))
-             !call mpas_log_write("radiativeTemperature: "//repeat("$r ", nCategories), messageType=MPAS_LOG_ERR, realArgs=(/radiativeTemperature(1,:,iCell)/)) ! LM added
+             call mpas_log_write("radiativeTemperature: "//repeat("$r ", nCategories), messageType=MPAS_LOG_ERR, realArgs=(/radiativeTemperature(1,:,iCell)/)) ! LM added
              call mpas_log_write("surfaceTemperature: "//repeat("$r ", nCategories), messageType=MPAS_LOG_ERR, realArgs=(/surfaceTemperature(1,:,iCell)/))
              do iCategory = 1, nCategories
                 call mpas_log_write("snowEnthalpy: $i "//repeat("$r ", nSnowLayers), messageType=MPAS_LOG_ERR, intArgs=(/iCategory/), realArgs=(/snowEnthalpy(:,iCategory,iCell)/))

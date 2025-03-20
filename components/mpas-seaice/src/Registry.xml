@@ -2778,6 +2778,12 @@
 		     units="C"
 		     description="Surface temperature of ice/snow per ice thickness category"
 		/>
+		<var name="radiativeTemperature"
+                     type="real"
+                     dimensions="ONE nCategories nCells Time"
+                     units="C"
+                     description="Radiative temperature of ice/snow per ice thickness category"
+                />
 		<var name="iceEnthalpy"
 		     type="real"
 		     dimensions="nIceLayers nCategories nCells Time"
