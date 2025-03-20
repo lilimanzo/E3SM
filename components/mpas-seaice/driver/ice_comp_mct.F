@@ -3197,8 +3197,9 @@ contains
 !BOC
 
    ! compute temporal adjustment factor (TAF)
-   taf = (-longwaveUp + longwaveDown) / (seaiceStefanBoltzmann * Tsrf**4 + longwaveDown) 
+   !taf = (-longwaveUp + longwaveDown) / (seaiceStefanBoltzmann * Tsrf**4 + longwaveDown) 
    !taf = radiativeTemperature ! 697
+   taf = -longwaveUp / (seaiceStefanBoltzmann * Tsrf**4)
 
    fcheck = taf * seaiceStefanBoltzmann * Tsrf**4 + (1-taf) * longwaveDown
 !-----------------------------------------------------------------------
