@@ -1751,7 +1751,7 @@ contains
                uvel=uVelocityCell(iCell), &
                vvel=vVelocityCell(iCell), &
                Tsfc=surfaceTemperature(1,:,iCell), &
-               Tr=surfaceTemperature(1,:,iCell), & ! LM added
+               Tr=radiativeTemperature(1,:,iCell), & ! LM added
                zqsn=snowEnthalpy(:,:,iCell), &
                zqin=iceEnthalpy(:,:,iCell), &
                zSin=iceSalinity(:,:,iCell), &
@@ -2895,6 +2895,7 @@ contains
          iceVolumeCategory, &
          snowVolumeCategory, &
          surfaceTemperature, &
+         radiativeTemperature, & ! LM added
          levelIceArea, &
          pondArea, &
          pondDepth, &
@@ -2991,6 +2992,7 @@ contains
        call MPAS_pool_get_array(tracers, "iceVolumeCategory", iceVolumeCategory, 1)
        call MPAS_pool_get_array(tracers, "snowVolumeCategory", snowVolumeCategory, 1)
        call MPAS_pool_get_array(tracers, "surfaceTemperature", surfaceTemperature, 1)
+       call MPAS_pool_get_array(tracers, "radiativeTemperature", radiativeTemperature, 1) ! LM added
        call MPAS_pool_get_array(tracers, "levelIceArea", levelIceArea, 1)
        call MPAS_pool_get_array(tracers, "pondArea", pondArea, 1)
        call MPAS_pool_get_array(tracers, "pondDepth", pondDepth, 1)
