@@ -5531,6 +5531,7 @@ contains
          initialSalinityProfile, &
          initialMeltingTemperatureProfile, &
          surfaceTemperature, &
+         radiativeTemperature, & ! LM added
          iceEnthalpy, &
          snowEnthalpy)
 
