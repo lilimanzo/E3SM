@@ -3093,6 +3093,7 @@ contains
                vicen=iceVolumeCategory(1,:,iCell), &
                vsnon=snowVolumeCategory(1,:,iCell), &
                Tsfcn=surfaceTemperature(1,:,iCell), &
+               Trn=radiativeTemperature(1,:,iCell), & ! LM added
                alvln=levelIceArea(1,:,iCell), &
                apndn=pondArea(1,:,iCell), &
                hpndn=pondDepth(1,:,iCell), &
