@@ -5503,6 +5503,7 @@ contains
        initialSalinityProfile, &
        initialMeltingTemperatureProfile, &
        surfaceTemperature, &
+       radiativeTemperature, & ! LM added
        iceEnthalpy, &
        snowEnthalpy)
 
@@ -5518,7 +5519,8 @@ contains
          initialMeltingTemperatureProfile ! vertical temperature profile (C)
 
     real(kind=RKIND), intent(out) :: &
-         surfaceTemperature ! surface temperature (C)
+         surfaceTemperature, & ! surface temperature (C)
+         radiativeTemperature ! LM added
 
     real(kind=RKIND), dimension(:), intent(out) :: &
          iceEnthalpy, & ! ice enthalpy profile (J/m3)
