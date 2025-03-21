@@ -693,6 +693,7 @@ contains
          iceVolumeCategory, &
          snowVolumeCategory, &
          surfaceTemperature, &
+         radiativeTemperature, & ! LM added
          snowEnthalpy, &
          iceEnthalpy, &
          iceSalinity
@@ -744,6 +745,7 @@ contains
     call MPAS_pool_get_array(tracers, "iceVolumeCategory", iceVolumeCategory, 1)
     call MPAS_pool_get_array(tracers, "snowVolumeCategory", snowVolumeCategory, 1)
     call MPAS_pool_get_array(tracers, "surfaceTemperature", surfaceTemperature, 1)
+    call MPAS_pool_get_array(tracers, "radiativeTemperature", radiativeTemperature, 1) ! LM added
 
     call MPAS_pool_get_array(atmos_coupling, "airTemperature", airTemperature)
 
@@ -766,6 +768,7 @@ contains
        iceVolumeCategory(1,:,iCell)  = 0.0_RKIND
        snowVolumeCategory(1,:,iCell) = 0.0_RKIND
        surfaceTemperature(1,:,iCell) = seaFreezingTemperature(iCell)
+       radiativeTemperature(1,:,iCell) = seaFreezingTemperature(iCell) ! LM added
        iceEnthalpy(:,:,iCell)        = 0.0_RKIND
 
        if (trim(config_column_physics_type) == "icepack") then
@@ -782,6 +785,7 @@ contains
              iceVolumeCategory(1,1,iCell)  = config_initial_ice_volume
              snowVolumeCategory(1,1,iCell) = config_initial_snow_volume
              surfaceTemperature(1,1,iCell) = -1.0_RKIND
+             radiativeTemperature(1,1,iCell) = -1.0_RKIND ! LM added
 
              call icepack_init_enthalpy(&
                   airTemperature(iCell), &
@@ -789,6 +793,7 @@ contains
                   initialSalinityProfile(:,iCell), &
                   initialMeltingTemperatureProfile(:,iCell), &
                   surfaceTemperature(1,1,iCell), &
+                  radiativeTemperature(1,1,iCell), & ! LM added
                   iceEnthalpy(:,1,iCell), &
                   snowEnthalpy(:,1,iCell))
              call seaice_icepack_write_warnings(icepack_warnings_aborted())
@@ -808,6 +813,7 @@ contains
              iceVolumeCategory(1,1,iCell)  = config_initial_ice_volume
              snowVolumeCategory(1,1,iCell) = config_initial_snow_volume
              surfaceTemperature(1,1,iCell) = -1.0_RKIND
+             radiativeTemperature(1,1,iCell) = -1.0_RKIND ! LM added
 
              call colpkg_init_trcr(&
                   airTemperature(iCell), &
@@ -901,6 +907,7 @@ contains
 
     real(kind=RKIND), dimension(:,:,:), pointer :: &
          surfaceTemperature, &
+         radiativeTemperature, & ! LM added
          iceEnthalpy, &
          snowEnthalpy, &
          iceAreaCategory, &
@@ -950,6 +957,7 @@ contains
     call MPAS_pool_get_array(tracers, "iceVolumeCategory", iceVolumeCategory, 1)
     call MPAS_pool_get_array(tracers, "snowVolumeCategory", snowVolumeCategory, 1)
     call MPAS_pool_get_array(tracers, "surfaceTemperature", surfaceTemperature, 1)
+    call MPAS_pool_get_array(tracers, "radiativeTemperature", radiativeTemperature, 1) ! LM added
     call MPAS_pool_get_array(tracers, "iceEnthalpy", iceEnthalpy, 1)
     call MPAS_pool_get_array(tracers, "snowEnthalpy", snowEnthalpy, 1)
     call MPAS_pool_get_array(tracers, "iceSalinity", iceSalinity, 1)
@@ -994,6 +1002,7 @@ contains
                      initialSalinityProfile(:,iCell), &
                      initialMeltingTemperatureProfile(:,iCell), &
                      surfaceTemperature(1,iCategory,iCell), &
+                     radiativeTemperature(1,iCategory,iCell), & ! LM added
                      iceEnthalpy(:,iCategory,iCell), &
                      snowEnthalpy(:,iCategory,iCell))
                 call seaice_icepack_write_warnings(icepack_warnings_aborted())
@@ -1029,6 +1038,7 @@ contains
           snowVolumeCategory(1,:,iCell) = 0.0_RKIND
 
           surfaceTemperature(1,:,iCell) = seaFreezingTemperature(iCell)
+          radiativeTemperature(1,:,iCell) = seaFreezingTemperature(iCell) ! LM added
           if (trim(config_column_physics_type) == "icepack") then
              do iSnowLayer = 1, nSnowLayers
                 snowEnthalpy(iSnowLayer,:,iCell) = icepack_enthalpy_snow(0.0_RKIND)
@@ -1273,6 +1283,7 @@ contains
 
     real(kind=RKIND), dimension(:,:,:), pointer :: &
          surfaceTemperature, &
+         radiativeTemperature, & ! LM added
          iceEnthalpy, &
          snowEnthalpy, &
          iceAreaCategory, &
@@ -1314,6 +1325,7 @@ contains
     call MPAS_pool_get_array(tracers, "iceVolumeCategory", iceVolumeCategory, 1)
     call MPAS_pool_get_array(tracers, "snowVolumeCategory", snowVolumeCategory, 1)
     call MPAS_pool_get_array(tracers, "surfaceTemperature", surfaceTemperature, 1)
+    call MPAS_pool_get_array(tracers, "radiativeTemperature", radiativeTemperature, 1) ! LM added
     call MPAS_pool_get_array(tracers, "iceEnthalpy", iceEnthalpy, 1)
     call MPAS_pool_get_array(tracers, "snowEnthalpy", snowEnthalpy, 1)
     call MPAS_pool_get_array(tracers, "iceSalinity", iceSalinity, 1)
@@ -1342,6 +1354,7 @@ contains
                   initialSalinityProfile(:,iCell), &
                   initialMeltingTemperatureProfile(:,iCell), &
                   surfaceTemperature(1,iCategory,iCell), &
+                  radiativeTemperature(1,iCategory,iCell), & ! LM added
                   iceEnthalpy(:,iCategory,iCell), &
                   snowEnthalpy(:,iCategory,iCell))
              call seaice_icepack_write_warnings(icepack_warnings_aborted())
@@ -1454,6 +1467,7 @@ contains
 
     real(kind=RKIND), dimension(:,:,:), pointer :: &
          surfaceTemperature, &
+         radiativeTemperature, & ! LM added
          iceEnthalpy, &
          snowEnthalpy, &
          iceAreaCategory, &
@@ -1502,6 +1516,7 @@ contains
     call MPAS_pool_get_array(tracers, "iceVolumeCategory", iceVolumeCategory, 1)
     call MPAS_pool_get_array(tracers, "snowVolumeCategory", snowVolumeCategory, 1)
     call MPAS_pool_get_array(tracers, "surfaceTemperature", surfaceTemperature, 1)
+    call MPAS_pool_get_array(tracers, "radiativeTemperature", radiativeTemperature, 1) ! LM added
     call MPAS_pool_get_array(tracers, "iceEnthalpy", iceEnthalpy, 1)
     call MPAS_pool_get_array(tracers, "snowEnthalpy", snowEnthalpy, 1)
     call MPAS_pool_get_array(tracers, "iceSalinity", iceSalinity, 1)
@@ -1561,6 +1576,7 @@ contains
                      initialSalinityProfile(:,iCell), &
                      initialMeltingTemperatureProfile(:,iCell), &
                      surfaceTemperature(1,iCategory,iCell), &
+                     radiativeTemperature(1,iCategory,iCell), & ! LM added
                      iceEnthalpy(:,iCategory,iCell), &
                      snowEnthalpy(:,iCategory,iCell))
                 call seaice_icepack_write_warnings(icepack_warnings_aborted())
@@ -1575,6 +1591,7 @@ contains
              snowVolumeCategory(1,:,iCell) = 0.0_RKIND
 
              surfaceTemperature(1,:,iCell) = seaFreezingTemperature(iCell)
+             radiativeTemperature(1,:,iCell) = seaFreezingTemperature(iCell) ! LM added
              do iSnowLayer = 1, nSnowLayers
                 snowEnthalpy(iSnowLayer,:,iCell) = icepack_enthalpy_snow(0.0_RKIND)
              end do
@@ -1619,6 +1636,7 @@ contains
              snowVolumeCategory(1,:,iCell) = 0.0_RKIND
 
              surfaceTemperature(1,:,iCell) = seaFreezingTemperature(iCell)
+             radiativeTemperature(1,:,iCell) = seaFreezingTemperature(iCell) ! LM added
              do iSnowLayer = 1, nSnowLayers
                 snowEnthalpy(iSnowLayer,:,iCell) = seaice_column_enthalpy_snow(0.0_RKIND)
              end do
