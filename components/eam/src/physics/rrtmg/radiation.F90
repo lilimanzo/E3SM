@@ -56,7 +56,7 @@ integer :: su_idx       = 0
 integer :: sd_idx       = 0 
 integer :: lu_idx       = 0 
 integer :: ld_idx       = 0
-integer :: ldp_idx      = 0 ! LM added lwdn prev index
+integer :: ldp_idx      = 0 ! LM added lwdn prev index- maybe make -1
 integer :: cldfsnow_idx = 0 
 integer :: cld_idx      = 0 
 integer :: concld_idx   = 0
@@ -1104,6 +1104,8 @@ end function radiation_nextsw_cday
       call pbuf_get_field(pbuf, lu_idx, lu)
       call pbuf_get_field(pbuf, ld_idx, ld)
     end if
+
+    call pbuf_get_field(pbug, ldp_idx, ldp) ! LM added
  
     if (do_aerocom_ind3) then
       cld_tau_idx = pbuf_get_index('cld_tau')
