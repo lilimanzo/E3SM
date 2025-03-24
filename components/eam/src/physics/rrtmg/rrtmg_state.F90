@@ -112,6 +112,7 @@ contains
     allocate( rstate%tlev(pcols,num_rrtmg_levs+1) )
 
     allocate( rstate%lwdn_prev(pcols,num_rrtmg_levs) ) ! LM added
+    call prefetch(rstate%lwdn_prev)                    ! LM added
 
     ncol = pstate%ncol
 
