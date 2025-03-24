@@ -1040,6 +1040,8 @@ end function radiation_nextsw_cday
     real(r8), pointer, dimension(:,:,:) :: lu => NULL()  ! longwave  spectral flux up
     real(r8), pointer, dimension(:,:,:) :: ld => NULL()  ! longwave  spectral flux down
 
+    real(r8), pointer, dimension(:,:,:) :: ldp => NULL() ! LM added lwdn prev
+
     ! Aerosol radiative properties
     real(r8) :: aer_tau    (pcols,0:pver,nbndsw) ! aerosol extinction optical depth
     real(r8) :: aer_tau_w  (pcols,0:pver,nbndsw) ! aerosol single scattering albedo * tau
