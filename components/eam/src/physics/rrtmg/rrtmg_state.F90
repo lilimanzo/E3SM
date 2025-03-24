@@ -81,7 +81,7 @@ contains
     use shr_const_mod,    only: shr_const_ocn_msv       ! LM added
 
     !include '../crm/openacc_utils.F90'                  ! LM added
-    !use openacc_utils                                   ! LM added
+    use openacc_utils_LM                                 ! LM added
 
     implicit none
 
@@ -115,7 +115,7 @@ contains
     allocate( rstate%tlev(pcols,num_rrtmg_levs+1) )
 
     allocate( rstate%lwdn_prev(pcols,num_rrtmg_levs) ) ! LM added
-    !call prefetch(rstate%lwdn_prev)                    ! LM added
+    call prefetch(rstate%lwdn_prev)                    ! LM added
 
     ncol = pstate%ncol
 
