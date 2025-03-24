@@ -1754,7 +1754,7 @@ contains
                vsnon=snowVolumeCategory(1,:,iCell), &
                uvel=uVelocityCell(iCell), &
                vvel=vVelocityCell(iCell), &
-               Tsfc=surfaceTemperature(1,:,iCell), &
+               Tsfc=radiativeTemperature(1,:,iCell), &
                Tr=radiativeTemperature(1,:,iCell), & ! LM added
                zqsn=snowEnthalpy(:,:,iCell), &
                zqin=iceEnthalpy(:,:,iCell), &
