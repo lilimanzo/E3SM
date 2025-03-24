@@ -86,6 +86,7 @@ module seaice_icepack
      ! indexes of physics tracers in tracer array
      integer :: &
           index_surfaceTemperature, &    ! nt_Tsfc
+          index_radiativeTemperature, &  ! nt_Tr LM added
           index_iceEnthalpy, &           ! nt_qice
           index_snowEnthalpy, &          ! nt_qsno
           index_iceSalinity, &           ! nt_sice
@@ -857,6 +858,7 @@ contains
 
     real(kind=RKIND), dimension(:,:,:), pointer :: &
          surfaceTemperature, &
+         radiativeTemperature, & ! LM added
          iceEnthalpy, &
          snowEnthalpy
 
@@ -888,6 +890,7 @@ contains
        call MPAS_pool_get_array(initial, "initialMeltingTemperatureProfile", initialMeltingTemperatureProfile)
 
        call MPAS_pool_get_array(tracers, "surfaceTemperature", surfaceTemperature, 1)
+       call MPAS_pool_get_array(tracers, "radiativeTemperature", radiativeTemperature, 1) ! LM added
        call MPAS_pool_get_array(tracers, "iceEnthalpy", iceEnthalpy, 1)
        call MPAS_pool_get_array(tracers, "snowEnthalpy", snowEnthalpy, 1)
 
@@ -900,6 +903,7 @@ contains
                   initialSalinityProfile(:,iCell), &
                   initialMeltingTemperatureProfile(:,iCell), &
                   surfaceTemperature(1,iCategory,iCell), &
+                  radiativeTemperature(1,iCategory,iCell), & ! LM added
                   iceEnthalpy(:,iCategory,iCell), &
                   snowEnthalpy(:,iCategory,iCell))
 
