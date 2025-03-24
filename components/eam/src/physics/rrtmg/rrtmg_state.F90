@@ -39,6 +39,8 @@ module rrtmg_state
      real(r8), allocatable :: tlay(:,:)     ! mid point temperature
      real(r8), allocatable :: tlev(:,:)     ! interface temperature
 
+     real(r8), allocatable :: lwdn_prev(:,:)! LM added previous timestep lwdn 
+
   end type rrtmg_state_t
 
   integer :: num_rrtmg_levs ! number of pressure levels greate than 1.e-4_r8 mbar
@@ -108,6 +110,8 @@ contains
     allocate( rstate%pintmb(pcols,num_rrtmg_levs+1) )
     allocate( rstate%tlay(pcols,num_rrtmg_levs) )
     allocate( rstate%tlev(pcols,num_rrtmg_levs+1) )
+
+    allocate( rstate%lwdn_prev(pcols,num_rrtmg_levs) ) ! LM added
 
     ncol = pstate%ncol
 
