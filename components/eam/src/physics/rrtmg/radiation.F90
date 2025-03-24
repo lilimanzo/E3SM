@@ -55,7 +55,8 @@ integer :: qrl_idx      = 0
 integer :: su_idx       = 0 
 integer :: sd_idx       = 0 
 integer :: lu_idx       = 0 
-integer :: ld_idx       = 0 
+integer :: ld_idx       = 0
+integer :: ldp_odx      = 0 ! LM added lwdn prev index
 integer :: cldfsnow_idx = 0 
 integer :: cld_idx      = 0 
 integer :: concld_idx   = 0
@@ -182,6 +183,7 @@ end subroutine radiation_readnl
 
     call pbuf_add_field('QRS' , 'global',dtype_r8,(/pcols,pver/), qrs_idx) ! shortwave radiative heating rate 
     call pbuf_add_field('QRL' , 'global',dtype_r8,(/pcols,pver/), qrl_idx) ! longwave  radiative heating rate 
+    call pbuf_add_field('LWDN_PREV','global',dtype_r8,(/pcols,pver/), ldp_idx) ! LM added lwdn prev
 
     ! If the namelist has been configured for preserving the spectral fluxes, then create
     ! physics buffer variables to store the results.
