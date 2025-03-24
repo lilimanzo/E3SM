@@ -853,6 +853,7 @@ subroutine crm_physics_tend(ztodt, state, tend, ptend, pbuf2d, cam_in, cam_out, 
             call pbuf_get_field(pbuf_chunk, pbuf_get_index('CRM_QM'), crm_qm)
             call pbuf_get_field(pbuf_chunk, pbuf_get_index('CRM_BM'), crm_bm)
             call pbuf_get_field(pbuf_chunk, crm_t_prev_idx, crm_t_prev)
+            print *, “LM test1 ” ! LM added
             call pbuf_get_field(pbuf_chunk, crm_q_prev_idx, crm_q_prev)
             call pbuf_get_field(pbuf_chunk, crm_shoc_tk_idx     , crm_shoc_tk)
             call pbuf_get_field(pbuf_chunk, crm_shoc_tkh_idx    , crm_shoc_tkh)
