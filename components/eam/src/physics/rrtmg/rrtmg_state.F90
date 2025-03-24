@@ -247,6 +247,8 @@ contains
     deallocate(rstate%tlay)
     deallocate(rstate%tlev)
 
+    deallocate(rstate%lwdn_prev) ! LM added
+
     nullify(rstate)
 
   endsubroutine rrtmg_state_destroy
