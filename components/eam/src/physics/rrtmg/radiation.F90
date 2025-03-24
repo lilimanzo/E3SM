@@ -1105,7 +1105,7 @@ end function radiation_nextsw_cday
       call pbuf_get_field(pbuf, ld_idx, ld)
     end if
 
-    call pbuf_get_field(pbug, ldp_idx, ldp) ! LM added
+    call pbuf_get_field(pbuf, ldp_idx, ldp) ! LM added
  
     if (do_aerocom_ind3) then
       cld_tau_idx = pbuf_get_index('cld_tau')
