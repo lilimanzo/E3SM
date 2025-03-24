@@ -79,6 +79,7 @@ contains
     use camsrfexch,       only: cam_in_t
     use physconst,        only: stebol
     use shr_const_mod,    only: shr_const_ocn_msv       ! LM added
+    use openacc_utils                                   ! LM added
 
     implicit none
 
