@@ -1108,30 +1108,30 @@ end function radiation_nextsw_cday
 
     !call pbuf_get_field(pbuf, ldp_idx, ldp) ! LM added
 
-    if (is_first_restart_step()) then ! LM added if statement
-       do c = begchunk,endchunk
-          call pbuf_get_field(pbuf, ldp_idx, ldp) 
-          do i = 1,ncol ! LM added loop
+    !if (is_first_restart_step()) then ! LM added if statement
+    !   do c = begchunk,endchunk
+    !      call pbuf_get_field(pbuf, ldp_idx, ldp) 
+    !      do i = 1,ncol ! LM added loop
              !do k = 1,pver
                 !m = pver-k+1
-                m = ncol-i+1
-                ldp(i,:,:) = cam_out%flwds(m) 
+    !            m = ncol-i+1
+    !            ldp(i,:,:) = cam_out%flwds(m) 
              !end do
-          end do
-       end do
-    else ! not first step
-       ncol_sum=0
-       do c=begchunk,endchunk
-          call pbuf_get_field(pbuf, ldp_idx, ldp)
-          do i = 1,ncol ! LM added loop
+    !      end do
+    !   end do
+    !else ! not first step
+    !   ncol_sum=0
+    !   do c=begchunk,endchunk
+    !      call pbuf_get_field(pbuf, ldp_idx, ldp)
+    !      do i = 1,ncol ! LM added loop
              !do k = 1,pver
                 !m = pver-k+1
-                m = ncol_sum+i
-                cam_out%flwds(m) = ldp(i)
+    !            m = ncol_sum+i
+    !            cam_out%flwds(m) = ldp(i)
              !end do
-          end do
-       end do
-    end if
+    !      end do
+    !   end do
+    !end if
 
 
     if (do_aerocom_ind3) then
