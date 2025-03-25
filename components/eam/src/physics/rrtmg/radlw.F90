@@ -38,7 +38,8 @@ CONTAINS
 subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
                         pmid    ,aer_lw_abs,cld       ,tauc_lw,       &
                         qrl     ,qrlc      ,                          &
-                        flns    ,flnt      ,flnsc     ,flntc  ,flwds, flus, & ! LM added flus and flusc
+                        flns    ,flnt      ,flnsc     ,flntc  ,flwds, &
+                        flus    ,flusc     ,flwdsp    ,               & ! LM added flus, flusc, flwdsp (flux lwdn prev)
                         flusc   ,flut    ,flutc     ,fnl       ,fcnl   ,fldsc,clm_rand_seed, &
                         lu      ,ld        )
 
@@ -83,6 +84,7 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    real(r8), intent(out) :: flntc(pcols)         ! Net clear sky outgoing flux
    real(r8), intent(out) :: flutc(pcols)         ! Upward clear-sky flux at top of model
    real(r8), intent(out) :: flwds(pcols)         ! Down longwave flux at surface
+   real(r8), intent(out) :: flwdsp(pcols)        ! LM down lw flux at surface from prev timestep
    real(r8), intent(out) :: fldsc(pcols)         ! Down longwave clear flux at surface
    real(r8), intent(out) :: fcnl(pcols,pverp)    ! clear sky net flux at interfaces
    real(r8), intent(out) :: fnl(pcols,pverp)     ! net flux at interfaces
@@ -240,6 +242,7 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    ! Heating units are converted to J/kg/s below for use in CAM. 
 
    flwds(:ncol) = dflx (:ncol,1)
+   flwdsp(:ncol)= dflx (:ncol,1)                        ! LM added
    fldsc(:ncol) = dflxc(:ncol,1)
    flns(:ncol)  = uflx (:ncol,1) - dflx (:ncol,1)
    flnsc(:ncol) = uflxc(:ncol,1) - dflxc(:ncol,1)

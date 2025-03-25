@@ -1475,8 +1475,9 @@ end function radiation_nextsw_cday
                        lchnk,        ncol,         num_rrtmg_levs,  r_state,                     &
                        state%pmid,   aer_lw_abs,   cldfprime,       c_cld_lw_abs,                &
                        qrl,          qrlc,                                                       &
-                       flns,         flnt,         flnsc,           flntc,        cam_out%flwds, & ! LM added flus and flusc
-                       flus,         flusc,        flut,         flutc,        fnl,             fcnl,         fldsc,  &
+                       flns,         flnt,         flnsc,           flntc,        cam_out%flwds, & 
+                       flus,         flusc,        flwdsp,                                       & ! LM added flus and flusc
+                       flut,         flutc,        fnl,             fcnl,         fldsc,         &
                        clm_seed,     lu,           ld                                            )
                   call t_stopf ('rad_rrtmg_lw')
 
