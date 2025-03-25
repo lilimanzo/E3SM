@@ -1126,7 +1126,7 @@ end function radiation_nextsw_cday
              !do k = 1,pver
                 !m = pver-k+1
                 m = ncol-i+1
-                cam_out%flwds(m) = ldp(i,:,:)
+                cam_out%flwds(m) = ldp(i)
              !end do
           end do
        end do
