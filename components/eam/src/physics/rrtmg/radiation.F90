@@ -1106,10 +1106,10 @@ end function radiation_nextsw_cday
       call pbuf_get_field(pbuf, ld_idx, ld)
     end if
 
-    call pbuf_get_field(pbuf, ldp_idx, ldp) ! LM added
+    !call pbuf_get_field(pbuf, ldp_idx, ldp) ! LM added
 
     if (is_first_restart_step()) then ! LM added if statement
-       do c=begchunk,endchunk
+       do c = begchunk,endchunk
           call pbuf_get_field(pbuf, ldp_idx, ldp) 
           do i = 1,ncol ! LM added loop
              !do k = 1,pver
@@ -1126,7 +1126,7 @@ end function radiation_nextsw_cday
           do i = 1,ncol ! LM added loop
              !do k = 1,pver
                 !m = pver-k+1
-                m = ncol_sum-i+1
+                m = ncol_sum+i
                 cam_out%flwds(m) = ldp(i)
              !end do
           end do
