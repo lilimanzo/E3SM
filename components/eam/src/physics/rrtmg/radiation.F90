@@ -1108,12 +1108,13 @@ end function radiation_nextsw_cday
 
     call pbuf_get_field(pbuf, ldp_idx, ldp) ! LM added
 
-    do i = 1,ncol ! LM added loop
+    if (is_first_restart_step()) then ! LM added if statement
+       do i = 1,ncol ! LM added loop
           do k = 1,pver
              m = pver-k+1
           end do
-    end do
-
+       end do
+    end if
 
 
     if (do_aerocom_ind3) then
