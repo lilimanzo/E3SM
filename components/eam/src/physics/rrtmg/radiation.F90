@@ -990,7 +990,7 @@ end function radiation_nextsw_cday
 
     ! Local variables from radctl
     integer :: i, k, iseed, ilchnk                  ! index
-    integer :: m                                    ! LM added index
+    integer :: m, c                                 ! LM added index
     integer :: istat
     integer :: clm_seed (pcols,kiss_seed_num)
     real(r8) solin(pcols)         ! Solar incident flux
@@ -1109,7 +1109,7 @@ end function radiation_nextsw_cday
     call pbuf_get_field(pbuf, ldp_idx, ldp) ! LM added
 
     if (is_first_restart_step()) then ! LM added if statement
-       do    c=begchunk,endchunk
+       do c=begchunk,endchunk
           do i = 1,ncol ! LM added loop
              do k = 1,pver
                 m = pver-k+1
