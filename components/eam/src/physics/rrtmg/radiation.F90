@@ -1113,7 +1113,7 @@ end function radiation_nextsw_cday
           do i = 1,ncol ! LM added loop
              do k = 1,pver
                 m = pver-k+1
-                ldp(i,:,k) = cam_out%lwdn(i,m) 
+                ldp(i,:,k) = cam_out%flwds(i,m) 
              end do
           end do
        end do
