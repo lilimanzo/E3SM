@@ -990,7 +990,7 @@ end function radiation_nextsw_cday
 
     ! Local variables from radctl
     integer :: i, k, iseed, ilchnk                  ! index
-    integer :: m, c                                 ! LM added index
+    integer :: m, c, ncol_sum                       ! LM added index
     integer :: istat
     integer :: clm_seed (pcols,kiss_seed_num)
     real(r8) solin(pcols)         ! Solar incident flux
@@ -1120,12 +1120,13 @@ end function radiation_nextsw_cday
           end do
        end do
     else ! not first step
+       ncol_sum=0
        do c=begchunk,endchunk
           call pbuf_get_field(pbuf, ldp_idx, ldp)
           do i = 1,ncol ! LM added loop
              !do k = 1,pver
                 !m = pver-k+1
-                m = ncol-i+1
+                m = ncol_sum-i+1
                 cam_out%flwds(m) = ldp(i)
              !end do
           end do
