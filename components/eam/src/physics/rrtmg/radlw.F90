@@ -40,7 +40,7 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
                         qrl     ,qrlc      ,                          &
                         flns    ,flnt      ,flnsc     ,flntc  ,flwds, &
                         flus    ,flusc     ,flwdsp    ,               & ! LM added flus, flusc, flwdsp (flux lwdn prev)
-                        flusc   ,flut    ,flutc     ,fnl       ,fcnl   ,fldsc,clm_rand_seed, &
+                        flut    ,flutc     ,fnl       ,fcnl   ,fldsc,clm_rand_seed, &
                         lu      ,ld        )
 
 !-----------------------------------------------------------------------
