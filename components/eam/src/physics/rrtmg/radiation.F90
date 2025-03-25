@@ -1111,10 +1111,11 @@ end function radiation_nextsw_cday
     if (is_first_restart_step()) then ! LM added if statement
        do c=begchunk,endchunk
           do i = 1,ncol ! LM added loop
-             do k = 1,pver
-                m = pver-k+1
-                ldp(i,:,k) = cam_out%flwds(i,m) 
-             end do
+             !do k = 1,pver
+                !m = pver-k+1
+                m = ncol-i+1
+                ldp(i,:,:) = cam_out%flwds(m) 
+             !end do
           end do
        end do
     end if
