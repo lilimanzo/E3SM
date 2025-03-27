@@ -58,7 +58,8 @@ module cam_cpl_indices
   integer :: index_x2a_Sf_ifrac        ! surface ice fraction            
   integer :: index_x2a_Sf_ofrac        ! surface ocn fraction            
   integer :: index_x2a_Sx_tref         ! 2m reference temperature 
-  integer :: index_x2a_Sx_tr           ! LM radiative temperature  
+  integer :: index_x2a_Sx_tr           ! LM radiative temperature 
+  integer :: index_x2a_Sx_lwdn_prev    ! LM lwdn from previous timestep 
   integer :: index_x2a_Sx_qref         ! 2m reference specific humidity  
   integer :: index_x2a_Sx_avsdr        ! albedo, visible, direct         
   integer :: index_x2a_Sx_anidr        ! albedo, near-ir, direct         
@@ -114,6 +115,7 @@ contains
     index_x2a_So_t          = mct_avect_indexra(x2a,'So_t')
     index_x2a_So_omsv       = mct_avect_indexra(x2a,'So_omsv') ! LM 
     index_x2a_Si_imsv       = mct_avect_indexra(x2a,'Si_imsv') ! LM
+    index_x2a_Si_lwdn_prev  = mct_avect_indexra(x2a,'Sx_lwdn_prev') ! LM
     index_x2a_Sl_snowh      = mct_avect_indexra(x2a,'Sl_snowh')
     index_x2a_Si_snowh      = mct_avect_indexra(x2a,'Si_snowh')
     
