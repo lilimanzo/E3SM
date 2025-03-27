@@ -59,7 +59,6 @@ module cam_cpl_indices
   integer :: index_x2a_Sf_ofrac        ! surface ocn fraction            
   integer :: index_x2a_Sx_tref         ! 2m reference temperature 
   integer :: index_x2a_Sx_tr           ! LM radiative temperature 
-  integer :: index_x2a_Sx_lwdn_prev    ! LM lwdn from previous timestep 
   integer :: index_x2a_Sx_qref         ! 2m reference specific humidity  
   integer :: index_x2a_Sx_avsdr        ! albedo, visible, direct         
   integer :: index_x2a_Sx_anidr        ! albedo, near-ir, direct         
@@ -70,6 +69,7 @@ module cam_cpl_indices
   integer :: index_x2a_Sl_fv           ! friction velocity
   integer :: index_x2a_Sl_ram1         ! aerodynamical resistance
   integer :: index_x2a_Sl_soilw        ! volumetric soil water
+  integer :: index_x2a_Faxx_lwdn_prev  ! LM added lwdn previous timestep
   integer :: index_x2a_Faxx_taux       ! wind stress, zonal              
   integer :: index_x2a_Faxx_tauy       ! wind stress, meridional         
   integer :: index_x2a_Faxx_lat        ! latent          heat flux       
@@ -115,7 +115,6 @@ contains
     index_x2a_So_t          = mct_avect_indexra(x2a,'So_t')
     index_x2a_So_omsv       = mct_avect_indexra(x2a,'So_omsv') ! LM 
     index_x2a_Si_imsv       = mct_avect_indexra(x2a,'Si_imsv') ! LM
-    index_x2a_Si_lwdn_prev  = mct_avect_indexra(x2a,'Sx_lwdn_prev') ! LM
     index_x2a_Sl_snowh      = mct_avect_indexra(x2a,'Sl_snowh')
     index_x2a_Si_snowh      = mct_avect_indexra(x2a,'Si_snowh')
     
@@ -132,6 +131,7 @@ contains
 
     index_x2a_Sx_u10        = mct_avect_indexra(x2a,'Sx_u10')
     index_x2a_Sx_u10withgusts = mct_avect_indexra(x2a,'Sx_u10withgusts')
+    index_x2a_Faxx_lwdn_prev=mct_avect_indexra(x2a,'Faxx_lwdn_prev') ! LM added
     index_x2a_Faxx_taux     = mct_avect_indexra(x2a,'Faxx_taux')
     index_x2a_Faxx_tauy     = mct_avect_indexra(x2a,'Faxx_tauy')
     index_x2a_Faxx_lat      = mct_avect_indexra(x2a,'Faxx_lat')
