@@ -698,6 +698,8 @@ end function radiation_nextsw_cday
                       standard_name='surface_downwelling_longwave_flux_in_air')
           call addfld('FLDSC'//diag(icall), horiz_only,    'A',   'W/m2', 'Clearsky Downwelling longwave flux at surface', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
+          call addfld('FLDS_PREV'//diag(icall), horiz_only,    'A',   'W/m2', 'Downwelling longwave flux at surface from prev timestep', &
+                      sampling_seq='rad_lwsw', flag_xyfill=.true.)                                                      ! LM added
           call addfld('FLNS'//diag(icall), horiz_only,    'A',    'W/m2', 'Net longwave flux at surface', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
           call addfld('FLNT'//diag(icall), horiz_only,    'A',    'W/m2', 'Net longwave flux at top of model', &
@@ -735,6 +737,7 @@ end function radiation_nextsw_cday
              call add_default('QRL'//diag(icall),   1, ' ')
              call add_default('FLNS'//diag(icall),  1, ' ')
              call add_default('FLDS'//diag(icall),  1, ' ')
+             call add_default('FLDS_PREV'//diag(icall),  1, ' ') ! LM added
              call add_default('FLNT'//diag(icall),  1, ' ')
              call add_default('FLUS'//diag(icall),  1, ' ') ! LM added
              call add_default('FLUSC'//diag(icall), 1, ' ') ! LM added
