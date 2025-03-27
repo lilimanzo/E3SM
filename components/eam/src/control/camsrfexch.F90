@@ -109,6 +109,7 @@ module camsrfexch
      real(r8), allocatable :: sst(:)        ! sea surface temp
      real(r8), allocatable :: msv(:)        ! sea surface emissivity  LM
      real(r8), allocatable :: imsv(:)       ! sea ice emissivity  LM
+     real(r8), allocatable :: lwdn_prev(:)  ! LWDN from previous timestep LM
      real(r8), allocatable :: tr(:)         ! radiative temperature LM
      real(r8), allocatable :: snowhland(:)  ! snow depth (liquid water equivalent) over land
      real(r8), allocatable :: snowhice(:)   ! snow depth over ice
@@ -240,6 +241,9 @@ CONTAINS
 
        allocate (cam_in(c)%imsv(pcols), stat=ierror)
        if ( ierror /= 0 ) call endrun('HUB2ATM_ALLOC error: allocation error imsv') ! LM
+
+       allocate (cam_in(c)%lwdn_prev(pcols), stat=ierror)
+       if ( ierror /= 0 ) call endrun('HUB2ATM_ALLOC error: allocation error lwdn_prev') ! LM
        
        allocate (cam_in(c)%tr(pcols), stat=ierror)
        if ( ierror /= 0 ) call endrun('HUB2ATM_ALLOC error: allocation error tr') ! LM
@@ -330,6 +334,7 @@ CONTAINS
        cam_in(c)%msv      (:) = 0._r8  ! LM
        cam_in(c)%snowhland(:) = 0._r8
        cam_in(c)%imsv     (:) = 0._r8  ! LM
+       cam_in(c)%lwdn_prev(:) = 0._r8  ! LM
        cam_in(c)%tr       (:) = 0._r8  ! LM
        cam_in(c)%snowhice (:) = 0._r8
        cam_in(c)%fco2_lnd (:) = 0._r8
@@ -643,6 +648,7 @@ CONTAINS
           deallocate(cam_in(c)%msv) ! LM
           deallocate(cam_in(c)%snowhland)
           deallocate(cam_in(c)%imsv) ! LM
+          deallocate(cam_in(c)%lwdn_prev) ! LM
           deallocate(cam_in(c)%tr)   ! LM
           deallocate(cam_in(c)%snowhice)
           deallocate(cam_in(c)%fco2_lnd)

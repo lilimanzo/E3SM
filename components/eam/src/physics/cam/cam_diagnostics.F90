@@ -2195,8 +2195,9 @@ subroutine diag_surf (cam_in, cam_out, ps, trefmxav, trefmnav )
 
     call outfld('TBOT',     cam_out%tbot,     pcols, lchnk)
     call outfld('TS',       cam_in%ts,        pcols, lchnk)
-    call outfld('MSV_LM',   cam_in%msv,       pcols, lchnk) 
-    call outfld('IMSV_LM',  cam_in%imsv,      pcols, lchnk)
+    call outfld('MSV_LM',   cam_in%msv,       pcols, lchnk) ! LM  
+    call outfld('IMSV_LM',  cam_in%imsv,      pcols, lchnk) ! LM 
+    !call outfld('FLDS_PREV',cam_in%lwup_prev, pcols, lchnk) ! LM
     call outfld('TR',       cam_in%tr,        pcols, lchnk) ! LM
     call outfld('TSMN',     cam_in%ts,        pcols, lchnk)
     call outfld('TSMX',     cam_in%ts,        pcols, lchnk)
