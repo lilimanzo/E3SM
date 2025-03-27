@@ -1007,6 +1007,7 @@ end function radiation_nextsw_cday
     real(r8) flut(pcols)          ! Upward flux at top of model
     real(r8) flus(pcols)          ! LM added Upward flux at surface
     real(r8) flusc(pcols)         ! LM added Clear sky Upward flux at surface
+    real(r8) fldsp(pcols)         ! LM added lwdn surface previous timestep
     real(r8) lwcf(pcols)          ! longwave cloud forcing
     real(r8) swcf(pcols)          ! shortwave cloud forcing
     real(r8) flutc(pcols)         ! Upward Clear Sky flux at top of model
@@ -1476,7 +1477,7 @@ end function radiation_nextsw_cday
                        state%pmid,   aer_lw_abs,   cldfprime,       c_cld_lw_abs,                &
                        qrl,          qrlc,                                                       &
                        flns,         flnt,         flnsc,           flntc,        cam_out%flwds, & 
-                       flus,         flusc,        flwdsp,                                       & ! LM added flus and flusc
+                       flus,         flusc,        flwdsp,                                       & ! LM added flus, flusc, fldsp
                        flut,         flutc,        fnl,             fcnl,         fldsc,         &
                        clm_seed,     lu,           ld                                            )
                   call t_stopf ('rad_rrtmg_lw')
