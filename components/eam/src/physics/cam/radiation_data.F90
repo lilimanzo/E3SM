@@ -39,6 +39,7 @@ module radiation_data
        aldir_pos_fldn = 'rad_aldir_pos   ' , &
        aldif_pos_fldn = 'rad_aldif_pos   ' , &
        lwup_fldn      = 'rad_lwup        ' , &
+       lwdn_prev_fldn = 'rad_lwdn_prev   ' , & ! LM added
        ts_fldn        = 'rad_ts          ' , &
        temp_fldn      = 'rad_temp        ' , &
        pdel_fldn      = 'rad_pdel        ' , &
@@ -192,6 +193,8 @@ contains
     
     call addfld (lwup_fldn,     horiz_only,    rad_data_avgflag,   'W/m2',&
          'radiation input: long wave up radiation flux ')
+    call addfld (lwdn_prev_fldn,horiz_only,    rad_data_avgflag,   'W/m2',&     ! LM added
+         'radiation input: long wave down previous timestep radiation flux ')   ! LM added
     call addfld (ts_fldn,        horiz_only,    rad_data_avgflag,     'K',&
          'radiation input: surface temperature')
 
@@ -269,6 +272,7 @@ contains
     call add_default (aldif_pos_fldn, rad_data_histfile_num, ' ')
 
     call add_default (lwup_fldn,      rad_data_histfile_num, ' ')
+    call add_default (lwdn_prev_fldn, rad_data_histfile_num, ' ')  ! LM added
     call add_default (ts_fldn,        rad_data_histfile_num, ' ')
     call add_default (temp_fldn,      rad_data_histfile_num, ' ')
     call add_default (pdel_fldn,      rad_data_histfile_num, ' ')
@@ -417,6 +421,7 @@ contains
     call outfld(aldif_pos_fldn, aldif_pos, pcols, lchnk   )
 
     call outfld(lwup_fldn,  cam_in%lwup,  pcols, lchnk   )
+    call outfld(lwdn_prev_fldn,  cam_in%lwdn_prev,  pcols, lchnk   ) ! LM added
     call outfld(ts_fldn,    cam_in%ts,    pcols, lchnk   )
 
     itim_old = pbuf_old_tim_idx()
