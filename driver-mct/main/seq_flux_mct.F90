@@ -79,7 +79,6 @@ module seq_flux_mct
   real(r8), allocatable :: ocnsal (:) ! ocean salinity
   real(r8), allocatable :: uGust  (:) ! wind gust
   real(r8), allocatable :: lwdn   (:) ! long  wave, downward
-  real(r8), allocatable :: lwdn_prev(:) ! LM lwdn from previous timestep 
   real(r8), allocatable :: swdn   (:) ! short wave, downward
   real(r8), allocatable :: swup   (:) ! short wave, upward
   real(r8), allocatable :: prec   (:) ! precip
