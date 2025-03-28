@@ -62,6 +62,7 @@ module seq_flux_mct
   real(r8), allocatable ::  sen  (:)  ! heat flux: sensible
   real(r8), allocatable ::  lat  (:)  ! heat flux: latent
   real(r8), allocatable ::  lwup (:)  ! lwup over ocean
+  real(r8), allocatable ::  lwdn_prev(:) ! LM added lwdn previous timestep
   real(r8), allocatable ::  radtemp (:)  ! LM added ocean radiative temperature
   real(r8), allocatable ::  evap (:)  ! water flux: evaporation
   real(r8), allocatable ::  evap_16O (:) !H2O flux: evaporation
@@ -169,6 +170,7 @@ module seq_flux_mct
   integer :: index_xao_Faox_evap_HDO
   integer :: index_xao_Faox_evap_18O
   integer :: index_xao_Faox_lwup
+  integer :: index_x2a_Faxx_lwdn_prev ! LM added 
   integer :: index_xao_So_radtemp ! LM added radiative temp
   integer :: index_xao_Faox_swdn
   integer :: index_xao_Faox_swup
@@ -335,6 +337,9 @@ contains
     allocate(lwup(nloc),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate lwup',ier)
     lwup = 0.0_r8
+    allocate(lwdn_prev(nloc),stat=ier)                               ! LM added
+    if(ier/=0) call mct_die(subName,'allocate lwdn_prev',ier)        ! LM added
+    lwdn_prev = 0.0_r8                                               ! LM added
     allocate(radtemp(nloc),stat=ier)                            ! LM added
     if(ier/=0) call mct_die(subName,'allocate radtemp',ier)     ! LM added
     radtemp = 0.0_r8                                            ! LM added
@@ -750,6 +755,8 @@ contains
     if(ier/=0) call mct_die(subName,'allocate evap_18O',ier)
     allocate(lwup(nloc_a2o),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate lwup',ier)
+    allocate(lwdn_prev(nloc_a2o),stat=ier)                  ! LM added
+    if(ier/=0) call mct_die(subName,'allocate lwdn_prev',ier)! LM added
     allocate(radtemp(nloc_a2o),stat=ier)                    ! LM added
     if(ier/=0) call mct_die(subName,'allocate radtemp',ier) ! LM added
     allocate(taux(nloc_a2o),stat=ier)
