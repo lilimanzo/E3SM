@@ -33,11 +33,11 @@ atmosphere_processes:
   physics:
     atm_procs_list: [mac_mic,rrtmgp]
     schedule_type: Sequential
-    type: Group
+    type: group
     mac_mic:
       atm_procs_list: [shoc,CldFraction,mam4_optics,p3]
       schedule_type: Sequential
-      type: Group
+      type: group
       number_of_subcycles: ${MAC_MIC_SUBCYCLES}
       mam4_optics:
        mam4_mode1_physical_properties_file : ${SCREAM_DATA_DIR}/mam4xx/physprops/mam4_mode1_rrtmg_aeronetdust_c20240206.nc
