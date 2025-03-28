@@ -35,7 +35,9 @@ grids_manager:
     number_of_vertical_levels:  72
 
 initial_conditions:
-  Filename: ${SCREAM_DATA_DIR}/init/scream_unit_tests_aerosol_optics_ne2np4L72_20220822.nc
+  # The name of the file containing the initial conditions for this test.
+  filename: ${SCREAM_DATA_DIR}/init/${EAMxx_tests_IC_FILE_MAM4xx_72lev}
+  topography_filename: ${TOPO_DATA_DIR}/${EAMxx_tests_TOPO_FILE}
   pbl_height : 1.0
   phis : 1.0
 
