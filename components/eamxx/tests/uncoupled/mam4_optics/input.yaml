@@ -26,9 +26,10 @@ atmosphere_processes:
     mam4_mom_physical_properties_file : ${SCREAM_DATA_DIR}/mam4xx/physprops/poly_rrtmg_c20240206.nc
 
 grids_manager:
-  Type: Mesh Free
-  grids_names: [Physics]
-  Physics:
+  type: Mesh Free
+  geo_data_source: IC_FILE
+  grids_names: [Physics GLL]
+  Physics GLL:
     type: point_grid
     number_of_global_columns:   218
     number_of_vertical_levels:  72
