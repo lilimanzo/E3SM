@@ -664,7 +664,7 @@ subroutine diag_init()
        standard_name = 'surface_temperature')
    call addfld ('MSV_LM',horiz_only, 'A','K','LM ocean emissivity')
    call addfld ('IMSV_LM',horiz_only, 'A','K','LM sea ice emissivity')
-   call addfld ('FLDS_PREV',horiz_only,'A','K','LM lwdn previous timestep') ! LM added
+   !call addfld ('FLDS_PREV',horiz_only,'A','K','LM lwdn previous timestep') ! LM added
    call addfld ('TR',horiz_only, 'A','K','LM sea radiative temperature')
    call addfld ('TSMN',horiz_only,    'M','K','Minimum surface temperature over output period')
    call addfld ('TSMX',horiz_only,    'X','K','Maximum surface temperature over output period')
