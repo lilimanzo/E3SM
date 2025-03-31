@@ -1429,6 +1429,7 @@ contains
          iceVolumeCategory, &
          snowVolumeCategory, &
          surfaceTemperature, &
+         TAF, & ! LM added
          radiativeTemperature, & ! LM added
          levelIceArea, &
          levelIceVolume, &
@@ -1529,6 +1530,7 @@ contains
        call MPAS_pool_get_array(tracers, "iceVolumeCategory", iceVolumeCategory, 1)
        call MPAS_pool_get_array(tracers, "snowVolumeCategory", snowVolumeCategory, 1)
        call MPAS_pool_get_array(tracers, "surfaceTemperature", surfaceTemperature, 1)
+       call MPAS_pool_get_array(tracers, "TAF", TAF, 1) ! LM added
        call MPAS_pool_get_array(tracers, "radiativeTemperature", radiativeTemperature, 1) ! LM added
        call MPAS_pool_get_array(tracers, "snowEnthalpy", snowEnthalpy, 1)
        call MPAS_pool_get_array(tracers, "iceEnthalpy", iceEnthalpy, 1)
@@ -1754,7 +1756,7 @@ contains
                vsnon=snowVolumeCategory(1,:,iCell), &
                uvel=uVelocityCell(iCell), &
                vvel=vVelocityCell(iCell), &
-               Tsfc=radiativeTemperature(1,:,iCell), &
+               Tsfc=surfaceTemperature(1,:,iCell), &
                Tr=radiativeTemperature(1,:,iCell), & ! LM added
                zqsn=snowEnthalpy(:,:,iCell), &
                zqin=iceEnthalpy(:,:,iCell), &
@@ -1871,7 +1873,7 @@ contains
                mlt_onset=meltOnset(iCell), &
                frz_onset=freezeOnset(iCell), &
                yday=dayOfYear, &
-               prescribed_ice=config_use_prescribed_ice)!, & 697
+               prescribed_ice=config_use_prescribed_ice,taf=TAF(iCell))!, & 697
                !TsfKr=radiativeTemperature(iCell)) ! LM added line
 
           abortFlag = icepack_warnings_aborted()
