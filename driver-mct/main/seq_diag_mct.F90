@@ -180,7 +180,8 @@ module seq_diag_mct
   integer(in),parameter :: f_wioff_HDO =44     ! water: frozen runoff
   integer(in),parameter :: f_hlwdn_prev=45     ! LM added lwdn flux prev
 
-  integer(in),parameter :: f_size     = f_wioff_HDO   ! Total array size of all elements
+  !integer(in),parameter :: f_size     = f_wioff_HDO   ! Total array size of all elements
+  integer(in),parameter :: f_size     = f_hlwdn_prev  ! LM modified array size
   integer(in),parameter :: f_a        = f_area        ! 1st index for area
   integer(in),parameter :: f_a_end    = f_area        ! last index for area
   integer(in),parameter :: f_h        = f_hfrz        ! 1st index for heat
