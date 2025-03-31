@@ -1366,7 +1366,7 @@ contains
          surfaceConductiveFlux, &
          absorbedShortwaveFlux, &
          longwaveUp, &
-         TAF, & ! LM
+         !TAF, & ! LM
          longwaveDown, &
          solarZenithAngleCosine, &
          sensibleHeatFlux, &
@@ -1631,7 +1631,7 @@ contains
        call MPAS_pool_get_array(atmos_fluxes, "surfaceConductiveFlux", surfaceConductiveFlux)
        call MPAS_pool_get_array(atmos_fluxes, "surfaceConductiveFluxCategory", surfaceConductiveFluxCategory)
        call MPAS_pool_get_array(atmos_fluxes, "longwaveUp", longwaveUp)
-       call MPAS_pool_get_array(atmos_fluxes, "TAF", TAF) ! LM added
+       !call MPAS_pool_get_array(atmos_fluxes, "TAF", TAF) ! LM added
        call MPAS_pool_get_array(atmos_fluxes, "sensibleHeatFlux", sensibleHeatFlux)
        call MPAS_pool_get_array(atmos_fluxes, "sensibleHeatFluxCategory", sensibleHeatFluxCategory)
        call MPAS_pool_get_array(atmos_fluxes, "latentHeatFlux", latentHeatFlux)
@@ -1875,7 +1875,7 @@ contains
                mlt_onset=meltOnset(iCell), &
                frz_onset=freezeOnset(iCell), &
                yday=dayOfYear, &
-               prescribed_ice=config_use_prescribed_ice,taf=TAF(iCell))!, & 697
+               prescribed_ice=config_use_prescribed_ice)!, & 697
                !TsfKr=radiativeTemperature(iCell)) ! LM added line
 
           abortFlag = icepack_warnings_aborted()
