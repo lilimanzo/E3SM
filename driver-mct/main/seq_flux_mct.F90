@@ -754,8 +754,8 @@ contains
     if(ier/=0) call mct_die(subName,'allocate evap_18O',ier)
     allocate(lwup(nloc_a2o),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate lwup',ier)
-    allocate(lwdn_prev(nloc_a2o),stat=ier)                  ! LM added
-    if(ier/=0) call mct_die(subName,'allocate lwdn_prev',ier)! LM added
+    !allocate(lwdn_prev(nloc_a2o),stat=ier)                  ! LM added
+    !if(ier/=0) call mct_die(subName,'allocate lwdn_prev',ier)! LM added
     allocate(radtemp(nloc_a2o),stat=ier)                    ! LM added
     if(ier/=0) call mct_die(subName,'allocate radtemp',ier) ! LM added
     allocate(taux(nloc_a2o),stat=ier)
