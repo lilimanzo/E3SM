@@ -1873,7 +1873,7 @@ contains
                mlt_onset=meltOnset(iCell), &
                frz_onset=freezeOnset(iCell), &
                yday=dayOfYear, &
-               prescribed_ice=config_use_prescribed_ice,taf=TAF(iCell))!, & 697
+               prescribed_ice=config_use_prescribed_ice,taf=TAF(1,:,iCell))!, & 697
                !TsfKr=radiativeTemperature(iCell)) ! LM added line
 
           abortFlag = icepack_warnings_aborted()
