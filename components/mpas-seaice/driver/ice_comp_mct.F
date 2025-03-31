@@ -2915,13 +2915,13 @@ contains
                  pondLidThicknessCell(i), &
                  pondAreaCell(i),         &
                  config_use_topo_meltponds)
-            call time_adjustment_factor (& ! LM added call
-                 taf,                     &
-                 fcheck,                  &
-                 longwaveDown(i),         &
-                 longwaveUp(i),           &
-                 !radiativeTemperature(i), & ! 697
-                 Tsrf                     )
+            !call time_adjustment_factor (& ! LM added call
+            !     taf,                     &
+            !     fcheck,                  &
+            !     longwaveDown(i),         &
+            !     longwaveUp(i),           &
+            !     !radiativeTemperature(i), & ! 697
+            !     Tsrf                     )
          endif
 
          ! wind stress  (on T-grid:  convert to lat-lon)
