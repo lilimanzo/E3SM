@@ -178,6 +178,7 @@ module seq_diag_mct
   integer(in),parameter :: f_wevap_HDO =42     ! water: evaporation
   integer(in),parameter :: f_wroff_HDO =43     ! water: runoff/flood
   integer(in),parameter :: f_wioff_HDO =44     ! water: frozen runoff
+  integer(in),parameter :: f_hlwdn_prev=45     ! LM added lwdn flux prev
 
   integer(in),parameter :: f_size     = f_wioff_HDO   ! Total array size of all elements
   integer(in),parameter :: f_a        = f_area        ! 1st index for area
@@ -208,7 +209,7 @@ module seq_diag_mct
        ' wfreeze_18O','   wmelt_18O','   wrain_18O','   wsnow_18O',                &
        '   wevap_18O',' wrunoff_18O',' wfrzrof_18O',                               &
        ' wfreeze_HDO','   wmelt_HDO','   wrain_HDO','   wsnow_HDO',                &
-       '   wevap_HDO',' wrunoff_HDO',' wfrzrof_HDO'/)
+       '   wevap_HDO',' wrunoff_HDO',' wfrzrof_HDO', 'hlwdn_prev'/) ! LM added hwldn_prev
 
   !--- P for period ---
 
@@ -256,6 +257,7 @@ module seq_diag_mct
   integer :: index_a2x_Faxa_snowl
 
   integer :: index_x2a_Faxx_lwup
+  integer :: index_x2a_Faxx_lwdn_prev ! LM added
   integer :: index_x2a_Faxx_lat
   integer :: index_x2a_Faxx_sen
   integer :: index_x2a_Faxx_evap
@@ -802,6 +804,7 @@ contains
     if (present(do_x2a)) then
        if (first_time) then
           index_x2a_Faxx_lwup   = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
+          index_x2a_Faxx_lwdn_prev=mct_aVect_indexRA(x2a_a,'Faxx_lwdn_prev') ! LM added
           index_x2a_Faxx_lat    = mct_aVect_indexRA(x2a_a,'Faxx_lat')
           index_x2a_Faxx_sen    = mct_aVect_indexRA(x2a_a,'Faxx_sen')
           index_x2a_Faxx_evap   = mct_aVect_indexRA(x2a_a,'Faxx_evap')
