@@ -183,7 +183,7 @@ end subroutine radiation_readnl
 
     call pbuf_add_field('QRS' , 'global',dtype_r8,(/pcols,pver/), qrs_idx) ! shortwave radiative heating rate 
     call pbuf_add_field('QRL' , 'global',dtype_r8,(/pcols,pver/), qrl_idx) ! longwave  radiative heating rate 
-    call pbuf_add_field('FLDS_PREV','global',dtype_r8,(/pcols,pver/), ldp_idx) ! LM added lwdn prev
+    !call pbuf_add_field('FLDS_PREV','global',dtype_r8,(/pcols,pver/), ldp_idx) ! LM added lwdn prev
 
     ! If the namelist has been configured for preserving the spectral fluxes, then create
     ! physics buffer variables to store the results.
@@ -698,8 +698,8 @@ end function radiation_nextsw_cday
                       standard_name='surface_downwelling_longwave_flux_in_air')
           call addfld('FLDSC'//diag(icall), horiz_only,    'A',   'W/m2', 'Clearsky Downwelling longwave flux at surface', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
-          call addfld('FLDS_PREV'//diag(icall), horiz_only,    'A',   'W/m2', 'Downwelling longwave flux at surface from prev timestep', &
-                      sampling_seq='rad_lwsw', flag_xyfill=.true.)                                                      ! LM added
+          !call addfld('FLDS_PREV'//diag(icall), horiz_only,    'A',   'W/m2', 'Downwelling longwave flux at surface from prev timestep', &
+          !            sampling_seq='rad_lwsw', flag_xyfill=.true.)                                                      ! LM added
           call addfld('FLNS'//diag(icall), horiz_only,    'A',    'W/m2', 'Net longwave flux at surface', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
           call addfld('FLNT'//diag(icall), horiz_only,    'A',    'W/m2', 'Net longwave flux at top of model', &
@@ -737,7 +737,7 @@ end function radiation_nextsw_cday
              call add_default('QRL'//diag(icall),   1, ' ')
              call add_default('FLNS'//diag(icall),  1, ' ')
              call add_default('FLDS'//diag(icall),  1, ' ')
-             call add_default('FLDS_PREV'//diag(icall),  1, ' ') ! LM added
+             !call add_default('FLDS_PREV'//diag(icall),  1, ' ') ! LM added- try removing
              call add_default('FLNT'//diag(icall),  1, ' ')
              call add_default('FLUS'//diag(icall),  1, ' ') ! LM added
              call add_default('FLUSC'//diag(icall), 1, ' ') ! LM added
@@ -1499,7 +1499,7 @@ end function radiation_nextsw_cday
                   call outfld('FLUT'//diag(icall),flut  ,pcols,lchnk)
                   call outfld('FLUS'//diag(icall),flus  ,pcols,lchnk) ! LM added
                   call outfld('FLUSC'//diag(icall),flusc,pcols,lchnk) ! LM added
-                  call outfld('FLDS_PREV'//diag(icall),cam_in%lwdn_prev,pcols,lchnk) ! LM added
+                  !call outfld('FLDS_PREV'//diag(icall),cam_in%lwdn_prev,pcols,lchnk) ! LM added
                   call outfld('FLUTC'//diag(icall),flutc ,pcols,lchnk)
                   call outfld('FLNTC'//diag(icall),flntc ,pcols,lchnk)
                   call outfld('FLNS'//diag(icall),flns  ,pcols,lchnk)
