@@ -297,6 +297,7 @@ contains
     !integer  :: index_x2a_Sx_mmsv               ! LM added
     !integer  :: index_x2a_Sx_t                  ! LM added
     !integer  :: index_x2a_Faxx_lwup             ! LM added
+    integer  :: index_a2x_Faxa_lwdn             ! LM added
     integer  :: index_x2a_Faxx_lwdn_prev        ! LM added
     character(CL),allocatable :: field_atm(:)   ! string converted to char
     character(CL),allocatable :: field_lnd(:)   ! string converted to char
