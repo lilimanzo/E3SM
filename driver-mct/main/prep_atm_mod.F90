@@ -271,7 +271,7 @@ contains
 
   !================================================================================================
 
-  subroutine prep_atm_merge( l2x_a, o2x_a, xao_a, i2x_a, fractions_a, x2a_a, a2x_a )
+  subroutine prep_atm_merge( l2x_a, o2x_a, xao_a, i2x_a, fractions_a, x2a_a ) ! LM added a2x_a
 
     !-----------------------------------------------------------------------
     !
