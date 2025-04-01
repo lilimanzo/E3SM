@@ -295,6 +295,7 @@ contains
     !integer  :: index_x2a_Sx_mmsv               ! LM added
     !integer  :: index_x2a_Sx_t                  ! LM added
     !integer  :: index_x2a_Faxx_lwup             ! LM added
+    integer  :: index_x2a_Faxx_lwdn_prev        ! LM added
     character(CL),allocatable :: field_atm(:)   ! string converted to char
     character(CL),allocatable :: field_lnd(:)   ! string converted to char
     character(CL),allocatable :: field_ice(:)   ! string converted to char
@@ -313,6 +314,7 @@ contains
     type(mct_aVect_sharedindices),save :: o2x_sharedindices
     type(mct_aVect_sharedindices),save :: i2x_sharedindices
     type(mct_aVect_sharedindices),save :: xao_sharedindices
+    type(mct_avect), pointer         :: a2x_ax ! LM added
     logical, pointer, save :: lmerge(:),imerge(:),xmerge(:),omerge(:),lstate(:)
     integer, pointer, save :: lindx(:), iindx(:), oindx(:),xindx(:)
     integer, save          :: naflds, nlflds,niflds,noflds,nxflds
@@ -526,6 +528,7 @@ contains
        x2a_a%rAttr(index_x2a_Sf_ifrad,n) = fractions_a%Rattr(kifr,n)  ! LM added
        x2a_a%rAttr(index_x2a_Sf_ofrad,n) = fractions_a%Rattr(kofr,n)  ! LM added
        !x2a_a%rAttr(index_x2a_Sx_mmsv,n)  = x2a_a%rAttr(index_x2a_Faxx_lwup,n) !1.0_r8 ! LM added
+       x2a_a%rAttr(index_x2a_Faxx_lwdn_prev,n)=a2x_a%rAttr(index_a2x_Faxa_lwdn,n) ! LM added
     end do
 
     !--- document fraction operations ---
