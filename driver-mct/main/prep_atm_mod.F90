@@ -518,6 +518,7 @@ contains
     index_x2a_Sf_ifrac = mct_aVect_indexRA(x2a_a,'Sf_ifrac')
     index_x2a_Sf_ofrac = mct_aVect_indexRA(x2a_a,'Sf_ofrac')
     !index_x2a_Sx_mmsv  = mct_aVect_indexRA(x2a_a,'Sx_mmsv')  ! LM added
+    index_a2x_Faxa_lwdn=mct_aVect_indexRA(a2x_a,'Faxa_lwdn')  ! LM added
 
     index_x2a_Sf_ifrad = mct_aVect_indexRA(x2a_a,'Sf_ifrad')  ! LM added
     index_x2a_Sf_ofrad = mct_aVect_indexRA(x2a_a,'Sf_ofrad')  ! LM added
