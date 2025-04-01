@@ -245,7 +245,7 @@ contains
     ! Local Variables
     integer                  :: eli, eoi, eii, exi, efi, eai, emi
     type(mct_avect), pointer :: x2a_ax
-    type(mct_avect), pointer :: a2x_ax ! LM added
+    !type(mct_avect), pointer :: a2x_ax ! LM added
     character(*), parameter  :: subname = '(prep_atm_mrg)'
     character(*), parameter  :: F00 = "('"//subname//" : ', 4A )"
     !---------------------------------------------------------------
@@ -261,9 +261,9 @@ contains
        emi = mod((eai-1),num_inst_max) + 1
 
        x2a_ax => component_get_x2c_cx(atm(eai)) ! This is actually modifying x2a_ax
-       a2x_ax => component_get_x2c_cx(atm(eai)) ! LM added
+       !a2x_ax => component_get_x2c_cx(atm(eai)) ! LM added
        call prep_atm_merge(l2x_ax(eli), o2x_ax(emi), xao_ax(exi), i2x_ax(eii), &
-            fractions_ax(efi), x2a_ax, a2x_ax) ! LM added a2x_ax
+            fractions_ax(efi), x2a_ax) ! LM added a2x_ax
     enddo
     call t_drvstopf  (trim(timer_mrg))
 
@@ -298,7 +298,7 @@ contains
     !integer  :: index_x2a_Sx_t                  ! LM added
     !integer  :: index_x2a_Faxx_lwup             ! LM added
     integer  :: index_a2x_Faxa_lwdn             ! LM added
-    integer  :: index_x2a_Faxx_lwdn_prev        ! LM added
+    !integer  :: index_x2a_Faxx_lwdn_prev        ! LM added
     character(CL),allocatable :: field_atm(:)   ! string converted to char
     character(CL),allocatable :: field_lnd(:)   ! string converted to char
     character(CL),allocatable :: field_ice(:)   ! string converted to char
@@ -519,7 +519,7 @@ contains
     index_x2a_Sf_ifrac = mct_aVect_indexRA(x2a_a,'Sf_ifrac')
     index_x2a_Sf_ofrac = mct_aVect_indexRA(x2a_a,'Sf_ofrac')
     !index_x2a_Sx_mmsv  = mct_aVect_indexRA(x2a_a,'Sx_mmsv')  ! LM added
-    index_a2x_Faxa_lwdn=mct_aVect_indexRA(a2x_a,'Faxa_lwdn')  ! LM added
+    !index_a2x_Faxa_lwdn=mct_aVect_indexRA(a2x_a,'Faxa_lwdn')  ! LM added
 
     index_x2a_Sf_ifrad = mct_aVect_indexRA(x2a_a,'Sf_ifrad')  ! LM added
     index_x2a_Sf_ofrad = mct_aVect_indexRA(x2a_a,'Sf_ofrad')  ! LM added
@@ -532,7 +532,7 @@ contains
        x2a_a%rAttr(index_x2a_Sf_ifrad,n) = fractions_a%Rattr(kifr,n)  ! LM added
        x2a_a%rAttr(index_x2a_Sf_ofrad,n) = fractions_a%Rattr(kofr,n)  ! LM added
        !x2a_a%rAttr(index_x2a_Sx_mmsv,n)  = x2a_a%rAttr(index_x2a_Faxx_lwup,n) !1.0_r8 ! LM added
-       x2a_a%rAttr(index_x2a_Faxx_lwdn_prev,n)=a2x_a%rAttr(index_a2x_Faxa_lwdn,n) ! LM added
+       !x2a_a%rAttr(index_x2a_Faxx_lwdn_prev,n)=a2x_a%rAttr(index_a2x_Faxa_lwdn,n) ! LM added
     end do
 
     !--- document fraction operations ---
