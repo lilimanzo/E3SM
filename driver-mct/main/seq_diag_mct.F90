@@ -2704,7 +2704,7 @@ contains
         integer     :: index_x2a_Faxx_lwup      ! LW UP
         integer     :: index_a2x_Faxa_lwdn      ! LW DN
         integer     :: index_a2x_Faxa_lwdn_prev ! LW DN from previous timestep
-        integer     :: index_x2a_Faxx_lwdn_prev ! LW DN from previous timestep 2nd approach
+        !integer     :: index_x2a_Faxx_lwdn_prev ! LW DN from previous timestep 2nd approach
         integer     :: index_x2a_Sx_saf         ! saf
         integer     :: index_x2a_Si_taf         ! sea ice TAF
         integer     :: index_x2a_Sl_taf         ! land TAF
@@ -2724,7 +2724,7 @@ contains
         
         index_x2a_Faxx_lwup = mct_aVect_indexRA(x2a_a,'Faxx_lwup')
         index_a2x_Faxa_lwdn = mct_aVect_indexRA(a2x_a,'Faxa_lwdn')
-        index_x2a_Faxx_lwdn_prev = mct_aVect_indexRA(x2a_a,'Faxx_lwdn_prev')
+        !index_x2a_Faxx_lwdn_prev = mct_aVect_indexRA(x2a_a,'Faxx_lwdn_prev')
         index_a2x_Faxa_lwdn_prev = mct_aVect_indexRA(a2x_a,'Faxa_lwdn_prev')
         index_x2a_Sx_saf    = mct_aVect_indexRA(x2a_a,'Sx_saf')
         index_x2a_Si_taf    = mct_aVect_indexRA(x2a_a,'Si_taf')
@@ -2793,7 +2793,8 @@ contains
 
                 ! update lwdn_prev
                 a2x_a % rAttr(index_a2x_Faxa_lwdn_prev, n) = a2x_a % rAttr(index_a2x_Faxa_lwdn, n)
-                x2a_a % rAttr(index_x2a_Faxx_lwdn_prev, n) = a2x_a % rAttr(index_a2x_Faxa_lwdn, n)
+                
+                !x2a_a % rAttr(index_x2a_Faxx_lwdn_prev, n) = a2x_a % rAttr(index_a2x_Faxa_lwdn, n)
         enddo
 
   end subroutine seq_diag_saf
