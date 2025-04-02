@@ -2805,20 +2805,23 @@ contains
         use shr_const_mod, only : shr_const_ocn_msv, shr_const_stebol
 
         ! Input parameters
-        type(component_type), intent(in)  :: atm(:) ! component type for instance1
-        type(mct_aVect), intent(in)       :: frac_a ! frac bundle
-        type(mct_aVect), pointer          :: a2x_a 
-        type(mct_aVect), pointer          :: x2a_a 
+        type(component_type), intent(in)  :: atm   (:) ! component type for instance1
+        type(mct_aVect), intent(in)       :: frac_a(:) ! frac bundle
+        !type(mct_aVect), pointer          :: a2x_a (:) 
+        !type(mct_aVect), pointer          :: x2a_a (:) 
 
         ! Output parameters
         !real, intent(out)    :: saf                 ! spatial adjustment factor
         
         ! Public data members
         ! Local variables
+        type(mct_avect), pointer :: x2a_a       ! x2a
+        type(mct_avect), pointer :: a2x_a       ! a2x
         integer     :: index_a2x_Faxa_lwdn      ! LW DN
         integer     :: index_x2a_Faxx_lwdn_prev ! LW DN from previous timestep 2nd approach
         integer     :: lSize                    ! aVect size
         integer     :: n                        ! generic index
+        integer     :: eai                      ! number of atmosphere instances
 
         a2x_a => component_get_c2x_cx(atm)
         x2a_a => component_get_x2c_cx(atm)
