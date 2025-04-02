@@ -39,7 +39,7 @@ module rrtmg_state
      real(r8), allocatable :: tlay(:,:)     ! mid point temperature
      real(r8), allocatable :: tlev(:,:)     ! interface temperature
 
-     real(r8), allocatable :: lwdn_prev(:,:)! LM added previous timestep lwdn 
+     !real(r8), allocatable :: lwdn_prev(:,:)! LM added previous timestep lwdn 
 
   end type rrtmg_state_t
 
@@ -114,8 +114,8 @@ contains
     allocate( rstate%tlay(pcols,num_rrtmg_levs) )
     allocate( rstate%tlev(pcols,num_rrtmg_levs+1) )
 
-    allocate( rstate%lwdn_prev(pcols,num_rrtmg_levs) ) ! LM added
-    call prefetch(rstate%lwdn_prev)                    ! LM added
+    !allocate( rstate%lwdn_prev(pcols,num_rrtmg_levs) ) ! LM added
+    !call prefetch(rstate%lwdn_prev)                    ! LM added
 
     ncol = pstate%ncol
 
@@ -251,7 +251,7 @@ contains
     deallocate(rstate%tlay)
     deallocate(rstate%tlev)
 
-    deallocate(rstate%lwdn_prev) ! LM added
+    !deallocate(rstate%lwdn_prev) ! LM added
 
     nullify(rstate)
 
