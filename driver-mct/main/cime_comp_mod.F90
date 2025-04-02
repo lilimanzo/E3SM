@@ -3923,7 +3923,7 @@ contains
        call t_drvstopf  ('CPL:ATMPREP',cplrun=.true.)
        if (drv_threading) call seq_comm_setnthreads(nthreads_GLOID)
 
-       a2x_ax => component_get_c2x_cx(atm) ! LM added- not sure if it makes a difference
+       !a2x_ax => component_get_c2x_cx(atm) ! LM added- not sure if it makes a difference
        call seq_diag_lwdn(atm, fractions_ax, a2x_ax)  ! LM added
     endif
 
