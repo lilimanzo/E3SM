@@ -422,6 +422,7 @@ contains
 
     call outfld(lwup_fldn,  cam_in%lwup,  pcols, lchnk   )
     call outfld(lwdn_prev_fldn,  cam_in%lwdn_prev,  pcols, lchnk   ) ! LM added
+    print *, "LM radiation_data", cam_in%lwdn_prev ! LM added
     call outfld(ts_fldn,    cam_in%ts,    pcols, lchnk   )
 
     itim_old = pbuf_old_tim_idx()

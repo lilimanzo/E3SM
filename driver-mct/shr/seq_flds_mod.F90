@@ -865,7 +865,7 @@ contains
     longname = 'Downward longwave heat flux from previous timestep'
     stdname  = 'downwelling_longwave_flux_prev'
     units    = 'W m-2'
-    attname  = 'Faxa_lwdn_prev'
+    attname  = 'Faxx_lwdn_prev'
     call metadata_set(attname, longname, stdname, units)
 
     ! direct near-infrared incident solar radiation
