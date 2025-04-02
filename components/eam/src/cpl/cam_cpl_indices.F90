@@ -132,12 +132,13 @@ contains
     index_x2a_Sx_u10        = mct_avect_indexra(x2a,'Sx_u10')
     index_x2a_Sx_u10withgusts = mct_avect_indexra(x2a,'Sx_u10withgusts')
     index_x2a_Faxx_lwdn_prev=mct_avect_indexra(x2a,'Faxx_lwdn_prev') ! LM added
-    print *, "LM cam_cpl_indices", index_x2a_Faxx_lwdn_prev
+    print *, "LM cam_cpl_indices lwdn_prev ", index_x2a_Faxx_lwdn_prev
     index_x2a_Faxx_taux     = mct_avect_indexra(x2a,'Faxx_taux')
     index_x2a_Faxx_tauy     = mct_avect_indexra(x2a,'Faxx_tauy')
     index_x2a_Faxx_lat      = mct_avect_indexra(x2a,'Faxx_lat')
     index_x2a_Faxx_sen      = mct_avect_indexra(x2a,'Faxx_sen')
     index_x2a_Faxx_lwup     = mct_avect_indexra(x2a,'Faxx_lwup')
+    print *, "LM cam_cpl_indices lwup", index_x2a_Faxx_lwup ! LM added
     index_x2a_Faxx_evap     = mct_avect_indexra(x2a,'Faxx_evap')
     index_x2a_So_ustar      = mct_avect_indexra(x2a,'So_ustar')
     index_x2a_So_re         = mct_avect_indexra(x2a,'So_re')
