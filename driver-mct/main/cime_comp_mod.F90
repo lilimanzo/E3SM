@@ -147,7 +147,7 @@ module cime_comp_mod
   use seq_diag_mct, only : seq_diag_rof_mct  , seq_diag_ocn_mct  , seq_diag_atm_mct
   use seq_diag_mct, only : seq_diag_ice_mct  , seq_diag_glc_mct 
   use seq_diag_mct, only : seq_diag_accum_mct, seq_diag_print_mct
-  use seq_diag_mct, only : seq_diag_saf ! LM added
+  use seq_diag_mct, only : seq_diag_saf, seq_diag_lwdn ! LM added
   use seq_diagBGC_mct, only : seq_diagBGC_zero_mct , seq_diagBGC_avect_mct, seq_diagBGC_lnd_mct
   use seq_diagBGC_mct, only : seq_diagBGC_rof_mct  , seq_diagBGC_ocn_mct  , seq_diagBGC_atm_mct
   use seq_diagBGC_mct, only : seq_diagBGC_ice_mct  , seq_diagBGC_accum_mct
@@ -3922,6 +3922,9 @@ contains
 
        call t_drvstopf  ('CPL:ATMPREP',cplrun=.true.)
        if (drv_threading) call seq_comm_setnthreads(nthreads_GLOID)
+
+       !a2x_ax => component_get_c2x_cx(atm(eai)) ! LM added
+       call seq_diag_lwdn(atm, fractions_ax, a2x_ax)  ! LM added
     endif
 
     !----------------------------------------------------------
