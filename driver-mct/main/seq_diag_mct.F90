@@ -2805,7 +2805,7 @@ contains
         use shr_const_mod, only : shr_const_ocn_msv, shr_const_stebol
 
         ! Input parameters
-        type(component_type), intent(in)  :: atm    ! component type for instance1
+        type(component_type), intent(in)  :: atm(:) ! component type for instance1
         type(mct_aVect), intent(in)       :: frac_a ! frac bundle
         type(mct_aVect), pointer          :: a2x_a 
         type(mct_aVect), pointer          :: x2a_a 
