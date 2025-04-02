@@ -2817,6 +2817,8 @@ contains
         ! Local variables
         integer     :: index_a2x_Faxa_lwdn      ! LW DN
         integer     :: index_x2a_Faxx_lwdn_prev ! LW DN from previous timestep 2nd approach
+        integer     :: lSize                    ! aVect size
+        integer     :: n                        ! generic index
 
         a2x_a => component_get_c2x_cx(atm)
         x2a_a => component_get_x2c_cx(atm)
