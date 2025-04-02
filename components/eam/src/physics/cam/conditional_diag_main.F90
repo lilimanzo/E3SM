@@ -480,6 +480,7 @@ subroutine get_values( arrayout, varname, state, pbuf, cam_in, cam_out )
 
         case('LWDN_PREV')                               ! LM added
            arrayout(1:ncol,1) = cam_in%lwdn_prev(1:ncol)! LM added
+           print *, "LM conditional_diag_main ", cam_in%lwdn_prev(1:ncol) ! LM added
 
         case('LHF')
            arrayout(1:ncol,1) = cam_in%lhf(1:ncol)

@@ -863,7 +863,7 @@ contains
     ! LM downward LW flux from previous timestep- attempt 2
     call seq_flds_add(x2a_fluxes,"Faxx_lwdn_prev")
     longname = 'Downward longwave heat flux from previous timestep'
-    stdname  = 'downwelling_longwave_flux_prev'
+    stdname  = 'downwelling_longwave_flux_prev2'
     units    = 'W m-2'
     attname  = 'Faxx_lwdn_prev'
     call metadata_set(attname, longname, stdname, units)
