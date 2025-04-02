@@ -2803,6 +2803,7 @@ contains
   subroutine seq_diag_lwdn(atm, frac_a, a2x_a) ! LM created subroutine
         
         use shr_const_mod, only : shr_const_ocn_msv, shr_const_stebol
+        use seq_comm_mct,  only: num_inst_atm
 
         ! Input parameters
         type(component_type), intent(in)  :: atm   (:) ! component type for instance1
@@ -2823,17 +2824,18 @@ contains
         integer     :: n                        ! generic index
         integer     :: eai                      ! number of atmosphere instances
 
-        a2x_a => component_get_c2x_cx(atm)
-        x2a_a => component_get_x2c_cx(atm)
-        
         index_a2x_Faxa_lwdn = mct_aVect_indexRA(a2x_a,'Faxa_lwdn')
         index_x2a_Faxx_lwdn_prev = mct_aVect_indexRA(x2a_a,'Faxx_lwdn_prev')
         
         lSize = mct_avect_lSize(x2a_a)
-        
-        do n=1,lSize
-                x2a_a % rAttr(index_x2a_Faxx_lwdn_prev, n) = a2x_a % rAttr(index_a2x_Faxa_lwdn, n)
-        enddo
+       
+        do eai = 1,num_inst_atm
+        a2x_a => component_get_c2x_cx(atm(eai))
+        x2a_a => component_get_x2c_cx(atm(eai)) 
+                do n=1,lSize
+                        x2a_a % rAttr(index_x2a_Faxx_lwdn_prev, n) = a2x_a % rAttr(index_a2x_Faxa_lwdn, n)
+                enddo
+        enddo 
 
   end subroutine seq_diag_lwdn
 
