@@ -2830,8 +2830,8 @@ contains
         lSize = mct_avect_lSize(x2a_a)
        
         do eai = 1,num_inst_atm
-        a2x_a => component_get_c2x_cx(atm(eai))
-        x2a_a => component_get_x2c_cx(atm(eai)) 
+                a2x_a => component_get_c2x_cx(atm(eai))
+                x2a_a => component_get_x2c_cx(atm(eai)) 
                 do n=1,lSize
                         x2a_a % rAttr(index_x2a_Faxx_lwdn_prev, n) = a2x_a % rAttr(index_a2x_Faxa_lwdn, n)
                 enddo

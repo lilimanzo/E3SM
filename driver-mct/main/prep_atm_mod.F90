@@ -245,7 +245,7 @@ contains
     ! Local Variables
     integer                  :: eli, eoi, eii, exi, efi, eai, emi
     type(mct_avect), pointer :: x2a_ax
-    !type(mct_avect), pointer :: a2x_ax ! LM added
+    type(mct_avect), pointer :: a2x_ax ! LM added
     character(*), parameter  :: subname = '(prep_atm_mrg)'
     character(*), parameter  :: F00 = "('"//subname//" : ', 4A )"
     !---------------------------------------------------------------
@@ -263,7 +263,7 @@ contains
        x2a_ax => component_get_x2c_cx(atm(eai)) ! This is actually modifying x2a_ax
        !a2x_ax => component_get_x2c_cx(atm(eai)) ! LM added
        call prep_atm_merge(l2x_ax(eli), o2x_ax(emi), xao_ax(exi), i2x_ax(eii), &
-            fractions_ax(efi), x2a_ax) ! LM added a2x_ax
+            fractions_ax(efi), x2a_ax, a2x_ax) ! LM added a2x_ax
     enddo
     call t_drvstopf  (trim(timer_mrg))
 
@@ -271,7 +271,7 @@ contains
 
   !================================================================================================
 
-  subroutine prep_atm_merge( l2x_a, o2x_a, xao_a, i2x_a, fractions_a, x2a_a ) ! LM added a2x_a
+  subroutine prep_atm_merge( l2x_a, o2x_a, xao_a, i2x_a, fractions_a, x2a_a, a2x_a ) ! LM added a2x_a
 
     !-----------------------------------------------------------------------
     !
@@ -280,6 +280,7 @@ contains
     type(mct_aVect), intent(in)    :: o2x_a
     type(mct_aVect), intent(in)    :: xao_a
     type(mct_aVect), intent(in)    :: i2x_a
+    type(mct_aVect), intent(in)    :: a2x_a ! LM added
     type(mct_aVect), intent(in)    :: fractions_a
     type(mct_aVect), intent(inout) :: x2a_a
     !
@@ -297,8 +298,8 @@ contains
     !integer  :: index_x2a_Sx_mmsv               ! LM added
     !integer  :: index_x2a_Sx_t                  ! LM added
     !integer  :: index_x2a_Faxx_lwup             ! LM added
-    integer  :: index_a2x_Faxa_lwdn             ! LM added
-    !integer  :: index_x2a_Faxx_lwdn_prev        ! LM added
+    !integer  :: index_a2x_Faxa_lwdn             ! LM added
+    integer  :: index_x2a_Faxx_lwdn_prev        ! LM added
     character(CL),allocatable :: field_atm(:)   ! string converted to char
     character(CL),allocatable :: field_lnd(:)   ! string converted to char
     character(CL),allocatable :: field_ice(:)   ! string converted to char
@@ -317,7 +318,8 @@ contains
     type(mct_aVect_sharedindices),save :: o2x_sharedindices
     type(mct_aVect_sharedindices),save :: i2x_sharedindices
     type(mct_aVect_sharedindices),save :: xao_sharedindices
-    type(mct_avect), pointer         :: a2x_a ! LM added
+    !type(mct_aVect_sharedindices),save :: a2x_sharedindices ! LM added
+    !type(mct_avect), pointer         :: a2x_a ! LM added
     logical, pointer, save :: lmerge(:),imerge(:),xmerge(:),omerge(:),lstate(:)
     integer, pointer, save :: lindx(:), iindx(:), oindx(:),xindx(:)
     integer, save          :: naflds, nlflds,niflds,noflds,nxflds
