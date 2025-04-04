@@ -3,7 +3,7 @@
 filename_prefix: homme_shoc_cld_p3_mam_optics_rrtmgp
 averaging_type: Instant
 Fields:
-  Physics GLL:
+  Physics gll:
     Field Names:
       # HOMME
       - ps
@@ -98,6 +98,20 @@ Fields:
       - MeridionalVapFlux
       - PotentialTemperature_at_model_top
       - PotentialTemperature_at_500mb
+  # GLL output for homme states. These
+  # represent all current possible homme
+  # states available.
+  Dynamics:
+    Field Names:
+      - v_dyn
+      - vtheta_dp_dyn
+      - dp3d_dyn
+      - phi_int_dyn
+      - ps_dyn
+      - phis_dyn
+      - omega_dyn
+      - Qdp_dyn
+    IO Grid Name: Physics gll
 
 output_control:
   frequency: ${NUM_STEPS}
