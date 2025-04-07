@@ -65,17 +65,10 @@ fields:
       - rad_heating_pdel
       - sfc_flux_lw_dn
       - sfc_flux_sw_net
-      - cldtot
-      - cldlow
-      - cldmed
-      - cldhgh
-      # Surface Fluxes
-      - surf_evap
-      - surf_sens_flux
-      # Diagnostics
-      - PotentialTemperature
-  # GLL output for homme states.
-  Dynamics:
+  # GLL output for homme states. These
+  # represent all current possible homme
+  # states available.
+  dynamics:
     field_names:
       - v_dyn
       - vtheta_dp_dyn
