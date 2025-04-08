@@ -72,15 +72,18 @@ contains
 ! creates (alloacates) an rrtmg_state object
 !--------------------------------------------------------------------------------
 
-  function rrtmg_state_create( pstate, cam_in ) result( rstate )
+  function rrtmg_state_create( pstate, cam_in, landfrac, icefrac ) result( rstate )
     use physics_types,    only: physics_state
     use camsrfexch,       only: cam_in_t
     use physconst,        only: stebol
+    use shr_const_mod,    only: shr_const_ocn_msv      ! LM added
 
     implicit none
 
     type(physics_state), intent(in) :: pstate
     type(cam_in_t),      intent(in) :: cam_in
+    real(r8), intent(in)            :: landfrac(pcols) ! LM added
+    real(r8), intent(in)            :: icefrac(pcols)  ! LM added
 
     type(rrtmg_state_t), pointer  :: rstate
 
@@ -113,7 +116,14 @@ contains
     ! stebol constant in mks units
     do i = 1,ncol
        tint(i,1) = pstate%t(i,1)
-       tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))
+
+       ! LM added if statement
+       if (landfrac(i).le.0.001 .and. icefrac(i).le.0.001) then
+          tint(i,pverp) = sqrt(sqrt((cam_in%lwup(i)-(1-shr_const_ocn_msv))/(shr_const_ocn_msv*stebol)))
+       else
+          tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))
+       endif
+
        do k = 2,pver
           dy = (pstate%lnpint(i,k) - pstate%lnpmid(i,k)) / (pstate%lnpmid(i,k-1) - pstate%lnpmid(i,k))
           tint(i,k) = pstate%t(i,k) - dy * (pstate%t(i,k) - pstate%t(i,k-1))
