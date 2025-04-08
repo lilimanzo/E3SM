@@ -318,7 +318,7 @@ contains
     type(mct_aVect_sharedindices),save :: o2x_sharedindices
     type(mct_aVect_sharedindices),save :: i2x_sharedindices
     type(mct_aVect_sharedindices),save :: xao_sharedindices
-    !type(mct_aVect_sharedindices),save :: a2x_sharedindices ! LM added
+    type(mct_aVect_sharedindices),save :: a2x_sharedindices ! LM added
     !type(mct_avect), pointer         :: a2x_a ! LM added
     logical, pointer, save :: lmerge(:),imerge(:),xmerge(:),omerge(:),lstate(:)
     integer, pointer, save :: lindx(:), iindx(:), oindx(:),xindx(:)
