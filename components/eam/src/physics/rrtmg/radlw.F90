@@ -39,7 +39,8 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
                         pmid    ,aer_lw_abs,cld       ,tauc_lw,       &
                         qrl     ,qrlc      ,                          &
                         flns    ,flnt      ,flnsc     ,flntc  ,flwds, &
-                        flut    ,flutc     ,fnl       ,fcnl   ,fldsc,clm_rand_seed, &
+                        flut    ,flutc     ,fnl       ,fcnl   ,fldsc, &
+                        flus    ,flusc     ,clm_rand_seed,            & ! LM added flus, flusc
                         lu      ,ld        )
 
 !-----------------------------------------------------------------------
@@ -77,6 +78,8 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    real(r8), intent(out) :: flns(pcols)          ! Surface cooling flux
    real(r8), intent(out) :: flnt(pcols)          ! Net outgoing flux
    real(r8), intent(out) :: flut(pcols)          ! Upward flux at top of model
+   real(r8), intent(out) :: flus(pcols)          ! LM added upward flux at surface
+   real(r8), intent(out) :: flusc(pcols)         ! LM added clearsky flux at surface
    real(r8), intent(out) :: flnsc(pcols)         ! Clear sky surface cooing
    real(r8), intent(out) :: flntc(pcols)         ! Net clear sky outgoing flux
    real(r8), intent(out) :: flutc(pcols)         ! Upward clear-sky flux at top of model
@@ -245,6 +248,8 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    flntc(:ncol) = uflxc(:ncol,rrtmg_levs) - dflxc(:ncol,rrtmg_levs)
    flut(:ncol)  = uflx (:ncol,rrtmg_levs)
    flutc(:ncol) = uflxc(:ncol,rrtmg_levs)
+   flus(:ncol)  = uflx (:ncol,1)                        ! LM added
+   flusc(:ncol) = uflxc(:ncol,1)                        ! LM added
 
    !
    ! Reverse vertical indexing here for CAM arrays to go from top to bottom.

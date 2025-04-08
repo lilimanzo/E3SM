@@ -696,6 +696,13 @@ end function radiation_nextsw_cday
                       standard_name='surface_downwelling_longwave_flux_in_air')
           call addfld('FLDSC'//diag(icall), horiz_only,    'A',   'W/m2', 'Clearsky Downwelling longwave flux at surface', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
+              ! ------ LM added ------
+          call addfld('FLUS'//diag(icall), horiz_only,    'A',    'W/m2', 'Upwelling longwave flux at surface', &
+                      sampling_seq='rad_lwsw', flag_xyfill=.true., &
+                      standard_name='surface_upwelling_longwave_flux_in_air')
+          call addfld('FLUSC'//diag(icall), horiz_only,    'A',   'W/m2', 'Clearsky upwelling longwave flux at surface', &
+                      sampling_seq='rad_lwsw', flag_xyfill=.true.) 
+              ! ----------------------
           call addfld('FLNS'//diag(icall), horiz_only,    'A',    'W/m2', 'Net longwave flux at surface', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
           call addfld('FLNT'//diag(icall), horiz_only,    'A',    'W/m2', 'Net longwave flux at top of model', &
@@ -732,6 +739,8 @@ end function radiation_nextsw_cday
              call add_default('FLNT'//diag(icall),  1, ' ')
              call add_default('FLUT'//diag(icall),  1, ' ')
              call add_default('FLUTC'//diag(icall), 1, ' ')
+             call add_default('FLUS'//diag(icall),  1, ' ') ! LM added
+             call add_default('FLUSC'//diag(icall), 1, ' ') ! LM added
              call add_default('FLNTC'//diag(icall), 1, ' ')
              call add_default('FLNSC'//diag(icall), 1, ' ')
              call add_default('LWCF'//diag(icall),  1, ' ')
@@ -996,6 +1005,8 @@ end function radiation_nextsw_cday
     real(r8) fsnsc(pcols)         ! Clear sky surface abs solar flux
     real(r8) fsdsc(pcols)         ! Clear sky surface downwelling solar flux
     real(r8) flut(pcols)          ! Upward flux at top of model
+    real(r8) flus(pcols)          ! LM added upward flux at surface
+    real(r8) flusc(pcols)         ! LM added clearly upward flux at surface
     real(r8) lwcf(pcols)          ! longwave cloud forcing
     real(r8) swcf(pcols)          ! shortwave cloud forcing
     real(r8) flutc(pcols)         ! Upward Clear Sky flux at top of model
@@ -1436,7 +1447,7 @@ end function radiation_nextsw_cday
                        qrl,          qrlc,                                                       &
                        flns,         flnt,         flnsc,           flntc,        cam_out%flwds, &
                        flut,         flutc,        fnl,             fcnl,         fldsc,         &
-                       clm_seed,     lu,           ld                                            )
+                       flus,         flusc,        clm_seed,        lu,           ld) ! LM added flus, flusc
                   call t_stopf ('rad_rrtmg_lw')
 
                   do i=1,ncol
@@ -1452,6 +1463,8 @@ end function radiation_nextsw_cday
                   call outfld('FLNT'//diag(icall),flnt  ,pcols,lchnk)
                   call outfld('FLUT'//diag(icall),flut  ,pcols,lchnk)
                   call outfld('FLUTC'//diag(icall),flutc ,pcols,lchnk)
+                  call outfld('FLUS'//diag(icall),flus , pcols,lchnk) ! LM added
+                  call outfld('FLUSC'//diag(icall),flusc , pcols,lchnk) ! LM added
                   call outfld('FLNTC'//diag(icall),flntc ,pcols,lchnk)
                   call outfld('FLNS'//diag(icall),flns  ,pcols,lchnk)
                   
