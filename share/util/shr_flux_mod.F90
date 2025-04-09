@@ -461,7 +461,9 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,   &
         !lwup(n) = -loc_stebol * ts(n)**4
         ! LM changed to greybody
         lwup(n) = -loc_ocn_msv * loc_stebol * ts(n)**4 - (1.0_R8 - loc_ocn_msv) * lwdn(n)
-        lwdn_prev(n) = lwdn(n) ! LM added 
+        lwdn_prev(n) = lwdn(n) ! LM added
+        print *, "lwdn = ", lwdn(n)
+        print *, "lwdn_prev = ", lwdn_prev(n) 
 
         !--- water flux ---
         evap(n) = lat(n)/loc_latvap
