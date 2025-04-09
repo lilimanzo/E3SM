@@ -1271,7 +1271,7 @@ contains
        xaop_ae%rAttr(index_re    ,ia) = xaop_ae%rAttr(index_re    ,ia) + re(n)  * wt   ! reynolds number
        xaop_ae%rAttr(index_ssq   ,ia) = xaop_ae%rAttr(index_ssq   ,ia) + ssq(n) * wt   ! s.hum. saturation at Ts
        xaop_ae%rAttr(index_lwup  ,ia) = xaop_ae%rAttr(index_lwup  ,ia) + lwup(n)* wt
-       xaop_ae%rAttr(index_lwdn_prev,ia = xaop_ae%rAttr(index_lwdn_prev,ia) + lwdn_prev(n)*wt ! LM added
+       xaop_ae%rAttr(index_lwdn_prev,ia) = xaop_ae%rAttr(index_lwdn_prev,ia) + lwdn_prev(n)*wt ! LM added
        xaop_ae%rAttr(index_duu10n,ia) = xaop_ae%rAttr(index_duu10n,ia) + duu10n(n)*wt
        xaop_ae%rAttr(index_u10   ,ia) = xaop_ae%rAttr(index_u10   ,ia) + u10res(n)*wt
        xaop_ae%rAttr(index_u10withgusts,ia) = xaop_ae%rAttr(index_u10withgusts,ia) + sqrt(duu10n(n))*wt
