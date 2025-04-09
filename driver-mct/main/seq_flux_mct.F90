@@ -1208,6 +1208,7 @@ contains
     index_evap_HDO = mct_aVect_indexRA(xaop_ae,"Faox_evap_HDO", perrWith='quiet')
     index_evap_18O = mct_aVect_indexRA(xaop_ae,"Faox_evap_18O", perrWith='quiet')
     index_lwup   = mct_aVect_indexRA(xaop_ae,"Faox_lwup")
+    index_lwdn_prev = mct_aVect_indexRA(xaop_ae,"Faox_lwdn_prev") ! LM added
     index_sumwt  = mct_aVect_indexRA(xaop_ae,"sumwt")
 
     !--- aggregate ocean values locally based on exchange grid decomp
@@ -1234,6 +1235,7 @@ contains
        xaop_oe%rAttr(index_re    ,io) = xaop_oe%rAttr(index_re    ,io) + re(n)  * wt   ! reynolds number
        xaop_oe%rAttr(index_ssq   ,io) = xaop_oe%rAttr(index_ssq   ,io) + ssq(n) * wt   ! s.hum. saturation at Ts
        xaop_oe%rAttr(index_lwup  ,io) = xaop_oe%rAttr(index_lwup  ,io) + lwup(n)* wt
+       xaop_oe%rAttr(index_lwdn_prev,io)=xaop_oe%rAttr(index_lwdn_prev,io) + lwdn_prev(n)*wt ! LM added
        xaop_oe%rAttr(index_duu10n,io) = xaop_oe%rAttr(index_duu10n,io) + duu10n(n)*wt
        xaop_oe%rAttr(index_u10   ,io) = xaop_oe%rAttr(index_u10   ,io) + u10res(n)*wt
        xaop_oe%rAttr(index_u10withgusts,io) = xaop_oe%rAttr(index_u10withgusts,io) + sqrt(duu10n(n))*wt
@@ -1269,6 +1271,7 @@ contains
        xaop_ae%rAttr(index_re    ,ia) = xaop_ae%rAttr(index_re    ,ia) + re(n)  * wt   ! reynolds number
        xaop_ae%rAttr(index_ssq   ,ia) = xaop_ae%rAttr(index_ssq   ,ia) + ssq(n) * wt   ! s.hum. saturation at Ts
        xaop_ae%rAttr(index_lwup  ,ia) = xaop_ae%rAttr(index_lwup  ,ia) + lwup(n)* wt
+       xaop_ae%rAttr(index_lwdn_prev,ia = xaop_ae%rAttr(index_lwdn_prev,ia) + lwdn_prev(n)*wt ! LM added
        xaop_ae%rAttr(index_duu10n,ia) = xaop_ae%rAttr(index_duu10n,ia) + duu10n(n)*wt
        xaop_ae%rAttr(index_u10   ,ia) = xaop_ae%rAttr(index_u10   ,ia) + u10res(n)*wt
        xaop_ae%rAttr(index_u10withgusts,ia) = xaop_ae%rAttr(index_u10withgusts,ia) + sqrt(duu10n(n))*wt
@@ -1398,6 +1401,7 @@ contains
        index_xao_Faox_evap_HDO = mct_aVect_indexRA(xao,'Faox_evap_HDO', perrWith='quiet')
        index_xao_Faox_evap_18O = mct_aVect_indexRA(xao,'Faox_evap_18O', perrWith='quiet')
        index_xao_Faox_lwup = mct_aVect_indexRA(xao,'Faox_lwup')
+       index_xao_Faox_lwdn_prev = mct_aVect_indexRA(xao,'Faox_lwdn_prev') ! LM added
        index_xao_Faox_swdn = mct_aVect_indexRA(xao,'Faox_swdn')
        index_xao_Faox_swup = mct_aVect_indexRA(xao,'Faox_swup')
        index_xao_So_fswpen            = mct_aVect_indexRA(xao,'So_fswpen')
