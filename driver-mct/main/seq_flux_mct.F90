@@ -62,6 +62,7 @@ module seq_flux_mct
   real(r8), allocatable ::  sen  (:)  ! heat flux: sensible
   real(r8), allocatable ::  lat  (:)  ! heat flux: latent
   real(r8), allocatable ::  lwup (:)  ! lwup over ocean
+  real(r8), allocatable ::  lwdn_prev(:) ! LM added lwdn from previous timestep
   real(r8), allocatable ::  evap (:)  ! water flux: evaporation
   real(r8), allocatable ::  evap_16O (:) !H2O flux: evaporation
   real(r8), allocatable ::  evap_HDO (:) !HDO flux: evaporation
@@ -165,6 +166,7 @@ module seq_flux_mct
   integer :: index_xao_Faox_evap_HDO
   integer :: index_xao_Faox_evap_18O
   integer :: index_xao_Faox_lwup
+  integer :: index_xao_Faox_lwdn_prev ! LM added
   integer :: index_xao_Faox_swdn
   integer :: index_xao_Faox_swup
   integer :: index_xao_So_ustar
@@ -330,6 +332,9 @@ contains
     allocate(lwup(nloc),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate lwup',ier)
     lwup = 0.0_r8
+    allocate(lwdn_prev(nloc),stat=ier)                       ! LM added
+    if(ier/=0) call mct_die(subName,'allocate lwdn_prev',ier)!
+    lwdn_prev = 0.0_r8                                       !
     allocate(taux(nloc),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate taux',ier)
     taux = 0.0_r8
@@ -739,6 +744,8 @@ contains
     if(ier/=0) call mct_die(subName,'allocate evap_18O',ier)
     allocate(lwup(nloc_a2o),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate lwup',ier)
+    allocate(lwdn_prev(nloc_a2o),stat=ier)                    ! LM added
+    if(ier/=0) call mct_die(subName,'allocate lwdn_prev',ier) ! LM added
     allocate(taux(nloc_a2o),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate taux',ier)
     allocate(tauy(nloc_a2o),stat=ier)
@@ -1007,6 +1014,7 @@ contains
     integer(in) :: index_evap_HDO
     integer(in) :: index_evap_18O
     integer(in) :: index_lwup
+    integer(in) :: index_lwdn_prev ! LM added
     integer(in) :: index_sumwt
     integer(in) :: atm_nx,atm_ny,ocn_nx,ocn_ny
     real(r8)    :: wt
@@ -1656,6 +1664,7 @@ contains
           xao%rAttr(index_xao_So_re    ,n) = re(n)     ! reynolds number
           xao%rAttr(index_xao_So_ssq   ,n) = ssq(n)    ! s.hum. saturation at Ts
           xao%rAttr(index_xao_Faox_lwup,n) = lwup(n)
+          xao%rAttr(index_xao_Faox_lwdn_prev,n) = lwdn_prev(n)   ! LM added
           xao%rAttr(index_xao_So_duu10n,n) = duu10n(n)
           xao%rAttr(index_xao_So_u10   ,n) = u10res(n)
           xao%rAttr(index_xao_So_u10withgusts,n) = sqrt(duu10n(n))
