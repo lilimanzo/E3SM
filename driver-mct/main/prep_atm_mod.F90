@@ -534,6 +534,8 @@ contains
        x2a_a%rAttr(index_x2a_Sf_ifrad,n) = fractions_a%Rattr(kifr,n)  ! LM added
        x2a_a%rAttr(index_x2a_Sf_ofrad,n) = fractions_a%Rattr(kofr,n)  ! LM added
        !x2a_a%rAttr(index_x2a_Sx_mmsv,n)  = x2a_a%rAttr(index_x2a_Faxx_lwup,n) !1.0_r8 ! LM added
+       print *, "Faxa_lwdn shape ", shape(a2x_a%rAttr(index_a2x_Faxa_lwdn,n) ! LM added
+       print *, "Faxx_lwdn_prev shape ", shape(index_x2a_Faxx_lwdn_prev,n)   ! LM added
        x2a_a%rAttr(index_x2a_Faxx_lwdn_prev,n)=a2x_a%rAttr(index_a2x_Faxa_lwdn,n) ! LM added
     end do
 
