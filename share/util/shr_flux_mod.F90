@@ -460,7 +460,8 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,   &
         ! original (blackbody)
         !lwup(n) = -loc_stebol * ts(n)**4
         ! LM changed to greybody
-        lwup(n) = -loc_ocn_msv * loc_stebol * ts(n)**4 - (1.0_R8 - loc_ocn_msv) * lwdn(n) 
+        lwup(n) = -loc_ocn_msv * loc_stebol * ts(n)**4 - (1.0_R8 - loc_ocn_msv) * lwdn(n)
+        lwdn_prev(n) = lwdn(n) ! LM added 
 
         !--- water flux ---
         evap(n) = lat(n)/loc_latvap
@@ -504,6 +505,7 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,   &
         sen   (n) = spval  ! sensible         heat flux  (W/m^2)
         lat   (n) = spval  ! latent           heat flux  (W/m^2)
         lwup  (n) = spval  ! long-wave upward heat flux  (W/m^2)
+        lwdn_prev(n)=spval ! LM added lw downward flux from prev timestep (W/m^2)
         evap  (n) = spval  ! evaporative water flux ((kg/s)/m^2)
         evap_16O (n) = spval !water tracer flux (kg/s)/m^2)
         evap_HDO (n) = spval !HDO tracer flux  (kg/s)/m^2)

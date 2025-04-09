@@ -1308,6 +1308,14 @@ contains
     attname  = 'u10withgusts'
     call metadata_set(attname, longname, stdname, units)
 
+    ! LM added lwdn from previous timestep
+    call seq_flds_add(xao_fluxes,"Faox_lwdn_prev")
+    longname = 'LW down prev timestep'
+    stdname  = 'longwave_downward_prev' 
+    units    = 'W m-2'
+    attname  = 'Faox_lwdn_prev'
+    call metadata_set(attname, longname, stdname, units)
+
     ! Zonal surface stress"
     call seq_flds_add(l2x_fluxes,"Fall_taux")
     call seq_flds_add(xao_fluxes,"Faox_taux")
