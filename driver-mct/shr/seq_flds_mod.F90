@@ -1310,10 +1310,13 @@ contains
 
     ! LM added lwdn from previous timestep
     call seq_flds_add(xao_fluxes,"Faox_lwdn_prev")
+    call seq_flds_add(x2a_fluxes,"Faxx_lwdn_prev") 
     longname = 'LW down prev timestep'
     stdname  = 'longwave_downward_prev' 
     units    = 'W m-2'
     attname  = 'Faox_lwdn_prev'
+    call metadata_set(attname, longname, stdname, units)
+    attname  = 'Faxx_lwdn_prev'
     call metadata_set(attname, longname, stdname, units)
 
     ! Zonal surface stress"
