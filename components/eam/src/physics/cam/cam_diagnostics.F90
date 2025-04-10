@@ -639,6 +639,8 @@ subroutine diag_init()
    standard_name = 'surface_upward_latent_heat_flux')
    call addfld ('QFLX',horiz_only,    'A','kg/m2/s','Surface water flux', &
    standard_name = 'water_evapotranspiration_flux')
+   call addfld ('FLDS_PREV',horiz_only,    'A','kg/m2/s','LW downward flux from prev cpl interval', &
+   standard_name = 'longwave_downward_prev_interval') 
 
    call addfld ('TAUX',horiz_only,    'A','N/m2','Zonal surface stress')
    call addfld ('TAUY',horiz_only,    'A','N/m2','Meridional surface stress')
@@ -684,6 +686,7 @@ subroutine diag_init()
        call add_default ('SHFLX   ', 1, ' ')
        call add_default ('LHFLX   ', 1, ' ')
        call add_default ('QFLX    ', 1, ' ')
+       call add_default ('FLDS_PREV',1, ' ') ! LM added
        call add_default ('TAUX    ', 1, ' ')
        call add_default ('TAUY    ', 1, ' ')
        call add_default ('TREFHT  ', 1, ' ')
@@ -2141,6 +2144,7 @@ subroutine diag_surf (cam_in, cam_out, ps, trefmxav, trefmnav )
     call outfld('SHFLX',    cam_in%shf,       pcols, lchnk)
     call outfld('LHFLX',    cam_in%lhf,       pcols, lchnk)
     call outfld('QFLX',     cam_in%cflx(1,1), pcols, lchnk)
+    call outfld('FLDS_PREV',cam_in%lwdn_prev, pcols, lchnk) ! LM added
 
     call outfld('TAUX',     cam_in%wsx,       pcols, lchnk)
     call outfld('TAUY',     cam_in%wsy,       pcols, lchnk)

@@ -87,6 +87,8 @@ contains
           cam_in(c)%wsx(i)    = -x2a(index_x2a_Faxx_taux,ig)
           cam_in(c)%wsy(i)    = -x2a(index_x2a_Faxx_tauy,ig)
           cam_in(c)%lwup(i)      = -x2a(index_x2a_Faxx_lwup,ig)
+          cam_in(c)%lwdn_prev(i) =  x2a(index_x2a_Faxx_lwdn_prev,ig)
+          print *, "LM atm_import_export lwdn_prev = ", cam_in(c)%lwdn_prev(i)
           cam_in(c)%asdir(i)     =  x2a(index_x2a_Sx_avsdr, ig)
           cam_in(c)%aldir(i)     =  x2a(index_x2a_Sx_anidr, ig)
           cam_in(c)%asdif(i)     =  x2a(index_x2a_Sx_avsdf, ig)
