@@ -118,12 +118,12 @@ contains
        tint(i,1) = pstate%t(i,1)
 
        ! LM added if statement
-       if (landfrac(i).le.0.001 .and. icefrac(i).le.0.001) then
-          tint(i,pverp) = sqrt(sqrt((cam_in%lwup(i)-(1-shr_const_ocn_msv)*cam_in%lwdn_prev(i))/(shr_const_ocn_msv*stebol)))
+       !if (landfrac(i).le.0.001 .and. icefrac(i).le.0.001) then
+       !   tint(i,pverp) = sqrt(sqrt((cam_in%lwup(i)-(1-shr_const_ocn_msv)*cam_in%lwdn_prev(i))/(shr_const_ocn_msv*stebol)))
        !   !tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))
-       else
+       !else
           tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))
-       endif
+       !endif
 
        do k = 2,pver
           dy = (pstate%lnpint(i,k) - pstate%lnpmid(i,k)) / (pstate%lnpmid(i,k-1) - pstate%lnpmid(i,k))
