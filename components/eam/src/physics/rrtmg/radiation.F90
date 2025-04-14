@@ -702,6 +702,7 @@ end function radiation_nextsw_cday
                       standard_name='surface_upwelling_longwave_flux_in_air')
           call addfld('FLUSC'//diag(icall), horiz_only,    'A',   'W/m2', 'Clearsky upwelling longwave flux at surface', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.) 
+          call addfld('TRAD'//diag(icall), horiz_only, 'A', 'K', 'LM added radiative temperature') ! LM added
               ! ----------------------
           call addfld('FLNS'//diag(icall), horiz_only,    'A',    'W/m2', 'Net longwave flux at surface', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
@@ -741,6 +742,7 @@ end function radiation_nextsw_cday
              call add_default('FLUTC'//diag(icall), 1, ' ')
              call add_default('FLUS'//diag(icall),  1, ' ') ! LM added
              call add_default('FLUSC'//diag(icall), 1, ' ') ! LM added
+             call add_default('TRAD'//diag(icall),  1, ' ') ! LM added
              call add_default('FLNTC'//diag(icall), 1, ' ')
              call add_default('FLNSC'//diag(icall), 1, ' ')
              call add_default('LWCF'//diag(icall),  1, ' ')
@@ -1476,7 +1478,7 @@ end function radiation_nextsw_cday
                   call outfld('FLN200C'//diag(icall),fln200c,pcols,lchnk)
                   call outfld('FLDS'//diag(icall),cam_out%flwds ,pcols,lchnk)
 
-                  !call outfld('TRAD'//diag(icall),cam_out%tsfc, pcols,lchnk) ! LM added
+                  call outfld('TRAD'//diag(icall),trad, pcols,lchnk) ! LM added
 
               end if
           end do
