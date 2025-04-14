@@ -1475,6 +1475,8 @@ end function radiation_nextsw_cday
                   call outfld('FLN200C'//diag(icall),fln200c,pcols,lchnk)
                   call outfld('FLDS'//diag(icall),cam_out%flwds ,pcols,lchnk)
 
+                  !call outfld('TRAD'//diag(icall),cam_out%tsfc, pcols,lchnk) ! LM added
+
               end if
           end do
           call t_stopf ('rad_lw_loop')
