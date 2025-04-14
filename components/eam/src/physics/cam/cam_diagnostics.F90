@@ -695,6 +695,7 @@ subroutine diag_init()
        call add_default ('QREFHT  ', 1, ' ')
        call add_default ('U10     ', 1, ' ')
        call add_default ('ICEFRAC ', 1, ' ')
+       call add_default ('TBOT'   ,  1, ' ') ! LM added
        call add_default ('TS      ', 1, ' ')
        call add_default ('TSMN    ', 1, ' ')
        call add_default ('TSMX    ', 1, ' ')
