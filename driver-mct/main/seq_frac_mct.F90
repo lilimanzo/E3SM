@@ -191,15 +191,15 @@ module seq_frac_mct
   !real(r8),parameter :: eps_fraclim = 1.0e-03   ! truncation limit in fractions_a(lfrac)
   !logical ,parameter :: atm_frac_correct = .false. ! turn on frac correction on atm grid
   !--- standard plus atm fraction consistency ---
-    real(r8),parameter :: eps_fracsum = 1.0e-12   ! allowed error in sum of fracs
-    real(r8),parameter :: eps_fracval = 1.0e-02   ! allowed error in any frac +- 0,1
-    real(r8),parameter :: eps_fraclim = 1.0e-03   ! truncation limit in fractions_a(lfrac)
-    logical ,parameter :: atm_frac_correct = .true. ! turn on frac correction on atm grid
-  !--- unconstrained and area conserving? ---
   !  real(r8),parameter :: eps_fracsum = 1.0e-12   ! allowed error in sum of fracs
   !  real(r8),parameter :: eps_fracval = 1.0e-02   ! allowed error in any frac +- 0,1
-  !  real(r8),parameter :: eps_fraclim = 1.0e-20   ! truncation limit in fractions_a(lfrac)
+  !  real(r8),parameter :: eps_fraclim = 1.0e-03   ! truncation limit in fractions_a(lfrac)
   !  logical ,parameter :: atm_frac_correct = .true. ! turn on frac correction on atm grid
+  !--- unconstrained and area conserving? ---
+    real(r8),parameter :: eps_fracsum = 1.0e-12   ! allowed error in sum of fracs
+    real(r8),parameter :: eps_fracval = 1.0e-02   ! allowed error in any frac +- 0,1
+    real(r8),parameter :: eps_fraclim = 1.0e-20   ! truncation limit in fractions_a(lfrac)
+    logical ,parameter :: atm_frac_correct = .true. ! turn on frac correction on atm grid
 
   type(seq_map)  , pointer :: mapper_o2a
   type(seq_map)  , pointer :: mapper_i2a
