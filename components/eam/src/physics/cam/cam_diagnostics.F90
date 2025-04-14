@@ -664,7 +664,6 @@ subroutine diag_init()
 
    call addfld ('TS',horiz_only,    'A','K','Surface temperature (radiative)', &
        standard_name = 'surface_temperature')
-   call addfld ('TRAD',horiz_only,  'A','K', 'LM Interface (radiative?) temperature') ! LM added
    call addfld ('TSMN',horiz_only,    'M','K','Minimum surface temperature over output period')
    call addfld ('TSMX',horiz_only,    'X','K','Maximum surface temperature over output period')
    call addfld ('SNOWHLND',horiz_only,    'A','m','Water equivalent snow depth')
@@ -697,7 +696,6 @@ subroutine diag_init()
        call add_default ('U10     ', 1, ' ')
        call add_default ('ICEFRAC ', 1, ' ')
        call add_default ('TBOT    ', 1, ' ') ! LM added
-       call add_default ('TRAD    ', 1, ' ') ! LM added
        call add_default ('TS      ', 1, ' ')
        call add_default ('TSMN    ', 1, ' ')
        call add_default ('TSMX    ', 1, ' ')
@@ -759,7 +757,6 @@ subroutine diag_init()
    call addfld ('TPERT&IC',horiz_only,    'I','K','Perturbation temperature (eddies in PBL)'        )
    call addfld ('QPERT&IC',horiz_only,    'I','kg/kg','Perturbation specific humidity (eddies in PBL)'  )
    call addfld ('TBOT&IC',horiz_only,    'I','K','Lowest model level temperature'                  )
-   call addfld ('TRAD&IC',horiz_only, 'I', 'K', 'LM interface (radiative?) temperature' ) ! LM added
 
 
    ! Initial file - Optional fields
@@ -778,7 +775,6 @@ subroutine diag_init()
       call add_default ('KVH&IC     ',0, 'I')
       call add_default ('KVM&IC     ',0, 'I')
       call add_default ('TBOT&IC    ',0, 'I')
-      call add_default ('TRAD&IC    ',0, 'I') ! LM added
    end if
 
    ! CAM export state 
@@ -2197,7 +2193,6 @@ subroutine diag_surf (cam_in, cam_out, ps, trefmxav, trefmnav )
     endif
 
     call outfld('TBOT',     cam_out%tbot,     pcols, lchnk)
-    call outfld('TRAD',     cam_out%tsfc,     pcols, lchnk) ! LM added
     call outfld('TS',       cam_in%ts,        pcols, lchnk)
     call outfld('TSMN',     cam_in%ts,        pcols, lchnk)
     call outfld('TSMX',     cam_in%ts,        pcols, lchnk)

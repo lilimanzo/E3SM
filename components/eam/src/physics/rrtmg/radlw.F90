@@ -40,7 +40,7 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
                         qrl     ,qrlc      ,                          &
                         flns    ,flnt      ,flnsc     ,flntc  ,flwds, &
                         flut    ,flutc     ,fnl       ,fcnl   ,fldsc, &
-                        flus    ,flusc     ,clm_rand_seed,            & ! LM added flus, flusc
+                        flus    ,flusc     ,trad      ,clm_rand_seed, & ! LM added flus, flusc, trad
                         lu      ,ld        )
 
 !-----------------------------------------------------------------------
@@ -87,6 +87,7 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    real(r8), intent(out) :: fldsc(pcols)         ! Down longwave clear flux at surface
    real(r8), intent(out) :: fcnl(pcols,pverp)    ! clear sky net flux at interfaces
    real(r8), intent(out) :: fnl(pcols,pverp)     ! net flux at interfaces
+   real(r8), intent(out) :: trad(pcols)          ! LM added radiative temperature
 
    real(r8), pointer, dimension(:,:,:) :: lu ! longwave spectral flux up
    real(r8), pointer, dimension(:,:,:) :: ld ! longwave spectral flux down
@@ -250,6 +251,8 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    flutc(:ncol) = uflxc(:ncol,rrtmg_levs)
    flus(:ncol)  = uflx (:ncol,1)                        ! LM added
    flusc(:ncol) = uflxc(:ncol,1)                        ! LM added
+
+   trad(:ncol)  = tsfc(:ncol)                           ! LM added
 
    !
    ! Reverse vertical indexing here for CAM arrays to go from top to bottom.

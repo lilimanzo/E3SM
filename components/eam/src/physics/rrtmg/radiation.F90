@@ -1021,6 +1021,7 @@ end function radiation_nextsw_cday
     real(r8) fsn200c(pcols)       ! fcns interpolated to 200 mb
     real(r8) fnl(pcols,pverp)     ! net longwave flux
     real(r8) fcnl(pcols,pverp)    ! net clear-sky longwave flux
+    real(r8) trad(pcols)          ! LM added radiative temperature
 
     real(r8) pbr(pcols,pver)      ! Model mid-level pressures (dynes/cm2)
     real(r8) pnm(pcols,pverp)     ! Model interface pressures (dynes/cm2)
@@ -1447,7 +1448,7 @@ end function radiation_nextsw_cday
                        qrl,          qrlc,                                                       &
                        flns,         flnt,         flnsc,           flntc,        cam_out%flwds, &
                        flut,         flutc,        fnl,             fcnl,         fldsc,         &
-                       flus,         flusc,        clm_seed,        lu,           ld) ! LM added flus, flusc
+                       flus,         flusc,        trad,            clm_seed,     lu,           ld) ! LM added flus, flusc, trad
                   call t_stopf ('rad_rrtmg_lw')
 
                   do i=1,ncol
