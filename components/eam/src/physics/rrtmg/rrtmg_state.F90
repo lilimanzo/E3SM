@@ -71,8 +71,8 @@ contains
 !--------------------------------------------------------------------------------
 ! creates (alloacates) an rrtmg_state object
 !--------------------------------------------------------------------------------
-
-  function rrtmg_state_create( pstate, cam_in, landfrac, icefrac ) result( rstate )
+                                               ! LM added landfrac, icefrac, ocnfrac
+  function rrtmg_state_create( pstate, cam_in, landfrac, icefrac, ocnfrac ) result( rstate )
     use physics_types,    only: physics_state
     use camsrfexch,       only: cam_in_t
     use physconst,        only: stebol
@@ -84,6 +84,7 @@ contains
     type(cam_in_t),      intent(in) :: cam_in
     real(r8), intent(in)            :: landfrac(pcols) ! LM added
     real(r8), intent(in)            :: icefrac(pcols)  ! LM added
+    real(r8), intent(in)            :: ocnfrac(pcols)  ! LM added
 
     type(rrtmg_state_t), pointer  :: rstate
 

@@ -3066,7 +3066,8 @@ if (l_rad) then
 
     call radiation_tend(state,ptend, pbuf, &
          cam_out, cam_in, &
-         cam_in%landfrac, cam_in%icefrac, cam_in%snowhland, &
+         cam_in%landfrac, cam_in%icefrac, cam_in%ocnfrac, & ! LM added ocnfrac
+         cam_in%snowhland, &
          fsns,    fsnt, flns,    flnt,  &
          fsds, net_flx,is_cmip6_volc, ztodt)
 

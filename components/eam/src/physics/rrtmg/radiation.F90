@@ -828,7 +828,7 @@ end function radiation_nextsw_cday
   
   subroutine radiation_tend(state,ptend, pbuf, &
        cam_out, cam_in, &
-       landfrac,icefrac,snowh, &
+       landfrac,icefrac,ocnfrac,snowh, & ! LM added ocnfrac
        fsns,    fsnt, flns,    flnt,  &
        fsds, net_flx, is_cmip6_volc, dt)
 
@@ -889,7 +889,8 @@ end function radiation_nextsw_cday
     logical,  intent(in)    :: is_cmip6_volc    ! true if cmip6 style volcanic file is read otherwise false 
     real(r8), intent(in)    :: landfrac(pcols)  ! land fraction
     real(r8), intent(in)    :: dt               ! time step(s)
-    real(r8), intent(in)    :: icefrac(pcols)   ! land fraction
+    real(r8), intent(in)    :: icefrac(pcols)   ! land fraction <- typo here
+    real(r8), intent(in)    :: ocnfrac(pcols)   ! LM added ocean fraction 
     real(r8), intent(in)    :: snowh(pcols)     ! Snow depth (liquid water equivalent)
     real(r8), intent(inout) :: fsns(pcols)      ! Surface solar absorbed flux
     real(r8), intent(inout) :: fsnt(pcols)      ! Net column abs solar flux at model top
@@ -1143,7 +1144,7 @@ end function radiation_nextsw_cday
     if (dosw .or. dolw) then
 
        ! construct an RRTMG state object
-       r_state => rrtmg_state_create( state, cam_in, landfrac, icefrac ) ! LM added landfrac, icefrac
+       r_state => rrtmg_state_create( state, cam_in, landfrac, icefrac, ocnfrac ) ! LM added landfrac, icefrac, ocnfrac
 
        call t_stopf ('radiation_tend_init')
 
