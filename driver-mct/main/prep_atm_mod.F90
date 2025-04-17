@@ -278,6 +278,7 @@ contains
 
     ! Local variables
     integer  :: index_x2a_Faxx_lwdn_prev
+    integer  :: index_a2x_Faxa_lwdn
     integer  :: lsize
     integer  :: n
 
@@ -286,8 +287,9 @@ contains
     index_x2a_Faxx_lwdn_prev = mct_aVect_indexRA(x2a_a,'Faxx_lwdn_prev')
 
     do n = 1,lsize
-      x2a_a%rAttr(index_x2a_Faxx_lwdn_prev,n) = 1 !a2x_a%Rattr(index_a2x_Faxa_lwdn,n)
+      x2a_a%rAttr(index_x2a_Faxx_lwdn_prev,n) = a2x_a%Rattr(index_a2x_Faxa_lwdn,n)
     end do
+
   end subroutine prep_atm_copy
 
   !================================================================================================
