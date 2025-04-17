@@ -279,6 +279,7 @@ contains
     ! Local variables
     integer  :: index_x2a_Faxx_lwdn_prev
     integer  :: lsize
+    integer  :: n
 
     lsize = mct_avect_lsize(x2a_a)
 
