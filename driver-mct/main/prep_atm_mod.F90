@@ -244,6 +244,7 @@ contains
     ! Local Variables
     integer                  :: eli, eoi, eii, exi, efi, eai, emi
     type(mct_avect), pointer :: x2a_ax
+    type(mct_avect), pointer :: a2x_ax ! LM added
     character(*), parameter  :: subname = '(prep_atm_mrg)'
     character(*), parameter  :: F00 = "('"//subname//" : ', 4A )"
     !---------------------------------------------------------------
