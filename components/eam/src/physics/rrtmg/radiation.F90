@@ -697,7 +697,7 @@ end function radiation_nextsw_cday
           call addfld('FLDSC'//diag(icall), horiz_only,    'A',   'W/m2', 'Clearsky Downwelling longwave flux at surface', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
               ! ------ LM added ------
-          call addfld('FLUS'//diag(icall), horiz_only,    'I',    'W/m2', 'Upwelling longwave flux at surface', &
+          call addfld('FLUS'//diag(icall), horiz_only,    'A',    'W/m2', 'Upwelling longwave flux at surface', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true., &
                       standard_name='surface_upwelling_longwave_flux_in_air')
           call addfld('FLUSC'//diag(icall), horiz_only,    'A',   'W/m2', 'Clearsky upwelling longwave flux at surface', &

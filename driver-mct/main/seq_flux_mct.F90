@@ -1216,7 +1216,7 @@ contains
     index_evap_HDO = mct_aVect_indexRA(xaop_ae,"Faox_evap_HDO", perrWith='quiet')
     index_evap_18O = mct_aVect_indexRA(xaop_ae,"Faox_evap_18O", perrWith='quiet')
     index_lwup   = mct_aVect_indexRA(xaop_ae,"Faox_lwup")
-    index_lwdn_prev = mct_aVect_indexRA(xaop_ae,"Faox_lwdn_prev") ! LM added
+    index_lwdn_prev = mct_aVect_indexRA(xaop_ae,"PFaox_lwdn_prev") ! LM added
     index_lwdn_prev2=mct_aVect_indexRA(xaop_ae,"Faox_lwdn_prev2") ! LM added
     index_sumwt  = mct_aVect_indexRA(xaop_ae,"sumwt")
 
@@ -1414,7 +1414,7 @@ contains
        index_xao_Faox_evap_HDO = mct_aVect_indexRA(xao,'Faox_evap_HDO', perrWith='quiet')
        index_xao_Faox_evap_18O = mct_aVect_indexRA(xao,'Faox_evap_18O', perrWith='quiet')
        index_xao_Faox_lwup = mct_aVect_indexRA(xao,'Faox_lwup')
-       index_xao_Faox_lwdn_prev = mct_aVect_indexRA(xao,'Faox_lwdn_prev') ! LM added
+       index_xao_Faox_lwdn_prev = mct_aVect_indexRA(xao,'PFaox_lwdn_prev') ! LM added
        index_xao_Faox_lwdn_prev2=mct_aVect_indexRA(xao,'Faox_lwdn_prev2') ! LM added
        index_xao_Faox_swdn = mct_aVect_indexRA(xao,'Faox_swdn')
        index_xao_Faox_swup = mct_aVect_indexRA(xao,'Faox_swup')
