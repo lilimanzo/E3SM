@@ -131,7 +131,7 @@ contains
     index_x2a_Faxx_lat      = mct_avect_indexra(x2a,'Faxx_lat')
     index_x2a_Faxx_sen      = mct_avect_indexra(x2a,'Faxx_sen')
     index_x2a_Faxx_lwup     = mct_avect_indexra(x2a,'Faxx_lwup')
-    index_x2a_Faxx_lwdn_prev= mct_avect_indexra(x2a,'Faxx_lwdn_prev') ! LM added
+    index_x2a_Faxx_lwdn_prev= mct_avect_indexra(x2a,'PFaxx_lwdn_prev') ! LM added
     index_x2a_Faxx_evap     = mct_avect_indexra(x2a,'Faxx_evap')
     index_x2a_So_ustar      = mct_avect_indexra(x2a,'So_ustar')
     index_x2a_So_re         = mct_avect_indexra(x2a,'So_re')
