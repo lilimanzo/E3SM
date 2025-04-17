@@ -27,6 +27,7 @@ module prep_atm_mod
 
   public :: prep_atm_init
   public :: prep_atm_mrg
+  public :: prep_atm_copy ! LM added
 
   public :: prep_atm_get_l2x_ax
   public :: prep_atm_get_i2x_ax
@@ -258,12 +259,27 @@ contains
        emi = mod((eai-1),num_inst_max) + 1
 
        x2a_ax => component_get_x2c_cx(atm(eai)) ! This is actually modifying x2a_ax
+       a2x_ax => component_get_c2x_cx(atm(eai)) ! LM added
        call prep_atm_merge(l2x_ax(eli), o2x_ax(emi), xao_ax(exi), i2x_ax(eii), &
             fractions_ax(efi), x2a_ax)
+       call prep_atm_copy(a2x_ax, x2a_ax) ! LM added
     enddo
     call t_drvstopf  (trim(timer_mrg))
 
   end subroutine prep_atm_mrg
+
+  !================================================================================================
+  ! LM created subroutine
+  subroutine prep_atm_copy (a2x_a, x2a_a )
+   
+    type(mct_aVect), intent(in)    :: a2x_a
+    type(mct_aVect), intent(inout) :: x2a_a
+
+    ! Local variables
+    !type(mct_avect), pointer       :: a2x_ax
+
+
+  end subroutine prep_atm_copy
 
   !================================================================================================
 
