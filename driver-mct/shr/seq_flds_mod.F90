@@ -1319,6 +1319,17 @@ contains
     attname  = 'Faxx_lwdn_prev'
     call metadata_set(attname, longname, stdname, units)
 
+    ! LM added lwdn from previous timestep- take 2
+    call seq_flds_add(xao_fluxes,"Faox_lwdn_prev2")
+    call seq_flds_add(x2a_fluxes,"Faxx_lwdn_prev2")
+    longname = 'LW down prev timestep 2'
+    stdname  = 'longwave_downward_prev2'
+    units    = 'W m-2'
+    attname  = 'Faox_lwdn_prev2'
+    call metadata_set(attname, longname, stdname, units)
+    attname  = 'Faxx_lwdn_prev2'
+    call metadata_set(attname, longname, stdname, units)
+
     ! Zonal surface stress"
     call seq_flds_add(l2x_fluxes,"Fall_taux")
     call seq_flds_add(xao_fluxes,"Faox_taux")
