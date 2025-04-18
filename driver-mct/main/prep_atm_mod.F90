@@ -290,7 +290,7 @@ contains
 
     do n = 1,lsize
       x2a_a%rAttr(index_x2a_Faxx_lwdnprev3,n) = a2x_a%Rattr(index_a2x_Faxa_lwdn,n)
-      print *, "LM prep_atm_copy lwdnprev3 = ", x2a_a%rAttr(index_x2a_Faxx_lwdnprev3,n)
+      !print *, "LM prep_atm_copy lwdnprev3 = ", x2a_a%rAttr(index_x2a_Faxx_lwdnprev3,n)
     end do
 
   end subroutine prep_atm_copy
