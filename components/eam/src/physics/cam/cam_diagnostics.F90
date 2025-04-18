@@ -640,7 +640,9 @@ subroutine diag_init()
    call addfld ('QFLX',horiz_only,    'A','kg/m2/s','Surface water flux', &
    standard_name = 'water_evapotranspiration_flux')
    call addfld ('FLDS_PREV',horiz_only,    'A','kg/m2/s','LW downward flux from prev cpl interval', &
-   standard_name = 'longwave_downward_prev_interval') 
+   standard_name = 'longwave_downward_prev_interval')  ! LM added
+   call addfld ('FLDS_PREV3',horiz_only,   'A','kg/m2/s','LW downward flux from prev cpl interval', &
+   standard_name = 'longwave_downward_prev3_interval')  ! LM added
    call addfld ('LWUP',horiz_only,    'A','kg/m2/s','LW upward flux from cpl', &
    standard_name = 'longwave_upward_cpl') ! LM added
 
@@ -689,6 +691,7 @@ subroutine diag_init()
        call add_default ('LHFLX   ', 1, ' ')
        call add_default ('QFLX    ', 1, ' ')
        call add_default ('FLDS_PREV',1, ' ') ! LM added
+       call add_default ('FLDS_PREV3',1,' ') ! LM added
        call add_default ('LWUP    ', 1, ' ') ! LM added
        call add_default ('TAUX    ', 1, ' ')
        call add_default ('TAUY    ', 1, ' ')
@@ -2149,6 +2152,7 @@ subroutine diag_surf (cam_in, cam_out, ps, trefmxav, trefmnav )
     call outfld('LHFLX',    cam_in%lhf,       pcols, lchnk)
     call outfld('QFLX',     cam_in%cflx(1,1), pcols, lchnk)
     call outfld('FLDS_PREV',cam_in%lwdnprev,  pcols, lchnk) ! LM added
+    call outfld('FLDS_PREV3',cam_in%lwdnprev3,pcols, lchnk) ! LM added
     call outfld('LWUP',     cam_in%lwup,      pcols, lchnk) ! LM added
 
     call outfld('TAUX',     cam_in%wsx,       pcols, lchnk)

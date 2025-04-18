@@ -89,6 +89,8 @@ contains
           cam_in(c)%lwup(i)      = -x2a(index_x2a_Faxx_lwup,ig)
           cam_in(c)%lwdnprev(i) =  x2a(index_x2a_Faxx_lwdnprev,ig)
           print *, "LM atm_import_export lwdnprev = ", cam_in(c)%lwdnprev(i)
+          cam_in(c)%lwdnprev3(i) =  x2a(index_x2a_Faxx_lwdnprev3,ig)
+          print *, "LM atm_import_export lwdnprev3 = ", cam_in(c)%lwdnprev3(i)
           cam_in(c)%asdir(i)     =  x2a(index_x2a_Sx_avsdr, ig)
           cam_in(c)%aldir(i)     =  x2a(index_x2a_Sx_anidr, ig)
           cam_in(c)%asdif(i)     =  x2a(index_x2a_Sx_avsdf, ig)
