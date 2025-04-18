@@ -2148,7 +2148,7 @@ subroutine diag_surf (cam_in, cam_out, ps, trefmxav, trefmnav )
     call outfld('SHFLX',    cam_in%shf,       pcols, lchnk)
     call outfld('LHFLX',    cam_in%lhf,       pcols, lchnk)
     call outfld('QFLX',     cam_in%cflx(1,1), pcols, lchnk)
-    call outfld('FLDS_PREV',cam_in%lwdn_prev, pcols, lchnk) ! LM added
+    call outfld('FLDS_PREV',cam_in%lwdnprev,  pcols, lchnk) ! LM added
     call outfld('LWUP',     cam_in%lwup,      pcols, lchnk) ! LM added
 
     call outfld('TAUX',     cam_in%wsx,       pcols, lchnk)

@@ -278,7 +278,7 @@ contains
     type(mct_aVect), intent(inout) :: x2a_a
 
     ! Local variables
-    integer  :: index_x2a_Faxx_lwdn_prev3
+    integer  :: index_x2a_Faxx_lwdnprev3
     integer  :: index_a2x_Faxa_lwdn
     integer  :: lsize
     integer  :: n
@@ -286,10 +286,10 @@ contains
     lsize = mct_avect_lsize(x2a_a)
 
     index_a2x_Faxa_lwdn = mct_aVect_indexRA(a2x_a, 'Faxa_lwdn')
-    index_x2a_Faxx_lwdn_prev3 = mct_aVect_indexRA(x2a_a,'Faxx_lwdn_prev3')
+    index_x2a_Faxx_lwdn_prev3 = mct_aVect_indexRA(x2a_a,'Faxx_lwdnprev3')
 
     do n = 1,lsize
-      x2a_a%rAttr(index_x2a_Faxx_lwdn_prev3,n) = a2x_a%Rattr(index_a2x_Faxa_lwdn,n)
+      x2a_a%rAttr(index_x2a_Faxx_lwdnprev3,n) = a2x_a%Rattr(index_a2x_Faxa_lwdn,n)
     end do
 
   end subroutine prep_atm_copy

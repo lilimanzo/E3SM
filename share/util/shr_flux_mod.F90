@@ -146,7 +146,7 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,   &
            &               tbot  ,us    ,vs    ,   &
            &               ts    ,mask  , seq_flux_atmocn_minwind, &
            &               sen   ,lat   ,lwup  ,lwdn  ,  &   ! LM added lwdn
-           &               lwdn_prev    ,r16O, rhdo, r18O, & ! LM added lwdn_prev
+           &               lwdnprev    ,r16O, rhdo, r18O, & ! LM added lwdnprev
            &               evap  ,evap_16O, evap_HDO, evap_18O, &
            &               taux  ,tauy  ,tref  ,qref  ,   &
            &               ocn_surface_flux_scheme, &
@@ -187,7 +187,7 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,   &
    real(R8),intent(out)  ::  sen  (nMax) ! heat flux: sensible    (W/m^2)
    real(R8),intent(out)  ::  lat  (nMax) ! heat flux: latent      (W/m^2)
    real(R8),intent(out)  ::  lwup (nMax) ! heat flux: lw upward   (W/m^2)
-   real(R8),intent(out)  ::  lwdn_prev(nMax) ! LM added lw downward from prev timestep (W/m^2)
+   real(R8),intent(out)  ::  lwdnprev(nMax) ! LM added lw downward from prev timestep (W/m^2)
    real(R8),intent(out)  ::  evap (nMax) ! water flux: evap  ((kg/s)/m^2)
    real(R8),intent(out)  ::  evap_16O (nMax) ! water flux: evap ((kg/s/m^2)
    real(R8),intent(out)  ::  evap_HDO (nMax) ! water flux: evap ((kg/s)/m^2)
@@ -461,9 +461,9 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,   &
         !lwup(n) = -loc_stebol * ts(n)**4
         ! LM changed to greybody
         lwup(n) = -loc_ocn_msv * loc_stebol * ts(n)**4 - (1.0_R8 - loc_ocn_msv) * lwdn(n)
-        lwdn_prev(n) = lwdn(n) ! LM added
+        lwdnprev(n) = lwdn(n) ! LM added
         print *, "lwdn = ", lwdn(n)
-        print *, "lwdn_prev = ", lwdn_prev(n) 
+        print *, "lwdnprev = ", lwdnprev(n) 
 
         !--- water flux ---
         evap(n) = lat(n)/loc_latvap
@@ -507,7 +507,7 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,   &
         sen   (n) = spval  ! sensible         heat flux  (W/m^2)
         lat   (n) = spval  ! latent           heat flux  (W/m^2)
         lwup  (n) = spval  ! long-wave upward heat flux  (W/m^2)
-        lwdn_prev(n)=spval ! LM added lw downward flux from prev timestep (W/m^2)
+        lwdnprev(n)=spval ! LM added lw downward flux from prev timestep (W/m^2)
         evap  (n) = spval  ! evaporative water flux ((kg/s)/m^2)
         evap_16O (n) = spval !water tracer flux (kg/s)/m^2)
         evap_HDO (n) = spval !HDO tracer flux  (kg/s)/m^2)
