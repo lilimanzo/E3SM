@@ -272,7 +272,8 @@ contains
   !================================================================================================
   ! LM created subroutine
   subroutine prep_atm_copy (a2x_a, x2a_a )
-   
+  
+    ! Arguments 
     type(mct_aVect), intent(in)    :: a2x_a
     type(mct_aVect), intent(inout) :: x2a_a
 
@@ -284,6 +285,7 @@ contains
 
     lsize = mct_avect_lsize(x2a_a)
 
+    index_a2x_Faxa_lwdn = mct_aVect_indexRA(a2x_a, 'Faxa_lwdn')
     index_x2a_Faxx_lwdn_prev3 = mct_aVect_indexRA(x2a_a,'Faxx_lwdn_prev3')
 
     do n = 1,lsize
