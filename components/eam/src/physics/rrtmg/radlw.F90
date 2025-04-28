@@ -48,6 +48,7 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    use mcica_subcol_gen_lw, only: mcica_subcol_lw
    use physconst,           only: cpair
    use rrtmg_state,         only: rrtmg_state_t
+   use shr_const_mod,       only: shr_const_ocn_msv ! LM added
 
 !------------------------------Arguments--------------------------------
 !
@@ -216,7 +217,7 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    ! Set surface temperature
    ! Set aerosol optical depth to zero for now
 
-   emis(:ncol,:nbndlw) = 1._r8
+   emis(:ncol,:nbndlw) = shr_const_ocn_msv  ! 1._r8 <- orig; LM changed
    tsfc(:ncol) = r_state%tlev(:ncol,rrtmg_levs+1)
    taua_lw(:ncol, 1:rrtmg_levs-1, :nbndlw) = aer_lw_abs(:ncol,pverp-rrtmg_levs+1:pverp-1,:nbndlw)
 
