@@ -15,6 +15,7 @@ module radiation
 !---------------------------------------------------------------------------------
 
 use shr_kind_mod,    only: r8=>shr_kind_r8
+use shr_const_mod,   only: shr_const_ocn_msv
 use spmd_utils,      only: masterproc, iam, npes
 use ppgrid,          only: pcols, pver, pverp, begchunk, endchunk
 use physics_types,   only: physics_state, physics_ptend
