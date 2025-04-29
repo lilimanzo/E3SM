@@ -254,7 +254,7 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    flusc(:ncol) = uflxc(:ncol,1)                        ! LM added
 
    trad(:ncol)  = tsfc(:ncol)                           ! LM added
-   print *, 'LM print trad: ', trad(:ncol)
+   !print *, 'LM print trad: ', trad(:ncol)
 
    !
    ! Reverse vertical indexing here for CAM arrays to go from top to bottom.
