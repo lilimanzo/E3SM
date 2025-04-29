@@ -38,6 +38,7 @@ module rrtmg_state
      real(r8), allocatable :: pintmb(:,:)   ! Model interface pressure (hPa)
      real(r8), allocatable :: tlay(:,:)     ! mid point temperature
      real(r8), allocatable :: tlev(:,:)     ! interface temperature
+     real(r8), allocatable :: semis(:)      ! LM added surface temperature
 
   end type rrtmg_state_t
 
@@ -110,6 +111,7 @@ contains
     allocate( rstate%pintmb(pcols,num_rrtmg_levs+1) )
     allocate( rstate%tlay(pcols,num_rrtmg_levs) )
     allocate( rstate%tlev(pcols,num_rrtmg_levs+1) )
+    allocate( rstate%semis(pcols) ) ! LM added
 
     ncol = pstate%ncol
 
@@ -248,6 +250,7 @@ contains
     deallocate(rstate%pintmb)
     deallocate(rstate%tlay)
     deallocate(rstate%tlev)
+    deallocate(rstate%semis) ! LM added
 
     nullify(rstate)
 

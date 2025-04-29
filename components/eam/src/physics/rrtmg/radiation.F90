@@ -15,7 +15,7 @@ module radiation
 !---------------------------------------------------------------------------------
 
 use shr_kind_mod,    only: r8=>shr_kind_r8
-use shr_const_mod,   only: shr_const_ocn_msv
+!use shr_const_mod,   only: shr_const_ocn_msv ! LM added
 use spmd_utils,      only: masterproc, iam, npes
 use ppgrid,          only: pcols, pver, pverp, begchunk, endchunk
 use physics_types,   only: physics_state, physics_ptend
@@ -916,7 +916,7 @@ end function radiation_nextsw_cday
     real(r8) britemp(pcols,pnf_msu)     ! Microwave brightness temperature
     real(r8) tb_ir(pcols,pnb_hirs)      ! Infrared brightness temperature
     real(r8) ts(pcols)                  ! surface temperature
-    real(r8) semis(pcols)               ! LM added Surface emissivity
+    !real(r8) semis(pcols)               ! LM added Surface emissivity
     real(r8) pintmb(pcols,pverp)        ! Model interface pressures (hPa)
     real(r8) oro(pcols)                 ! Land surface flag, sea=0, land=1
 
@@ -1438,9 +1438,9 @@ end function radiation_nextsw_cday
        ! Longwave radiation computation
        
        ! LM added- define surface emissivity
-       do i=1,ncol
-          semis(i)=shr_const_ocn_msv 
-       end do
+       !do i=1,ncol
+       !   semis(i)=shr_const_ocn_msv 
+       !end do
 
        if (dolw) then
           call t_startf ('rad_lw')
