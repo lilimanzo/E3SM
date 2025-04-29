@@ -125,9 +125,11 @@ contains
        if (landfrac(i).le.0.001 .and. icefrac(i).le.0.001) then
        !if (ocnfrac(i).ge.0.999) then 
           tint(i,pverp) = sqrt(sqrt((cam_in%lwup(i)-(1-shr_const_ocn_msv)*cam_in%lwdnprev3(i))/(shr_const_ocn_msv*stebol)))
+          rstate%semis(i) = shr_const_ocn_msv
           !tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))
        else
           tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))
+          rstate%semis(i) = 1.0_r8
        endif
 
        !flus_sb(i,pverp) = stebol * tint(i,pverp)**4 ! LM added
