@@ -111,6 +111,7 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
 
    real(r8) :: tsfc(pcols)          ! surface temperature
    real(r8) :: emis(pcols,nbndlw)   ! surface emissivity
+   real(r8) :: semis_spc(pcols,nbndlw) ! spectral surface emissivity
 
    real(r8) :: taua_lw(pcols,rrtmg_levs-1,nbndlw)     ! aerosol optical depth by band
 
@@ -217,7 +218,9 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    ! Set surface temperature
    ! Set aerosol optical depth to zero for now
 
-   emis(:ncol,:nbndlw) = r_state%semis(:ncol)  ! 1._r8 <- orig; LM changed
+   do i=1,nbndlw
+      emis(:ncol,i) = r_state%semis(:ncol)  ! 1._r8 <- orig; LM changed
+   end do 
    tsfc(:ncol) = r_state%tlev(:ncol,rrtmg_levs+1)
    taua_lw(:ncol, 1:rrtmg_levs-1, :nbndlw) = aer_lw_abs(:ncol,pverp-rrtmg_levs+1:pverp-1,:nbndlw)
 
