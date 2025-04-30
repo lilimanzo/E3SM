@@ -716,9 +716,13 @@ end function radiation_nextsw_cday
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
           call addfld('FDLC'//diag(icall), (/ 'ilev' /),'I',    'W/m2', 'LM added Longwave clear-sky column downward flux', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
-          call addfld('LU'//diag(icall), (/'ilev','lwband'/),'I', 'W/m2', 'LM added spectral upwelling flux', & 
+          !call addfld('LU'//diag(icall), (/'ilev','lwband'/),'I', 'W/m2', 'LM added spectral upwelling flux', & 
+          !            sampling_seq='rad_lwsw', flag_xyfill=.true.)
+          !call addfld('LD'//diag(icall), (/'ilev','lwband'/),'I', 'W/m2', 'LM added spectral downwelling flux', &
+          !            sampling_seq='rad_lwsw', flag_xyfill=.true.)    
+          call addfld('FLUS_SPC'//diag(icall), (/'ilev','lwband'/),'I', 'W/m2', 'LM added spectral upwelling surface flux', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
-          call addfld('LD'//diag(icall), (/'ilev','lwband'/),'I', 'W/m2', 'LM added spectral downwelling flux', &
+          call addfld('FLUT_SPC'//diag(icall), (/'ilev','lwband'/),'I', 'W/m2', 'LM added spectral upwelling TOA flux', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)    
               ! ----------------------
           call addfld('FLNS'//diag(icall), horiz_only,    'A',    'W/m2', 'Net longwave flux at surface', &
@@ -764,8 +768,10 @@ end function radiation_nextsw_cday
              call add_default('FDL'//diag(icall),   1, ' ') ! LM added
              call add_default('FULC'//diag(icall),  1, ' ') ! LM added
              call add_default('FDLC'//diag(icall),  1, ' ') ! LM added
-             call add_default('LU'//diag(icall),    1, ' ') ! LM added
-             call add_default('LD'//diag(icall),    1, ' ') ! LM added
+             !call add_default('LU'//diag(icall),    1, ' ') ! LM added
+             !call add_default('LD'//diag(icall),    1, ' ') ! LM added
+             call add_default('FLUS_SPC'//diag(icall),1,' ') ! LM added
+             call add_default('FLUT_SPC'//diag(icall),1,' ') ! LM added
           endif
 
        end if
@@ -1507,12 +1513,14 @@ end function radiation_nextsw_cday
                   call outfld('FLUSC'//diag(icall),flusc , pcols,lchnk) ! LM added
                   call outfld('FLNTC'//diag(icall),flntc ,pcols,lchnk)
                   call outfld('FLNS'//diag(icall),flns  ,pcols,lchnk)
-                  call outfld('FUL'//diag(icall),ful (:ncol,:),ncol,lchnk)   ! LM added
-                  call outfld('FULC'//diag(icall),fsul (:ncol,:),ncol,lchnk) ! LM added
-                  call outfld('FDL'//diag(icall),fdl (:ncol,:),ncol,lchnk)   ! LM added
-                  call outfld('FDLC'//diag(icall),fsdl (:ncol,:),ncol,lchnk) ! LM added
-                  call outfld('LU'//diag(icall),lu (:ncol,:,:),ncol,lchnk)   ! LM added
-                  call outfld('LD'//diag(icall),ld (:ncol,:,:),ncol,lchnk)   ! LM added
+                  call outfld('FUL'//diag(icall),ful (:pcol,:),pcol,lchnk)   ! LM added
+                  call outfld('FULC'//diag(icall),fsul (:pcol,:),pcol,lchnk) ! LM added
+                  call outfld('FDL'//diag(icall),fdl (:pcol,:),pcol,lchnk)   ! LM added
+                  call outfld('FDLC'//diag(icall),fsdl (:pcol,:),pcol,lchnk) ! LM added
+                  !call outfld('LU'//diag(icall),lu (:pcol,:,:),pcol,lchnk)   ! LM added
+                  !call outfld('LD'//diag(icall),ld (:pcol,:,:),pcol,lchnk)   ! LM added
+                  call outfld('FLUS_SPC'//diag(icall),lu(:,pver+1,:),pcol,lchnk) ! LM added
+                  call outfld('FLUT_SPC'//diag(icall),lu(:,1,:),pcol,lchnk) ! LM added
                   
                   call outfld('FLDSC'//diag(icall),fldsc ,pcols,lchnk)
                   call outfld('FLNSC'//diag(icall),flnsc ,pcols,lchnk)
