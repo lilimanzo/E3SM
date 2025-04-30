@@ -74,7 +74,7 @@ integer :: irad_always = 0 ! Specifies length of time in timesteps (positive)
                            ! or hours (negative) SW/LW radiation will be
                            ! run continuously from the start of an
                            ! initial or restart run
-logical :: spectralflux  = .false. ! calculate fluxes (up and down) per band.
+logical :: spectralflux  = .true. ! calculate fluxes (up and down) per band. LM changed to true
 
 logical :: use_rad_dt_cosz  = .false. ! if true, uses the radiation dt for all cosz calculations !BSINGH - Added for solar insolation calc.
 
