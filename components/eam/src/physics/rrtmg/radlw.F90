@@ -101,7 +101,8 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
 !---------------------------Local variables-----------------------------
 !
    integer :: i, k, kk, nbnd         ! indices
-
+   
+   ! LM commented
    !real(r8) :: ful(pcols,pverp)     ! Total upwards longwave flux
    !real(r8) :: fsul(pcols,pverp)    ! Clear sky upwards longwave flux
    !real(r8) :: fdl(pcols,pverp)     ! Total downwards longwave flux
