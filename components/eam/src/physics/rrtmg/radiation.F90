@@ -692,6 +692,8 @@ end function radiation_nextsw_cday
     do icall = 0, N_DIAG
 
        if (active_calls(icall)) then
+          call get_lw_spectral_midpoints(lw_band_midpoints, 'cm-1') ! LM added from JPT
+          call add_hist_coord('lwband', nlwbands, 'Longwave wavenumber', 'cm-1', lw_band_midpoints) ! LM added from JPT
 
           call addfld('QRL'//diag(icall),  (/ 'lev' /), 'A',     'K/s', 'Longwave heating rate', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
