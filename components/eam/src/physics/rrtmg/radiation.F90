@@ -27,9 +27,11 @@ use cam_control_mod, only: lambm0, obliqr, mvelpp, eccen
 use iop_data_mod,    only: single_column
 use perf_mod,        only: t_startf, t_stopf
 use cam_logfile,     only: iulog
+use cam_history_support, only: add_hist_coord ! LM added from JPT
 
 use rad_constituents, only: N_DIAG, rad_cnst_get_call_list, rad_cnst_get_info
-use radconstants,     only: rrtmg_sw_cloudsim_band, rrtmg_lw_cloudsim_band, nswbands, nlwbands
+use radconstants,     only: rrtmg_sw_cloudsim_band, rrtmg_lw_cloudsim_band, nswbands, nlwbands, &
+        get_sw_spectral_midpoints, get_lw_spectral_midpoints ! LM added from JPT
 
 implicit none
 private
@@ -93,6 +95,9 @@ real(r8) :: dt_avg=0.0_r8  ! time step to use for the shr_orb_cosz calculation, 
 
 logical :: pergro_mods = .false. ! for activating pergro mods
 integer :: firstblock, lastblock      ! global block indices
+
+! LM added from JPT
+real(r8), target :: sw_band_midpoints(nswbands), lw_band_midpoints(nlwbands)
 
 !===============================================================================
 contains
