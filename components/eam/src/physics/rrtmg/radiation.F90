@@ -1513,14 +1513,14 @@ end function radiation_nextsw_cday
                   call outfld('FLUSC'//diag(icall),flusc , pcols,lchnk) ! LM added
                   call outfld('FLNTC'//diag(icall),flntc ,pcols,lchnk)
                   call outfld('FLNS'//diag(icall),flns  ,pcols,lchnk)
-                  call outfld('FUL'//diag(icall),ful (:pcol,:),pcol,lchnk)   ! LM added
-                  call outfld('FULC'//diag(icall),fsul (:pcol,:),pcol,lchnk) ! LM added
-                  call outfld('FDL'//diag(icall),fdl (:pcol,:),pcol,lchnk)   ! LM added
-                  call outfld('FDLC'//diag(icall),fsdl (:pcol,:),pcol,lchnk) ! LM added
-                  !call outfld('LU'//diag(icall),lu (:pcol,:,:),pcol,lchnk)   ! LM added
-                  !call outfld('LD'//diag(icall),ld (:pcol,:,:),pcol,lchnk)   ! LM added
-                  call outfld('FLUS_SPC'//diag(icall),lu(:,pver+1,:),pcol,lchnk) ! LM added
-                  call outfld('FLUT_SPC'//diag(icall),lu(:,1,:),pcol,lchnk) ! LM added
+                  call outfld('FUL'//diag(icall),ful (:pcols,:),pcols,lchnk)   ! LM added
+                  call outfld('FULC'//diag(icall),fsul (:pcols,:),pcols,lchnk) ! LM added
+                  call outfld('FDL'//diag(icall),fdl (:pcols,:),pcols,lchnk)   ! LM added
+                  call outfld('FDLC'//diag(icall),fsdl (:pcols,:),pcols,lchnk) ! LM added
+                  !call outfld('LU'//diag(icall),lu (:pcols,:,:),pcols,lchnk)   ! LM added
+                  !call outfld('LD'//diag(icall),ld (:pcols,:,:),pcols,lchnk)   ! LM added
+                  call outfld('FLUS_SPC'//diag(icall),lu(:,pver+1,:),pcols,lchnk) ! LM added
+                  call outfld('FLUT_SPC'//diag(icall),lu(:,1,:),pcols,lchnk) ! LM added
                   
                   call outfld('FLDSC'//diag(icall),fldsc ,pcols,lchnk)
                   call outfld('FLNSC'//diag(icall),flnsc ,pcols,lchnk)
