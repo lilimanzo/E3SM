@@ -1492,6 +1492,8 @@ end function radiation_nextsw_cday
                   call outfld('FLUSC'//diag(icall),flusc , pcols,lchnk) ! LM added
                   call outfld('FLNTC'//diag(icall),flntc ,pcols,lchnk)
                   call outfld('FLNS'//diag(icall),flns  ,pcols,lchnk)
+                  call outfld('FUL'//diag(icall),ful (:ncol,:),ncol,lchnk) ! LM added
+                  call outfld('FDL'//diag(icall),fdl (:ncol,:),ncol,lchnk) ! LM added
                   
                   call outfld('FLDSC'//diag(icall),fldsc ,pcols,lchnk)
                   call outfld('FLNSC'//diag(icall),flnsc ,pcols,lchnk)

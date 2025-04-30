@@ -219,7 +219,7 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    ! Set aerosol optical depth to zero for now
 
    do i=1,nbndlw
-      emis(:ncol,i) = r_state%semis(:ncol)  ! 1._r8 <- orig; LM changed
+      emis(:ncol,i) = r_state%semis(:ncol)  ! 1._r8 <- orig; LM changed and added loop
    end do 
    tsfc(:ncol) = r_state%tlev(:ncol,rrtmg_levs+1)
    taua_lw(:ncol, 1:rrtmg_levs-1, :nbndlw) = aer_lw_abs(:ncol,pverp-rrtmg_levs+1:pverp-1,:nbndlw)
