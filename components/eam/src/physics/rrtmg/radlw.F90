@@ -40,8 +40,8 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
                         qrl     ,qrlc      ,                          &
                         flns    ,flnt      ,flnsc     ,flntc  ,flwds, &
                         flut    ,flutc     ,fnl       ,fcnl   ,fldsc, &
-                        flus    ,flusc     ,trad      ,clm_rand_seed, & ! LM added flus, flusc, trad
-                        lu      ,ld        )
+                        flus    ,flusc     ,trad      ,clm_rand_seed, &     ! LM added flus, flusc, trad
+                        lu      ,ld        ,ful       ,fsul   ,fdl  , fsdl) ! LM added ful, fsul, fdl, fsdl
 
 !-----------------------------------------------------------------------
    use cam_history,         only: outfld
@@ -89,6 +89,10 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    real(r8), intent(out) :: fcnl(pcols,pverp)    ! clear sky net flux at interfaces
    real(r8), intent(out) :: fnl(pcols,pverp)     ! net flux at interfaces
    real(r8), intent(out) :: trad(pcols)          ! LM added radiative temperature
+   real(r8), intent(out) :: ful(pcols,pverp)     ! LM moved from local to output- column lwup
+   real(r8), intent(out) :: fsul(pcols,pverp)    ! LM moved from local to output- column clearsky lwup
+   real(r8), intent(out) :: fdl(pcols,pverp)     ! LM moved from local to output- column lwdn
+   real(r8), intent(out) :: fsdl(pcols,pverp)    ! LM moved from local to output- column clearsky lwdn
 
    real(r8), pointer, dimension(:,:,:) :: lu ! longwave spectral flux up
    real(r8), pointer, dimension(:,:,:) :: ld ! longwave spectral flux down
@@ -98,10 +102,10 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
 !
    integer :: i, k, kk, nbnd         ! indices
 
-   real(r8) :: ful(pcols,pverp)     ! Total upwards longwave flux
-   real(r8) :: fsul(pcols,pverp)    ! Clear sky upwards longwave flux
-   real(r8) :: fdl(pcols,pverp)     ! Total downwards longwave flux
-   real(r8) :: fsdl(pcols,pverp)    ! Clear sky downwards longwv flux
+   !real(r8) :: ful(pcols,pverp)     ! Total upwards longwave flux
+   !real(r8) :: fsul(pcols,pverp)    ! Clear sky upwards longwave flux
+   !real(r8) :: fdl(pcols,pverp)     ! Total downwards longwave flux
+   !real(r8) :: fsdl(pcols,pverp)    ! Clear sky downwards longwv flux
 
    integer :: inflglw               ! Flag for cloud parameterization method
    integer :: iceflglw              ! Flag for ice cloud param method
