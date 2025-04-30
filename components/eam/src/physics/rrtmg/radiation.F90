@@ -710,6 +710,10 @@ end function radiation_nextsw_cday
                       sampling_seq='rad_lwsw', flag_xyfill=.true.) 
           call addfld('TRAD'//diag(icall), horiz_only, 'A', 'K', 'LM added radiative temperature')
           call addfld('SEMIS'//diag(icall), horiz_only, 'A', '1', 'LM added surface emissivity')
+          call addfld('FULC'//diag(icall), (/ 'ilev' /),'I',    'W/m2', 'LM added Longwave clear-sky column upward flux', &
+                      sampling_seq='rad_lwsw', flag_xyfill=.true.)
+          call addfld('FDLC'//diag(icall), (/ 'ilev' /),'I',    'W/m2', 'LM added Longwave clear-sky column downward flux', &
+                      sampling_seq='rad_lwsw', flag_xyfill=.true.)
               ! ----------------------
           call addfld('FLNS'//diag(icall), horiz_only,    'A',    'W/m2', 'Net longwave flux at surface', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
@@ -735,10 +739,6 @@ end function radiation_nextsw_cday
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
           call addfld('FDL'//diag(icall), (/ 'ilev' /),'I',     'W/m2', 'Longwave downward flux', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
-          call addfld('FULC'//diag(icall), (/ 'ilev' /),'I',    'W/m2', 'Longwave clear-sky upward flux', &
-                      sampling_seq='rad_lwsw', flag_xyfill=.true.)
-          call addfld('FDLC'//diag(icall), (/ 'ilev' /),'I',    'W/m2', 'Longwave clear-sky downward flux', &
-                      sampling_seq='rad_lwsw', flag_xyfill=.true.)
 
           if (history_amwg) then
              call add_default('QRL'//diag(icall),   1, ' ')
@@ -756,6 +756,8 @@ end function radiation_nextsw_cday
              call add_default('LWCF'//diag(icall),  1, ' ')
              call add_default('FUL'//diag(icall),   1, ' ') ! LM added
              call add_default('FDL'//diag(icall),   1, ' ') ! LM added
+             call add_default('FULC'//diag(icall),  1, ' ') ! LM added
+             call add_default('FDLC'//diag(icall),  1, ' ') ! LM added
           endif
 
        end if
@@ -1498,7 +1500,9 @@ end function radiation_nextsw_cday
                   call outfld('FLNTC'//diag(icall),flntc ,pcols,lchnk)
                   call outfld('FLNS'//diag(icall),flns  ,pcols,lchnk)
                   call outfld('FUL'//diag(icall),ful (:ncol,:),ncol,lchnk) ! LM added
+                  call outfld('FULC'//diag(icall),fsul (:ncol,:),ncol,lchnk) ! LM added
                   call outfld('FDL'//diag(icall),fdl (:ncol,:),ncol,lchnk) ! LM added
+                  call outfld('FDLC'//diag(icall),fsdl (:ncol,:),ncol,lchnk) ! LM added
                   
                   call outfld('FLDSC'//diag(icall),fldsc ,pcols,lchnk)
                   call outfld('FLNSC'//diag(icall),flnsc ,pcols,lchnk)
