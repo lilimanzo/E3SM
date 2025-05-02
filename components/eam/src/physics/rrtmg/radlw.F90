@@ -40,12 +40,12 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
                         qrl     ,qrlc      ,                          &
                         flns    ,flnt      ,flnsc     ,flntc  ,flwds, &
                         flut    ,flutc     ,fnl       ,fcnl   ,fldsc,clm_rand_seed, &
-                        lu      ,ld        ,trad ) ! LM added trad
+                        lu      ,ld        ,trad      ,flus_sb ) ! LM added trad
 
 !-----------------------------------------------------------------------
    use cam_history,         only: outfld
    use mcica_subcol_gen_lw, only: mcica_subcol_lw
-   use physconst,           only: cpair
+   use physconst,           only: cpair, stebol
    use rrtmg_state,         only: rrtmg_state_t
 
 !------------------------------Arguments--------------------------------
@@ -85,6 +85,7 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    real(r8), intent(out) :: fcnl(pcols,pverp)    ! clear sky net flux at interfaces
    real(r8), intent(out) :: fnl(pcols,pverp)     ! net flux at interfaces
    real(r8), intent(out) :: trad(pcols)          ! LM added radiative temperature
+   real(r8), intent(out) :: flus_sb(pcols)       ! LM added surface flux from SB law
 
    real(r8), pointer, dimension(:,:,:) :: lu ! longwave spectral flux up
    real(r8), pointer, dimension(:,:,:) :: ld ! longwave spectral flux down
@@ -248,6 +249,7 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    flutc(:ncol) = uflxc(:ncol,rrtmg_levs)
 
    trad(:ncol)  = tsfc(:ncol) ! LM added
+   flus_sb(:ncol) = stebol * tsfc(:ncol)**4 ! LM added
 
    !
    ! Reverse vertical indexing here for CAM arrays to go from top to bottom.
