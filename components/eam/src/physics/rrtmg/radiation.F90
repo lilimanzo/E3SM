@@ -27,8 +27,10 @@ use iop_data_mod,    only: single_column
 use perf_mod,        only: t_startf, t_stopf
 use cam_logfile,     only: iulog
 
+use cam_history_support, only: add_hist_coord ! LM added from JPT
 use rad_constituents, only: N_DIAG, rad_cnst_get_call_list, rad_cnst_get_info
-use radconstants,     only: rrtmg_sw_cloudsim_band, rrtmg_lw_cloudsim_band, nswbands, nlwbands
+use radconstants,     only: rrtmg_sw_cloudsim_band, rrtmg_lw_cloudsim_band, nswbands, nlwbands, &
+        get_sw_spectral_midpoints, get_lw_spectral_midpoints ! LM added from JPT
 
 implicit none
 private
@@ -71,7 +73,7 @@ integer :: irad_always = 0 ! Specifies length of time in timesteps (positive)
                            ! or hours (negative) SW/LW radiation will be
                            ! run continuously from the start of an
                            ! initial or restart run
-logical :: spectralflux  = .false. ! calculate fluxes (up and down) per band.
+logical :: spectralflux  = .true. ! calculate fluxes (up and down) per band. LM changed from false to true
 
 logical :: use_rad_dt_cosz  = .false. ! if true, uses the radiation dt for all cosz calculations !BSINGH - Added for solar insolation calc.
 
@@ -688,9 +690,13 @@ end function radiation_nextsw_cday
        if (active_calls(icall)) then
 
           ! --------- LM added ----------
+          call get_lw_spectral_midpoints(lw_band_midpoints, 'cm-1') ! LM added from JPT
+          call add_hist_coord('lwband', nlwbands, 'Longwave wavenumber', 'cm-1', lw_band_midpoints) ! LM added from JPT
           call addfld('TRAD'//diag(icall), horiz_only,    'A',    'K', 'LM added radiative temperature', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
           call addfld('FLUS_SB'//diag(icall), horiz_only,    'A',    'W/m2', 'LM added surface flux from SB law', &
+                      sampling_seq='rad_lwsw', flag_xyfill=.true.)
+          call addfld('FLUS_BND2'//diag(icall),horiz_only, 'A', 'W/m2', 'LM added FLUS spc bnd 2 (350-500)',&
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
           ! -----------------------------
           call addfld('QRL'//diag(icall),  (/ 'lev' /), 'A',     'K/s', 'Longwave heating rate', &
@@ -747,6 +753,7 @@ end function radiation_nextsw_cday
              call add_default('FDL'//diag(icall),   1, ' ') ! LM added
              call add_default('FULC'//diag(icall),   1, ' ') ! LM added
              call add_default('FDLC'//diag(icall),   1, ' ') ! LM added
+             call add_default('FLUS_BND2'//diag(icall),1,' ') ! LM added
           endif
 
        end if
@@ -1028,6 +1035,7 @@ end function radiation_nextsw_cday
     real(r8) fdl(pcols,pverp)     ! LM added column downward LW flux
     real(r8) fsul(pcols,pverp)    ! LM added column clearsky upward LW flux
     real(r8) fsdl(pcols,pverp)    ! LM added column clearsky downward LW flux
+    real(r8) flus_bnd2(pcols)     ! LM added surface upwelling LW at band 2 (350-500)
 
     real(r8) pbr(pcols,pver)      ! Model mid-level pressures (dynes/cm2)
     real(r8) pnm(pcols,pverp)     ! Model interface pressures (dynes/cm2)
@@ -1462,6 +1470,9 @@ end function radiation_nextsw_cday
                      lwcf(i)=flutc(i) - flut(i)
                   end do
 
+                  ! LM added
+                  flus_bnd2 = lu(:,pver+1,2) 
+
                   !  Output fluxes at 200 mb
                   call vertinterp(ncol, pcols, pverp, state%pint, 20000._r8, fnl, fln200)
                   call vertinterp(ncol, pcols, pverp, state%pint, 20000._r8, fcnl, fln200c)
@@ -1486,6 +1497,7 @@ end function radiation_nextsw_cday
                   call outfld('FDL'//diag(icall),fdl,pcols,lchnk)         ! LM added
                   call outfld('FULC'//diag(icall),fsul,pcols,lchnk)       ! LM added
                   call outfld('FDLC'//diag(icall),fsdl,pcols,lchnk)       ! LM added
+                  call outfld('FLUS_BND2'//diag(icall),flus_bnd2,pcols,lchnk) ! LM added
 
               end if
           end do
