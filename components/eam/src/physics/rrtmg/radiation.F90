@@ -687,6 +687,10 @@ end function radiation_nextsw_cday
 
        if (active_calls(icall)) then
 
+          ! --------- LM added ----------
+          call addfld('TRAD'//diag(icall), horiz_only,    'A',    'K', 'LM added radiative temperature', &
+                      sampling_seq='rad_lwsw', flag_xyfill=.true.)
+          ! -----------------------------
           call addfld('QRL'//diag(icall),  (/ 'lev' /), 'A',     'K/s', 'Longwave heating rate', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
           call addfld('QRLC'//diag(icall),  (/ 'lev' /), 'A',    'K/s', 'Clearsky longwave heating rate', &
@@ -735,6 +739,7 @@ end function radiation_nextsw_cday
              call add_default('FLNTC'//diag(icall), 1, ' ')
              call add_default('FLNSC'//diag(icall), 1, ' ')
              call add_default('LWCF'//diag(icall),  1, ' ')
+             call add_default('TRAD'//diag(icall),  1, ' ') ! LM added
           endif
 
        end if
@@ -1010,6 +1015,7 @@ end function radiation_nextsw_cday
     real(r8) fsn200c(pcols)       ! fcns interpolated to 200 mb
     real(r8) fnl(pcols,pverp)     ! net longwave flux
     real(r8) fcnl(pcols,pverp)    ! net clear-sky longwave flux
+    real(r8) trad(pcols)          ! LM added radiative temperature
 
     real(r8) pbr(pcols,pver)      ! Model mid-level pressures (dynes/cm2)
     real(r8) pnm(pcols,pverp)     ! Model interface pressures (dynes/cm2)
@@ -1430,13 +1436,13 @@ end function radiation_nextsw_cday
                   call aer_rad_props_lw(is_cmip6_volc, icall, dt, state, pbuf,  aer_lw_abs)
                   
                   call t_startf ('rad_rrtmg_lw')
-                  call rad_rrtmg_lw( &
+                  call rad_rrtmg_lw( & ! LM added trad
                        lchnk,        ncol,         num_rrtmg_levs,  r_state,                     &
                        state%pmid,   aer_lw_abs,   cldfprime,       c_cld_lw_abs,                &
                        qrl,          qrlc,                                                       &
                        flns,         flnt,         flnsc,           flntc,        cam_out%flwds, &
                        flut,         flutc,        fnl,             fcnl,         fldsc,         &
-                       clm_seed,     lu,           ld                                            )
+                       clm_seed,     lu,           ld,              trad                         )
                   call t_stopf ('rad_rrtmg_lw')
 
                   do i=1,ncol
@@ -1461,6 +1467,7 @@ end function radiation_nextsw_cday
                   call outfld('FLN200'//diag(icall),fln200,pcols,lchnk)
                   call outfld('FLN200C'//diag(icall),fln200c,pcols,lchnk)
                   call outfld('FLDS'//diag(icall),cam_out%flwds ,pcols,lchnk)
+                  call outfld('TRAD'//diag(icall),trad,pcols,lchnk) ! LM added
 
               end if
           end do
