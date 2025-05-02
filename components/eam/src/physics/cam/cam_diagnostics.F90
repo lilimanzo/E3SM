@@ -438,6 +438,8 @@ subroutine diag_init()
    if ( ideal_phys )then
       call addfld('QRS', (/ 'lev' /), 'A', 'K/s', 'Solar heating rate')
    end if
+
+   call addfld ('LWUP',horiz_only, 'A', 'W/m2', 'LM added upwelling LW received from coupler')
  
    ! ----------------------------
    ! determine default variables
@@ -462,6 +464,7 @@ subroutine diag_init()
       call add_default ('VU      ', 1, ' ')
       call add_default ('VV      ', 1, ' ')
       call add_default ('VQ      ', 1, ' ')
+      call add_default ('LWUP    ', 1, ' ') ! LM added
 
       if(prog_modal_aero .and. history_verbose) then !Only for prognostic aerosols
          call add_default ('Vbc_a1  ', 1, ' ')
@@ -2141,6 +2144,7 @@ subroutine diag_surf (cam_in, cam_out, ps, trefmxav, trefmnav )
     call outfld('SHFLX',    cam_in%shf,       pcols, lchnk)
     call outfld('LHFLX',    cam_in%lhf,       pcols, lchnk)
     call outfld('QFLX',     cam_in%cflx(1,1), pcols, lchnk)
+    call outfld('LWUP',     cam_in%lwup,      pcols, lchnk) ! LM added
 
     call outfld('TAUX',     cam_in%wsx,       pcols, lchnk)
     call outfld('TAUY',     cam_in%wsy,       pcols, lchnk)
