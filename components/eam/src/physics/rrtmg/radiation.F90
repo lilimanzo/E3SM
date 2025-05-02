@@ -692,10 +692,6 @@ end function radiation_nextsw_cday
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
           call addfld('FLUS_SB'//diag(icall), horiz_only,    'A',    'W/m2', 'LM added surface flux from SB law', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
-          call addfld('FULC'//diag(icall), (/ 'ilev' /),'I',     'W/m2', 'LM added clearsky column longwave upward flux', &
-                      sampling_seq='rad_lwsw', flag_xyfill=.true.)
-              call addfld('FDLC'//diag(icall), (/ 'ilev' /),'I',     'W/m2', 'LM added clearsky column longwave downward flux', &
-                      sampling_seq='rad_lwsw', flag_xyfill=.true.)
           ! -----------------------------
           call addfld('QRL'//diag(icall),  (/ 'lev' /), 'A',     'K/s', 'Longwave heating rate', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
