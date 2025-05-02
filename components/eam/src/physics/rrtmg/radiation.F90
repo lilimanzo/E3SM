@@ -95,6 +95,9 @@ real(r8) :: dt_avg=0.0_r8  ! time step to use for the shr_orb_cosz calculation, 
 logical :: pergro_mods = .false. ! for activating pergro mods
 integer :: firstblock, lastblock      ! global block indices
 
+! LM added from JPT
+real(r8), target :: lw_band_midpoints(nlwbands)
+
 !===============================================================================
 contains
 !===============================================================================
