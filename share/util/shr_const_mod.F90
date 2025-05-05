@@ -20,8 +20,8 @@ MODULE shr_const_mod
    real(R8),parameter :: SHR_CONST_REARTH  = 6.37122e6_R8    ! radius of earth ~ m
    real(R8),parameter :: SHR_CONST_G       = 9.80616_R8      ! acceleration of gravity ~ m/s^2
 
-   !real(R8),parameter :: SHR_CONST_STEBOL  = 5.67e-8_R8      ! Stefan-Boltzmann constant ~ W/m^2/K^4
-   real(R8),parameter :: SHR_CONST_STEBOL  = 5.670374419e-8_R8 ! LM increased precision of SB constant
+   real(R8),parameter :: SHR_CONST_STEBOL  = 5.67e-8_R8      ! Stefan-Boltzmann constant ~ W/m^2/K^4
+   !real(R8),parameter :: SHR_CONST_STEBOL  = 5.670374419e-8_R8 ! LM increased precision of SB constant
    real(R8),parameter :: SHR_CONST_BOLTZ   = 1.38065e-23_R8  ! Boltzmann's constant ~ J/K/molecule
    real(R8),parameter :: SHR_CONST_AVOGAD  = 6.02214e26_R8   ! Avogadro's number ~ molecules/kmole
    real(R8),parameter :: SHR_CONST_RGAS    = SHR_CONST_AVOGAD*SHR_CONST_BOLTZ       ! Universal gas constant ~ J/K/kmole
@@ -70,8 +70,8 @@ MODULE shr_const_mod
    ! pressure in the freezing temperature in sub-ice-shelf ocean cavities ~ C PSU^{-1} Pa^{-1}
    real(R8),parameter :: SHR_CONST_OCN_REF_SAL = 34.7_R8     ! ocn ref salinity (psu)
    real(R8),parameter :: SHR_CONST_ICE_REF_SAL =  4.0_R8     ! ice ref salinity (psu)
-   !real(R8),parameter :: SHR_CONST_OCN_MSV     =  0.9735_R8  ! LM added ocean greybody emissivity
-   real(R8),parameter :: SHR_CONST_OCN_MSV     =  1.0_R8  ! LM added ocean greybody emissivity
+   real(R8),parameter :: SHR_CONST_OCN_MSV     =  0.9735_R8  ! LM added ocean greybody emissivity
+   !real(R8),parameter :: SHR_CONST_OCN_MSV     =  1.0_R8  ! LM added ocean greybody emissivity
 
    real(R8),parameter :: SHR_CONST_SPVAL        = 1.0e30_R8                 ! special missing value
    real(R8),parameter :: SHR_CONST_SPVAL_TOLMIN = 0.99_R8 * SHR_CONST_SPVAL ! min spval tolerance
