@@ -1502,7 +1502,7 @@ end function radiation_nextsw_cday
                        flns,         flnt,         flnsc,           flntc,        cam_out%flwds, &
                        flut,         flutc,        fnl,             fcnl,         fldsc,         &
                        clm_seed,     lu,           ld,              trad,         flus_sb,       &
-                       ful,          fdl,          fsul,            fsdl,         flus,
+                       ful,          fdl,          fsul,            fsdl,         flus,          &
                        flusc        )
                   call t_stopf ('rad_rrtmg_lw')
 
