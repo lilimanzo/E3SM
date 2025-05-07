@@ -697,6 +697,10 @@ end function radiation_nextsw_cday
           call add_hist_coord('lwband', nlwbands, 'Longwave wavenumber', 'cm-1', lw_band_midpoints) ! LM added from JPT
           call addfld('TRAD'//diag(icall), horiz_only,    'A',    'K', 'LM added radiative temperature', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
+          call addfld('FLUS'//diag(icall), horiz_only,    'A',    'W/m2', 'LM added broadband surface', &
+                      sampling_seq='rad_lwsw', flag_xyfill=.true.)
+          call addfld('FLUSC'//diag(icall), horiz_only,    'A',    'W/m2', 'LM added clearsky broadband surface', &
+                      sampling_seq='rad_lwsw', flag_xyfill=.true.)
           call addfld('FLUS_SB'//diag(icall), horiz_only,    'A',    'W/m2', 'LM added surface flux from SB law', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
           call addfld('FLUS_BND2'//diag(icall),horiz_only, 'A', 'W/m2', 'LM added FLUS spc bnd 2 (350-500)',&
@@ -766,6 +770,8 @@ end function radiation_nextsw_cday
              call add_default('LWCF'//diag(icall),  1, ' ')
              call add_default('TRAD'//diag(icall),  1, ' ') ! LM added
              call add_default('FLUS_SB'//diag(icall),1,' ') ! LM added
+             call add_default('FLUS'//diag(icall),  1, ' ') ! LM added
+             call add_default('FLUSC'//diag(icall), 1, ' ') ! LM added
              call add_default('FUL'//diag(icall),   1, ' ') ! LM added
              call add_default('FDL'//diag(icall),   1, ' ') ! LM added
              call add_default('FULC'//diag(icall),   1, ' ') ! LM added
@@ -1054,6 +1060,8 @@ end function radiation_nextsw_cday
     real(r8) fnl(pcols,pverp)     ! net longwave flux
     real(r8) fcnl(pcols,pverp)    ! net clear-sky longwave flux
     real(r8) trad(pcols)          ! LM added radiative temperature
+    real(r8) flus(pcols)          ! LM added broadband surface flux
+    real(r8) flusc(pcols)         ! LM added clearsky broadband surace flux
     real(r8) flus_sb(pcols)       ! LM added surface flux computed from SB law
     real(r8) ful(pcols,pverp)     ! LM added column upward LW flux
     real(r8) fdl(pcols,pverp)     ! LM added column downward LW flux
@@ -1487,14 +1495,15 @@ end function radiation_nextsw_cday
                   call aer_rad_props_lw(is_cmip6_volc, icall, dt, state, pbuf,  aer_lw_abs)
                   
                   call t_startf ('rad_rrtmg_lw')
-                  call rad_rrtmg_lw( & ! LM added trad, flus_sb, ful, fdl, fsul, fsdl
+                  call rad_rrtmg_lw( & ! LM added trad, flus_sb, ful, fdl, fsul, fsdl, flus, flusc
                        lchnk,        ncol,         num_rrtmg_levs,  r_state,                     &
                        state%pmid,   aer_lw_abs,   cldfprime,       c_cld_lw_abs,                &
                        qrl,          qrlc,                                                       &
                        flns,         flnt,         flnsc,           flntc,        cam_out%flwds, &
                        flut,         flutc,        fnl,             fcnl,         fldsc,         &
                        clm_seed,     lu,           ld,              trad,         flus_sb,       &
-                       ful,          fdl,          fsul,            fsdl        )
+                       ful,          fdl,          fsul,            fsdl,         flus,
+                       flusc        )
                   call t_stopf ('rad_rrtmg_lw')
 
                   do i=1,ncol
@@ -1531,6 +1540,8 @@ end function radiation_nextsw_cday
                   call outfld('FLDS'//diag(icall),cam_out%flwds ,pcols,lchnk)
                   call outfld('TRAD'//diag(icall),trad,pcols,lchnk)       ! LM added
                   call outfld('FLUS_SB'//diag(icall),flus_sb,pcols,lchnk) ! LM added
+                  call outfld('FLUS'//diag(icall),flus,pcols,lchnk)       ! LM added
+                  call outfld('FLUSC'//diag(icall),flusc,pcols,lchnk)     ! LM added
                   call outfld('FUL'//diag(icall),ful,pcols,lchnk)         ! LM added
                   call outfld('FDL'//diag(icall),fdl,pcols,lchnk)         ! LM added
                   call outfld('FULC'//diag(icall),fsul,pcols,lchnk)       ! LM added
