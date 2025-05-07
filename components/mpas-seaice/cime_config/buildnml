@@ -891,6 +891,7 @@ def buildnml(case, caseroot, compname):
             lines.append('    <var name="vVelocityGeo"/>')
             lines.append('    <var name="shortwaveDown"/>')
             lines.append('    <var name="longwaveDown"/>')
+            lines.append('    <var name="longwaveUp"/>')           # LM added
             lines.append('    <var name="seaSurfaceTemperature"/>')
             lines.append('    <var name="seaSurfaceSalinity"/>')
             lines.append('    <var name="uOceanVelocityVertexGeo"/>')
