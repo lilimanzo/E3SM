@@ -1338,6 +1338,8 @@ def buildnml(case, caseroot, compname):
             lines.append('    <var name="velocityZonal"/>')
             lines.append('    <var name="layerThickness"/>')
             lines.append('    <var name="density"/>')
+            lines.append('    <var name="temperatureSurfaceValue"/>')  # LM added
+            lines.append('    <var name="temperatureSurfaceLayerValue"/>') # LM added
             lines.append('    <var name="potentialDensity"/>')
             lines.append('    <var name="windStressZonal"/>')
             lines.append('    <var name="windStressMeridional"/>')
