@@ -1023,6 +1023,7 @@ contains
     integer(in) :: index_lwup
     integer(in) :: index_lwdnprev ! LM added
     integer(in) :: index_lwdnprev2 ! LM added
+    integer(in) :: index_tocn ! LM added
     integer(in) :: index_sumwt
     integer(in) :: atm_nx,atm_ny,ocn_nx,ocn_ny
     real(r8)    :: wt
@@ -1418,7 +1419,7 @@ contains
        index_xao_Faox_lwup = mct_aVect_indexRA(xao,'Faox_lwup')
        index_xao_Faox_lwdnprev = mct_aVect_indexRA(xao,'PFaox_lwdnprev') ! LM added
        index_xao_Faox_lwdnprev2=mct_aVect_indexRA(xao,'Faox_lwdnprev2') ! LM added
-       index_xao_Sx_lwup = mct_aVect_indexRA(xao,'So_t') ! LM added
+       index_xao_Sx_tocn = mct_aVect_indexRA(xao,'So_t') ! LM added
        index_xao_Faox_swdn = mct_aVect_indexRA(xao,'Faox_swdn')
        index_xao_Faox_swup = mct_aVect_indexRA(xao,'Faox_swup')
        index_xao_So_fswpen            = mct_aVect_indexRA(xao,'So_fswpen')
