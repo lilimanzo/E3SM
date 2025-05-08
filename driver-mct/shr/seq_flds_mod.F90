@@ -1219,6 +1219,7 @@ contains
     call seq_flds_add(i2x_states,"Si_t")
     call seq_flds_add(x2a_states,"So_t")
     call seq_flds_add(x2a_states,"Sx_t")
+    call seq_flds_add(xao_states,"So_t") ! LM added
     longname = 'Surface temperature'
     stdname  = 'surface_temperature'
     units    = 'K'
@@ -1229,7 +1230,7 @@ contains
     attname  = 'So_t'
     call metadata_set(attname, longname, stdname, units)
     attname  = 'Sx_t'
-    call metadata_set(attname, longname, stdname, units)
+    call metadata_set(attname, longname, stdname, units)i
 
     ! Surface friction velocity in land (land/atm only)
     call seq_flds_add(l2x_states,"Sl_fv")

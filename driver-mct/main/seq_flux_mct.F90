@@ -1216,6 +1216,7 @@ contains
     index_evap_HDO = mct_aVect_indexRA(xaop_ae,"Faox_evap_HDO", perrWith='quiet')
     index_evap_18O = mct_aVect_indexRA(xaop_ae,"Faox_evap_18O", perrWith='quiet')
     index_lwup   = mct_aVect_indexRA(xaop_ae,"Faox_lwup")
+    index_tocn   = mct_aVect_indexRA(xaop_ae,"So_t") ! LM added
     index_lwdnprev = mct_aVect_indexRA(xaop_ae,"PFaox_lwdnprev") ! LM added
     index_lwdnprev2=mct_aVect_indexRA(xaop_ae,"Faox_lwdnprev2") ! LM added
     index_sumwt  = mct_aVect_indexRA(xaop_ae,"sumwt")
@@ -1246,7 +1247,8 @@ contains
        xaop_oe%rAttr(index_lwup  ,io) = xaop_oe%rAttr(index_lwup  ,io) + lwup(n)* wt
        xaop_oe%rAttr(index_lwdnprev,io)=xaop_oe%rAttr(index_lwdnprev,io) + lwdnprev(n)*wt ! LM added
        print *, "lwdnprev, io = ", xaop_oe%rAttr(index_lwdnprev,io)                        ! LM added
-      xaop_oe%rAttr(index_lwdnprev2,io)=xaop_oe%rAttr(index_lwdnprev2,io) + lwdnprev2(n)*wt ! LM added 
+       xaop_oe%rAttr(index_lwdnprev2,io)=xaop_oe%rAttr(index_lwdnprev2,io) + lwdnprev2(n)*wt ! LM added 
+       xaop_oe%rAttr(index_tocn  ,io) = xaop_oe%rAttr(index_tocn  ,io) + tocn(n)  *wt  ! LM added
        xaop_oe%rAttr(index_duu10n,io) = xaop_oe%rAttr(index_duu10n,io) + duu10n(n)*wt
        xaop_oe%rAttr(index_u10   ,io) = xaop_oe%rAttr(index_u10   ,io) + u10res(n)*wt
        xaop_oe%rAttr(index_u10withgusts,io) = xaop_oe%rAttr(index_u10withgusts,io) + sqrt(duu10n(n))*wt
@@ -1416,6 +1418,7 @@ contains
        index_xao_Faox_lwup = mct_aVect_indexRA(xao,'Faox_lwup')
        index_xao_Faox_lwdnprev = mct_aVect_indexRA(xao,'PFaox_lwdnprev') ! LM added
        index_xao_Faox_lwdnprev2=mct_aVect_indexRA(xao,'Faox_lwdnprev2') ! LM added
+       index_xao_Sx_lwup = mct_aVect_indexRA(xao,'So_t') ! LM added
        index_xao_Faox_swdn = mct_aVect_indexRA(xao,'Faox_swdn')
        index_xao_Faox_swup = mct_aVect_indexRA(xao,'Faox_swup')
        index_xao_So_fswpen            = mct_aVect_indexRA(xao,'So_fswpen')
@@ -1685,6 +1688,7 @@ contains
           xao%rAttr(index_xao_Faox_lwup,n) = lwup(n)
           xao%rAttr(index_xao_Faox_lwdnprev,n) = lwdnprev(n)   ! LM added
           xao%rAttr(index_xao_Faox_lwdnprev2,n)=lwdnprev2(n)   ! LM added
+          xao%rAttr(index_xao_Sx_tocn)     = tocn(n)   ! LM added
           xao%rAttr(index_xao_So_duu10n,n) = duu10n(n)
           xao%rAttr(index_xao_So_u10   ,n) = u10res(n)
           xao%rAttr(index_xao_So_u10withgusts,n) = sqrt(duu10n(n))
