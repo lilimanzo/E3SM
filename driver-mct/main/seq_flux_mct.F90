@@ -1218,7 +1218,7 @@ contains
     index_evap_HDO = mct_aVect_indexRA(xaop_ae,"Faox_evap_HDO", perrWith='quiet')
     index_evap_18O = mct_aVect_indexRA(xaop_ae,"Faox_evap_18O", perrWith='quiet')
     index_lwup   = mct_aVect_indexRA(xaop_ae,"Faox_lwup")
-    index_tocn   = mct_aVect_indexRA(xaop_ae,"So_t") ! LM added
+    index_tocn   = mct_aVect_indexRA(xaop_ae,"Sx_tocn") ! LM added
     index_lwdnprev = mct_aVect_indexRA(xaop_ae,"PFaox_lwdnprev") ! LM added
     index_lwdnprev2=mct_aVect_indexRA(xaop_ae,"Faox_lwdnprev2") ! LM added
     index_sumwt  = mct_aVect_indexRA(xaop_ae,"sumwt")
@@ -1289,6 +1289,7 @@ contains
        xaop_ae%rAttr(index_lwdnprev,ia) = xaop_ae%rAttr(index_lwdnprev,ia) + lwdnprev(n)*wt ! LM added
        print *, "lwdnprev, ia = ", xaop_ae%rAttr(index_lwdnprev,ia)                          ! LM added 
        xaop_ae%rAttr(index_lwdnprev2,ia) = xaop_ae%rAttr(index_lwdnprev2,ia) + lwdnprev2(n)*wt ! LM added
+       xaop_ae%rAttr(index_tocn  ,ia) = xaop_ae%rAttr(index_tocn,ia) + tocn(n)*wt ! LM added
        xaop_ae%rAttr(index_duu10n,ia) = xaop_ae%rAttr(index_duu10n,ia) + duu10n(n)*wt
        xaop_ae%rAttr(index_u10   ,ia) = xaop_ae%rAttr(index_u10   ,ia) + u10res(n)*wt
        xaop_ae%rAttr(index_u10withgusts,ia) = xaop_ae%rAttr(index_u10withgusts,ia) + sqrt(duu10n(n))*wt
@@ -1420,7 +1421,7 @@ contains
        index_xao_Faox_lwup = mct_aVect_indexRA(xao,'Faox_lwup')
        index_xao_Faox_lwdnprev = mct_aVect_indexRA(xao,'PFaox_lwdnprev') ! LM added
        index_xao_Faox_lwdnprev2=mct_aVect_indexRA(xao,'Faox_lwdnprev2') ! LM added
-       index_xao_Sx_tocn = mct_aVect_indexRA(xao,'So_t') ! LM added
+       index_xao_Sx_tocn = mct_aVect_indexRA(xao,'Sx_tocn') ! LM added
        index_xao_Faox_swdn = mct_aVect_indexRA(xao,'Faox_swdn')
        index_xao_Faox_swup = mct_aVect_indexRA(xao,'Faox_swup')
        index_xao_So_fswpen            = mct_aVect_indexRA(xao,'So_fswpen')
