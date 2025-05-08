@@ -169,6 +169,7 @@ module seq_flux_mct
   integer :: index_xao_Faox_lwup
   integer :: index_xao_Faox_lwdnprev ! LM added
   integer :: index_xao_Faox_lwdnprev2 ! LM added
+  integer :: index_xao_Sx_tocn        ! LM added
   integer :: index_xao_Faox_swdn
   integer :: index_xao_Faox_swup
   integer :: index_xao_So_ustar
