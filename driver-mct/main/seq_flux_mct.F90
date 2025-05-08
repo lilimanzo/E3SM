@@ -1690,7 +1690,7 @@ contains
           xao%rAttr(index_xao_Faox_lwup,n) = lwup(n)
           xao%rAttr(index_xao_Faox_lwdnprev,n) = lwdnprev(n)   ! LM added
           xao%rAttr(index_xao_Faox_lwdnprev2,n)=lwdnprev2(n)   ! LM added
-          xao%rAttr(index_xao_Sx_tocn)     = tocn(n)   ! LM added
+          xao%rAttr(index_xao_Sx_tocn  ,n) = tocn(n)   ! LM added
           xao%rAttr(index_xao_So_duu10n,n) = duu10n(n)
           xao%rAttr(index_xao_So_u10   ,n) = u10res(n)
           xao%rAttr(index_xao_So_u10withgusts,n) = sqrt(duu10n(n))
