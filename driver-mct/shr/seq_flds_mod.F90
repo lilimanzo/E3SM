@@ -1230,7 +1230,7 @@ contains
     attname  = 'So_t'
     call metadata_set(attname, longname, stdname, units)
     attname  = 'Sx_t'
-    call metadata_set(attname, longname, stdname, units)i
+    call metadata_set(attname, longname, stdname, units)
 
     ! Surface friction velocity in land (land/atm only)
     call seq_flds_add(l2x_states,"Sl_fv")
