@@ -1231,14 +1231,6 @@ contains
     attname  = 'Sx_t'
     call metadata_set(attname, longname, stdname, units)
 
-     ! Surface temperature
-    call seq_flds_add(xao_states,"Sx_tocn")
-    longname = 'LM added ocean radiative surface temperature'
-    stdname  = 'Ocean surface_temperature'
-    units    = 'K'
-    attname  = 'Sx_tocn'
-    call metadata_set(attname, longname, stdname, units)
-
     ! Surface friction velocity in land (land/atm only)
     call seq_flds_add(l2x_states,"Sl_fv")
     call seq_flds_add(x2a_states,"Sl_fv")
@@ -1314,28 +1306,6 @@ contains
     stdname  = ''
     units    = 'm s-1'
     attname  = 'u10withgusts'
-    call metadata_set(attname, longname, stdname, units)
-
-    ! LM added lwdn from previous timestep
-    call seq_flds_add(xao_fluxes,"PFaox_lwdnprev")
-    call seq_flds_add(x2a_fluxes,"Faxx_lwdnprev") 
-    longname = 'LW down prev timestep'
-    stdname  = 'longwave_downward_prev' 
-    units    = 'W m-2'
-    attname  = 'PFaox_lwdnprev'
-    call metadata_set(attname, longname, stdname, units)
-    attname  = 'Faxx_lwdnprev'
-    call metadata_set(attname, longname, stdname, units)
-
-    ! LM added lwdn from previous timestep- take 2: copy in seq_flux_mct
-    call seq_flds_add(xao_fluxes,"Faox_lwdnprev2")
-    call seq_flds_add(x2a_fluxes,"Faxx_lwdnprev2")
-    longname = 'LW down prev timestep 2'
-    stdname  = 'longwave_downward_prev2'
-    units    = 'W m-2'
-    attname  = 'Faox_lwdnprev2'
-    call metadata_set(attname, longname, stdname, units)
-    attname  = 'Faxx_lwdnprev2'
     call metadata_set(attname, longname, stdname, units)
 
     ! LM added lwdn from previous timestep- take 3: prep_atm_copy subroutine

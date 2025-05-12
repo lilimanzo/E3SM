@@ -62,8 +62,6 @@ module seq_flux_mct
   real(r8), allocatable ::  sen  (:)  ! heat flux: sensible
   real(r8), allocatable ::  lat  (:)  ! heat flux: latent
   real(r8), allocatable ::  lwup (:)  ! lwup over ocean
-  real(r8), allocatable ::  lwdnprev(:) ! LM added lwdn from previous timestep
-  real(r8), allocatable ::  lwdnprev2(:) ! LM lwdn prev 2nd approach
   real(r8), allocatable ::  evap (:)  ! water flux: evaporation
   real(r8), allocatable ::  evap_16O (:) !H2O flux: evaporation
   real(r8), allocatable ::  evap_HDO (:) !HDO flux: evaporation
@@ -167,9 +165,6 @@ module seq_flux_mct
   integer :: index_xao_Faox_evap_HDO
   integer :: index_xao_Faox_evap_18O
   integer :: index_xao_Faox_lwup
-  integer :: index_xao_Faox_lwdnprev ! LM added
-  integer :: index_xao_Faox_lwdnprev2 ! LM added
-  integer :: index_xao_Sx_tocn        ! LM added
   integer :: index_xao_Faox_swdn
   integer :: index_xao_Faox_swup
   integer :: index_xao_So_ustar
@@ -335,12 +330,6 @@ contains
     allocate(lwup(nloc),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate lwup',ier)
     lwup = 0.0_r8
-    allocate(lwdnprev(nloc),stat=ier)                       ! LM added
-    if(ier/=0) call mct_die(subName,'allocate lwdnprev',ier)!
-    lwdnprev = 0.0_r8                                       !
-    allocate(lwdnprev2(nloc),stat=ier)                       ! LM added
-    if(ier/=0) call mct_die(subName,'allocate lwdnprev2',ier)!
-    lwdnprev2 = 0.0_r8                                       !
     allocate(taux(nloc),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate taux',ier)
     taux = 0.0_r8
@@ -750,10 +739,6 @@ contains
     if(ier/=0) call mct_die(subName,'allocate evap_18O',ier)
     allocate(lwup(nloc_a2o),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate lwup',ier)
-    allocate(lwdnprev(nloc_a2o),stat=ier)                    ! LM added
-    if(ier/=0) call mct_die(subName,'allocate lwdnprev',ier) ! LM added
-    allocate(lwdnprev2(nloc_a2o),stat=ier)                    ! LM added
-    if(ier/=0) call mct_die(subName,'allocate lwdnprev2',ier) ! LM added
     allocate(taux(nloc_a2o),stat=ier)
     if(ier/=0) call mct_die(subName,'allocate taux',ier)
     allocate(tauy(nloc_a2o),stat=ier)
@@ -1022,9 +1007,6 @@ contains
     integer(in) :: index_evap_HDO
     integer(in) :: index_evap_18O
     integer(in) :: index_lwup
-    integer(in) :: index_lwdnprev ! LM added
-    integer(in) :: index_lwdnprev2 ! LM added
-    integer(in) :: index_tocn ! LM added
     integer(in) :: index_sumwt
     integer(in) :: atm_nx,atm_ny,ocn_nx,ocn_ny
     real(r8)    :: wt
@@ -1181,7 +1163,7 @@ contains
        call shr_flux_atmocn (nloc_a2o , zbot , ubot, vbot, thbot, &
             shum , shum_16O , shum_HDO, shum_18O, dens , tbot, uocn, vocn , &
             tocn , emask, seq_flux_atmocn_minwind, &
-            sen , lat , lwup , lwdn , lwdnprev , & ! LM added lwdn, lwdnprev
+            sen , lat , lwup , lwdn , & ! LM added lwdn
             roce_16O, roce_HDO, roce_18O,    &
             evap , evap_16O, evap_HDO, evap_18O, taux, tauy, tref, qref , &
             ocn_surface_flux_scheme, &
@@ -1218,9 +1200,6 @@ contains
     index_evap_HDO = mct_aVect_indexRA(xaop_ae,"Faox_evap_HDO", perrWith='quiet')
     index_evap_18O = mct_aVect_indexRA(xaop_ae,"Faox_evap_18O", perrWith='quiet')
     index_lwup   = mct_aVect_indexRA(xaop_ae,"Faox_lwup")
-    index_tocn   = mct_aVect_indexRA(xaop_ae,"Sx_tocn") ! LM added
-    index_lwdnprev = mct_aVect_indexRA(xaop_ae,"PFaox_lwdnprev") ! LM added
-    index_lwdnprev2=mct_aVect_indexRA(xaop_ae,"Faox_lwdnprev2") ! LM added
     index_sumwt  = mct_aVect_indexRA(xaop_ae,"sumwt")
 
     !--- aggregate ocean values locally based on exchange grid decomp
@@ -1247,10 +1226,6 @@ contains
        xaop_oe%rAttr(index_re    ,io) = xaop_oe%rAttr(index_re    ,io) + re(n)  * wt   ! reynolds number
        xaop_oe%rAttr(index_ssq   ,io) = xaop_oe%rAttr(index_ssq   ,io) + ssq(n) * wt   ! s.hum. saturation at Ts
        xaop_oe%rAttr(index_lwup  ,io) = xaop_oe%rAttr(index_lwup  ,io) + lwup(n)* wt
-       xaop_oe%rAttr(index_lwdnprev,io)=xaop_oe%rAttr(index_lwdnprev,io) + lwdnprev(n)*wt ! LM added
-       print *, "lwdnprev, io = ", xaop_oe%rAttr(index_lwdnprev,io)                        ! LM added
-       xaop_oe%rAttr(index_lwdnprev2,io)=xaop_oe%rAttr(index_lwdnprev2,io) + lwdnprev2(n)*wt ! LM added 
-       xaop_oe%rAttr(index_tocn  ,io) = xaop_oe%rAttr(index_tocn  ,io) + tocn(n)  *wt  ! LM added
        xaop_oe%rAttr(index_duu10n,io) = xaop_oe%rAttr(index_duu10n,io) + duu10n(n)*wt
        xaop_oe%rAttr(index_u10   ,io) = xaop_oe%rAttr(index_u10   ,io) + u10res(n)*wt
        xaop_oe%rAttr(index_u10withgusts,io) = xaop_oe%rAttr(index_u10withgusts,io) + sqrt(duu10n(n))*wt
@@ -1286,10 +1261,6 @@ contains
        xaop_ae%rAttr(index_re    ,ia) = xaop_ae%rAttr(index_re    ,ia) + re(n)  * wt   ! reynolds number
        xaop_ae%rAttr(index_ssq   ,ia) = xaop_ae%rAttr(index_ssq   ,ia) + ssq(n) * wt   ! s.hum. saturation at Ts
        xaop_ae%rAttr(index_lwup  ,ia) = xaop_ae%rAttr(index_lwup  ,ia) + lwup(n)* wt
-       xaop_ae%rAttr(index_lwdnprev,ia) = xaop_ae%rAttr(index_lwdnprev,ia) + lwdnprev(n)*wt ! LM added
-       print *, "lwdnprev, ia = ", xaop_ae%rAttr(index_lwdnprev,ia)                          ! LM added 
-       xaop_ae%rAttr(index_lwdnprev2,ia) = xaop_ae%rAttr(index_lwdnprev2,ia) + lwdnprev2(n)*wt ! LM added
-       xaop_ae%rAttr(index_tocn  ,ia) = xaop_ae%rAttr(index_tocn,ia) + tocn(n)*wt ! LM added
        xaop_ae%rAttr(index_duu10n,ia) = xaop_ae%rAttr(index_duu10n,ia) + duu10n(n)*wt
        xaop_ae%rAttr(index_u10   ,ia) = xaop_ae%rAttr(index_u10   ,ia) + u10res(n)*wt
        xaop_ae%rAttr(index_u10withgusts,ia) = xaop_ae%rAttr(index_u10withgusts,ia) + sqrt(duu10n(n))*wt
@@ -1419,9 +1390,6 @@ contains
        index_xao_Faox_evap_HDO = mct_aVect_indexRA(xao,'Faox_evap_HDO', perrWith='quiet')
        index_xao_Faox_evap_18O = mct_aVect_indexRA(xao,'Faox_evap_18O', perrWith='quiet')
        index_xao_Faox_lwup = mct_aVect_indexRA(xao,'Faox_lwup')
-       index_xao_Faox_lwdnprev = mct_aVect_indexRA(xao,'PFaox_lwdnprev') ! LM added
-       index_xao_Faox_lwdnprev2=mct_aVect_indexRA(xao,'Faox_lwdnprev2') ! LM added
-       index_xao_Sx_tocn = mct_aVect_indexRA(xao,'Sx_tocn') ! LM added
        index_xao_Faox_swdn = mct_aVect_indexRA(xao,'Faox_swdn')
        index_xao_Faox_swup = mct_aVect_indexRA(xao,'Faox_swup')
        index_xao_So_fswpen            = mct_aVect_indexRA(xao,'So_fswpen')
@@ -1591,7 +1559,6 @@ contains
              !           !!uGust(n) = 1.5_r8*sqrt(uocn(n)**2 + vocn(n)**2) ! there is no wind gust data from ocn
              uGust(n) = 0.0_r8
              lwdn (n) = a2x%rAttr(index_a2x_Faxa_lwdn ,n)
-             lwdnprev2(n)=lwdn(n)                      ! LM added
              prec (n) = a2x%rAttr(index_a2x_Faxa_rainc,n) &
                   & + a2x%rAttr(index_a2x_Faxa_rainl,n) &
                   & + a2x%rAttr(index_a2x_Faxa_snowc,n) &
@@ -1662,7 +1629,7 @@ contains
        call shr_flux_atmocn (nloc , zbot , ubot, vbot, thbot, &
             shum , shum_16O , shum_HDO, shum_18O, dens , tbot, uocn, vocn , &
             tocn , emask, seq_flux_atmocn_minwind, &
-            sen , lat , lwup , lwdn , lwdnprev , & ! LM added lwdn, lwdnprev
+            sen , lat , lwup , lwdn , & ! LM added lwdn
             roce_16O, roce_HDO, roce_18O,    &
             evap , evap_16O, evap_HDO, evap_18O, taux , tauy, tref, qref , &
             ocn_surface_flux_scheme, &
@@ -1689,9 +1656,6 @@ contains
           xao%rAttr(index_xao_So_re    ,n) = re(n)     ! reynolds number
           xao%rAttr(index_xao_So_ssq   ,n) = ssq(n)    ! s.hum. saturation at Ts
           xao%rAttr(index_xao_Faox_lwup,n) = lwup(n)
-          xao%rAttr(index_xao_Faox_lwdnprev,n) = lwdnprev(n)   ! LM added
-          xao%rAttr(index_xao_Faox_lwdnprev2,n)=lwdnprev2(n)   ! LM added
-          xao%rAttr(index_xao_Sx_tocn  ,n) = tocn(n)   ! LM added
           xao%rAttr(index_xao_So_duu10n,n) = duu10n(n)
           xao%rAttr(index_xao_So_u10   ,n) = u10res(n)
           xao%rAttr(index_xao_So_u10withgusts,n) = sqrt(duu10n(n))
