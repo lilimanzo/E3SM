@@ -703,6 +703,8 @@ end function radiation_nextsw_cday
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
           call addfld('FLUS_SB'//diag(icall), horiz_only,    'A',    'W/m2', 'LM added surface flux from SB law', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
+          call addfld('FLUS_BND1'//diag(icall),horiz_only, 'A', 'W/m2', 'LM added FLUS spc bnd 1 (10-350)',&
+                      sampling_seq='rad_lwsw', flag_xyfill=.true.)
           call addfld('FLUS_BND2'//diag(icall),horiz_only, 'A', 'W/m2', 'LM added FLUS spc bnd 2 (350-500)',&
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
           call addfld('FLUS_BND3'//diag(icall),horiz_only, 'A', 'W/m2', 'LM added FLUS spc bnd 3 (500-630)',&
@@ -718,6 +720,10 @@ end function radiation_nextsw_cday
           call addfld('FLUS_BND8'//diag(icall),horiz_only, 'A', 'W/m2', 'LM added FLUS spc bnd 8 (1080-1180)',&
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
           call addfld('FLUS_BND9'//diag(icall),horiz_only, 'A', 'W/m2', 'LM added FLUS spc bnd 9 (1180-1390)',&
+                      sampling_seq='rad_lwsw', flag_xyfill=.true.)
+          call addfld('FLUS_BND10'//diag(icall),horiz_only, 'A', 'W/m2', 'LM added FLUS spc bnd 10 (1390-1480)',&
+                      sampling_seq='rad_lwsw', flag_xyfill=.true.)
+          call addfld('FLUS_BND11'//diag(icall),horiz_only, 'A', 'W/m2', 'LM added FLUS spc bnd 11 (1480-1800)',&
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
           ! -----------------------------
           call addfld('QRL'//diag(icall),  (/ 'lev' /), 'A',     'K/s', 'Longwave heating rate', &
@@ -776,6 +782,7 @@ end function radiation_nextsw_cday
              call add_default('FDL'//diag(icall),   1, ' ') ! LM added
              call add_default('FULC'//diag(icall),   1, ' ') ! LM added
              call add_default('FDLC'//diag(icall),   1, ' ') ! LM added
+             call add_default('FLUS_BND1'//diag(icall),1,' ') ! LM added
              call add_default('FLUS_BND2'//diag(icall),1,' ') ! LM added
              call add_default('FLUS_BND3'//diag(icall),1,' ') ! LM added
              call add_default('FLUS_BND4'//diag(icall),1,' ') ! LM added
@@ -784,6 +791,8 @@ end function radiation_nextsw_cday
              call add_default('FLUS_BND7'//diag(icall),1,' ') ! LM added
              call add_default('FLUS_BND8'//diag(icall),1,' ') ! LM added
              call add_default('FLUS_BND9'//diag(icall),1,' ') ! LM added
+             call add_default('FLUS_BND10'//diag(icall),1,' ') ! LM added
+             call add_default('FLUS_BND11'//diag(icall),1,' ') ! LM added
           endif
 
        end if
@@ -1067,6 +1076,7 @@ end function radiation_nextsw_cday
     real(r8) fdl(pcols,pverp)     ! LM added column downward LW flux
     real(r8) fsul(pcols,pverp)    ! LM added column clearsky upward LW flux
     real(r8) fsdl(pcols,pverp)    ! LM added column clearsky downward LW flux
+    real(r8) flus_bnd1(pcols)     ! LM added surface upwelling LW at band 1 (10-350)
     real(r8) flus_bnd2(pcols)     ! LM added surface upwelling LW at band 2 (350-500)
     real(r8) flus_bnd3(pcols)     ! LM added surface upwelling LW at band 3 (500-630)
     real(r8) flus_bnd4(pcols)     ! LM added surface upwelling LW at band 4 (630-700)
@@ -1075,6 +1085,8 @@ end function radiation_nextsw_cday
     real(r8) flus_bnd7(pcols)     ! LM added surface upwelling LW at band 7 (980-1080)
     real(r8) flus_bnd8(pcols)     ! LM added surface upwelling LW at band 8 (1080-1180)
     real(r8) flus_bnd9(pcols)     ! LM added surface upwelling LW at band 9 (1180-1390)
+    real(r8) flus_bnd10(pcols)    ! LM added surface upwelling LW at band 10 (1390-1480)
+    real(r8) flus_bnd11(pcols)    ! LM added surface upwelling LW at band 10 (1480-1800)
 
     real(r8) pbr(pcols,pver)      ! Model mid-level pressures (dynes/cm2)
     real(r8) pnm(pcols,pverp)     ! Model interface pressures (dynes/cm2)
@@ -1511,6 +1523,7 @@ end function radiation_nextsw_cday
                   end do
 
                   ! LM added
+                  flus_bnd1 = lu(:,pver+1,1)
                   flus_bnd2 = lu(:,pver+1,2)
                   flus_bnd3 = lu(:,pver+1,3) 
                   flus_bnd4 = lu(:,pver+1,4)
@@ -1519,6 +1532,8 @@ end function radiation_nextsw_cday
                   flus_bnd7 = lu(:,pver+1,7) 
                   flus_bnd8 = lu(:,pver+1,8) 
                   flus_bnd9 = lu(:,pver+1,9) 
+                  flus_bnd10= lu(:,pver+1,10)
+                  flus_bnd11= lu(:,pver+1,11)
 
                   !  Output fluxes at 200 mb
                   call vertinterp(ncol, pcols, pverp, state%pint, 20000._r8, fnl, fln200)
@@ -1546,6 +1561,7 @@ end function radiation_nextsw_cday
                   call outfld('FDL'//diag(icall),fdl,pcols,lchnk)         ! LM added
                   call outfld('FULC'//diag(icall),fsul,pcols,lchnk)       ! LM added
                   call outfld('FDLC'//diag(icall),fsdl,pcols,lchnk)       ! LM added
+                  call outfld('FLUS_BND1'//diag(icall),flus_bnd1,pcols,lchnk) ! LM added
                   call outfld('FLUS_BND2'//diag(icall),flus_bnd2,pcols,lchnk) ! LM added
                   call outfld('FLUS_BND3'//diag(icall),flus_bnd3,pcols,lchnk) ! LM added
                   call outfld('FLUS_BND4'//diag(icall),flus_bnd4,pcols,lchnk) ! LM added
@@ -1554,6 +1570,8 @@ end function radiation_nextsw_cday
                   call outfld('FLUS_BND7'//diag(icall),flus_bnd7,pcols,lchnk) ! LM added
                   call outfld('FLUS_BND8'//diag(icall),flus_bnd8,pcols,lchnk) ! LM added
                   call outfld('FLUS_BND9'//diag(icall),flus_bnd9,pcols,lchnk) ! LM added
+                  call outfld('FLUS_BND10'//diag(icall),flus_bnd10,pcols,lchnk) ! LM added
+                  call outfld('FLUS_BND11'//diag(icall),flus_bnd11,pcols,lchnk) ! LM added
 
               end if
           end do
