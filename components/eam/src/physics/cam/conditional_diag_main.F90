@@ -475,9 +475,6 @@ subroutine get_values( arrayout, varname, state, pbuf, cam_in, cam_out )
         case('LWUP')
            arrayout(1:ncol,1) = cam_in%lwup(1:ncol)
 
-        case('LWDNPREV')                                ! LM added
-           arrayout(1:ncol,1) = cam_in%lwdnprev(1:ncol) ! LM added
-
         case('LWDNPREV3')                                ! LM added
            arrayout(1:ncol,1) = cam_in%lwdnprev3(1:ncol) ! LM added
 

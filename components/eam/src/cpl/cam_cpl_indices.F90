@@ -72,7 +72,6 @@ module cam_cpl_indices
   integer :: index_x2a_Faxx_lat        ! latent          heat flux
   integer :: index_x2a_Faxx_sen        ! sensible        heat flux
   integer :: index_x2a_Faxx_lwup       ! upward longwave heat flux
-  integer :: index_x2a_Faxx_lwdnprev   ! LM added downward lw from prev cpl interval
   integer :: index_x2a_Faxx_lwdnprev3  ! LM added downward lw from prev cpl interval- prev3
   integer :: index_x2a_Faxx_evap       ! evaporation    water flux
   integer :: index_x2a_Fall_flxdst1    ! dust flux size bin 1
@@ -132,7 +131,6 @@ contains
     index_x2a_Faxx_lat      = mct_avect_indexra(x2a,'Faxx_lat')
     index_x2a_Faxx_sen      = mct_avect_indexra(x2a,'Faxx_sen')
     index_x2a_Faxx_lwup     = mct_avect_indexra(x2a,'Faxx_lwup')
-    index_x2a_Faxx_lwdnprev = mct_avect_indexra(x2a,'Faxx_lwdnprev') ! LM added
     index_x2a_Faxx_lwdnprev3= mct_avect_indexra(x2a,'Faxx_lwdnprev3') ! LM added
     index_x2a_Faxx_evap     = mct_avect_indexra(x2a,'Faxx_evap')
     index_x2a_So_ustar      = mct_avect_indexra(x2a,'So_ustar')
