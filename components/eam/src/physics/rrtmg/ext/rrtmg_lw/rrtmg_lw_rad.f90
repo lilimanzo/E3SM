@@ -737,7 +737,6 @@
  
 !  Set surface temperature.
       tbound = tsfc(iplon)
-      print *, 'LM print tbound: ', tbound
 
 !  Install input GCM arrays into RRTMG_LW arrays for pressure, temperature,
 !  and molecular amounts.  

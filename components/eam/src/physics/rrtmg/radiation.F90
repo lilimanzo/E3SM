@@ -15,7 +15,6 @@ module radiation
 !---------------------------------------------------------------------------------
 
 use shr_kind_mod,    only: r8=>shr_kind_r8
-!use shr_const_mod,   only: shr_const_ocn_msv ! LM added
 use spmd_utils,      only: masterproc, iam, npes
 use ppgrid,          only: pcols, pver, pverp, begchunk, endchunk
 use physics_types,   only: physics_state, physics_ptend
@@ -1303,12 +1302,7 @@ end function radiation_nextsw_cday
        ! stebol constant in mks units
        do i = 1,ncol
           tint(i,1) = state%t(i,1)
-          ! LM added if statement
-          !if (ocnfrac(i).eq.1.0) then
-          !   tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))
-          !else
-             tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))
-          !endif
+          tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))
           do k = 2,pver
              dy = (state%lnpint(i,k) - state%lnpmid(i,k)) / (state%lnpmid(i,k-1) - state%lnpmid(i,k))
              tint(i,k) = state%t(i,k) - dy * (state%t(i,k) - state%t(i,k-1))
@@ -1463,12 +1457,6 @@ end function radiation_nextsw_cday
        call rad_cnst_out(0, state, pbuf)
 
        ! Longwave radiation computation
-       
-       ! LM added- define surface emissivity
-       !do i=1,ncol
-       !   semis(i)=shr_const_ocn_msv 
-       !end do
-
        if (dolw) then
           call t_startf ('rad_lw')
 

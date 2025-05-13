@@ -639,8 +639,6 @@ subroutine diag_init()
    standard_name = 'surface_upward_latent_heat_flux')
    call addfld ('QFLX',horiz_only,    'A','kg/m2/s','Surface water flux', &
    standard_name = 'water_evapotranspiration_flux')
-   call addfld ('FLDS_PREV',horiz_only,    'A','kg/m2/s','LW downward flux from prev cpl interval', &
-   standard_name = 'longwave_downward_prev_interval')  ! LM added
    call addfld ('FLDS_PREV3',horiz_only,   'A','kg/m2/s','LW downward flux from prev cpl interval', &
    standard_name = 'longwave_downward_prev3_interval')  ! LM added
    call addfld ('LWUP',horiz_only,    'A','kg/m2/s','LW upward flux from cpl', &
@@ -690,7 +688,6 @@ subroutine diag_init()
        call add_default ('SHFLX   ', 1, ' ')
        call add_default ('LHFLX   ', 1, ' ')
        call add_default ('QFLX    ', 1, ' ')
-       call add_default ('FLDS_PREV',1, ' ') ! LM added
        call add_default ('FLDS_PREV3',1,' ') ! LM added
        call add_default ('LWUP    ', 1, ' ') ! LM added
        call add_default ('TAUX    ', 1, ' ')
