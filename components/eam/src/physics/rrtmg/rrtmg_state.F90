@@ -92,7 +92,6 @@ contains
 
     real(r8) dy                   ! Temporary layer pressure thickness
     real(r8) :: tint(pcols,pverp)    ! Model interface temperature
-    !real(r8) :: flus_sb(pcols,pverp) ! LM added upwelling flux from sb eqn
     integer  :: ncol, i, kk, k
 
     allocate( rstate )
@@ -124,16 +123,12 @@ contains
 
        ! LM added if statement
        if (landfrac(i).le.0.001 .and. icefrac(i).le.0.001) then
-       !if (ocnfrac(i).ge.0.999) then 
           tint(i,pverp) = sqrt(sqrt((cam_in%lwup(i)-(1-shr_const_ocn_msv)*cam_in%lwdnprev3(i))/(shr_const_ocn_msv*stebol)))
           rstate%semis(i) = shr_const_ocn_msv
-          !tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))
        else
           tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))
           rstate%semis(i) = 1.0_r8
        endif
-
-       !flus_sb(i,pverp) = stebol * tint(i,pverp)**4 ! LM added
 
        do k = 2,pver
           dy = (pstate%lnpint(i,k) - pstate%lnpmid(i,k)) / (pstate%lnpmid(i,k-1) - pstate%lnpmid(i,k))
