@@ -92,6 +92,8 @@ contains
 
     real(r8) dy                   ! Temporary layer pressure thickness
     real(r8) :: tint(pcols,pverp)    ! Model interface temperature
+    real(r8) :: tint_eg(pcols,pverp) ! LM added EG TRAD diagnostic variable
+    real(r8) :: tint_fg(pcols,pverp) ! LM added FG TRAD diagnostic variable
     integer  :: ncol, i, kk, k
 
     allocate( rstate )
@@ -120,15 +122,22 @@ contains
     ! stebol constant in mks units
     do i = 1,ncol
        tint(i,1) = pstate%t(i,1)
+       tint_eg(i,1) = pstate%t(i,1) ! LM added
+       tint_fg(i,1) = pstate%t(i,1) ! LM added
 
        ! LM added if statement
        if (landfrac(i).le.0.001 .and. icefrac(i).le.0.001) then
-          tint(i,pverp) = sqrt(sqrt((cam_in%lwup(i)-(1-shr_const_ocn_msv)*cam_in%lwdnprev3(i))/(shr_const_ocn_msv*stebol)))
+          !tint(i,pverp) = sqrt(sqrt((cam_in%lwup(i)-(1-shr_const_ocn_msv)*cam_in%lwdnprev3(i))/(shr_const_ocn_msv*stebol)))
+          tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))
           rstate%semis(i) = shr_const_ocn_msv
        else
           tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))
           rstate%semis(i) = 1.0_r8
        endif
+
+       ! LM added EG, FG TRAD
+       tint_eg(i,pverp) = sqrt(sqrt((cam_in%lwup_gb(i)/stebol))
+       tint_fg(i,pverp) = sqrt(sqrt((cam_in%lwup_gb(i)-(1-shr_const_ocn_msv)*cam_in%lwdnprev3(i))/(shr_const_ocn_msv*stebol)))
 
        do k = 2,pver
           dy = (pstate%lnpint(i,k) - pstate%lnpmid(i,k)) / (pstate%lnpmid(i,k-1) - pstate%lnpmid(i,k))
