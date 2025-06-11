@@ -145,7 +145,7 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,   &
            &               qbot  ,s16O  ,sHDO  ,s18O  ,rbot  ,   &
            &               tbot  ,us    ,vs    ,   &
            &               ts    ,mask  , seq_flux_atmocn_minwind, &
-           &               sen   ,lat   ,lwup  ,lwdn  ,  &   ! LM added lwdn
+           &               sen   ,lat   ,lwup  ,lwdn  ,lwup_gb ,   &   ! LM added lwdn and lwup_gb
            &               r16O, rhdo, r18O, & 
            &               evap  ,evap_16O, evap_HDO, evap_18O, &
            &               taux  ,tauy  ,tref  ,qref  ,   &
@@ -187,6 +187,7 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,   &
    real(R8),intent(out)  ::  sen  (nMax) ! heat flux: sensible    (W/m^2)
    real(R8),intent(out)  ::  lat  (nMax) ! heat flux: latent      (W/m^2)
    real(R8),intent(out)  ::  lwup (nMax) ! heat flux: lw upward   (W/m^2)
+   real(R8),intent(out)  ::  lwup_gb(nMax) ! diagnostic GB flux   (W/m^2) LM added
    real(R8),intent(out)  ::  evap (nMax) ! water flux: evap  ((kg/s)/m^2)
    real(R8),intent(out)  ::  evap_16O (nMax) ! water flux: evap ((kg/s/m^2)
    real(R8),intent(out)  ::  evap_HDO (nMax) ! water flux: evap ((kg/s)/m^2)
@@ -457,9 +458,9 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,   &
         sen (n) =          cp * tau * tstar / ustar
         lat (n) =  loc_latvap * tau * qstar / ustar
         ! original (blackbody)
-        !lwup(n) = -loc_stebol * ts(n)**4
+        lwup(n) = -loc_stebol * ts(n)**4
         ! LM changed to greybody
-        lwup(n) = -loc_ocn_msv * loc_stebol * ts(n)**4 - (1.0_R8 - loc_ocn_msv) * lwdn(n)
+        lwup_gb(n) = -loc_ocn_msv * loc_stebol * ts(n)**4 - (1.0_R8 - loc_ocn_msv) * lwdn(n)
 
         !--- water flux ---
         evap(n) = lat(n)/loc_latvap
@@ -503,6 +504,7 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,   &
         sen   (n) = spval  ! sensible         heat flux  (W/m^2)
         lat   (n) = spval  ! latent           heat flux  (W/m^2)
         lwup  (n) = spval  ! long-wave upward heat flux  (W/m^2)
+        lwup_gb(n) = spval ! LM added diagnostic greybody long-wave upward heat flux  (W/m^2)
         evap  (n) = spval  ! evaporative water flux ((kg/s)/m^2)
         evap_16O (n) = spval !water tracer flux (kg/s)/m^2)
         evap_HDO (n) = spval !HDO tracer flux  (kg/s)/m^2)
