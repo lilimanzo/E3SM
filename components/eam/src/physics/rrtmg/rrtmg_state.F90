@@ -136,7 +136,7 @@ contains
        endif
 
        ! LM added EG, FG TRAD
-       tint_eg(i,pverp) = sqrt(sqrt((cam_in%lwup_gb(i)/stebol))
+       tint_eg(i,pverp) = sqrt(sqrt((cam_in%lwup_gb(i)/stebol)))
        tint_fg(i,pverp) = sqrt(sqrt((cam_in%lwup_gb(i)-(1-shr_const_ocn_msv)*cam_in%lwdnprev3(i))/(shr_const_ocn_msv*stebol)))
 
        do k = 2,pver
