@@ -712,6 +712,8 @@ end function radiation_nextsw_cday
           call addfld('FLUS_SB'//diag(icall), horiz_only,    'A',    'W/m2', 'LM added surface flux from SB law', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
           call addfld('TRAD'//diag(icall), horiz_only, 'A', 'K', 'LM added radiative temperature')
+          call addfld('TRAD_EG'//diag(icall), horiz_only, 'A', 'K', 'LM added diagnostic EG radiative temperature')
+          call addfld('TRAD_FG'//diag(icall), horiz_only, 'A', 'K', 'LM added diagnostic FG radiative temperature')
           call addfld('SEMIS'//diag(icall), horiz_only, 'A', '1', 'LM added surface emissivity')
           call addfld('FULC'//diag(icall), (/ 'ilev' /),'I',    'W/m2', 'LM added Longwave clear-sky column upward flux', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
@@ -784,6 +786,8 @@ end function radiation_nextsw_cday
              call add_default('FLUSC'//diag(icall), 1, ' ') ! LM added
              call add_default('FLUS_SB'//diag(icall),1,' ') ! LM added
              call add_default('TRAD'//diag(icall),  1, ' ') ! LM added
+             call add_default('TRAD_EG'//diag(icall),1, ' ') ! LM added
+             call add_default('TRAD_FG'//diag(icall),1, ' ') ! LM added
              call add_default('SEMIS'//diag(icall), 1, ' ') ! LM added
              call add_default('FLNTC'//diag(icall), 1, ' ')
              call add_default('FLNSC'//diag(icall), 1, ' ')
@@ -1098,6 +1102,8 @@ end function radiation_nextsw_cday
     real(r8) fnl(pcols,pverp)     ! net longwave flux
     real(r8) fcnl(pcols,pverp)    ! net clear-sky longwave flux
     real(r8) trad(pcols)          ! LM added radiative temperature
+    real(r8) trad_eg(pcols)       ! LM added diagnostic EG radiative temperature
+    real(r8) trad_fg(pcols)       ! LM added diagnostic FG radiative temperature
     real(r8) flus_sb(pcols)       ! LM added surface flux computed from SB law
     real(r8) ful(pcols,pverp)     ! LM added column lwup
     real(r8) fsul(pcols,pverp)    ! LM added column clearsky lwup
@@ -1522,14 +1528,15 @@ end function radiation_nextsw_cday
                   call aer_rad_props_lw(is_cmip6_volc, icall, dt, state, pbuf,  aer_lw_abs)
                   
                   call t_startf ('rad_rrtmg_lw')
-                  call rad_rrtmg_lw( & ! LM added flus, flusc, trad, ful, fsul, fdl, fsdl, flus_sb
+                  call rad_rrtmg_lw( & ! LM added flus, flusc, trad, ful, fsul, fdl, fsdl, flus_sb, trad_eg, trad_fg
                        lchnk,        ncol,         num_rrtmg_levs,  r_state,                     &
                        state%pmid,   aer_lw_abs,   cldfprime,       c_cld_lw_abs,                &
                        qrl,          qrlc,                                                       &
                        flns,         flnt,         flnsc,           flntc,        cam_out%flwds, &
                        flut,         flutc,        fnl,             fcnl,         fldsc,         &
                        flus,         flusc,        trad,            clm_seed,     lu,         ld,&
-                       ful,          fsul,         fdl,             fsdl,         flus_sb        ) 
+                       ful,          fsul,         fdl,             fsdl,         flus_sb,       &
+                       trad_eg,      trad_fg        ) 
                   call t_stopf ('rad_rrtmg_lw')
 
                   do i=1,ncol
@@ -1592,6 +1599,8 @@ end function radiation_nextsw_cday
 
                   call outfld('SEMIS'//diag(icall), r_state%semis, pcols,lchnk) ! LM added     
                   call outfld('TRAD'//diag(icall),trad, pcols,lchnk)            ! LM added
+                  call outfld('TRAD_EG'//diag(icall),trad_eg, pcols,lchnk)            ! LM added
+                  call outfld('TRAD_FG'//diag(icall),trad_fg, pcols,lchnk)            ! LM added   
 
               end if
           end do
