@@ -38,6 +38,8 @@ module rrtmg_state
      real(r8), allocatable :: pintmb(:,:)   ! Model interface pressure (hPa)
      real(r8), allocatable :: tlay(:,:)     ! mid point temperature
      real(r8), allocatable :: tlev(:,:)     ! interface temperature
+     real(r8), allocatable :: tlev_eg(:,:)  ! LM added diagnostic EG temp
+     real(r8), allocatable :: tlev_fg(:,:)  ! LM added diagnostic FG temp
      real(r8), allocatable :: semis(:)      ! LM added surface temperature
 
   end type rrtmg_state_t
@@ -113,6 +115,8 @@ contains
     allocate( rstate%pintmb(pcols,num_rrtmg_levs+1) )
     allocate( rstate%tlay(pcols,num_rrtmg_levs) )
     allocate( rstate%tlev(pcols,num_rrtmg_levs+1) )
+    allocate( rstate%tlev_eg(pcols,num_rrtmg_levs+1) ) ! LM added
+    allocate( rstate%tlev_fg(pcols,num_rrtmg_levs+1) ) ! LM added
     allocate( rstate%semis(pcols) ) ! LM added
 
     ncol = pstate%ncol
@@ -154,12 +158,16 @@ contains
 
        rstate%tlay(:ncol,k) = pstate%t(:ncol,kk)
        rstate%tlev(:ncol,k) = tint(:ncol,kk)
+       rstate%tlev_eg(:ncol,k)=tint_eg(:ncol,kk) ! LM added
+       rstate%tlev_fg(:ncol,k)=tint_fg(:ncol,kk) ! LM added
 
     enddo
 
     ! bottom interface
     rstate%pintmb(:ncol,num_rrtmg_levs+1) = pstate%pint(:ncol,pverp) * 1.e-2_r8 ! mbar
     rstate%tlev(:ncol,num_rrtmg_levs+1) = tint(:ncol,pverp)
+    rstate%tlev_eg(:ncol,num_rrtmg_levs+1)=tint_eg(:ncol,pverp) ! LM added
+    rstate%tlev_fg(:ncol,num_rrtmg_levs+1)=tint_fg(:ncol,pverp) ! LM added
 
     ! top layer thickness
     if (num_rrtmg_levs==pverp) then
@@ -257,6 +265,8 @@ contains
     deallocate(rstate%pintmb)
     deallocate(rstate%tlay)
     deallocate(rstate%tlev)
+    deallocate(rstate%tlev_eg) ! LM added
+    deallocate(rstate%tlev_fg) ! LM added
     deallocate(rstate%semis) ! LM added
 
     nullify(rstate)

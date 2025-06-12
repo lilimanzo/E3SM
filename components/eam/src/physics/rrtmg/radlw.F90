@@ -42,7 +42,7 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
                         flut    ,flutc     ,fnl       ,fcnl   ,fldsc, &
                         flus    ,flusc     ,trad      ,clm_rand_seed, &     ! LM added flus, flusc, trad
                         lu      ,ld        ,ful       ,fsul   ,fdl  , &
-                        fsdl    , flus_sb) ! LM added ful, fsul, fdl, fsdl, flus_sb
+                        fsdl    ,flus_sb   ,trad_eg   ,trad_fg) ! LM added ful, fsul, fdl, fsdl, flus_sb, trad_eg, trad_fg
 
 !-----------------------------------------------------------------------
    use cam_history,         only: outfld
@@ -90,6 +90,8 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    real(r8), intent(out) :: fcnl(pcols,pverp)    ! clear sky net flux at interfaces
    real(r8), intent(out) :: fnl(pcols,pverp)     ! net flux at interfaces
    real(r8), intent(out) :: trad(pcols)          ! LM added radiative temperature
+   real(r8), intent(out) :: trad_eg(pcols)       ! LM added EG TRAD
+   real(r8), intent(out) :: trad_fg(pcols)       ! LM added FG TRAD
    real(r8), intent(out) :: flus_sb(pcols)       ! LM added surface flux from SB law
    real(r8), intent(out) :: ful(pcols,pverp)     ! LM moved from local to output- column lwup
    real(r8), intent(out) :: fsul(pcols,pverp)    ! LM moved from local to output- column clearsky lwup
@@ -117,6 +119,8 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
                                  ! 0=clear, 1=random, 2=maximum/random, 3=maximum
 
    real(r8) :: tsfc(pcols)          ! surface temperature
+   real(r8) :: tsfc_eg(pcols)       ! LM added diagnostic surface temp from EG
+   real(r8) :: tsfc_fg(pcols)       ! LM added diagnostic surface temp from FG
    real(r8) :: emis(pcols,nbndlw)   ! surface emissivity
    real(r8) :: semis_spc(pcols,nbndlw) ! spectral surface emissivity
 
@@ -229,6 +233,9 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
       emis(:ncol,i) = r_state%semis(:ncol)  ! 1._r8 <- orig; LM changed and added loop
    end do 
    tsfc(:ncol) = r_state%tlev(:ncol,rrtmg_levs+1)
+   tsfc_eg(:ncol)=r_state%tlev_eg(:ncol,rrtmg_levs+1) ! LM added
+   tsfc_fg(:ncol)=r_state%tlev_fg(:ncol,rrtmg_levs+1) ! LM added
+   
    taua_lw(:ncol, 1:rrtmg_levs-1, :nbndlw) = aer_lw_abs(:ncol,pverp-rrtmg_levs+1:pverp-1,:nbndlw)
 
    if (associated(lu)) lu(1:ncol,:,:) = 0.0_r8
@@ -264,6 +271,8 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    flusc(:ncol) = uflxc(:ncol,1)                        ! LM added
 
    trad(:ncol)  = tsfc(:ncol)                           ! LM added
+   trad_eg(:ncol)=tsfc_eg(:ncol)                        ! LM added
+   trad_fg(:ncol)=tsfc_fg(:ncol)                        ! LM added
    flus_sb(:ncol) = stebol * tsfc(:ncol)**4 ! LM added
 
    !
