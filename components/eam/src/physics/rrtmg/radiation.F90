@@ -712,8 +712,8 @@ end function radiation_nextsw_cday
           call addfld('FLUS_SB'//diag(icall), horiz_only,    'A',    'W/m2', 'LM added surface flux from SB law', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
           call addfld('TRAD'//diag(icall), horiz_only, 'A', 'K', 'LM added radiative temperature')
-          call addfld('TRAD_EG'//diag(icall), horiz_only, 'A', 'K', 'LM added diagnostic EG radiative temperature')
-          call addfld('TRAD_FG'//diag(icall), horiz_only, 'A', 'K', 'LM added diagnostic FG radiative temperature')
+          !call addfld('TRAD_EG'//diag(icall), horiz_only, 'A', 'K', 'LM added diagnostic EG radiative temperature')
+          !call addfld('TRAD_FG'//diag(icall), horiz_only, 'A', 'K', 'LM added diagnostic FG radiative temperature')
           call addfld('SEMIS'//diag(icall), horiz_only, 'A', '1', 'LM added surface emissivity')
           call addfld('FULC'//diag(icall), (/ 'ilev' /),'I',    'W/m2', 'LM added Longwave clear-sky column upward flux', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
@@ -786,8 +786,8 @@ end function radiation_nextsw_cday
              call add_default('FLUSC'//diag(icall), 1, ' ') ! LM added
              call add_default('FLUS_SB'//diag(icall),1,' ') ! LM added
              call add_default('TRAD'//diag(icall),  1, ' ') ! LM added
-             call add_default('TRAD_EG'//diag(icall),1, ' ') ! LM added
-             call add_default('TRAD_FG'//diag(icall),1, ' ') ! LM added
+             !call add_default('TRAD_EG'//diag(icall),1, ' ') ! LM added
+             !call add_default('TRAD_FG'//diag(icall),1, ' ') ! LM added
              call add_default('SEMIS'//diag(icall), 1, ' ') ! LM added
              call add_default('FLNTC'//diag(icall), 1, ' ')
              call add_default('FLNSC'//diag(icall), 1, ' ')
@@ -1599,8 +1599,8 @@ end function radiation_nextsw_cday
 
                   call outfld('SEMIS'//diag(icall), r_state%semis, pcols,lchnk) ! LM added     
                   call outfld('TRAD'//diag(icall),trad, pcols,lchnk)            ! LM added
-                  call outfld('TRAD_EG'//diag(icall),trad_eg, pcols,lchnk)            ! LM added
-                  call outfld('TRAD_FG'//diag(icall),trad_fg, pcols,lchnk)            ! LM added   
+                  !call outfld('TRAD_EG'//diag(icall),trad_eg, pcols,lchnk)            ! LM added
+                  !call outfld('TRAD_FG'//diag(icall),trad_fg, pcols,lchnk)            ! LM added   
 
               end if
           end do
