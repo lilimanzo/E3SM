@@ -786,8 +786,8 @@ end function radiation_nextsw_cday
              call add_default('FLUSC'//diag(icall), 1, ' ') ! LM added
              call add_default('FLUS_SB'//diag(icall),1,' ') ! LM added
              call add_default('TRAD'//diag(icall),  1, ' ') ! LM added
-             !call add_default('TRAD_EG'//diag(icall),1, ' ') ! LM added
-             !call add_default('TRAD_FG'//diag(icall),1, ' ') ! LM added
+             call add_default('TRAD_EG'//diag(icall),1, ' ') ! LM added
+             call add_default('TRAD_FG'//diag(icall),1, ' ') ! LM added
              call add_default('SEMIS'//diag(icall), 1, ' ') ! LM added
              call add_default('FLNTC'//diag(icall), 1, ' ')
              call add_default('FLNSC'//diag(icall), 1, ' ')
