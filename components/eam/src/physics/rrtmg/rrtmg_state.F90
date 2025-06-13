@@ -146,6 +146,8 @@ contains
        do k = 2,pver
           dy = (pstate%lnpint(i,k) - pstate%lnpmid(i,k)) / (pstate%lnpmid(i,k-1) - pstate%lnpmid(i,k))
           tint(i,k) = pstate%t(i,k) - dy * (pstate%t(i,k) - pstate%t(i,k-1))
+          tint_eg(i,k) = pstate%t(i,k) - dy * (pstate%t(i,k) - pstate%t(i,k-1)) ! LM added
+          tint_fg(i,k) = pstate%t(i,k) - dy * (pstate%t(i,k) - pstate%t(i,k-1)) ! LM added
        end do
     end do
 
