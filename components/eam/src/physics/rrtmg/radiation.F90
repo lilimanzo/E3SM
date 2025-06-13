@@ -1599,8 +1599,8 @@ end function radiation_nextsw_cday
 
                   call outfld('SEMIS'//diag(icall), r_state%semis, pcols,lchnk) ! LM added     
                   call outfld('TRAD'//diag(icall),trad, pcols,lchnk)            ! LM added
-                  !call outfld('TRAD_EG'//diag(icall),trad_eg, pcols,lchnk)            ! LM added
-                  !call outfld('TRAD_FG'//diag(icall),trad_fg, pcols,lchnk)            ! LM added   
+                  call outfld('TRAD_EG'//diag(icall),trad_eg, pcols,lchnk)            ! LM added
+                  call outfld('TRAD_FG'//diag(icall),trad_fg, pcols,lchnk)            ! LM added   
 
               end if
           end do
