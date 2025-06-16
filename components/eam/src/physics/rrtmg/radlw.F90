@@ -42,7 +42,8 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
                         flut    ,flutc     ,fnl       ,fcnl   ,fldsc, &
                         flus    ,flusc     ,trad      ,clm_rand_seed, &     ! LM added flus, flusc, trad
                         lu      ,ld        ,ful       ,fsul   ,fdl  , &
-                        fsdl    ,flus_sb   ,trad_eg   ,trad_fg) ! LM added ful, fsul, fdl, fsdl, flus_sb, trad_eg, trad_fg
+                        fsdl    ,flus_sb   ,trad_eg   ,trad_fg,       &
+                        flus_eg ,flus_fg) ! LM added ful, fsul, fdl, fsdl, flus_sb, trad_eg, trad_fg, flus_eg, flus_fg
 
 !-----------------------------------------------------------------------
    use cam_history,         only: outfld
@@ -93,6 +94,8 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    real(r8), intent(out) :: trad_eg(pcols)       ! LM added EG TRAD
    real(r8), intent(out) :: trad_fg(pcols)       ! LM added FG TRAD
    real(r8), intent(out) :: flus_sb(pcols)       ! LM added surface flux from SB law
+   real(r8), intent(out) :: flus_eg(pcols)       ! LM added diagnostic EG flux from SB law
+   real(r8), intent(out) :: flus_fg(pcols)       ! LM added diagnostic FG flux from SB law
    real(r8), intent(out) :: ful(pcols,pverp)     ! LM moved from local to output- column lwup
    real(r8), intent(out) :: fsul(pcols,pverp)    ! LM moved from local to output- column clearsky lwup
    real(r8), intent(out) :: fdl(pcols,pverp)     ! LM moved from local to output- column lwdn
@@ -273,7 +276,10 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    trad(:ncol)  = tsfc(:ncol)                           ! LM added
    trad_eg(:ncol)=tsfc_eg(:ncol)                        ! LM added
    trad_fg(:ncol)=tsfc_fg(:ncol)                        ! LM added
-   flus_sb(:ncol) = stebol * tsfc(:ncol)**4 ! LM added
+   
+   flus_sb(:ncol) = stebol * tsfc(:ncol)**4             ! LM added
+   flus_eg(:ncol) = 5.672195e-8 * tsfc_eg(:ncol)**4     ! LM added
+   flus_fg(:ncol) = 5.672195e-8 * tsfc_fg(:ncol)**4     ! LM added
 
    !
    ! Reverse vertical indexing here for CAM arrays to go from top to bottom.

@@ -1105,6 +1105,8 @@ end function radiation_nextsw_cday
     real(r8) trad_eg(pcols)       ! LM added diagnostic EG radiative temperature
     real(r8) trad_fg(pcols)       ! LM added diagnostic FG radiative temperature
     real(r8) flus_sb(pcols)       ! LM added surface flux computed from SB law
+    real(r8) flus_eg(pcols)       ! LM added diagnostic EG flux
+    real(r8) flus_fg(pcols)       ! LM added diagnostic FG flux
     real(r8) ful(pcols,pverp)     ! LM added column lwup
     real(r8) fsul(pcols,pverp)    ! LM added column clearsky lwup
     real(r8) fdl(pcols,pverp)     ! LM added column lwdn
@@ -1528,7 +1530,7 @@ end function radiation_nextsw_cday
                   call aer_rad_props_lw(is_cmip6_volc, icall, dt, state, pbuf,  aer_lw_abs)
                   
                   call t_startf ('rad_rrtmg_lw')
-                  call rad_rrtmg_lw( & ! LM added flus, flusc, trad, ful, fsul, fdl, fsdl, flus_sb, trad_eg, trad_fg
+                  call rad_rrtmg_lw( & ! LM added flus, flusc, trad, ful, fsul, fdl, fsdl, flus_sb, trad_eg, trad_fg, flus_eg, flus_fg
                        lchnk,        ncol,         num_rrtmg_levs,  r_state,                     &
                        state%pmid,   aer_lw_abs,   cldfprime,       c_cld_lw_abs,                &
                        qrl,          qrlc,                                                       &
@@ -1536,7 +1538,7 @@ end function radiation_nextsw_cday
                        flut,         flutc,        fnl,             fcnl,         fldsc,         &
                        flus,         flusc,        trad,            clm_seed,     lu,         ld,&
                        ful,          fsul,         fdl,             fsdl,         flus_sb,       &
-                       trad_eg,      trad_fg        ) 
+                       trad_eg,      trad_fg,      flus_eg,         flus_fg        ) 
                   call t_stopf ('rad_rrtmg_lw')
 
                   do i=1,ncol
