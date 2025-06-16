@@ -276,6 +276,7 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    trad(:ncol)  = tsfc(:ncol)                           ! LM added
    trad_eg(:ncol)=tsfc_eg(:ncol)                        ! LM added
    trad_fg(:ncol)=tsfc_fg(:ncol)                        ! LM added
+   print *, "LM radlw trad = ", trad(:ncol)
    print *, "LM radlw trad_eg = ", trad_eg(:ncol)
    
    flus_sb(:ncol) = stebol * tsfc(:ncol)**4             ! LM added

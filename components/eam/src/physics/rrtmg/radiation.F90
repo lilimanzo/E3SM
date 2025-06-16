@@ -1557,6 +1557,7 @@ end function radiation_nextsw_cday
                   flus_bnd9 = lu(:,pver+1,9)
                   flus_bnd10= lu(:,pver+1,10)
                   flus_bnd11= lu(:,pver+1,11)
+                  print *, "LM radiation trad = ", trad 
                   print *, "LM radiation trad_eg = ", trad_eg
 
                   !  Output fluxes at 200 mb
