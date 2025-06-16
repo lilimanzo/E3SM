@@ -140,10 +140,8 @@ contains
        endif
 
        ! LM added EG, FG TRAD
-       !tint_eg(i,pverp) = sqrt(sqrt((cam_in%lwup_gb(i)/stebol)))
-       !tint_fg(i,pverp) = sqrt(sqrt((cam_in%lwup_gb(i)-(1-shr_const_ocn_msv)*cam_in%lwdnprev3(i))/(shr_const_ocn_msv*stebol)))
-       tint_eg(i,pverp) = sqrt(sqrt((cam_in%lwup(i)/stebol)))
-       tint_fg(i,pverp) = sqrt(sqrt((cam_in%lwup(i)-(1-shr_const_ocn_msv)*cam_in%lwdnprev3(i))/(shr_const_ocn_msv*stebol)))
+       tint_eg(i,pverp) = sqrt(sqrt((cam_in%lwup_gb(i)/stebol)))
+       tint_fg(i,pverp) = sqrt(sqrt((cam_in%lwup_gb(i)-(1-shr_const_ocn_msv)*cam_in%lwdnprev3(i))/(shr_const_ocn_msv*stebol)))
 
        do k = 2,pver
           dy = (pstate%lnpint(i,k) - pstate%lnpmid(i,k)) / (pstate%lnpmid(i,k-1) - pstate%lnpmid(i,k))
