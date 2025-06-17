@@ -137,7 +137,8 @@ contains
           ! LM added EG, FG TRAD
           tint_eg(i,pverp) = sqrt(sqrt((cam_in%lwup_gb(i)/stebol)))
           tint_fg(i,pverp) = sqrt(sqrt((cam_in%lwup_gb(i)-(1-shr_const_ocn_msv)*cam_in%lwdnprev3(i))/(shr_const_ocn_msv*stebol)))
-          
+          print *, "LM rrtmg_state lwup_gb = ", cam_in%lwup_gb(i)
+
           rstate%semis(i) = shr_const_ocn_msv
        else
           tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))
