@@ -135,10 +135,10 @@ contains
           tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))
       
           ! LM added EG, FG TRAD
-          print *, "LM rrtmg_state lwup_gb1 = ", -cam_in%lwup_gb(i)
-          tint_eg(i,pverp) = sqrt(sqrt((-cam_in%lwup_gb(i)/stebol)))
-          tint_fg(i,pverp) = sqrt(sqrt((-cam_in%lwup_gb(i)-(1-shr_const_ocn_msv)*cam_in%lwdnprev3(i))/(shr_const_ocn_msv*stebol)))
-          print *, "LM rrtmg_state lwup_gb2 = ", -cam_in%lwup_gb(i)
+          tint_eg(i,pverp) = sqrt(sqrt((cam_in%lwup_gb(i)/stebol)))
+          tint_fg(i,pverp) = sqrt(sqrt((cam_in%lwup_gb(i)-(1-shr_const_ocn_msv)*cam_in%lwdnprev3(i))/(shr_const_ocn_msv*stebol)))
+          print *, "LM rrtmg_state lwup_gb negative = ", -cam_in%lwup_gb(i)
+          print *, "LM rrtmg_state lwup_gb actual = ", cam_in%lwup_gb(i)
           print *, "LM rrtmg_state trad_eg = ", tint_eg(i,pverp)
 
           rstate%semis(i) = shr_const_ocn_msv
