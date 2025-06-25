@@ -281,7 +281,8 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    
    flus_sb(:ncol) = stebol * tsfc(:ncol)**4             ! LM added
    flus_eg(:ncol) = 5.672195e-8 * tsfc_eg(:ncol)**4     ! LM added
-   flus_fg(:ncol) = 5.672195e-8 * tsfc_fg(:ncol)**4     ! LM added
+   flus_fg(:ncol) = shr_const_ocn_msv * 5.672195e-8 * tsfc_fg(:ncol)**4 &
+           + (1-shr_const_ocn_msv) * flwds(:ncol)    ! LM added
 
    !
    ! Reverse vertical indexing here for CAM arrays to go from top to bottom.
