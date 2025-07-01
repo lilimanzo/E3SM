@@ -1790,6 +1790,7 @@ subroutine atm_import_moab(Eclock, cam_in, restart_init )
           cam_in(c)%wsy(i)    = -x2a_am(ig,index_x2a_Faxx_tauy)
           cam_in(c)%lwup(i)      = -x2a_am(ig,index_x2a_Faxx_lwup)
           cam_in(c)%lwup_gb(i)   = -x2a_am(ig,index_x2a_Faxx_lwup_gb)   ! LM added
+          cam_in(c)%lwdnprev3(i) =  x2a_am(ig,index_x2a_Faxx_lwdnprev3) ! LM added
           cam_in(c)%asdir(i)     =  x2a_am(ig,index_x2a_Sx_avsdr)
           cam_in(c)%aldir(i)     =  x2a_am(ig,index_x2a_Sx_anidr)
           cam_in(c)%asdif(i)     =  x2a_am(ig,index_x2a_Sx_avsdf)
