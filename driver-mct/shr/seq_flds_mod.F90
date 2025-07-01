@@ -1432,6 +1432,17 @@ contains
     attname  = 'Faxx_evap'
     call metadata_set(attname, longname, stdname, units)
 
+    ! LM added diagnostic ocean upward longwave heat flux
+    call seq_flds_add(xao_fluxes,"Faox_lwup_gb")
+    call seq_flds_add(x2a_fluxes,"Faxx_lwup_gb")
+    longname = 'Diagnostic GB surface upward longwave heat flux'
+    stdname  = 'gb_surface_net_upward_longwave_flux'
+    units    = 'W m-2'
+    attname  = 'Faox_lwup_gb'
+    call metadata_set(attname, longname, stdname, units)
+    attname  = 'Faxx_lwup_gb'
+    call metadata_set(attname, longname, stdname, units)
+
     call seq_flds_add(l2x_states,"Flrl_wslake")
     longname = 'Lake water storage flux'
     stdname  = 'lake_water_storage_flux'
