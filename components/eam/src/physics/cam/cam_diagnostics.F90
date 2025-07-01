@@ -643,6 +643,9 @@ subroutine diag_init()
    call addfld ('QFLX',horiz_only,    'A','kg/m2/s','Surface water flux', &
    standard_name = 'water_evapotranspiration_flux')
 
+   call addfld ('LWUP_GB',horiz_only,    'A','kg/m2/s','Diagnostic GB upward flux from cpl', &
+   standard_name = 'longwave_gb_upward_cpl') ! LM added 
+
    call addfld ('TAUX',horiz_only,    'A','N/m2','Zonal surface stress')
    call addfld ('TAUY',horiz_only,    'A','N/m2','Meridional surface stress')
    call addfld ('TREFHT',horiz_only,    'A','K','Reference height temperature', &
@@ -690,6 +693,7 @@ subroutine diag_init()
        call add_default ('TAUX    ', 1, ' ')
        call add_default ('TAUY    ', 1, ' ')
        call add_default ('TREFHT  ', 1, ' ')
+       call add_default ('LWUP_GB ', 1, ' ') ! LM added
        call add_default ('LANDFRAC', 1, ' ')
        call add_default ('OCNFRAC ', 1, ' ')
        call add_default ('QREFHT  ', 1, ' ')
@@ -2145,6 +2149,7 @@ subroutine diag_surf (cam_in, cam_out, ps, trefmxav, trefmnav )
     call outfld('LHFLX',    cam_in%lhf,       pcols, lchnk)
     call outfld('QFLX',     cam_in%cflx(1,1), pcols, lchnk)
     call outfld('LWUP',     cam_in%lwup,      pcols, lchnk) ! LM added
+    call outfld('LWUP_GB',  cam_in%lwup_gb,   pcols, lchnk) ! LM added
 
     call outfld('TAUX',     cam_in%wsx,       pcols, lchnk)
     call outfld('TAUY',     cam_in%wsy,       pcols, lchnk)
