@@ -1443,6 +1443,14 @@ contains
     attname  = 'Faxx_lwup_gb'
     call metadata_set(attname, longname, stdname, units)
 
+    ! LM added lwdn from previous timestep- take 3: prep_atm_copy subroutine
+    call seq_flds_add(x2a_fluxes,"Faxx_lwdnprev3")
+    longname = 'LW down prev timestep 3'
+    stdname  = 'longwave_downward_prev3'
+    units    = 'W m-2'
+    attname  = 'Faxx_lwdnprev3'
+    call metadata_set(attname, longname, stdname, units)
+
     call seq_flds_add(l2x_states,"Flrl_wslake")
     longname = 'Lake water storage flux'
     stdname  = 'lake_water_storage_flux'
