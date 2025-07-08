@@ -88,6 +88,8 @@ contains
 
     real(r8) dy                   ! Temporary layer pressure thickness
     real(r8) :: tint(pcols,pverp)    ! Model interface temperature
+    real(r8) :: tint_eg(pcols,pverp) ! LM added EG TRAD diagnostic variable
+    real(r8) :: tint_fg(pcols,pverp) ! LM added FG TRAD diagnostic variable
     integer  :: ncol, i, kk, k
 
     allocate( rstate )
@@ -117,10 +119,33 @@ contains
     ! stebol constant in mks units
     do i = 1,ncol
        tint(i,1) = pstate%t(i,1)
+       tint_eg(i,1) = pstate%t(i,1) ! LM added
+       tint_fg(i,1) = pstate%t(i,1) ! LM added
+
        tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))
+
+      ! LM added if statement
+       if (landfrac(i).le.0.001 .and. icefrac(i).le.0.001) then
+          !tint(i,pverp) = sqrt(sqrt((cam_in%lwup(i)-(1-shr_const_ocn_msv)*cam_in%lwdnprev3(i))/(shr_const_ocn_msv*stebol)))
+          tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))
+
+          ! LM added EG, FG TRAD
+          tint_eg(i,pverp) = sqrt(sqrt((cam_in%lwup_gb(i)/stebol)))
+          tint_fg(i,pverp) = sqrt(sqrt((cam_in%lwup_gb(i)-(1-shr_const_ocn_msv)*cam_in%lwdnprev3(i))/(shr_const_ocn_msv*stebol)))
+
+          !rstate%semis(i) = shr_const_ocn_msv
+       else
+          tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))
+          tint_eg(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol)) ! LM added
+          tint_fg(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol)) ! LM added
+          !rstate%semis(i) = 1.0_r8
+       endif
+
        do k = 2,pver
           dy = (pstate%lnpint(i,k) - pstate%lnpmid(i,k)) / (pstate%lnpmid(i,k-1) - pstate%lnpmid(i,k))
           tint(i,k) = pstate%t(i,k) - dy * (pstate%t(i,k) - pstate%t(i,k-1))
+          tint_eg(i,k) = pstate%t(i,k) - dy * (pstate%t(i,k) - pstate%t(i,k-1)) ! LM added
+          tint_fg(i,k) = pstate%t(i,k) - dy * (pstate%t(i,k) - pstate%t(i,k-1)) ! LM added
        end do
     end do
 
@@ -133,16 +158,16 @@ contains
 
        rstate%tlay(:ncol,k) = pstate%t(:ncol,kk)
        rstate%tlev(:ncol,k) = tint(:ncol,kk)
-       rstate%tlev_eg(:ncol,k)=tint(:ncol,kk) ! LM added
-       rstate%tlev_fg(:ncol,k)=tint(:ncol,kk) ! LM added
+       rstate%tlev_eg(:ncol,k)=tint_eg(:ncol,kk) ! LM added
+       rstate%tlev_fg(:ncol,k)=tint_fg(:ncol,kk) ! LM added
 
     enddo
 
     ! bottom interface
     rstate%pintmb(:ncol,num_rrtmg_levs+1) = pstate%pint(:ncol,pverp) * 1.e-2_r8 ! mbar
     rstate%tlev(:ncol,num_rrtmg_levs+1) = tint(:ncol,pverp)
-    rstate%tlev_eg(:ncol,num_rrtmg_levs+1)=tint(:ncol,pverp) ! LM added
-    rstate%tlev_fg(:ncol,num_rrtmg_levs+1)=tint(:ncol,pverp) ! LM added
+    rstate%tlev_eg(:ncol,num_rrtmg_levs+1)=tint_eg(:ncol,pverp) ! LM added
+    rstate%tlev_fg(:ncol,num_rrtmg_levs+1)=tint_fg(:ncol,pverp) ! LM added
 
     ! top layer thickness
     if (num_rrtmg_levs==pverp) then
