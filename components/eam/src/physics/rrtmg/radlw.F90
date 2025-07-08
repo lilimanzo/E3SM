@@ -41,7 +41,8 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
                         flns    ,flnt      ,flnsc     ,flntc  ,flwds, &
                         flut    ,flutc     ,fnl       ,fcnl   ,fldsc,clm_rand_seed, &
                         lu      ,ld        ,trad      ,flus_sb,       &
-                        ful     ,fdl       ,fsul      ,fsdl   ,flus ,flusc) ! LM added trad,ful,fdl,fsul,fsdl,flus,flusc
+                        ful     ,fdl       ,fsul      ,fsdl   ,flus , &
+                        flusc   ,trad_eg   , trad_fg) ! LM added trad,ful,fdl,fsul,fsdl,flus,flusc,trad_eg,trad_fg
 
 !-----------------------------------------------------------------------
    use cam_history,         only: outfld
@@ -88,6 +89,8 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    real(r8), intent(out) :: fcnl(pcols,pverp)    ! clear sky net flux at interfaces
    real(r8), intent(out) :: fnl(pcols,pverp)     ! net flux at interfaces
    real(r8), intent(out) :: trad(pcols)          ! LM added radiative temperature
+   real(r8), intent(out) :: trad_eg(pcols)       ! LM added EG TRAD
+   real(r8), intent(out) :: trad_fg(pcols)       ! LM added FG TRAD
    real(r8), intent(out) :: flus_sb(pcols)       ! LM added surface flux from SB law
    ! LM moved from local to output
    real(r8), intent(out) :: ful(pcols,pverp)     ! Total upwards longwave flux
@@ -258,7 +261,9 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    flusc(:ncol) = uflxc(:ncol,1) ! LM added
    flutc(:ncol) = uflxc(:ncol,rrtmg_levs)
 
-   trad(:ncol)  = tsfc(:ncol) ! LM added
+   trad(:ncol)  = tsfc(:ncol)                           ! LM added
+   trad_eg(:ncol)=tsfc(:ncol)                        ! LM added
+   trad_fg(:ncol)=tsfc(:ncol)                        ! LM added
    flus_sb(:ncol) = stebol * tsfc(:ncol)**4 ! LM added
 
    !
