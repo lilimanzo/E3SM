@@ -118,6 +118,8 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
                                  ! 0=clear, 1=random, 2=maximum/random, 3=maximum
 
    real(r8) :: tsfc(pcols)          ! surface temperature
+   real(r8) :: tsfc_eg(pcols)       ! LM added diagnostic surface temp from EG
+   real(r8) :: tsfc_fg(pcols)       ! LM added diagnostic surface temp from FG
    real(r8) :: emis(pcols,nbndlw)   ! surface emissivity
 
    real(r8) :: taua_lw(pcols,rrtmg_levs-1,nbndlw)     ! aerosol optical depth by band
@@ -227,6 +229,8 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
 
    emis(:ncol,:nbndlw) = 1._r8
    tsfc(:ncol) = r_state%tlev(:ncol,rrtmg_levs+1)
+   tsfc_eg(:ncol)=r_state%tlev_eg(:ncol,rrtmg_levs+1) ! LM added
+   tsfc_fg(:ncol)=r_state%tlev_fg(:ncol,rrtmg_levs+1) ! LM added
    taua_lw(:ncol, 1:rrtmg_levs-1, :nbndlw) = aer_lw_abs(:ncol,pverp-rrtmg_levs+1:pverp-1,:nbndlw)
 
    if (associated(lu)) lu(1:ncol,:,:) = 0.0_r8
@@ -262,8 +266,8 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    flutc(:ncol) = uflxc(:ncol,rrtmg_levs)
 
    trad(:ncol)  = tsfc(:ncol)                           ! LM added
-   trad_eg(:ncol)=tsfc(:ncol)                        ! LM added
-   trad_fg(:ncol)=tsfc(:ncol)                        ! LM added
+   trad_eg(:ncol)=tsfc_eg(:ncol)                        ! LM added
+   trad_fg(:ncol)=tsfc_eg(:ncol)                        ! LM added
    flus_sb(:ncol) = stebol * tsfc(:ncol)**4 ! LM added
 
    !
