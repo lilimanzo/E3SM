@@ -78,6 +78,7 @@ contains
     use physics_types,    only: physics_state
     use camsrfexch,       only: cam_in_t
     use physconst,        only: stebol
+    use shr_const_mod,    only: shr_const_ocn_msv      ! LM added
 
     implicit none
 
