@@ -42,13 +42,15 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
                         flut    ,flutc     ,fnl       ,fcnl   ,fldsc,clm_rand_seed, &
                         lu      ,ld        ,trad      ,flus_sb,       &
                         ful     ,fdl       ,fsul      ,fsdl   ,flus , &
-                        flusc   ,trad_eg   , trad_fg) ! LM added trad,ful,fdl,fsul,fsdl,flus,flusc,trad_eg,trad_fg
+                        flusc   ,trad_eg   , trad_fg  ,flus_eg,flus_fg) 
+                        ! LM added trad,ful,fdl,fsul,fsdl,flus,flusc,trad_eg,trad_fg,flus_eg,flus_fg
 
 !-----------------------------------------------------------------------
    use cam_history,         only: outfld
    use mcica_subcol_gen_lw, only: mcica_subcol_lw
    use physconst,           only: cpair, stebol
    use rrtmg_state,         only: rrtmg_state_t
+   use shr_const_mod,       only: shr_const_ocn_msv ! LM added
 
 !------------------------------Arguments--------------------------------
 !
@@ -92,6 +94,8 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    real(r8), intent(out) :: trad_eg(pcols)       ! LM added EG TRAD
    real(r8), intent(out) :: trad_fg(pcols)       ! LM added FG TRAD
    real(r8), intent(out) :: flus_sb(pcols)       ! LM added surface flux from SB law
+   real(r8), intent(out) :: flus_eg(pcols)       ! LM added diagnostic EG flux from SB law
+   real(r8), intent(out) :: flus_fg(pcols)       ! LM added diagnostic FG flux from SB law
    ! LM moved from local to output
    real(r8), intent(out) :: ful(pcols,pverp)     ! Total upwards longwave flux
    real(r8), intent(out) :: fsul(pcols,pverp)    ! Clear sky upwards longwave flux
@@ -269,6 +273,9 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    trad_eg(:ncol)=tsfc_eg(:ncol)                        ! LM added
    trad_fg(:ncol)=tsfc_fg(:ncol)                        ! LM added
    flus_sb(:ncol) = stebol * tsfc(:ncol)**4 ! LM added
+   flus_eg(:ncol) = 5.670374419e-8 * tsfc_eg(:ncol)**4     ! LM added
+   flus_fg(:ncol) = shr_const_ocn_msv * 5.670374419e-8 * tsfc_fg(:ncol)**4 &
+           + (1-shr_const_ocn_msv) * flwds(:ncol)    ! LM added
 
    !
    ! Reverse vertical indexing here for CAM arrays to go from top to bottom.
