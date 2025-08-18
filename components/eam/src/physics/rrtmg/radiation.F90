@@ -996,6 +996,8 @@ end function radiation_nextsw_cday
     real(r8) fsnsc(pcols)         ! Clear sky surface abs solar flux
     real(r8) fsdsc(pcols)         ! Clear sky surface downwelling solar flux
     real(r8) flut(pcols)          ! Upward flux at top of model
+    real(r8) flus(pcols)          ! LM added broadband surface flux
+    real(r8) flus_lpsb(pcols)     ! LM added surface flux computed from LP SBC 
     real(r8) lwcf(pcols)          ! longwave cloud forcing
     real(r8) swcf(pcols)          ! shortwave cloud forcing
     real(r8) flutc(pcols)         ! Upward Clear Sky flux at top of model
@@ -1430,13 +1432,13 @@ end function radiation_nextsw_cday
                   call aer_rad_props_lw(is_cmip6_volc, icall, dt, state, pbuf,  aer_lw_abs)
                   
                   call t_startf ('rad_rrtmg_lw')
-                  call rad_rrtmg_lw( &
+                  call rad_rrtmg_lw( & ! LM added flus, flus_lpsb
                        lchnk,        ncol,         num_rrtmg_levs,  r_state,                     &
                        state%pmid,   aer_lw_abs,   cldfprime,       c_cld_lw_abs,                &
                        qrl,          qrlc,                                                       &
                        flns,         flnt,         flnsc,           flntc,        cam_out%flwds, &
                        flut,         flutc,        fnl,             fcnl,         fldsc,         &
-                       clm_seed,     lu,           ld                                            )
+                       clm_seed,     flus,         flus_lpsb,       lu,           ld             )
                   call t_stopf ('rad_rrtmg_lw')
 
                   do i=1,ncol

@@ -40,7 +40,7 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
                         qrl     ,qrlc      ,                          &
                         flns    ,flnt      ,flnsc     ,flntc  ,flwds, &
                         flut    ,flutc     ,fnl       ,fcnl   ,fldsc,clm_rand_seed, &
-                        lu      ,ld        )
+                        flus    ,flus_lpsb ,lu        ,ld        ) ! LM added flus, flus_lpsb
 
 !-----------------------------------------------------------------------
    use cam_history,         only: outfld
@@ -77,6 +77,8 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    real(r8), intent(out) :: flns(pcols)          ! Surface cooling flux
    real(r8), intent(out) :: flnt(pcols)          ! Net outgoing flux
    real(r8), intent(out) :: flut(pcols)          ! Upward flux at top of model
+   real(r8), intent(out) :: flus(pcols)          ! Upward flux at surface LM added
+   real(r8), intent(out) :: flus_lpsb(pcols)     ! LM added surface flux from LP SB law
    real(r8), intent(out) :: flnsc(pcols)         ! Clear sky surface cooing
    real(r8), intent(out) :: flntc(pcols)         ! Net clear sky outgoing flux
    real(r8), intent(out) :: flutc(pcols)         ! Upward clear-sky flux at top of model
@@ -244,6 +246,8 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    flnt(:ncol)  = uflx (:ncol,rrtmg_levs) - dflx (:ncol,rrtmg_levs)
    flntc(:ncol) = uflxc(:ncol,rrtmg_levs) - dflxc(:ncol,rrtmg_levs)
    flut(:ncol)  = uflx (:ncol,rrtmg_levs)
+   flus(:ncol)  = uflx (:ncol,1) ! LM added
+   flus_lpsb(:ncol) = 5.67e-8_r8 * tsfc(:ncol)**4 ! LM added
    flutc(:ncol) = uflxc(:ncol,rrtmg_levs)
 
    !
