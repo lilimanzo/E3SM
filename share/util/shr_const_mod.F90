@@ -21,7 +21,7 @@ MODULE shr_const_mod
    real(R8),parameter :: SHR_CONST_G       = 9.80616_R8      ! acceleration of gravity ~ m/s^2
 
    !real(R8),parameter :: SHR_CONST_STEBOL  = 5.67e-8_R8      ! Stefan-Boltzmann constant ~ W/m^2/K^4
-   real(R8),parameter :: SHR_CONST_STEBOL  = 5.670374419e-8_R8 ! CODATA 2018 Stefan-Boltzmann constant ~ W/m^2/K^4
+   real(R8),parameter :: SHR_CONST_STEBOL  = 5.670374419e-8_R8 ! LM added CODATA 2018 Stefan-Boltzmann constant ~ W/m^2/K^4
    real(R8),parameter :: SHR_CONST_BOLTZ   = 1.38065e-23_R8  ! Boltzmann's constant ~ J/K/molecule
    real(R8),parameter :: SHR_CONST_AVOGAD  = 6.02214e26_R8   ! Avogadro's number ~ molecules/kmole
    real(R8),parameter :: SHR_CONST_RGAS    = SHR_CONST_AVOGAD*SHR_CONST_BOLTZ       ! Universal gas constant ~ J/K/kmole
