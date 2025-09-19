@@ -687,6 +687,8 @@ end function radiation_nextsw_cday
 
        if (active_calls(icall)) then
 
+          call addfld('FLUS_SB'//diag(icall), horiz_only,    'A',    'W/m2', 'LM added surface flux from low precision SBC', &
+                      sampling_seq='rad_lwsw', flag_xyfill=.true.)
           call addfld('QRL'//diag(icall),  (/ 'lev' /), 'A',     'K/s', 'Longwave heating rate', &
                       sampling_seq='rad_lwsw', flag_xyfill=.true.)
           call addfld('QRLC'//diag(icall),  (/ 'lev' /), 'A',    'K/s', 'Clearsky longwave heating rate', &
@@ -732,6 +734,7 @@ end function radiation_nextsw_cday
              call add_default('FLNT'//diag(icall),  1, ' ')
              call add_default('FLUT'//diag(icall),  1, ' ')
              call add_default('FLUTC'//diag(icall), 1, ' ')
+             call add_default('FLUS_SB'//diag(icall),1,' ') ! LM added
              call add_default('FLNTC'//diag(icall), 1, ' ')
              call add_default('FLNSC'//diag(icall), 1, ' ')
              call add_default('LWCF'//diag(icall),  1, ' ')
@@ -1455,7 +1458,8 @@ end function radiation_nextsw_cday
                   call outfld('FLUTC'//diag(icall),flutc ,pcols,lchnk)
                   call outfld('FLNTC'//diag(icall),flntc ,pcols,lchnk)
                   call outfld('FLNS'//diag(icall),flns  ,pcols,lchnk)
-                  
+                  call outfld('FLUS_SB'//diag(icall),flus_sb,pcols,lchnk) ! LM added
+
                   call outfld('FLDSC'//diag(icall),fldsc ,pcols,lchnk)
                   call outfld('FLNSC'//diag(icall),flnsc ,pcols,lchnk)
                   call outfld('LWCF'//diag(icall),lwcf  ,pcols,lchnk)
