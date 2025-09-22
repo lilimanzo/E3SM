@@ -67,6 +67,7 @@ module shr_flux_mod
    real(R8) :: loc_latice = shr_const_latice
    real(R8) :: loc_stebol = shr_const_stebol
    real(R8) :: loc_tkfrz  = shr_const_tkfrz
+   real(R8) :: loc_ocn_msv= shr_const_ocn_msv
 
    ! These control convergence of the iterative flux calculation
    ! (For Large and Pond scheme only; not UA or COARE).
@@ -144,7 +145,7 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,   &
            &               qbot  ,s16O  ,sHDO  ,s18O  ,rbot  ,   &
            &               tbot  ,us    ,vs    ,   &
            &               ts    ,mask  , seq_flux_atmocn_minwind, &
-           &               sen   ,lat   ,lwup  ,   &
+           &               sen   ,lat   ,lwup  ,lwdn  ,   &
            &               r16O, rhdo, r18O, &
            &               evap  ,evap_16O, evap_HDO, evap_18O, &
            &               taux  ,tauy  ,tref  ,qref  ,   &
@@ -179,6 +180,7 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,   &
    real(R8)   ,intent(in) :: us   (nMax) ! ocn u-velocity        (m/s)
    real(R8)   ,intent(in) :: vs   (nMax) ! ocn v-velocity        (m/s)
    real(R8)   ,intent(in) :: ts   (nMax) ! ocn temperature       (K)
+   real(R8)   ,intent(in) :: lwdn (nMax) ! atm lw downwelling flux(W/m^2)
    real(R8)   ,intent(in) :: seq_flux_atmocn_minwind        ! minimum wind speed for atmocn      (m/s)
 
    !--- output arguments -------------------------------
@@ -454,7 +456,7 @@ SUBROUTINE shr_flux_atmOcn(nMax  ,zbot  ,ubot  ,vbot  ,thbot ,   &
         !--- heat flux ---
         sen (n) =          cp * tau * tstar / ustar
         lat (n) =  loc_latvap * tau * qstar / ustar
-        lwup(n) = -loc_stebol * ts(n)**4
+        lwup(n) = -loc_ocn_msv * loc_stebol * ts(n)**4 - (1.0_R8 - loc_ocn_msv) * lwdn(n)
 
         !--- water flux ---
         evap(n) = lat(n)/loc_latvap
