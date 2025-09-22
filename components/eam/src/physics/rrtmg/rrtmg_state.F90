@@ -38,6 +38,7 @@ module rrtmg_state
      real(r8), allocatable :: pintmb(:,:)   ! Model interface pressure (hPa)
      real(r8), allocatable :: tlay(:,:)     ! mid point temperature
      real(r8), allocatable :: tlev(:,:)     ! interface temperature
+     real(r8), allocatable :: semis(:)      ! surface emissivity
 
   end type rrtmg_state_t
 
@@ -76,11 +77,14 @@ contains
     use physics_types,    only: physics_state
     use camsrfexch,       only: cam_in_t
     use physconst,        only: stebol
+    use shr_const_mod,    only: shr_const_ocn_msv
 
     implicit none
 
     type(physics_state), intent(in) :: pstate
     type(cam_in_t),      intent(in) :: cam_in
+    real(r8), intent(in)            :: landfrac(pcols)
+    real(r8), intent(in)            :: icefrac(pcols)
 
     type(rrtmg_state_t), pointer  :: rstate
 
@@ -105,6 +109,7 @@ contains
     allocate( rstate%pintmb(pcols,num_rrtmg_levs+1) )
     allocate( rstate%tlay(pcols,num_rrtmg_levs) )
     allocate( rstate%tlev(pcols,num_rrtmg_levs+1) )
+    allocate( rstate%semis(pcols) )
 
     ncol = pstate%ncol
 
@@ -113,7 +118,15 @@ contains
     ! stebol constant in mks units
     do i = 1,ncol
        tint(i,1) = pstate%t(i,1)
-       tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))
+       
+       if (landfrac(i).le.0.001 .and. icefrac(i).le.0.001) then
+          tint(i,pverp) = sqrt(sqrt((cam_in%lwup(i)-(1-shr_const_ocn_msv)*cam_in%lwdn_prev(i))/(shr_const_ocn_msv*stebol)))
+          rstate%semis(i) = shr_const_ocn_msv
+       else
+          tint(i,pverp) = sqrt(sqrt(cam_in%lwup(i)/stebol))
+          rstate%semis(i) = 1.0_r8
+       endif
+       
        do k = 2,pver
           dy = (pstate%lnpint(i,k) - pstate%lnpmid(i,k)) / (pstate%lnpmid(i,k-1) - pstate%lnpmid(i,k))
           tint(i,k) = pstate%t(i,k) - dy * (pstate%t(i,k) - pstate%t(i,k-1))
@@ -232,6 +245,7 @@ contains
     deallocate(rstate%pintmb)
     deallocate(rstate%tlay)
     deallocate(rstate%tlev)
+    deallocate(rstate%semis)
 
     nullify(rstate)
 
