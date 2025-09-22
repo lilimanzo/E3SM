@@ -1129,7 +1129,7 @@ end function radiation_nextsw_cday
     if (dosw .or. dolw) then
 
        ! construct an RRTMG state object
-       r_state => rrtmg_state_create( state, cam_in )
+       r_state => rrtmg_state_create( state, cam_in, landfrac, icefrac )
 
        call t_stopf ('radiation_tend_init')
 

@@ -209,10 +209,13 @@ subroutine rad_rrtmg_lw(lchnk   ,ncol      ,rrtmg_levs,r_state,       &
    ! Convert other incoming molecular amounts from mmr to vmr as needed;
    ! Convert pressures from Pa to hPa;
    ! Set surface emissivity to 1.0 here, this is treated in land surface model;
+   ! surface emissivity = 0.9735 over ocean
    ! Set surface temperature
    ! Set aerosol optical depth to zero for now
 
-   emis(:ncol,:nbndlw) = 1._r8
+   do i=1,nbndlw
+      emis(:ncol,i) = r_state%semis(:ncol)  
+   end do 
    tsfc(:ncol) = r_state%tlev(:ncol,rrtmg_levs+1)
    taua_lw(:ncol, 1:rrtmg_levs-1, :nbndlw) = aer_lw_abs(:ncol,pverp-rrtmg_levs+1:pverp-1,:nbndlw)
 

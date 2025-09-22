@@ -73,7 +73,7 @@ contains
 ! creates (alloacates) an rrtmg_state object
 !--------------------------------------------------------------------------------
 
-  function rrtmg_state_create( pstate, cam_in ) result( rstate )
+  function rrtmg_state_create( pstate, cam_in, landfrac, icefrac ) result( rstate )
     use physics_types,    only: physics_state
     use camsrfexch,       only: cam_in_t
     use physconst,        only: stebol
