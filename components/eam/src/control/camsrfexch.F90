@@ -96,6 +96,7 @@ module camsrfexch
      real(r8), allocatable :: aldir(:)      ! albedo: longwave, direct
      real(r8), allocatable :: aldif(:)      ! albedo: longwave, diffuse
      real(r8), allocatable :: lwup(:)       ! longwave up radiative flux
+     real(r8), allocatable :: lwdn_prev(:)  ! longwave down radiative flux from previous timestep
      real(r8), allocatable :: lhf(:)        ! latent heat flux
      real(r8), allocatable :: shf(:)        ! sensible heat flux
      real(r8), allocatable :: h2otemp(:)    ! water temperature heat flux from ocean
@@ -195,6 +196,9 @@ CONTAINS
 
        allocate (cam_in(c)%lwup(pcols), stat=ierror)
        if ( ierror /= 0 ) call endrun('HUB2ATM_ALLOC error: allocation error lwup')
+
+       allocate (cam_in(c)%lwdn_prev(pcols), stat=ierror)                                
+       if ( ierror /= 0 ) call endrun('HUB2ATM_ALLOC error: allocation error lwdn_prev')
 
        allocate (cam_in(c)%lhf(pcols), stat=ierror)
        if ( ierror /= 0 ) call endrun('HUB2ATM_ALLOC error: allocation error lhf')
@@ -304,6 +308,7 @@ CONTAINS
        cam_in(c)%aldir    (:) = 0._r8
        cam_in(c)%aldif    (:) = 0._r8
        cam_in(c)%lwup     (:) = 0._r8
+       cam_in(c)%lwdn_prev(:) = 0._r8
        cam_in(c)%lhf      (:) = 0._r8
        cam_in(c)%shf      (:) = 0._r8
        cam_in(c)%h2otemp  (:) = 0._r8
@@ -614,6 +619,7 @@ CONTAINS
           deallocate(cam_in(c)%aldir)
           deallocate(cam_in(c)%aldif)
           deallocate(cam_in(c)%lwup)
+          deallocate(cam_in(c)%lwdn_prev) 
           deallocate(cam_in(c)%lhf)
           deallocate(cam_in(c)%shf)
           deallocate(cam_in(c)%h2otemp)
